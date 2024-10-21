@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable no-shadow */
 "use client"
 import useEmblaCarousel from "embla-carousel-react"
@@ -82,7 +83,7 @@ const Carousel = React.forwardRef(
 
     React.useEffect(() => {
       if (!api) {
-        return null
+        return
       }
 
       onSelect(api)
