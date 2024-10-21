@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 "use client"
 import useEmblaCarousel from "embla-carousel-react"
 import * as React from "react"
@@ -81,7 +82,7 @@ const Carousel = React.forwardRef(
 
     React.useEffect(() => {
       if (!api) {
-        return
+        return null
       }
 
       onSelect(api)
@@ -97,7 +98,7 @@ const Carousel = React.forwardRef(
       <CarouselContext.Provider
         value={{
           carouselRef,
-          api: api,
+          api,
           opts,
           orientation:
             orientation || (opts?.axis === "y" ? "vertical" : "horizontal"),

@@ -45,7 +45,6 @@ const fields = [
     type: "password",
   }),
 ]
-
 const SignupCrad = () => {
   const form = useForm({
     resolver: zodResolver(signupSchema),

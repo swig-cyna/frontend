@@ -10,13 +10,11 @@ const Form = FormProvider
 
 const FormFieldContext = React.createContext({})
 
-const FormField = ({ ...props }) => {
-  return (
-    <FormFieldContext.Provider value={{ name: props.name }}>
-      <Controller {...props} />
-    </FormFieldContext.Provider>
-  )
-}
+const FormField = ({ ...props }) => (
+  <FormFieldContext.Provider value={{ name: props.name }}>
+    <Controller {...props} />
+  </FormFieldContext.Provider>
+)
 
 const useFormField = () => {
   const fieldContext = React.useContext(FormFieldContext)
@@ -80,7 +78,7 @@ const FormControl = React.forwardRef(({ ...props }, ref) => {
           ? `${formDescriptionId}`
           : `${formDescriptionId} ${formMessageId}`
       }
-      aria-invalid={!!error}
+      aria-invalid={Boolean(error)}
       {...props}
     />
   )

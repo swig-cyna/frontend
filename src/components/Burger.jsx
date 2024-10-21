@@ -8,18 +8,16 @@ import { useState } from "react"
 import { Button } from "./ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "./ui/sheet"
 
-const LinkBurger = ({ href, label, variant = "ghost", setOpen, ...props }) => {
-  return (
-    <Link href={href} onClick={() => setOpen(false)} {...props}>
-      <Button variant={variant} className="w-full text-xl h-12">
-        {label}
-      </Button>
-    </Link>
-  )
-}
-
+const LinkBurger = ({ href, label, variant = "ghost", setOpen, ...props }) => (
+  <Link href={href} onClick={() => setOpen(false)} {...props}>
+    <Button variant={variant} className="w-full text-xl h-12">
+      {label}
+    </Button>
+  </Link>
+)
 const Burger = () => {
   const [open, setOpen] = useState(false)
+
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger>
