@@ -9,6 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
+import CardProduct from "@/features/products/components/CardProduct"
 import Autoplay from "embla-carousel-autoplay"
 import Image from "next/image"
 
@@ -51,6 +52,12 @@ export default function Home() {
         <CarouselNext className="right-2 border-none bg-background/20" />
         <CarouselPrevious className="left-2 border-none bg-background/20" />
       </Carousel>
+
+      <div className="w-full grid gap-4 gird-cols-2 md:grid-cols-3">
+        {Array.from({ length: 6 }).map((_, index) => (
+          <CardProduct key={index} />
+        ))}
+      </div>
     </main>
   )
 }
