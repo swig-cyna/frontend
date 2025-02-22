@@ -9,6 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
+import CategoriesItem from "@/features/categories/components/CategoriesItem"
 import Autoplay from "embla-carousel-autoplay"
 import Image from "next/image"
 
@@ -51,6 +52,18 @@ export default function Home() {
         <CarouselNext className="right-2 border-none bg-background/20" />
         <CarouselPrevious className="left-2 border-none bg-background/20" />
       </Carousel>
+
+      <div className="w-full">
+        <h2 className="text-xl font-semibold mb-2">Categories</h2>
+        <div className="overflow-x-auto w-full pb-4 relative">
+          <div className="flex gap-2 min-w-max">
+            {Array.from({ length: 20 }).map((_, index) => (
+              <CategoriesItem key={index} />
+            ))}
+            <div className="z-10 bg-background flex-1 scale-150 w-7 sticky blur-sm -right-3"></div>
+          </div>
+        </div>
+      </div>
     </main>
   )
 }
