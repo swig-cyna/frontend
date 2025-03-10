@@ -1,5 +1,6 @@
 import Footer from "@/components/Footer"
 import Header from "@/components/Header"
+import TanstackProvider from "@/providers/TanStackProvider"
 import ThemeProvider from "@/providers/ThemeProvider"
 import clsx from "clsx"
 import localFont from "next/font/local"
@@ -37,11 +38,13 @@ export default function RootLayout({ children }) {
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
-          <div className="flex flex-col justify-items-center h-full flex-1 p-8 max-w-[1200px] w-full font-[family-name:var(--font-geist-sans)]">
-            {children}
-          </div>
-          <Footer />
+          <TanstackProvider>
+            <Header />
+            <div className="flex flex-col justify-items-center h-full flex-1 p-8 max-w-[1200px] w-full font-[family-name:var(--font-geist-sans)]">
+              {children}
+            </div>
+            <Footer />
+          </TanstackProvider>
         </ThemeProvider>
       </body>
     </html>
