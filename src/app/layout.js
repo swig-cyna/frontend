@@ -1,8 +1,12 @@
+"use client"
+
 import Footer from "@/components/Footer"
 import Header from "@/components/Header"
 import TanstackProvider from "@/providers/TanStackProvider"
 import ThemeProvider from "@/providers/ThemeProvider"
 import clsx from "clsx"
+import { NextIntlClientProvider } from "next-intl"
+import { getLocale } from "next-intl/server"
 import localFont from "next/font/local"
 import "./globals.css"
 
@@ -23,8 +27,10 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }) {
+  const local = getLocale()
+
   return (
-    <html lang="en">
+    <html lang={local}>
       <body
         className={clsx(
           geistSans.variable,
@@ -38,13 +44,15 @@ export default function RootLayout({ children }) {
           enableSystem
           disableTransitionOnChange
         >
-          <TanstackProvider>
-            <Header />
-            <div className="flex flex-col justify-items-center h-full flex-1 p-8 max-w-[1200px] w-full font-[family-name:var(--font-geist-sans)]">
-              {children}
-            </div>
-            <Footer />
-          </TanstackProvider>
+          <NextIntlClientProvider>
+            <TanstackProvider>
+              <Header />
+              <div className="flex flex-col justify-items-center h-full flex-1 p-8 max-w-[1200px] w-full font-[family-name:var(--font-geist-sans)]">
+                {children}
+              </div>
+              <Footer />
+            </TanstackProvider>
+          </NextIntlClientProvider>
         </ThemeProvider>
       </body>
     </html>
