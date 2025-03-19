@@ -33,10 +33,9 @@ const Header = () => {
               <Search />
             </button>
 
-            <button>
+            <Link href="/cart">
               <ShoppingCart />
-              <p></p>
-            </button>
+            </Link>
             <LocaleSwitcher />
             <Link href="/signin">
               <Button className="rounded-full">{t("signin")}</Button>
