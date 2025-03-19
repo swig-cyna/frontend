@@ -28,12 +28,12 @@ export default async function RootLayout({ children }) {
   const local = await getLocale()
 
   return (
-    <html lang={local}>
+    <html lang={local} suppressHydrationWarning={true}>
       <body
         className={clsx(
           geistSans.variable,
           geistMono.variable,
-          "antialiased bg-background flex min-h-screen items-center flex-col"
+          "antialiased bg-background flex min-h-screen items-center flex-col",
         )}
       >
         <ThemeProvider
