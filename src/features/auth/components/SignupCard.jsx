@@ -18,7 +18,7 @@ import { signUp } from "@/features/auth/utils/authClient"
 import { useState } from "react"
 import EmailVerification from "./EmailVerification"
 
-const CALLBACK_URL = "http://localhost:3000/"
+const CALLBACK_URL = process.env.NEXT_PUBLIC_FRONTEND
 
 const fields = [
   generateFormFieldInput({

@@ -17,7 +17,7 @@ import { signinSchema } from "../schemas/signin"
 import { signIn } from "@/features/auth/utils/authClient"
 import { useState } from "react"
 
-const CALLBACK_URL = "http://localhost:3000/"
+const CALLBACK_URL = process.env.NEXT_PUBLIC_FRONTEND
 
 const fields = [
   generateFormFieldInput({
@@ -83,17 +83,21 @@ const SigninCard = () => {
             {fields.map((field) => (
               <FormField key={field.name} control={form.control} {...field} />
             ))}
-            {error && <p className="text-red-500 mt-2">{error}</p>}
             <Button type="submit" className="mt-4 w-full">
               Sign in
             </Button>
           </form>
         </Form>
-
+        {error && <p className="text-red-500 mt-2">{error}</p>}
         <div className="text-center mt-4">
           Don&apos;t have an account?{" "}
           <Link href="/signup" className="underline text-primary">
             Sign up
+          </Link>
+        </div>
+        <div className="mt-4 text-center">
+          <Link href="/forget-password" className="underline text-primary">
+            Forgot your password?
           </Link>
         </div>
       </CardContent>
