@@ -1,10 +1,10 @@
 "use client"
 
-import SignupCrad from "@/features/auth/components/SignupCrad"
+import SignupCard from "@/features/auth/components/SignupCard"
 
 const Signup = () => (
-  <main className="flex flex-col items-center justify-center">
-    <SignupCrad />
+  <main className="flex flex-1 flex-col items-center justify-center">
+    <SignupCard />
   </main>
 )
 
