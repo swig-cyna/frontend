@@ -2,6 +2,7 @@
 
 import logo from "@/assets/logoText.png"
 import { Menu } from "lucide-react"
+import { useTranslations } from "next-intl"
 import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
@@ -17,6 +18,7 @@ const LinkBurger = ({ href, label, variant = "ghost", setOpen, ...props }) => (
 )
 const Burger = () => {
   const [open, setOpen] = useState(false)
+  const t = useTranslations("Burger")
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -31,25 +33,29 @@ const Burger = () => {
           <div className="grid space-y-2 py-4">
             <LinkBurger
               href="/signin"
-              label="Sign in"
+              label={t("signin")}
               variant="default"
               setOpen={setOpen}
             />
           </div>
 
           <div className="grid space-y-2 py-4">
-            <LinkBurger href="/" label="Home" setOpen={setOpen} />
+            <LinkBurger href="/" label={t("home")} setOpen={setOpen} />
             <LinkBurger
               href="/categories"
-              label="Categories"
+              label={t("categories")}
               setOpen={setOpen}
             />
           </div>
 
           <div className="grid space-y-2 py-4">
-            <LinkBurger href="/about" label="About" setOpen={setOpen} />
-            <LinkBurger href="/contact" label="Contact" setOpen={setOpen} />
-            <LinkBurger href="/cgu" label="CGU" setOpen={setOpen} />
+            <LinkBurger href="/about" label={t("about")} setOpen={setOpen} />
+            <LinkBurger
+              href="/contact"
+              label={t("contact")}
+              setOpen={setOpen}
+            />
+            <LinkBurger href="/cgu" label={t("cgu")} setOpen={setOpen} />
           </div>
         </div>
       </SheetContent>

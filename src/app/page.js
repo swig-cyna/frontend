@@ -12,9 +12,12 @@ import {
 import CategoriesItem from "@/features/categories/components/CategoriesItem"
 import CardProduct from "@/features/products/components/CardProduct"
 import Autoplay from "embla-carousel-autoplay"
+import { useTranslations } from "next-intl"
 import Image from "next/image"
 
 export default function Home() {
+  const t = useTranslations("HomePage")
+
   return (
     <main className="flex flex-col gap-8 items-center sm:items-start w-full">
       <Carousel
@@ -55,7 +58,7 @@ export default function Home() {
       </Carousel>
 
       <div className="w-full">
-        <h2 className="text-xl font-semibold mb-2">Categories</h2>
+        <h2 className="text-xl font-semibold mb-2">{t("categories")}</h2>
         <div className="overflow-x-auto w-full pb-4 relative">
           <div className="flex gap-2 min-w-max">
             {Array.from({ length: 20 }).map((_, index) => (

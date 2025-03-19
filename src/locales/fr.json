@@ -1,0 +1,29 @@
+{
+  "Header": {
+    "search": "Rechercher",
+    "signin": "Se connecter"
+  },
+  "Burger": {
+    "signin": "Se connecter",
+    "home": "Accueil",
+    "categories": "Catégories",
+    "about": "À propos",
+    "contact": "Contact",
+    "cgu": "CGU"
+  },
+  "Footer": {
+    "about": "À propos",
+    "contact": "Contact",
+    "cgu": "CGU"
+  },
+  "NotFoundPage": {
+    "title": "Page non trouvée",
+    "backHome": "Retour à l'accueil"
+  },
+  "HomePage": {
+    "categories": "Catégories"
+  },
+  "ProductCard": {
+    "showMore": "Voir plus"
+  }
+}
