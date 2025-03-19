@@ -2,5 +2,28 @@
   "Header": {
     "search": "Search",
     "signin": "Sign in"
+  },
+  "Burger": {
+    "signin": "Sign in",
+    "home": "Home",
+    "categories": "Categories",
+    "about": "About",
+    "contact": "Contact",
+    "cgu": "CGU"
+  },
+  "Footer": {
+    "about": "About",
+    "contact": "Contact",
+    "cgu": "CGU"
+  },
+  "NotFoundPage": {
+    "title": "Page not found",
+    "backHome": "Back to home"
+  },
+  "HomePage": {
+    "categories": "Categories"
+  },
+  "ProductCard": {
+    "showMore": "Show more"
   }
 }

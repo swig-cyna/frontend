@@ -8,4 +8,8 @@ export const LOCALE = [
     code: "fr",
     name: "Français",
   },
+  {
+    code: "il",
+    name: "Hebrew",
+  },
 ]
