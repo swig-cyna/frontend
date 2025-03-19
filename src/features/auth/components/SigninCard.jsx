@@ -14,6 +14,10 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import Link from "next/link"
 import { useForm } from "react-hook-form"
 import { signinSchema } from "../schemas/signin"
+import { signIn } from "@/features/auth/utils/authClient"
+import { useState } from "react"
+
+const CALLBACK_URL = "http://localhost:3000/"
 
 const fields = [
   generateFormFieldInput({
@@ -31,6 +35,9 @@ const fields = [
 ]
 
 const SigninCard = () => {
+  const [error, setError] = useState(null)
+  const [isSigninComplete, setIsSigninComplete] = useState(false)
+
   const form = useForm({
     resolver: zodResolver(signinSchema),
     defaultValues: {
@@ -39,8 +46,27 @@ const SigninCard = () => {
     },
   })
 
-  function onSubmit(values) {
-    console.log(values)
+  async function onSubmit(values) {
+    try {
+      const { error: signInError } = await signIn.email({
+        email: values.email,
+        password: values.password,
+        callbackURL: CALLBACK_URL,
+      })
+
+      if (signInError) {
+        setError(signInError.message)
+      } else {
+        setIsSigninComplete(true)
+      }
+    } catch (err) {
+      console.error(`An error has occurred: ${err}`)
+      setError("An error occurred during sign in.")
+    }
+  }
+
+  if (isSigninComplete) {
+    return <div>Sign in successful! Redirecting...</div>
   }
 
   return (
@@ -57,6 +83,7 @@ const SigninCard = () => {
             {fields.map((field) => (
               <FormField key={field.name} control={form.control} {...field} />
             ))}
+            {error && <p className="text-red-500 mt-2">{error}</p>}
             <Button type="submit" className="mt-4 w-full">
               Sign in
             </Button>
