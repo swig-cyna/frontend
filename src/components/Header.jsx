@@ -28,9 +28,9 @@ const Header = () => (
             <Search />
           </button>
 
-          <button>
+          <Link href="/cart">
             <ShoppingCart />
-          </button>
+          </Link>
           <Link href="/signin">
             <Button className="rounded-full">Sign in</Button>
           </Link>
