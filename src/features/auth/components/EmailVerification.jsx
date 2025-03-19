@@ -11,7 +11,7 @@ import { sendVerificationEmail } from "@/features/auth/utils/authClient"
 import { useState } from "react"
 import ResendEmailButton from "./ResendEmailButton"
 
-const CALLBACK_URL = "http://localhost:3000/"
+const CALLBACK_URL = process.env.NEXT_PUBLIC_FRONTEND
 
 const EmailVerification = ({ userEmail }) => {
   const [error, setError] = useState(null)
