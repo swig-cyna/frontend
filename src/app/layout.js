@@ -3,6 +3,8 @@ import Header from "@/components/Header"
 import TanstackProvider from "@/providers/TanStackProvider"
 import ThemeProvider from "@/providers/ThemeProvider"
 import clsx from "clsx"
+import { NextIntlClientProvider } from "next-intl"
+import { getLocale } from "next-intl/server"
 import localFont from "next/font/local"
 import "./globals.css"
 
@@ -22,14 +24,16 @@ export const metadata = {
   description: "Cyna Marketplace",
 }
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const local = await getLocale()
+
   return (
-    <html lang="en">
+    <html lang={local} suppressHydrationWarning={true}>
       <body
         className={clsx(
           geistSans.variable,
           geistMono.variable,
-          "antialiased bg-background flex min-h-screen items-center flex-col"
+          "antialiased bg-background flex min-h-screen items-center flex-col",
         )}
       >
         <ThemeProvider
@@ -38,13 +42,15 @@ export default function RootLayout({ children }) {
           enableSystem
           disableTransitionOnChange
         >
-          <TanstackProvider>
-            <Header />
-            <div className="flex flex-col justify-items-center h-full flex-1 p-8 max-w-[1200px] w-full font-[family-name:var(--font-geist-sans)]">
-              {children}
-            </div>
-            <Footer />
-          </TanstackProvider>
+          <NextIntlClientProvider>
+            <TanstackProvider>
+              <Header />
+              <div className="flex flex-col justify-items-center h-full flex-1 p-8 max-w-[1200px] w-full font-[family-name:var(--font-geist-sans)]">
+                {children}
+              </div>
+              <Footer />
+            </TanstackProvider>
+          </NextIntlClientProvider>
         </ThemeProvider>
       </body>
     </html>
