@@ -1,5 +1,3 @@
-"use client"
-
 import Footer from "@/components/Footer"
 import Header from "@/components/Header"
 import TanstackProvider from "@/providers/TanStackProvider"
@@ -26,8 +24,8 @@ export const metadata = {
   description: "Cyna Marketplace",
 }
 
-export default function RootLayout({ children }) {
-  const local = getLocale()
+export default async function RootLayout({ children }) {
+  const local = await getLocale()
 
   return (
     <html lang={local}>

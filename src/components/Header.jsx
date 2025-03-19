@@ -7,6 +7,7 @@ import Image from "next/image"
 import Link from "next/link"
 import Headroom from "react-headroom"
 import Burger from "./Burger"
+import LocaleSwitcher from "./LocaleSwitcher"
 import { Button } from "./ui/button"
 
 const Header = () => {
@@ -36,6 +37,7 @@ const Header = () => {
               <ShoppingCart />
               <p></p>
             </button>
+            <LocaleSwitcher />
             <Link href="/signin">
               <Button className="rounded-full">{t("signin")}</Button>
             </Link>
