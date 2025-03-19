@@ -14,6 +14,11 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import Link from "next/link"
 import { useForm } from "react-hook-form"
 import { signupSchema } from "../schemas/signup"
+import { signUp } from "@/features/auth/utils/authClient"
+import { useState } from "react"
+import EmailVerification from "./EmailVerification"
+
+const CALLBACK_URL = "http://localhost:3000/"
 
 const fields = [
   generateFormFieldInput({
@@ -45,7 +50,12 @@ const fields = [
     type: "password",
   }),
 ]
-const SignupCrad = () => {
+
+const SignupCard = () => {
+  const [error, setError] = useState(null)
+  const [isSignupComplete, setIsSignupComplete] = useState(false)
+  const [userEmail, setUserEmail] = useState("")
+
   const form = useForm({
     resolver: zodResolver(signupSchema),
     defaultValues: {
@@ -57,8 +67,29 @@ const SignupCrad = () => {
     },
   })
 
-  function onSubmit(values) {
-    console.log(values)
+  async function onSubmit(values) {
+    try {
+      const { error: signUpError } = await signUp.email({
+        email: values.email,
+        password: values.password,
+        name: `${values.firstname} ${values.lastname}`,
+        callbackURL: CALLBACK_URL,
+      })
+
+      if (signUpError) {
+        setError(signUpError.message)
+      } else {
+        setIsSignupComplete(true)
+        setUserEmail(values.email)
+      }
+    } catch (err) {
+      console.error(`An error has occurred: ${err}`)
+      setError("An error occurred during registration.")
+    }
+  }
+
+  if (isSignupComplete) {
+    return <EmailVerification userEmail={userEmail} />
   }
 
   return (
@@ -66,7 +97,7 @@ const SignupCrad = () => {
       <CardHeader>
         <CardTitle className="text-3xl">Sign up</CardTitle>
         <CardDescription>
-          Use your email and password to sign up
+          Create an account using your email and password
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -75,8 +106,9 @@ const SignupCrad = () => {
             {fields.map((field) => (
               <FormField key={field.name} control={form.control} {...field} />
             ))}
+            {error && <p className="text-red-500 mt-2">{error}</p>}
             <Button type="submit" className="mt-4 w-full">
-              Sign in
+              Sign up
             </Button>
           </form>
         </Form>
@@ -92,4 +124,4 @@ const SignupCrad = () => {
   )
 }
 
-export default SignupCrad
+export default SignupCard

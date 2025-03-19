@@ -24,12 +24,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning={true}>
       <body
         className={clsx(
           geistSans.variable,
           geistMono.variable,
-          "antialiased bg-background flex min-h-screen items-center flex-col"
+          "antialiased bg-background flex min-h-screen items-center flex-col",
         )}
       >
         <ThemeProvider
