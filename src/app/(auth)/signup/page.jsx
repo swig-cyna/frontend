@@ -1,5 +1,3 @@
-"use client"
-
 import SignupCard from "@/features/auth/components/SignupCard"
 
 const Signup = () => (

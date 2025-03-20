@@ -15,7 +15,7 @@ import Autoplay from "embla-carousel-autoplay"
 import { useTranslations } from "next-intl"
 import Image from "next/image"
 
-export default function Home() {
+const Home = () => {
   const t = useTranslations("HomePage")
 
   return (
@@ -76,3 +76,5 @@ export default function Home() {
     </main>
   )
 }
+
+export default Home
