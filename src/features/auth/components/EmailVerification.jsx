@@ -10,10 +10,12 @@ import {
 import { sendVerificationEmail } from "@/features/auth/utils/authClient"
 import { useState } from "react"
 import ResendEmailButton from "./ResendEmailButton"
+import { useTranslations } from "next-intl"
 
 const CALLBACK_URL = process.env.NEXT_PUBLIC_FRONTEND
 
 const EmailVerification = ({ userEmail }) => {
+  const t = useTranslations("EmailVerification")
   const [error, setError] = useState(null)
 
   const handleResendEmail = async () => {
@@ -24,29 +26,25 @@ const EmailVerification = ({ userEmail }) => {
       })
     } catch (err) {
       console.error(`An error has occurred:" ${err}`)
-      setError("Failed to resend verification email. Please try again later.")
+      setError(t("resendError"))
     }
   }
 
   return (
-    <Card className="w-full max-w-md">
+    <Card>
       <CardHeader>
-        <CardTitle className="text-3xl">
-          Account created successfully !
-        </CardTitle>
-        <CardDescription>
-          Check your email to activate your account.
-        </CardDescription>
+        <CardTitle className="text-3xl">{t("title")}</CardTitle>
+        <CardDescription>{t("description")}</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
-        <p>A verification email has been sent to the following address :</p>
+        <p>{t("emailSent")}</p>
         <p>{userEmail}</p>
-        <p>Please click on the link in the email to activate your account.</p>
+        <p>{t("clickLink")}</p>
         <ResendEmailButton
           onResend={handleResendEmail}
-          buttonText="Resend verification email"
+          buttonText={t("resendButton")}
         />
-        {error && <p className="text-red-500 mt-2">{error}</p>}
+        {error && <p className="mt-2 text-red-500">{error}</p>}
       </CardContent>
     </Card>
   )

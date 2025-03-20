@@ -17,41 +17,14 @@ import { signupSchema } from "../schemas/signup"
 import { signUp } from "@/features/auth/utils/authClient"
 import { useState } from "react"
 import EmailVerification from "./EmailVerification"
+import { useTranslations } from "next-intl"
+import { getLocale } from "@/utils/locales"
+import { getLangDir } from "rtl-detect"
 
 const CALLBACK_URL = process.env.NEXT_PUBLIC_FRONTEND
 
-const fields = [
-  generateFormFieldInput({
-    name: "firstname",
-    placeholder: "First name",
-    label: "First name",
-  }),
-  generateFormFieldInput({
-    name: "lastname",
-    placeholder: "Last name",
-    label: "Last name",
-  }),
-  generateFormFieldInput({
-    name: "email",
-    placeholder: "Email",
-    label: "Email",
-    type: "email",
-  }),
-  generateFormFieldInput({
-    name: "password",
-    placeholder: "Password",
-    label: "Password",
-    type: "password",
-  }),
-  generateFormFieldInput({
-    name: "confirmPassword",
-    placeholder: "Confirm password",
-    label: "Confirm password",
-    type: "password",
-  }),
-]
-
 const SignupCard = () => {
+  const t = useTranslations("SignupCard")
   const [error, setError] = useState(null)
   const [isSignupComplete, setIsSignupComplete] = useState(false)
   const [userEmail, setUserEmail] = useState("")
@@ -66,6 +39,37 @@ const SignupCard = () => {
       confirmPassword: "",
     },
   })
+
+  const fields = [
+    generateFormFieldInput({
+      name: "firstname",
+      placeholder: t("firstnamePlaceholder"),
+      label: t("firstnameLabel"),
+    }),
+    generateFormFieldInput({
+      name: "lastname",
+      placeholder: t("lastnamePlaceholder"),
+      label: t("lastnameLabel"),
+    }),
+    generateFormFieldInput({
+      name: "email",
+      placeholder: t("emailPlaceholder"),
+      label: t("emailLabel"),
+      type: "email",
+    }),
+    generateFormFieldInput({
+      name: "password",
+      placeholder: t("passwordPlaceholder"),
+      label: t("passwordLabel"),
+      type: "password",
+    }),
+    generateFormFieldInput({
+      name: "confirmPassword",
+      placeholder: t("confirmPasswordPlaceholder"),
+      label: t("confirmPasswordLabel"),
+      type: "password",
+    }),
+  ]
 
   async function onSubmit(values) {
     try {
@@ -84,7 +88,7 @@ const SignupCard = () => {
       }
     } catch (err) {
       console.error(`An error has occurred: ${err}`)
-      setError("An error occurred during registration.")
+      setError(t("signupError"))
     }
   }
 
@@ -95,10 +99,8 @@ const SignupCard = () => {
   return (
     <Card className="w-full max-w-md">
       <CardHeader>
-        <CardTitle className="text-3xl">Sign up</CardTitle>
-        <CardDescription>
-          Create an account using your email and password
-        </CardDescription>
+        <CardTitle className="text-3xl">{t("signupTitle")}</CardTitle>
+        <CardDescription>{t("signupDescription")}</CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -106,17 +108,17 @@ const SignupCard = () => {
             {fields.map((field) => (
               <FormField key={field.name} control={form.control} {...field} />
             ))}
-            {error && <p className="text-red-500 mt-2">{error}</p>}
+            {error && <p className="mt-2 text-red-500">{error}</p>}
             <Button type="submit" className="mt-4 w-full">
-              Sign up
+              {t("signupButton")}
             </Button>
           </form>
         </Form>
 
-        <div className="text-center mt-4">
-          Already have an account?{" "}
-          <Link href="/signin" className="underline text-primary">
-            Sign in
+        <div className="mt-4 text-center">
+          {t("alreadyHaveAccount")}{" "}
+          <Link href="/signin" className="text-primary underline">
+            {t("signin")}
           </Link>
         </div>
       </CardContent>

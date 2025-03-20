@@ -25,5 +25,72 @@
   },
   "ProductCard": {
     "showMore": "Voir plus"
+  },
+  "EmailVerification": {
+    "title": "Compte créé avec succès !",
+    "description": "Vérifiez votre email pour activer votre compte.",
+    "emailSent": "Un email de vérification a été envoyé à l'adresse suivante :",
+    "clickLink": "Veuillez cliquer sur le lien dans l'email pour activer votre compte.",
+    "resendError": "Échec de l'envoi de l'email de vérification. Veuillez réessayer plus tard.",
+    "resendButton": "Renvoyer l'email de vérification"
+  },
+  "PasswordForgetCard": {
+    "resetPasswordTitle": "Réinitialiser le mot de passe",
+    "resetPasswordDescription": "Entrez votre adresse e-mail pour recevoir un lien de réinitialisation.",
+    "sendResetLink": "Envoyer le lien de réinitialisation",
+    "emailSentTitle": "E-mail envoyé",
+    "emailSentDescription": "Si l'adresse e-mail que vous avez saisie est associée à un compte, vous recevrez sous peu un e-mail pour réinitialiser votre mot de passe. Veuillez vérifier votre boîte de réception.",
+    "resetEmailError": "Une erreur s'est produite lors de l'envoi de l'e-mail de réinitialisation.",
+    "resendButton": "Renvoyer le lien de réinitialisation du mot de passe",
+    "emailPlaceholder": "Adresse e-mail",
+    "emailLabel": "Adresse e-mail"
+  },
+  "PasswordResetCard": {
+    "resetPasswordTitle": "Réinitialiser le mot de passe",
+    "resetPasswordDescription": "Entrez votre nouveau mot de passe.",
+    "passwordPlaceholder": "Mot de passe",
+    "passwordLabel": "Mot de passe",
+    "confirmPasswordPlaceholder": "Confirmer le mot de passe",
+    "confirmPasswordLabel": "Confirmer le mot de passe",
+    "resetPasswordButton": "Réinitialiser le mot de passe",
+    "resetError": "Une erreur s'est produite lors de la réinitialisation du mot de passe.",
+    "resetCompleteTitle": "Mot de passe réinitialisé",
+    "resetCompleteDescription": "Votre mot de passe a été réinitialisé avec succès. Vous pouvez maintenant vous connecter avec votre nouveau mot de passe."
+  },
+  "ResendEmailButton": {
+    "resendInSeconds": "Renvoyer dans {seconds} secondes"
+  },
+  "SigninCard": {
+    "emailPlaceholder": "Email",
+    "emailLabel": "Email",
+    "passwordPlaceholder": "Mot de passe",
+    "passwordLabel": "Mot de passe",
+    "signinTitle": "Connexion",
+    "signinDescription": "Connectez-vous à votre compte",
+    "signinButton": "Se connecter",
+    "signinError": "Une erreur s'est produite lors de la connexion.",
+    "signinCompleteTitle": "Connexion réussie",
+    "signinCompleteDescription": "Vous êtes maintenant connecté à votre compte.",
+    "dontHaveAccount": "Vous n'avez pas de compte ?",
+    "signUp": "S'inscrire",
+    "forgotPassword": "Mot de passe oublié ?"
+  },
+  "SignupCard": {
+    "signupTitle": "Inscription",
+    "signupDescription": "Créez un compte en utilisant votre email et mot de passe",
+    "firstnamePlaceholder": "Prénom",
+    "firstnameLabel": "Prénom",
+    "lastnamePlaceholder": "Nom",
+    "lastnameLabel": "Nom",
+    "emailPlaceholder": "Email",
+    "emailLabel": "Email",
+    "passwordPlaceholder": "Mot de passe",
+    "passwordLabel": "Mot de passe",
+    "confirmPasswordPlaceholder": "Confirmer le mot de passe",
+    "confirmPasswordLabel": "Confirmer le mot de passe",
+    "signupButton": "S'inscrire",
+    "signupError": "Une erreur s'est produite lors de l'inscription.",
+    "alreadyHaveAccount": "Vous avez déjà un compte ?",
+    "signin": "Se connecter"
   }
 }

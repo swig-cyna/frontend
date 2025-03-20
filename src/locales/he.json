@@ -1,0 +1,96 @@
+{
+  "Header": {
+    "search": "חיפוש",
+    "signin": "התחבר"
+  },
+  "Burger": {
+    "signin": "התחבר",
+    "home": "דף הבית",
+    "categories": "קטגוריות",
+    "about": "אודות",
+    "contact": "צור קשר",
+    "cgu": "תנאי שימוש"
+  },
+  "Footer": {
+    "about": "אודות",
+    "contact": "צור קשר",
+    "cgu": "תנאי שימוש"
+  },
+  "NotFoundPage": {
+    "title": "הדף לא נמצא",
+    "backHome": "חזרה לדף הבית"
+  },
+  "HomePage": {
+    "categories": "קטגוריות"
+  },
+  "ProductCard": {
+    "showMore": "הצג עוד"
+  },
+  "EmailVerification": {
+    "title": "החשבון נוצר בהצלחה!",
+    "description": "בדוק את הדואר האלקטרוני שלך כדי להפעיל את החשבון.",
+    "emailSent": "דואר אלקטרוני לאימות נשלח לכתובת הבאה:",
+    "clickLink": "אנא לחץ על הקישור בדואר האלקטרוני כדי להפעיל את החשבון שלך.",
+    "resendError": "שליחת דואר אלקטרוני לאימות נכשלה. אנא נסה שוב מאוחר יותר.",
+    "resendButton": "שלח מחדש דואר אלקטרוני לאימות"
+  },
+  "PasswordForgetCard": {
+    "resetPasswordTitle": "איפוס סיסמה",
+    "resetPasswordDescription": "הזן את כתובת הדואר האלקטרוני שלך כדי לקבל קישור לאיפוס.",
+    "sendResetLink": "שלח קישור לאיפוס סיסמה",
+    "emailSentTitle": "דואר אלקטרוני נשלח",
+    "emailSentDescription": "אם כתובת הדואר האלקטרוני שהזנת משויכת לחשבון, תקבל בקרוב דואר אלקטרוני לאיפוס הסיסמה שלך. אנא בדוק את תיבת הדואר הנכנס שלך.",
+    "resetEmailError": "אירעה שגיאה בעת שליחת הדואר האלקטרוני לאיפוס.",
+    "resendButton": "שלח מחדש קישור לאיפוס סיסמה",
+    "emailPlaceholder": "כתובת דואר אלקטרוני",
+    "emailLabel": "כתובת דואר אלקטרוני"
+  },
+  "PasswordResetCard": {
+    "resetPasswordTitle": "איפוס סיסמה",
+    "resetPasswordDescription": "הזן את הסיסמה החדשה שלך.",
+    "passwordPlaceholder": "סיסמה",
+    "passwordLabel": "סיסמה",
+    "confirmPasswordPlaceholder": "אשר סיסמה",
+    "confirmPasswordLabel": "אשר סיסמה",
+    "resetPasswordButton": "איפוס סיסמה",
+    "resetError": "אירעה שגיאה בעת איפוס הסיסמה.",
+    "resetCompleteTitle": "הסיסמה אופסה",
+    "resetCompleteDescription": "הסיסמה שלך אופסה בהצלחה. כעת תוכל להתחבר עם הסיסמה החדשה שלך."
+  },
+  "ResendEmailButton": {
+    "resendInSeconds": "שלח שוב בעוד {seconds} שניות"
+  },
+  "SigninCard": {
+    "emailPlaceholder": "דוא\"ל",
+    "emailLabel": "דוא\"ל",
+    "passwordPlaceholder": "סיסמה",
+    "passwordLabel": "סיסמה",
+    "signinTitle": "התחברות",
+    "signinDescription": "התחבר לחשבון שלך",
+    "signinButton": "התחבר",
+    "signinError": "אירעה שגיאה בעת ההתחברות.",
+    "signinCompleteTitle": "התחברות הצליחה",
+    "signinCompleteDescription": "אתה מחובר כעת לחשבון שלך.",
+    "dontHaveAccount": "אין לך חשבון?",
+    "signUp": "הירשם",
+    "forgotPassword": "שכחת סיסמה?"
+  },
+  "SignupCard": {
+    "signupTitle": "הרשמה",
+    "signupDescription": "צור חשבון באמצעות האימייל והסיסמה שלך",
+    "firstnamePlaceholder": "שם פרטי",
+    "firstnameLabel": "שם פרטי",
+    "lastnamePlaceholder": "שם משפחה",
+    "lastnameLabel": "שם משפחה",
+    "emailPlaceholder": "אימייל",
+    "emailLabel": "אימייל",
+    "passwordPlaceholder": "סיסמה",
+    "passwordLabel": "סיסמה",
+    "confirmPasswordPlaceholder": "אשר סיסמה",
+    "confirmPasswordLabel": "אשר סיסמה",
+    "signupButton": "הירשם",
+    "signupError": "אירעה שגיאה במהלך ההרשמה.",
+    "alreadyHaveAccount": "כבר יש לך חשבון?",
+    "signin": "התחבר"
+  }
+}

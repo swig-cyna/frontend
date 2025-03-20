@@ -16,25 +16,12 @@ import { useForm } from "react-hook-form"
 import { signinSchema } from "../schemas/signin"
 import { signIn } from "@/features/auth/utils/authClient"
 import { useState } from "react"
+import { useTranslations } from "next-intl"
 
 const CALLBACK_URL = process.env.NEXT_PUBLIC_FRONTEND
 
-const fields = [
-  generateFormFieldInput({
-    name: "email",
-    placeholder: "Email",
-    label: "Email",
-    type: "email",
-  }),
-  generateFormFieldInput({
-    name: "password",
-    placeholder: "Password",
-    label: "Password",
-    type: "password",
-  }),
-]
-
 const SigninCard = () => {
+  const t = useTranslations("SigninCard")
   const [error, setError] = useState(null)
   const [isSigninComplete, setIsSigninComplete] = useState(false)
 
@@ -45,6 +32,21 @@ const SigninCard = () => {
       password: "",
     },
   })
+
+  const fields = [
+    generateFormFieldInput({
+      name: "email",
+      placeholder: t("emailPlaceholder"),
+      label: t("emailLabel"),
+      type: "email",
+    }),
+    generateFormFieldInput({
+      name: "password",
+      placeholder: t("passwordPlaceholder"),
+      label: t("passwordLabel"),
+      type: "password",
+    }),
+  ]
 
   async function onSubmit(values) {
     try {
@@ -61,21 +63,26 @@ const SigninCard = () => {
       }
     } catch (err) {
       console.error(`An error has occurred: ${err}`)
-      setError("An error occurred during sign in.")
+      setError(t("signinError"))
     }
   }
 
   if (isSigninComplete) {
-    return <div>Sign in successful! Redirecting...</div>
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle>{t("signinCompleteTitle")}</CardTitle>
+          <CardDescription>{t("signinCompleteDescription")}</CardDescription>
+        </CardHeader>
+      </Card>
+    )
   }
 
   return (
     <Card className="w-full max-w-md">
       <CardHeader>
-        <CardTitle className="text-3xl">Sign in</CardTitle>
-        <CardDescription>
-          Use your email and password to sign in
-        </CardDescription>
+        <CardTitle className="text-3xl">{t("signinTitle")}</CardTitle>
+        <CardDescription>{t("signinDescription")}</CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -84,20 +91,20 @@ const SigninCard = () => {
               <FormField key={field.name} control={form.control} {...field} />
             ))}
             <Button type="submit" className="mt-4 w-full">
-              Sign in
+              {t("signinButton")}
             </Button>
           </form>
         </Form>
-        {error && <p className="text-red-500 mt-2">{error}</p>}
-        <div className="text-center mt-4">
-          Don&apos;t have an account?{" "}
-          <Link href="/signup" className="underline text-primary">
-            Sign up
+        {error && <p className="mt-2 text-red-500">{error}</p>}
+        <div className="mt-4 text-center">
+          {t("dontHaveAccount")}{" "}
+          <Link href="/signup" className="text-primary underline">
+            {t("signUp")}
           </Link>
         </div>
         <div className="mt-4 text-center">
-          <Link href="/forget-password" className="underline text-primary">
-            Forgot your password?
+          <Link href="/forget-password" className="text-primary underline">
+            {t("forgotPassword")}
           </Link>
         </div>
       </CardContent>

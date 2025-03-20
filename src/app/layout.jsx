@@ -4,6 +4,7 @@ import clsx from "clsx"
 import { NextIntlClientProvider } from "next-intl"
 import { getLocale } from "next-intl/server"
 import localFont from "next/font/local"
+import { getLangDir } from "rtl-detect"
 import "./globals.css"
 
 const geistSans = localFont({
@@ -24,6 +25,7 @@ export const metadata = {
 
 const RootLayout = async ({ children }) => {
   const local = await getLocale()
+  const direction = getLangDir(local)
 
   return (
     <html lang={local} suppressHydrationWarning={true}>
@@ -31,7 +33,8 @@ const RootLayout = async ({ children }) => {
         className={clsx(
           geistSans.variable,
           geistMono.variable,
-          "antialiased bg-background flex min-h-screen items-center flex-col",
+          "flex min-h-screen flex-col items-center bg-background antialiased",
+          direction === "rtl" ? "text-right" : "text-left",
         )}
       >
         <ThemeProvider

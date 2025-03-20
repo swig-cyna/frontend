@@ -15,17 +15,10 @@ import { forgetPassword } from "@/features/auth/utils/authClient"
 import { useState } from "react"
 import { passwordResetSchema } from "../schemas/passwordForget"
 import ResendEmailButton from "./ResendEmailButton"
-
-const fields = [
-  generateFormFieldInput({
-    name: "email",
-    placeholder: "Email",
-    label: "Email",
-    type: "email",
-  }),
-]
+import { useTranslations } from "next-intl"
 
 const PasswordForgetCard = () => {
+  const t = useTranslations("PasswordForgetCard")
   const [error, setError] = useState(null)
   const [isResetEmailSent, setIsResetEmailSent] = useState(false)
 
@@ -36,6 +29,15 @@ const PasswordForgetCard = () => {
     },
   })
 
+  const fields = [
+    generateFormFieldInput({
+      name: "email",
+      placeholder: t("emailPlaceholder"),
+      label: t("emailLabel"),
+      type: "email",
+    }),
+  ]
+
   async function handleResendPasswordReset(values) {
     try {
       await forgetPassword({
@@ -45,7 +47,7 @@ const PasswordForgetCard = () => {
       setIsResetEmailSent(true)
     } catch (err) {
       console.error(`An error has occurred: ${err}`)
-      setError("An error occurred while sending the reset email.")
+      setError(t("resetEmailError"))
     }
   }
 
@@ -53,17 +55,13 @@ const PasswordForgetCard = () => {
     return (
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle className="text-3xl">Email sent</CardTitle>
-          <CardDescription>
-            If the email address you entered is associated with an account, you
-            will shortly receive an email to reset your password. Please check
-            your inbox.
-          </CardDescription>
+          <CardTitle className="text-3xl">{t("resetPasswordTitle")}</CardTitle>
+          <CardDescription>{t("resetPasswordDescription")} </CardDescription>
         </CardHeader>
         <CardContent>
           <ResendEmailButton
             onResend={handleResendPasswordReset}
-            buttonText="Resend password reset email"
+            buttonText={t("ResendButton")}
           />
         </CardContent>
       </Card>
@@ -73,10 +71,8 @@ const PasswordForgetCard = () => {
   return (
     <Card className="w-full max-w-md">
       <CardHeader>
-        <CardTitle className="text-3xl">Reset password</CardTitle>
-        <CardDescription>
-          Enter your email address to receive a reset link.
-        </CardDescription>
+        <CardTitle className="text-3xl">{t("resetPasswordTitle")}</CardTitle>
+        <CardDescription>{t("resetPasswordDescription")} </CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -88,11 +84,11 @@ const PasswordForgetCard = () => {
               <FormField key={field.name} control={form.control} {...field} />
             ))}
             <Button type="submit" className="mt-4 w-full">
-              Send password reset link
+              {t("sendResetLink")}
             </Button>
           </form>
         </Form>
-        {error && <p className="text-red-500 mt-2">{error}</p>}
+        {error && <p className="mt-2 text-red-500">{error}</p>}
       </CardContent>
     </Card>
   )

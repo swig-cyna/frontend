@@ -32,6 +32,7 @@
     "react-headroom": "^3.2.1",
     "react-hook-form": "^7.53.0",
     "react-world-flags": "^1.6.0",
+    "rtl-detect": "^1.1.2",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.23.8",

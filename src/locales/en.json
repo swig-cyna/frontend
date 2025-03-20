@@ -25,5 +25,72 @@
   },
   "ProductCard": {
     "showMore": "Show more"
+  },
+  "EmailVerification": {
+    "title": "Account created successfully!",
+    "description": "Check your email to activate your account.",
+    "emailSent": "A verification email has been sent to the following address:",
+    "clickLink": "Please click on the link in the email to activate your account.",
+    "resendError": "Failed to resend verification email. Please try again later.",
+    "resendButton": "Resend verification email"
+  },
+  "PasswordForgetCard": {
+    "resetPasswordTitle": "Reset password",
+    "resetPasswordDescription": "Enter your email address to receive a reset link.",
+    "sendResetLink": "Send password reset link",
+    "emailSentTitle": "Email sent",
+    "emailSentDescription": "If the email address you entered is associated with an account, you will shortly receive an email to reset your password. Please check your inbox.",
+    "resetEmailError": "An error occurred while sending the reset email.",
+    "resendButton": "Resend password reset link",
+    "emailPlaceholder": "Email address",
+    "emailLabel": "Email address"
+  },
+  "PasswordResetCard": {
+    "resetPasswordTitle": "Reset password",
+    "resetPasswordDescription": "Enter your new password.",
+    "passwordPlaceholder": "Password",
+    "passwordLabel": "Password",
+    "confirmPasswordPlaceholder": "Confirm password",
+    "confirmPasswordLabel": "Confirm password",
+    "resetPasswordButton": "Reset password",
+    "resetError": "An error occurred while resetting the password.",
+    "resetCompleteTitle": "Password reset",
+    "resetCompleteDescription": "Your password has been successfully reset. You can now log in with your new password."
+  },
+  "ResendEmailButton": {
+    "resendInSeconds": "Resend in {seconds} seconds"
+  },
+  "SigninCard": {
+    "emailPlaceholder": "Email",
+    "emailLabel": "Email",
+    "passwordPlaceholder": "Password",
+    "passwordLabel": "Password",
+    "signinTitle": "Sign in",
+    "signinDescription": "Sign in to your account",
+    "signinButton": "Sign in",
+    "signinError": "An error occurred during sign in.",
+    "signinCompleteTitle": "Sign in successful",
+    "signinCompleteDescription": "You are now signed in to your account.",
+    "dontHaveAccount": "Don't have an account?",
+    "signUp": "Sign up",
+    "forgotPassword": "Forgot password?"
+  },
+  "SignupCard": {
+    "signupTitle": "Sign up",
+    "signupDescription": "Create an account using your email and password",
+    "firstnamePlaceholder": "First name",
+    "firstnameLabel": "First name",
+    "lastnamePlaceholder": "Last name",
+    "lastnameLabel": "Last name",
+    "emailPlaceholder": "Email",
+    "emailLabel": "Email",
+    "passwordPlaceholder": "Password",
+    "passwordLabel": "Password",
+    "confirmPasswordPlaceholder": "Confirm password",
+    "confirmPasswordLabel": "Confirm password",
+    "signupButton": "Sign up",
+    "signupError": "An error occurred during registration.",
+    "alreadyHaveAccount": "Already have an account?",
+    "signin": "Sign in"
   }
 }

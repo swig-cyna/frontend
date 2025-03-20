@@ -15,23 +15,10 @@ import { Button } from "@/components/ui/button"
 import { generateFormFieldInput } from "@/components/functions"
 import { useSearchParams } from "next/navigation"
 import { resetPasswordSchema } from "../schemas/passwordReset"
-
-const fields = [
-  generateFormFieldInput({
-    name: "password",
-    placeholder: "Password",
-    label: "Password",
-    type: "password",
-  }),
-  generateFormFieldInput({
-    name: "confirmPassword",
-    placeholder: "Confirm password",
-    label: "Confirm password",
-    type: "password",
-  }),
-]
+import { useTranslations } from "next-intl"
 
 const PasswordResetCard = () => {
+  const t = useTranslations("PasswordResetCard")
   const searchParams = useSearchParams()
   const [token, setToken] = useState("")
   const [error, setError] = useState(null)
@@ -53,6 +40,21 @@ const PasswordResetCard = () => {
     },
   })
 
+  const fields = [
+    generateFormFieldInput({
+      name: "password",
+      placeholder: t("passwordPlaceholder"),
+      label: t("passwordLabel"),
+      type: "password",
+    }),
+    generateFormFieldInput({
+      name: "confirmPassword",
+      placeholder: t("confirmPasswordPlaceholder"),
+      label: t("confirmPasswordLabel"),
+      type: "password",
+    }),
+  ]
+
   async function onSubmit(values) {
     try {
       await authClient.resetPassword({
@@ -62,7 +64,7 @@ const PasswordResetCard = () => {
       setIsResetComplete(true)
     } catch (err) {
       console.error(`An error has occurred: ${err}`)
-      setError("An error occurred while resetting the password.")
+      setError(t("resetError"))
     }
   }
 
@@ -70,11 +72,8 @@ const PasswordResetCard = () => {
     return (
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle className="text-3xl">Password reset</CardTitle>
-          <CardDescription>
-            Your password has been successfully reset. You can now log in with
-            your new password.
-          </CardDescription>
+          <CardTitle className="text-3xl">{t("resetCompleteTitle")}</CardTitle>
+          <CardDescription>{t("resetCompleteDescription")}</CardDescription>
         </CardHeader>
       </Card>
     )
@@ -83,8 +82,8 @@ const PasswordResetCard = () => {
   return (
     <Card className="w-full max-w-md">
       <CardHeader>
-        <CardTitle className="text-3xl">Reset password </CardTitle>
-        <CardDescription>Enter your new password.</CardDescription>
+        <CardTitle className="text-3xl">{t("resetPasswordTitle")}</CardTitle>
+        <CardDescription>{t("resetPasswordDescription")}</CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -93,11 +92,11 @@ const PasswordResetCard = () => {
               <FormField key={field.name} control={form.control} {...field} />
             ))}
             <Button type="submit" className="mt-4 w-full">
-              Reset password
+              {t("resetPasswordButton")}
             </Button>
           </form>
         </Form>
-        {error && <p className="text-red-500 mt-2">{error}</p>}
+        {error && <p className="mt-2 text-red-500">{error}</p>}
       </CardContent>
     </Card>
   )
