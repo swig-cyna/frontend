@@ -1,7 +1,10 @@
 {
   "Header": {
     "search": "Rechercher",
-    "signin": "Se connecter"
+    "signin": "Se connecter",
+    "userMenu": "Menu utilisateur",
+    "userSpace": "Espace utilisateur",
+    "signout": "Se déconnecter"
   },
   "Burger": {
     "signin": "Se connecter",

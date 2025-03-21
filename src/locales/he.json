@@ -1,7 +1,10 @@
 {
   "Header": {
     "search": "חיפוש",
-    "signin": "התחבר"
+    "signin": "התחבר",
+    "userMenu": "תפריט משתמש",
+    "userSpace": "אזור משתמש",
+    "signout": "התנתק"
   },
   "Burger": {
     "signin": "התחבר",

@@ -1,7 +1,10 @@
 {
   "Header": {
     "search": "Search",
-    "signin": "Sign in"
+    "signin": "Sign in",
+    "userMenu": "User menu",
+    "userSpace": "User space",
+    "signout": "Sign out"
   },
   "Burger": {
     "signin": "Sign in",
