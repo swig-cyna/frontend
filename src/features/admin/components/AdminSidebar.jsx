@@ -21,7 +21,6 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -61,11 +60,10 @@ const items = [
 const AdminSidebar = () => (
   <Sidebar>
     <SidebarContent>
-      <div className="mx-2 mt-2 flex items-center justify-between">
+      <div className="mx-3 mt-3 flex items-center justify-between">
         <Image src={logo} className="mt-1 h-8 w-auto" alt="logo" />
       </div>
       <SidebarGroup>
-        <SidebarGroupLabel>Application</SidebarGroupLabel>
         <SidebarGroupContent>
           <SidebarMenu>
             {items.map((item) => (
