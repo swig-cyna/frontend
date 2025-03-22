@@ -10,11 +10,11 @@ const AdminLayout = ({ children }) => {
   return (
     <SidebarProvider open={open} onOpenChange={setOpen}>
       <AdminSidebar />
-      <div className="flex flex-col flex-1 mx-2">
-        <div className="h-9 mt-2 flex items-center">
+      <div className="mx-2 flex flex-1 flex-col">
+        <div className="mt-2 flex h-9 items-center">
           <SidebarTrigger />
         </div>
-        {children}
+        <div className="mx-auto w-full max-w-5xl">{children}</div>
       </div>
     </SidebarProvider>
   )

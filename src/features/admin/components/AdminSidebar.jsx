@@ -1,10 +1,10 @@
 import {
-  Calendar,
+  Box,
   ChevronUp,
   Home,
-  Inbox,
   Search,
   Settings,
+  User,
   User2,
 } from "lucide-react"
 
@@ -27,23 +27,24 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import Image from "next/image"
+import Link from "next/link"
 
 // Menu items.
 const items = [
   {
     title: "Home",
-    url: "#",
+    url: "/admin",
     icon: Home,
   },
   {
-    title: "Inbox",
-    url: "#",
-    icon: Inbox,
+    title: "Users",
+    url: "/admin/users",
+    icon: User,
   },
   {
-    title: "Calendar",
+    title: "Products",
     url: "#",
-    icon: Calendar,
+    icon: Box,
   },
   {
     title: "Search",
@@ -70,10 +71,10 @@ const AdminSidebar = () => (
             {items.map((item) => (
               <SidebarMenuItem key={item.title}>
                 <SidebarMenuButton asChild>
-                  <a href={item.url}>
+                  <Link href={item.url}>
                     <item.icon />
                     <span>{item.title}</span>
-                  </a>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             ))}
