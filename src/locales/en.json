@@ -76,7 +76,8 @@
     "signinCompleteDescription": "You are now signed in to your account.",
     "dontHaveAccount": "Don't have an account?",
     "signUp": "Sign up",
-    "forgotPassword": "Forgot password?"
+    "forgotPassword": "Forgot password?",
+    "rememberMeLabel": "Remember me"
   },
   "SignupCard": {
     "signupTitle": "Sign up",

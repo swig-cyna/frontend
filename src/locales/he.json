@@ -76,7 +76,8 @@
     "signinCompleteDescription": "אתה מחובר כעת לחשבון שלך.",
     "dontHaveAccount": "אין לך חשבון?",
     "signUp": "הירשם",
-    "forgotPassword": "שכחת סיסמה?"
+    "forgotPassword": "שכחת סיסמה?",
+    "rememberMeLabel": "תזכור אותי"
   },
   "SignupCard": {
     "signupTitle": "הרשמה",

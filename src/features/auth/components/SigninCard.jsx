@@ -17,6 +17,7 @@ import { signinSchema } from "../schemas/signin"
 import { signIn } from "@/features/auth/utils/authClient"
 import { useState } from "react"
 import { useTranslations } from "next-intl"
+import { Checkbox } from "@/components/ui/checkbox"
 
 const CALLBACK_URL = process.env.NEXT_PUBLIC_FRONTEND
 
@@ -24,6 +25,7 @@ const SigninCard = () => {
   const t = useTranslations("SigninCard")
   const [error, setError] = useState(null)
   const [isSigninComplete, setIsSigninComplete] = useState(false)
+  const [rememberMe, setRememberMe] = useState(false)
 
   const form = useForm({
     resolver: zodResolver(signinSchema),
@@ -54,6 +56,7 @@ const SigninCard = () => {
         email: values.email,
         password: values.password,
         callbackURL: CALLBACK_URL,
+        rememberMe,
       })
 
       if (signInError) {
@@ -65,6 +68,10 @@ const SigninCard = () => {
       console.error(`An error has occurred: ${err}`)
       setError(t("signinError"))
     }
+  }
+
+  const handleRememberMe = (checked) => {
+    setRememberMe(checked)
   }
 
   if (isSigninComplete) {
@@ -90,6 +97,24 @@ const SigninCard = () => {
             {fields.map((field) => (
               <FormField key={field.name} control={form.control} {...field} />
             ))}
+            <FormField
+              control={form.control}
+              name="rememberMe"
+              render={({ field }) => (
+                <div className="flex items-center">
+                  <Checkbox
+                    id="rememberMe"
+                    checked={rememberMe}
+                    onCheckedChange={handleRememberMe}
+                    {...field}
+                  />
+                  <label htmlFor="rememberMe" className="ml-2 text-sm">
+                    {t("rememberMeLabel")}
+                  </label>
+                </div>
+              )}
+            />
+
             <Button type="submit" className="mt-4 w-full">
               {t("signinButton")}
             </Button>
