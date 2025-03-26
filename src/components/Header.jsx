@@ -55,7 +55,7 @@ const Header = () => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuItem>
-                    <Link href="/user">{t("userSpace")}</Link>
+                    <Link href="/account-management">{t("userSpace")}</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
                     <button

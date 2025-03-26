@@ -96,5 +96,37 @@
     "signupError": "אירעה שגיאה במהלך ההרשמה.",
     "alreadyHaveAccount": "כבר יש לך חשבון?",
     "signin": "התחבר"
+  },
+  "UserSpaceMenu": {
+    "accountManagement": "ניהול חשבון משתמש",
+    "subscriptionManagement": "ניהול מנויים",
+    "orderHistory": "היסטוריית הזמנות וחיובים",
+    "paymentManagement": "ניהול תשלומים",
+    "addressBook": "ספר כתובות",
+    "support": "תמיכה וסיוע",
+    "preferences": "העדפות",
+    "logout": "התנתקות"
+  },
+  "AccountManagement": {
+    "title": "נהל את החשבון שלך",
+    "nameLabel": "שם",
+    "emailLabel": "אימייל",
+    "updateButton": "עדכן",
+    "updating": "מעדכן",
+    "emailUpdateError": "שגיאה בעדכון האימייל",
+    "nameUpdateError": "שגיאה בעדכון השם",
+    "emailUpdateSuccess": "האימייל עודכן בהצלחה",
+    "nameUpdateSuccess": "השם עודכן בהצלחה",
+    "emailUpdateInitiated": "תהליך שינוי האימייל החל",
+    "emailUpdateInstructions": "אימייל אישור נשלח לכתובת הישנה שלך. אנא עקוב אחר ההוראות כדי לאשר את השינוי.",
+    "emailChangeTitle": "בקשת שינוי האימייל התקבלה",
+    "emailChangeDescription": "אמת את זהותך כדי לאשר את הבקשה",
+    "emailChangeSent": "כדי לאבטח את שינוי כתובת האימייל שלך, עלינו לאמת את זהותך. אימייל נשלח לכתובת הנוכחית שלך:",
+    "emailChangeClickLink": "אנא לחץ על הקישור באימייל כדי לאשר את בקשתך.",
+    "emailVerificationTitle": "אימות כתובת האימייל החדשה שלך",
+    "emailVerificationDescription": "אמת את הכתובת החדשה שלך כדי לסיים את הבקשה",
+    "emailVerificationSent": "תודה שאישרת את זהותך. כדי לסיים את שינוי כתובת האימייל שלך, תמצא אימייל בכתובת החדשה שלך:",
+    "emailVerificationClickLink": "אנא לחץ על הקישור באימייל כדי לסיים את בקשתך.",
+    "resendButton": "שלח מחדש דואר אלקטרוני לאימות"
   }
 }

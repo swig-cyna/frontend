@@ -96,5 +96,37 @@
     "signupError": "An error occurred during registration.",
     "alreadyHaveAccount": "Already have an account?",
     "signin": "Sign in"
+  },
+  "UserSpaceMenu": {
+    "accountManagement": "User Account Management",
+    "subscriptionManagement": "Subscription Management",
+    "orderHistory": "Order History and Billing",
+    "paymentManagement": "Payment Management",
+    "addressBook": "Address Book",
+    "support": "Assistance and Support",
+    "preferences": "Preferences",
+    "logout": "Logout"
+  },
+  "AccountManagement": {
+    "title": "Manage your account",
+    "nameLabel": "Name",
+    "emailLabel": "Email",
+    "updateButton": "Update",
+    "updating": "Updating",
+    "emailUpdateError": "Error updating email",
+    "nameUpdateError": "Error updating name",
+    "emailUpdateSuccess": "Email updated successfully",
+    "nameUpdateSuccess": "Name updated successfully",
+    "emailUpdateInitiated": "Email change process initiated",
+    "emailUpdateInstructions": "A confirmation email has been sent to your old address. Please follow the instructions to confirm the change.",
+    "emailChangeTitle": "Email change request acknowledged",
+    "emailChangeDescription": "Verify your identity to validate the request",
+    "emailChangeSent": "To secure the modification of your email address, we need to verify your identity. An email has been sent to your current address:",
+    "emailChangeClickLink": "Please click on the link in the email to validate your request.",
+    "emailVerificationTitle": "Verification of your new email address",
+    "emailVerificationDescription": "Verify your new address to finalize the request",
+    "emailVerificationSent": "Thank you for confirming your identity. To finalize the change of your email address, you will find an email in your new address:",
+    "emailVerificationClickLink": "Please click on the link in the email to finalize your request.",
+    "resendButton": "Resend verification email"
   }
 }

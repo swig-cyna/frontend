@@ -96,5 +96,37 @@
     "signupError": "Une erreur s'est produite lors de l'inscription.",
     "alreadyHaveAccount": "Vous avez déjà un compte ?",
     "signin": "Se connecter"
+  },
+  "UserSpaceMenu": {
+    "accountManagement": "Gestion du compte utilisateur",
+    "subscriptionManagement": "Gestion des abonnements",
+    "orderHistory": "Historique de commandes et facturation",
+    "paymentManagement": "Gestion des paiements",
+    "addressBook": "Carnet d'adresses",
+    "support": "Assistance et support",
+    "preferences": "Préférences",
+    "logout": "Déconnexion"
+  },
+  "AccountManagement": {
+    "title": "Gérer votre compte",
+    "nameLabel": "Nom",
+    "emailLabel": "Email",
+    "updateButton": "Mettre à jour",
+    "updating": "Mise à jour en cours",
+    "emailUpdateError": "Erreur lors de la mise à jour de l'email",
+    "nameUpdateError": "Erreur lors de la mise à jour du nom",
+    "emailUpdateSuccess": "Email mis à jour avec succès",
+    "nameUpdateSuccess": "Nom mis à jour avec succès",
+    "emailUpdateInitiated": "Processus de changement d'email initié",
+    "emailUpdateInstructions": "Un email de confirmation a été envoyé à votre ancienne adresse. Veuillez suivre les instructions pour confirmer le changement.",
+    "emailChangeTitle": "Demande de changement d'adresse pris en compte",
+    "emailChangeDescription": "Vérifier votre identité pour valider la demande",
+    "emailChangeSent": "Pour sécuriser la modification de votre adresse e-mail, nous avons besoin de vérifier votre identité. Un email à été envoyé à votre adresse actuelle :",
+    "emailChangeClickLink": "Veuillez cliquer sur le lien dans l'email pour valider votre demande.",
+    "emailVerificationTitle": "Vérification de votre nouvelle adresse mail",
+    "emailVerificationDescription": "Vérifier votre nouvelle adresse pour finaliser la demande",
+    "emailVerificationSent": "Merci d'avoir confirmé votre identité. Pour finaliser le changement de votre adresse e-mail, vous trouverez un mail dans votre nouvelle adresse :",
+    "emailVerificationClickLink": "Veuillez cliquer sur le lien dans l'email pour finaliser votre demande.",
+    "resendButton": "Renvoyer l'email de vérification"
   }
 }

@@ -18,13 +18,12 @@ import { signUp } from "@/features/auth/utils/authClient"
 import { useState } from "react"
 import EmailVerification from "./EmailVerification"
 import { useTranslations } from "next-intl"
-import { getLocale } from "@/utils/locales"
-import { getLangDir } from "rtl-detect"
 
 const CALLBACK_URL = process.env.NEXT_PUBLIC_FRONTEND
 
 const SignupCard = () => {
   const t = useTranslations("SignupCard")
+
   const [error, setError] = useState(null)
   const [isSignupComplete, setIsSignupComplete] = useState(false)
   const [userEmail, setUserEmail] = useState("")
