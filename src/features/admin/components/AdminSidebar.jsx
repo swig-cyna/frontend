@@ -1,8 +1,8 @@
 import {
+  AppWindow,
   Box,
   ChevronUp,
   Home,
-  Search,
   Settings,
   User,
   User2,
@@ -46,9 +46,9 @@ const items = [
     icon: Box,
   },
   {
-    title: "Search",
-    url: "#",
-    icon: Search,
+    title: "Carousel",
+    url: "/admin/carousel",
+    icon: AppWindow,
   },
   {
     title: "Settings",
