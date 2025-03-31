@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/toaster"
 import TanstackProvider from "@/providers/TanStackProvider"
 import ThemeProvider from "@/providers/ThemeProvider"
 import clsx from "clsx"
@@ -31,7 +32,7 @@ const RootLayout = async ({ children }) => {
         className={clsx(
           geistSans.variable,
           geistMono.variable,
-          "antialiased bg-background flex min-h-screen items-center flex-col",
+          "flex min-h-screen flex-col items-center bg-background antialiased",
         )}
       >
         <ThemeProvider
@@ -44,6 +45,7 @@ const RootLayout = async ({ children }) => {
             <TanstackProvider>{children}</TanstackProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
+        <Toaster />
       </body>
     </html>
   )
