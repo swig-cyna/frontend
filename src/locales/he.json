@@ -108,8 +108,11 @@
     "logout": "התנתקות"
   },
   "AccountManagement": {
-    "title": "נהל את החשבון שלך",
-    "nameLabel": "שם",
+    "title": "נהל את החשבון שלך"
+  },
+  "ProfileInfoUpdate": {
+    "title": "ערוך את הנתונים שלך",
+    "description": "כאן תוכלו לערוך את המידע המשויך לחשבון שלכם.",
     "emailLabel": "אימייל",
     "updateButton": "עדכן",
     "updating": "מעדכן",
@@ -127,6 +130,29 @@
     "emailVerificationDescription": "אמת את הכתובת החדשה שלך כדי לסיים את הבקשה",
     "emailVerificationSent": "תודה שאישרת את זהותך. כדי לסיים את שינוי כתובת האימייל שלך, תמצא אימייל בכתובת החדשה שלך:",
     "emailVerificationClickLink": "אנא לחץ על הקישור באימייל כדי לסיים את בקשתך.",
-    "resendButton": "שלח מחדש דואר אלקטרוני לאימות"
+    "resendButton": "שלח מחדש דואר אלקטרוני לאימות",
+    "resetPasswordLink": "אני רוצה לאפס את הסיסמה שלי"
+  },
+  "TwoFactorAuthToggle": {
+    "enableSuccess": "בקשת ההפעלה התקבלה",
+    "activationError": "שגיאת הפעלה",
+    "desactivated": "אימות דו-שלבי בוטל",
+    "desactivationError": "שגיאה בביטול האימות",
+    "activationSuccessful": "!ההפעלה הצליחה. אימות דו-שלבי הופעל כעת.",
+    "verificationError": "קוד לא חוקי או שפג תוקפו",
+    "passwordNeed": ".אנא הזן את הסיסמה שלך כדי להמשיך",
+    "passwordPlaceholder": ".הסיסמה שלך",
+    "title": "(אימות דו-שלבי (2FA",
+    "description": ".אבטח את חשבונך באמצעות אימות דו-שלבי",
+    "status": ":סטטוס ",
+    "statusActivated": ".מופעל",
+    "statusDesactivated": ".מושבת",
+    "stepOne": ":שלב ראשון מתוך שניים - סרוק את קוד ה-QR או הזן את המפתח הסודי באפליקציית האימות שלך.",
+    "secret": ":מפתח סודי ",
+    "codeInstruction": ".העתק קוד זה אם אינך יכול לסרוק את קוד ה-QR",
+    "stepTwo": ":שלב שני מתוך שניים - הזן את הקוד שסופק על ידי אפליקציית האימות שלך.",
+    "codePlaceholder": ".הזן את הקוד בן ששת הספרות כאן",
+    "verifyButton": ".אמת",
+    "loading": "...טוען"
   }
 }

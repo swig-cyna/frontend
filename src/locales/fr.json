@@ -108,7 +108,11 @@
     "logout": "Déconnexion"
   },
   "AccountManagement": {
-    "title": "Gérer votre compte",
+    "title": "Gérer votre compte"
+  },
+  "ProfileInfoUpdate": {
+    "title": "Modifier vos données",
+    "description": "Vous pouvez ici modifier les informations associées à votre compte.",
     "nameLabel": "Nom",
     "emailLabel": "Email",
     "updateButton": "Mettre à jour",
@@ -127,6 +131,29 @@
     "emailVerificationDescription": "Vérifier votre nouvelle adresse pour finaliser la demande",
     "emailVerificationSent": "Merci d'avoir confirmé votre identité. Pour finaliser le changement de votre adresse e-mail, vous trouverez un mail dans votre nouvelle adresse :",
     "emailVerificationClickLink": "Veuillez cliquer sur le lien dans l'email pour finaliser votre demande.",
-    "resendButton": "Renvoyer l'email de vérification"
+    "resendButton": "Renvoyer l'email de vérification",
+    "resetPasswordLink": "Je souhaite réinitialiser mon mot de passe"
+  },
+  "TwoFactorAuthToggle": {
+    "enableSuccess": "Demande d'activation prise en compte",
+    "activationError": "Erreur d'activation",
+    "desactivated": "2FA désactivée",
+    "desactivationError": "Erreur de désactivation",
+    "activationSuccessful": "Activation réussie ! 2FA maintenant activée.",
+    "verificationError": "Code invalide ou expiré",
+    "passwordNeed": "Veuillez entrer votre mot de passe pour continuer",
+    "passwordPlaceholder": "Votre mot de passe",
+    "title": "Authentification à deux facteurs (2FA)",
+    "description": "Sécurisez votre compte avec l'authentification à deux facteurs",
+    "status": "Statut : ",
+    "statusActivated": "Activée",
+    "statusDesactivated": "Désactivée",
+    "stepOne": "Étape 1/2 : Scannez le QR Code ou entrez le secret dans votre application d'authentification.",
+    "secret": "Clé secrète :",
+    "codeInstruction": "Copiez ce code si vous ne pouvez pas scanner le QR Code",
+    "stepTwo": "Étape 2/2 : Entrez le code fourni par votre application d'authentification.",
+    "codePlaceholder": "Entrez le code à 6 chiffres",
+    "verifyButton": "Vérifier",
+    "loading": "Chargement..."
   }
 }

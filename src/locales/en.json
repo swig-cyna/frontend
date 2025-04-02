@@ -108,7 +108,11 @@
     "logout": "Logout"
   },
   "AccountManagement": {
-    "title": "Manage your account",
+    "title": "Manage your account"
+  },
+  "ProfileInfoUpdate": {
+    "title": "Edit Your Data",
+    "description": "Here you can edit the information associated with your account.",
     "nameLabel": "Name",
     "emailLabel": "Email",
     "updateButton": "Update",
@@ -127,6 +131,29 @@
     "emailVerificationDescription": "Verify your new address to finalize the request",
     "emailVerificationSent": "Thank you for confirming your identity. To finalize the change of your email address, you will find an email in your new address:",
     "emailVerificationClickLink": "Please click on the link in the email to finalize your request.",
-    "resendButton": "Resend verification email"
+    "resendButton": "Resend verification email",
+    "resetPasswordLink": "I want to reset my password"
+  },
+  "TwoFactorAuthToggle": {
+    "enableSuccess": "Activation request acknowledged",
+    "activationError": "Activation error",
+    "desactivated": "2FA disabled",
+    "desactivationError": "Deactivation error",
+    "activationSuccessful": "Activation successful! 2FA is now enabled.",
+    "verificationError": "Invalid or expired code",
+    "passwordNeed": "Please enter your password to continue",
+    "passwordPlaceholder": "Your password",
+    "title": "Two-Factor Authentication (2FA)",
+    "description": "Secure your account with two-factor authentication",
+    "status": "Status: ",
+    "statusActivated": "Enabled",
+    "statusDesactivated": "Disabled",
+    "stepOne": "Step 1/2: Scan the QR Code or enter the secret into your authentication app.",
+    "secret": "Secret Key:",
+    "codeInstruction": "Copy this code if you cannot scan the QR Code",
+    "stepTwo": "Step 2/2: Enter the code provided by your authentication app.",
+    "codePlaceholder": "Enter the 6-digit code",
+    "verifyButton": "Verify",
+    "loading": "Loading..."
   }
 }
