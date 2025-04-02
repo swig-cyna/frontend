@@ -77,7 +77,12 @@
     "dontHaveAccount": "Vous n'avez pas de compte ?",
     "signUp": "S'inscrire",
     "forgotPassword": "Mot de passe oublié ?",
-    "rememberMeLabel": "Se souvenir de moi"
+    "rememberMeLabel": "Se souvenir de moi",
+    "twoFactorTitle": "Authentification à deux facteurs requise",
+    "twoFactorDescription": "Veuillez entrer le code généré par votre application d'authentification.",
+    "verifyOtpButton": "Vérifier le code",
+    "invalidOtp": "Le code doit contenir exactement six chiffres.",
+    "otpVerificationFailed": "La vérification du code a échoué."
   },
   "SignupCard": {
     "signupTitle": "Inscription",

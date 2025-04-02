@@ -77,7 +77,12 @@
     "dontHaveAccount": "אין לך חשבון?",
     "signUp": "הירשם",
     "forgotPassword": "שכחת סיסמה?",
-    "rememberMeLabel": "תזכור אותי"
+    "rememberMeLabel": "זכור אותי",
+    "twoFactorTitle": "נדרשת אימות דו-שלבית",
+    "twoFactorDescription": "אנא הזן את הקוד שנוצר על ידי אפליקציית האימות שלך.",
+    "verifyOtpButton": "אמת קוד",
+    "invalidOtp": "הקוד חייב להכיל בדיוק שישה ספרות.",
+    "otpVerificationFailed": "אימות הקוד נכשל."
   },
   "SignupCard": {
     "signupTitle": "הרשמה",

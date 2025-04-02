@@ -27,7 +27,6 @@ const ProfileInfoUpdate = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [message, setMessage] = useState({ content: "", type: "" })
   const [isEmailChangeInitiated, setIsEmailChangeInitiated] = useState(false)
-  console.log(session)
 
   const form = useForm({
     resolver: zodResolver(changeEmail),
