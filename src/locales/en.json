@@ -10,9 +10,11 @@
     "signin": "Sign in",
     "home": "Home",
     "categories": "Categories",
+    "backoffice": "Admin portal",
     "about": "About",
     "contact": "Contact",
-    "cgu": "CGU"
+    "cgu": "Terms of Use",
+    "signout": "Sign out"
   },
   "Footer": {
     "about": "About",

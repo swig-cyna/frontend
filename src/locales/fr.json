@@ -10,9 +10,11 @@
     "signin": "Se connecter",
     "home": "Accueil",
     "categories": "Catégories",
+    "backoffice": "Portail administrateur",
     "about": "À propos",
     "contact": "Contact",
-    "cgu": "CGU"
+    "cgu": "CGU",
+    "signout": "Se déconnecter"
   },
   "Footer": {
     "about": "À propos",

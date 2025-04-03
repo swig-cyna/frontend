@@ -7,12 +7,14 @@
     "signout": "התנתק"
   },
   "Burger": {
-    "signin": "התחבר",
-    "home": "דף הבית",
+    "signin": "להתחבר",
+    "home": "בית",
     "categories": "קטגוריות",
+    "backoffice": "פורטל מנהלים",
     "about": "אודות",
     "contact": "צור קשר",
-    "cgu": "תנאי שימוש"
+    "cgu": "תנאי שימוש",
+    "signout": "להתנתק"
   },
   "Footer": {
     "about": "אודות",
