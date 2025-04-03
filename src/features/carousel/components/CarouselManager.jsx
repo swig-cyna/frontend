@@ -14,6 +14,8 @@ import {
 } from "@/components/ui/card"
 import { TabsContent } from "@/components/ui/tabs"
 import { useToast } from "@/hooks/useToast"
+import { useCarousel } from "../hooks/useCarousel"
+import { useAddSlide } from "../hooks/useSlide"
 import { AddSlideDialog } from "./AddSlideDialog"
 import { CarouselPreview } from "./CarouselPreview"
 import { DeleteSlideDialog } from "./DeleteSlideDialog"
@@ -55,7 +57,12 @@ export function CarouselManager() {
   const [slideToDelete, setSlideToDelete] = useState(null)
   const { toast } = useToast()
 
+  const { data, isLoading, refetch } = useCarousel()
+  const { mutate } = useAddSlide({ refetch })
+
   const handleAddSlide = (newSlide) => {
+    mutate(newSlide)
+
     const id = (slides.length + 1).toString()
     const order = slides.length
 
@@ -120,6 +127,10 @@ export function CarouselManager() {
     })
   }
 
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
+
   return (
     <div className="space-y-6">
       <TabsContent value="list" className="space-y-4">
@@ -132,7 +143,7 @@ export function CarouselManager() {
 
         <DragDropContext onDragEnd={handleDragEnd}>
           <SlideList
-            slides={slides}
+            slides={data}
             onEdit={setSlideToEdit}
             onDelete={setSlideToDelete}
           />
@@ -148,7 +159,7 @@ export function CarouselManager() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <CarouselPreview slides={slides} />
+            <CarouselPreview slides={data} />
           </CardContent>
         </Card>
       </TabsContent>

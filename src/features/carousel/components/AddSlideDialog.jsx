@@ -1,7 +1,6 @@
 "use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
-import { ImagePlus } from "lucide-react"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 
@@ -28,14 +27,12 @@ import { addSlideSchema } from "../schemas/addSlide"
 
 export function AddSlideDialog({ open, onOpenChange, onAddSlide }) {
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [previewImage, setPreviewImage] = useState(null)
 
   const form = useForm({
     resolver: zodResolver(addSlideSchema),
     defaultValues: {
       title: "",
       description: "",
-      imageUrl: "/placeholder.svg?height=600&width=1200",
       link: "",
     },
   })
@@ -48,13 +45,7 @@ export function AddSlideDialog({ open, onOpenChange, onAddSlide }) {
       onAddSlide(values)
       setIsSubmitting(false)
       form.reset()
-      setPreviewImage(null)
     }, 1000)
-  }
-
-  const handleImageUrlChange = (url) => {
-    form.setValue("imageUrl", url)
-    setPreviewImage(url)
   }
 
   return (
@@ -94,41 +85,6 @@ export function AddSlideDialog({ open, onOpenChange, onAddSlide }) {
                       className="resize-none"
                       {...field}
                     />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="imageUrl"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Image URL</FormLabel>
-                  <FormControl>
-                    <div className="space-y-2">
-                      <Input
-                        placeholder="https://example.com/image.jpg"
-                        {...field}
-                        onChange={(e) => handleImageUrlChange(e.target.value)}
-                      />
-                      <div className="relative aspect-[16/9] w-full overflow-hidden rounded-md border">
-                        {previewImage ? (
-                          // eslint-disable-next-line @next/next/no-img-element
-                          <img
-                            src={previewImage || "/placeholder.svg"}
-                            alt="Preview"
-                            className="h-full w-full object-cover"
-                            onError={() => setPreviewImage(null)}
-                          />
-                        ) : (
-                          <div className="flex h-full w-full items-center justify-center bg-muted">
-                            <ImagePlus className="h-10 w-10 text-muted-foreground" />
-                          </div>
-                        )}
-                      </div>
-                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>

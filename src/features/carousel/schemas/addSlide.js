@@ -7,9 +7,6 @@ export const addSlideSchema = z.object({
   description: z.string().min(10, {
     message: "Description must contain at least 10 characters.",
   }),
-  imageUrl: z.string().url({
-    message: "Please enter a valid image URL.",
-  }),
   link: z.string().url({
     message: "Please enter a valid URL.",
   }),
