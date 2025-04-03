@@ -10,22 +10,19 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
 import { useState } from "react"
+import { useDeleteSlide } from "../hooks/useSlide"
 
-export function DeleteSlideDialog({
-  slide,
-  open,
-  onOpenChange,
-  onConfirmDelete,
-}) {
+export function DeleteSlideDialog({ slide, open, onOpenChange }) {
   const [isDeleting, setIsDeleting] = useState(false)
 
-  const handleDelete = () => {
+  const { mutateAsync: deleteSlide } = useDeleteSlide()
+
+  const handleDelete = async () => {
     setIsDeleting(true)
-    // Simulate API delay
-    setTimeout(() => {
-      setIsDeleting(false)
-      onConfirmDelete()
-    }, 500)
+
+    await deleteSlide(slide.id)
+
+    setIsDeleting(false)
   }
 
   return (

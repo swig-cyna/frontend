@@ -1,10 +1,11 @@
 "use client"
 
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight, ImagePlus } from "lucide-react"
 import Image from "next/image"
 import { useCallback, useEffect, useState } from "react"
 
 import { Button } from "@/components/ui/button"
+import { getSlideImageUrl } from "../utils/image"
 
 export function CarouselPreview({ slides }) {
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -82,12 +83,18 @@ export function CarouselPreview({ slides }) {
             }`}
           >
             <div className="relative h-full w-full">
-              <Image
-                src={slide.imageUrl || "/placeholder.svg"}
-                alt={slide.title}
-                fill
-                className="object-cover"
-              />
+              {slide.image ? (
+                <Image
+                  src={getSlideImageUrl(slide.image)}
+                  alt={slide.title}
+                  fill
+                  className="object-cover"
+                />
+              ) : (
+                <div className="flex h-full w-full items-center justify-center bg-muted">
+                  <ImagePlus className="h-10 w-10 text-muted-foreground" />
+                </div>
+              )}
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
                 <h3 className="text-2xl font-bold">{slide.title}</h3>

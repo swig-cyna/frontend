@@ -1,9 +1,5 @@
 "use client"
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useState } from "react"
-import { useForm } from "react-hook-form"
-
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -23,16 +19,25 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { zodResolver } from "@hookform/resolvers/zod"
+import Image from "next/image"
+import { useState } from "react"
+import { useForm } from "react-hook-form"
+import { useUploadImageSlide } from "../hooks/useSlide"
 import { addSlideSchema } from "../schemas/addSlide"
+import { getSlideImageUrl } from "../utils/image"
 
 export function AddSlideDialog({ open, onOpenChange, onAddSlide }) {
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [imageFile, setImageFile] = useState(null)
+  const { mutateAsync: uploadImage } = useUploadImageSlide()
 
   const form = useForm({
     resolver: zodResolver(addSlideSchema),
     defaultValues: {
       title: "",
       description: "",
+      image: "",
       link: "",
     },
   })
@@ -40,12 +45,21 @@ export function AddSlideDialog({ open, onOpenChange, onAddSlide }) {
   function onSubmit(values) {
     setIsSubmitting(true)
 
-    // Simulate API delay
+    // Simuler un délai de l'API
     setTimeout(() => {
-      onAddSlide(values)
+      onAddSlide({ ...values, image: imageFile })
       setIsSubmitting(false)
       form.reset()
     }, 1000)
+  }
+
+  async function handleFileChange(event) {
+    const [file] = event.target.files
+
+    if (file) {
+      const image = await uploadImage(file)
+      setImageFile(image.imageId)
+    }
   }
 
   return (
@@ -104,6 +118,27 @@ export function AddSlideDialog({ open, onOpenChange, onAddSlide }) {
                 </FormItem>
               )}
             />
+
+            <FormItem>
+              <FormLabel>Image</FormLabel>
+              {imageFile && (
+                <Image
+                  src={getSlideImageUrl(imageFile)}
+                  alt="Preview"
+                  height={128}
+                  width={128}
+                  className="mx-auto w-auto rounded-md object-cover"
+                />
+              )}
+              <FormControl>
+                <Input
+                  type="file"
+                  onChange={handleFileChange}
+                  accept="image/*"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
 
             <DialogFooter>
               <Button

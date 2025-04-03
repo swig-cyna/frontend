@@ -1,9 +1,5 @@
 "use client"
 
-import { DragDropContext } from "@hello-pangea/dnd"
-import { PlusCircle } from "lucide-react"
-import { useState } from "react"
-
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -14,94 +10,39 @@ import {
 } from "@/components/ui/card"
 import { TabsContent } from "@/components/ui/tabs"
 import { useToast } from "@/hooks/useToast"
+import { DragDropContext } from "@hello-pangea/dnd"
+import { useQueryClient } from "@tanstack/react-query"
+import { PlusCircle } from "lucide-react"
+import { useState } from "react"
 import { useCarousel } from "../hooks/useCarousel"
-import { useAddSlide } from "../hooks/useSlide"
+import { useAddSlide, useReorderSlides } from "../hooks/useSlide"
 import { AddSlideDialog } from "./AddSlideDialog"
 import { CarouselPreview } from "./CarouselPreview"
 import { DeleteSlideDialog } from "./DeleteSlideDialog"
 import { EditSlideDialog } from "./EditSlideDialog"
 import { SlideList } from "./SideList"
 
-const initialSlides = [
-  {
-    id: "1",
-    title: "New Electronic Products",
-    description: "Discover our new range of high-end electronic products.",
-    imageUrl: "/placeholder.svg?height=600&width=1200",
-    link: "/products?category=Electronics",
-    order: 0,
-  },
-  {
-    id: "2",
-    title: "Summer Special Offers",
-    description: "Enjoy our summer special offers with up to 30% discount.",
-    imageUrl: "/placeholder.svg?height=600&width=1200",
-    link: "/promotions",
-    order: 1,
-  },
-  {
-    id: "3",
-    title: "Premium Audio Collection",
-    description:
-      "Explore our collection of audio products for an exceptional sound experience.",
-    imageUrl: "/placeholder.svg?height=600&width=1200",
-    link: "/products?category=Audio",
-    order: 2,
-  },
-]
-
 export function CarouselManager() {
-  const [slides, setSlides] = useState(initialSlides)
+  const { toast } = useToast()
+  const { data: slides, isLoading } = useCarousel()
+  const addSlideMutation = useAddSlide()
+  const reorderSlidesMutation = useReorderSlides()
+  const queryClient = useQueryClient()
+
   const [isAddSlideOpen, setIsAddSlideOpen] = useState(false)
   const [slideToEdit, setSlideToEdit] = useState(null)
   const [slideToDelete, setSlideToDelete] = useState(null)
-  const { toast } = useToast()
-
-  const { data, isLoading, refetch } = useCarousel()
-  const { mutate } = useAddSlide({ refetch })
+  const [localSlides, setLocalSlides] = useState([])
 
   const handleAddSlide = (newSlide) => {
-    mutate(newSlide)
-
-    const id = (slides.length + 1).toString()
-    const order = slides.length
-
-    setSlides([...slides, { ...newSlide, id, order }])
-    setIsAddSlideOpen(false)
-
-    toast({
-      title: "Slide Added",
-      description: "The slide has been successfully added to the carousel.",
-    })
-  }
-
-  const handleUpdateSlide = (updatedSlide) => {
-    setSlides(
-      slides.map((slide) =>
-        slide.id === updatedSlide.id ? updatedSlide : slide,
-      ),
-    )
-    setSlideToEdit(null)
-
-    toast({
-      title: "Slide Updated",
-      description: "The slide has been successfully updated.",
-    })
-  }
-
-  const handleDeleteSlide = (slideId) => {
-    const newSlides = slides.filter((slide) => slide.id !== slideId)
-    const reorderedSlides = newSlides.map((slide, index) => ({
-      ...slide,
-      order: index,
-    }))
-
-    setSlides(reorderedSlides)
-    setSlideToDelete(null)
-
-    toast({
-      title: "Slide Deleted",
-      description: "The slide has been successfully removed from the carousel.",
+    addSlideMutation.mutate(newSlide, {
+      onSuccess: () => {
+        setIsAddSlideOpen(false)
+        toast({
+          title: "Slide Added",
+          description: "The slide has been successfully added to the carousel.",
+        })
+      },
     })
   }
 
@@ -110,21 +51,32 @@ export function CarouselManager() {
       return
     }
 
-    const items = Array.from(slides)
-    const [reorderedItem] = items.splice(result.source.index, 1)
-    items.splice(result.destination.index, 0, reorderedItem)
+    const updatedSlides = [...(localSlides.length ? localSlides : slides)]
+    const [reorderedItem] = updatedSlides.splice(result.source.index, 1)
+    updatedSlides.splice(result.destination.index, 0, reorderedItem)
 
-    const reorderedSlides = items.map((slide, index) => ({
+    const optimisticSlides = updatedSlides.map((slide, index) => ({
       ...slide,
       order: index,
     }))
+    setLocalSlides(optimisticSlides)
 
-    setSlides(reorderedSlides)
+    reorderSlidesMutation.mutate(
+      { slideId: reorderedItem.id, position: result.destination.index },
+      {
+        onMutate: async () => {
+          await queryClient.cancelQueries(["carousel"])
+          const previousSlides = queryClient.getQueryData(["carousel"])
+          queryClient.setQueryData(["carousel"], optimisticSlides)
 
-    toast({
-      title: "Order Updated",
-      description: "The order of slides has been successfully updated.",
-    })
+          return { previousSlides }
+        },
+        onError: (err, variables, context) => {
+          queryClient.setQueryData(["carousel"], context.previousSlides)
+          setLocalSlides(context.previousSlides)
+        },
+      },
+    )
   }
 
   if (isLoading) {
@@ -143,7 +95,7 @@ export function CarouselManager() {
 
         <DragDropContext onDragEnd={handleDragEnd}>
           <SlideList
-            slides={data}
+            slides={localSlides.length ? localSlides : slides}
             onEdit={setSlideToEdit}
             onDelete={setSlideToDelete}
           />
@@ -159,7 +111,9 @@ export function CarouselManager() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <CarouselPreview slides={data} />
+            <CarouselPreview
+              slides={localSlides.length ? localSlides : slides}
+            />
           </CardContent>
         </Card>
       </TabsContent>
@@ -175,7 +129,6 @@ export function CarouselManager() {
           slide={slideToEdit}
           open={Boolean(slideToEdit)}
           onOpenChange={(open) => !open && setSlideToEdit(null)}
-          onUpdateSlide={handleUpdateSlide}
         />
       )}
 
@@ -184,7 +137,6 @@ export function CarouselManager() {
           slide={slideToDelete}
           open={Boolean(slideToDelete)}
           onOpenChange={(open) => !open && setSlideToDelete(null)}
-          onConfirmDelete={() => handleDeleteSlide(slideToDelete.id)}
         />
       )}
     </div>
