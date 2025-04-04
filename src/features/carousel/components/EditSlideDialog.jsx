@@ -45,12 +45,12 @@ export function EditSlideDialog({ slide, open, onOpenChange }) {
     },
   })
 
-  async function onSubmit(values) {
+  const onSubmit = async (values) => {
     await editSlide({ ...values, image: imageFile })
     onOpenChange(false)
   }
 
-  async function handleFileChange(event) {
+  const handleFileChange = async (event) => {
     const [file] = event.target.files
 
     if (file) {

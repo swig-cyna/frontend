@@ -19,17 +19,19 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { toast } from "@/hooks/useToast"
 import { zodResolver } from "@hookform/resolvers/zod"
 import Image from "next/image"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
-import { useUploadImageSlide } from "../hooks/useSlide"
+import { useAddSlide, useUploadImageSlide } from "../hooks/useSlide"
 import { addSlideSchema } from "../schemas/addSlide"
 import { getSlideImageUrl } from "../utils/image"
 
 export function AddSlideDialog({ open, onOpenChange, onAddSlide }) {
-  const [isSubmitting, setIsSubmitting] = useState(false)
   const [imageFile, setImageFile] = useState(null)
+
+  const { mutateAsync: addSlide, isPending } = useAddSlide()
   const { mutateAsync: uploadImage } = useUploadImageSlide()
 
   const form = useForm({
@@ -42,18 +44,20 @@ export function AddSlideDialog({ open, onOpenChange, onAddSlide }) {
     },
   })
 
-  function onSubmit(values) {
-    setIsSubmitting(true)
+  const onSubmit = async (values) => {
+    await addSlide({ ...values, image: imageFile })
 
-    // Simuler un délai de l'API
-    setTimeout(() => {
-      onAddSlide({ ...values, image: imageFile })
-      setIsSubmitting(false)
-      form.reset()
-    }, 1000)
+    onAddSlide(false)
+    form.reset()
+    setImageFile(null)
+
+    toast({
+      title: "Slide Added",
+      description: "The slide has been successfully added to the carousel.",
+    })
   }
 
-  async function handleFileChange(event) {
+  const handleFileChange = async (event) => {
     const [file] = event.target.files
 
     if (file) {
@@ -148,8 +152,8 @@ export function AddSlideDialog({ open, onOpenChange, onAddSlide }) {
               >
                 Cancel
               </Button>
-              <Button type="submit" disabled={isSubmitting}>
-                {isSubmitting ? "Adding..." : "Add"}
+              <Button type="submit" disabled={isPending}>
+                {isPending ? "Adding..." : "Add"}
               </Button>
             </DialogFooter>
           </form>

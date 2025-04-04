@@ -9,13 +9,12 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { TabsContent } from "@/components/ui/tabs"
-import { useToast } from "@/hooks/useToast"
 import { DragDropContext } from "@hello-pangea/dnd"
 import { useQueryClient } from "@tanstack/react-query"
 import { PlusCircle } from "lucide-react"
 import { useState } from "react"
 import { useCarousel } from "../hooks/useCarousel"
-import { useAddSlide, useReorderSlides } from "../hooks/useSlide"
+import { useReorderSlides } from "../hooks/useSlide"
 import { AddSlideDialog } from "./AddSlideDialog"
 import { CarouselPreview } from "./CarouselPreview"
 import { DeleteSlideDialog } from "./DeleteSlideDialog"
@@ -23,9 +22,7 @@ import { EditSlideDialog } from "./EditSlideDialog"
 import { SlideList } from "./SideList"
 
 export function CarouselManager() {
-  const { toast } = useToast()
   const { data: slides, isLoading } = useCarousel()
-  const addSlideMutation = useAddSlide()
   const reorderSlidesMutation = useReorderSlides()
   const queryClient = useQueryClient()
 
@@ -33,18 +30,6 @@ export function CarouselManager() {
   const [slideToEdit, setSlideToEdit] = useState(null)
   const [slideToDelete, setSlideToDelete] = useState(null)
   const [localSlides, setLocalSlides] = useState([])
-
-  const handleAddSlide = (newSlide) => {
-    addSlideMutation.mutate(newSlide, {
-      onSuccess: () => {
-        setIsAddSlideOpen(false)
-        toast({
-          title: "Slide Added",
-          description: "The slide has been successfully added to the carousel.",
-        })
-      },
-    })
-  }
 
   const handleDragEnd = (result) => {
     if (!result.destination) {
@@ -121,7 +106,7 @@ export function CarouselManager() {
       <AddSlideDialog
         open={isAddSlideOpen}
         onOpenChange={setIsAddSlideOpen}
-        onAddSlide={handleAddSlide}
+        onAddSlide={(open) => !open && setIsAddSlideOpen(null)}
       />
 
       {slideToEdit && (
