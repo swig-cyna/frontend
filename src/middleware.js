@@ -2,7 +2,17 @@ import { betterFetch } from "@better-fetch/fetch"
 import { NextResponse } from "next/server"
 
 export default async function authMiddleware(request) {
-  const { pathname } = request.nextUrl
+  const { pathname, searchParams } = request.nextUrl
+
+  if (searchParams.get("error") === "token_expired") {
+    if (pathname !== "/signin") {
+      return NextResponse.redirect(
+        new URL("/signin?reason=token_expired", request.url),
+      )
+    }
+
+    return NextResponse.next()
+  }
 
   const { data: session } = await betterFetch(
     `${process.env.NEXT_PUBLIC_BACKEND_API}/api/auth/get-session`,
@@ -14,7 +24,10 @@ export default async function authMiddleware(request) {
     },
   )
 
-  if (!session) {
+  if (
+    !session &&
+    (pathname.startsWith("/user") || pathname.startsWith("/admin"))
+  ) {
     return NextResponse.redirect(
       new URL("/signin?reason=not-authenticated", request.url),
     )
@@ -41,5 +54,5 @@ export default async function authMiddleware(request) {
 }
 
 export const config = {
-  matcher: ["/user/:path*", "/admin/:path*"],
+  matcher: ["/((?!_next/static|_next/image|favicon.ico|api).*)"],
 }

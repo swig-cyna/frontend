@@ -86,8 +86,10 @@
     "verifyOtpButton": "Vérifier le code",
     "invalidOtp": "Le code doit contenir exactement six chiffres.",
     "otpVerificationFailed": "La vérification du code a échoué.",
-    "alertTitle": "Accès restreint",
-    "alertDescription": "Vous devez vous connecter pour accéder à cette page."
+    "notAuthenticatedTitle": "Accès restreint",
+    "notAuthenticatedDesc": "Vous devez vous connecter pour accéder à cette page.",
+    "tokenExpiredTitle": "Jeton expiré",
+    "tokenExpiredDesc": "Votre lien de vérification a expiré. Veuillez vous reconnecter pour recevoir un nouvel email de vérification."
   },
   "SignupCard": {
     "signupTitle": "Inscription",

@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/input-otp"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { ShieldAlert } from "lucide-react"
+import EmailVerification from "./EmailVerification"
 
 const CALLBACK_URL = process.env.NEXT_PUBLIC_FRONTEND
 
@@ -35,6 +36,7 @@ const SigninCard = () => {
   const [rememberMe, setRememberMe] = useState(false)
   const [showTwoFactorCard, setShowTwoFactorCard] = useState(false)
   const [totpCode, setTotpCode] = useState("")
+  const [showEmailVerification, setShowEmailVerification] = useState(false)
 
   const reason = new URLSearchParams(window.location.search).get("reason")
 
@@ -82,6 +84,12 @@ const SigninCard = () => {
       )
 
       if (signInError) {
+        if (signInError.message === "Email not verified") {
+          setShowEmailVerification(true)
+
+          return
+        }
+
         setError(signInError.message)
       }
     } catch (err) {
@@ -125,6 +133,10 @@ const SigninCard = () => {
     )
   }
 
+  if (showEmailVerification) {
+    return <EmailVerification userEmail={form.getValues("email")} />
+  }
+
   if (showTwoFactorCard) {
     return (
       <Card className="w-full max-w-md">
@@ -166,10 +178,17 @@ const SigninCard = () => {
   return (
     <div>
       {reason === "not-authenticated" && (
-        <Alert variant="destructive" className="mb-4">
+        <Alert variant="destructive" className="mb-4 w-full max-w-md">
           <ShieldAlert className="h-4 w-4" />
-          <AlertTitle>{t("alertTitle")}</AlertTitle>
-          <AlertDescription>{t("alertDescription")} </AlertDescription>
+          <AlertTitle>{t("notAuthenticatedTitle")}</AlertTitle>
+          <AlertDescription>{t("notAuthenticatedDesc")} </AlertDescription>
+        </Alert>
+      )}
+      {reason === "token_expired" && (
+        <Alert variant="destructive" className="mb-4 w-full max-w-md">
+          <ShieldAlert className="h-4 w-4" />
+          <AlertTitle>{t("tokenExpiredTitle")}</AlertTitle>
+          <AlertDescription>{t("tokenExpiredDesc")} </AlertDescription>
         </Alert>
       )}
       <Card className="w-full max-w-md">

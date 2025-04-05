@@ -86,8 +86,10 @@
     "verifyOtpButton": "Verify code",
     "invalidOtp": "The code must contain exactly six digits.",
     "otpVerificationFailed": "Code verification failed.",
-    "alertTitle": "Restricted Access",
-    "alertDescription": "You must log in to access this page."
+    "notAuthenticatedTitle": "Restricted Access",
+    "notAuthenticatedDesc": "You must log in to access this page.",
+    "tokenExpiredTitle": "Token Expired",
+    "tokenExpiredDesc": "Your verification link has expired. Please sign in again to receive a new verification email."
   },
   "SignupCard": {
     "signupTitle": "Sign up",

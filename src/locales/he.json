@@ -86,8 +86,10 @@
     "verifyOtpButton": "אמת קוד",
     "invalidOtp": "הקוד חייב להכיל בדיוק שישה ספרות.",
     "otpVerificationFailed": "אימות הקוד נכשל.",
-    "alertTitle": "גישה מוגבלת",
-    "alertDescription": "עליך להתחבר כדי לגשת לדף זה."
+    "notAuthenticatedTitle": "גישה מוגבלת",
+    "notAuthenticatedDesc": "עליך להתחבר כדי לגשת לדף זה.",
+    "tokenExpiredTitle": "הטוקן פג תוקף",
+    "tokenExpiredDesc": "הקישור לאימות פג תוקף. אנא התחבר שוב כדי לקבל אימייל חדש לאימות"
   },
   "SignupCard": {
     "signupTitle": "הרשמה",
