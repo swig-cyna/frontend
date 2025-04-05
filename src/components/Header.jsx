@@ -16,10 +16,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { useRouter } from "next/navigation"
 
 const Header = () => {
   const t = useTranslations("Header")
   const { data: session } = useSession()
+  const router = useRouter()
 
   return (
     <Headroom className="z-50 w-full">
@@ -62,7 +64,13 @@ const Header = () => {
                   <DropdownMenuItem>
                     <button
                       onClick={async () => {
-                        await signOut()
+                        await signOut({
+                          fetchOptions: {
+                            onSuccess: () => {
+                              router.push("/")
+                            },
+                          },
+                        })
                       }}
                     >
                       {t("signout")}

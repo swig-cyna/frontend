@@ -9,6 +9,7 @@ import { useState } from "react"
 import { Button } from "./ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "./ui/sheet"
 import { signOut, useSession } from "@/features/auth/utils/authClient"
+import { useRouter } from "next/navigation"
 
 const LinkBurger = ({ href, label, variant = "ghost", setOpen, ...props }) => (
   <Link href={href} onClick={() => setOpen(false)} {...props}>
@@ -21,6 +22,7 @@ const Burger = () => {
   const [open, setOpen] = useState(false)
   const t = useTranslations("Burger")
   const { data: session } = useSession()
+  const router = useRouter()
 
   const isAdmin =
     session?.user?.role === "admin" ||
@@ -94,8 +96,14 @@ const Burger = () => {
                 <Button
                   variant="ghost"
                   className="px-8 py-6 text-base hover:bg-red-500/20 hover:text-white"
-                  onClick={() => {
-                    signOut()
+                  onClick={async () => {
+                    await signOut({
+                      fetchOptions: {
+                        onSuccess: () => {
+                          router.push("/")
+                        },
+                      },
+                    })
                     setOpen(false)
                   }}
                 >

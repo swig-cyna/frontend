@@ -55,8 +55,13 @@ const UserSpaceMenu = ({ user }) => {
 
   const handleItemClick = async (item) => {
     if (item.title === t("UserSpaceMenu.logout")) {
-      await signOut()
-      router.push("/")
+      await signOut({
+        fetchOptions: {
+          onSuccess: () => {
+            router.push("/")
+          },
+        },
+      })
     } else {
       router.push(item.url)
     }
