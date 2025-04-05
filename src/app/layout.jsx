@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/toaster"
 import TanstackProvider from "@/providers/TanStackProvider"
 import ThemeProvider from "@/providers/ThemeProvider"
 import clsx from "clsx"
@@ -47,6 +48,7 @@ const RootLayout = async ({ children }) => {
             <TanstackProvider>{children}</TanstackProvider>
           </NextIntlClientProvider>
         </ThemeProvider>
+        <Toaster />
       </body>
     </html>
   )

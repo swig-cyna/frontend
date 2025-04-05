@@ -1,10 +1,10 @@
 import {
-  Calendar,
+  Box,
   ChevronUp,
   Home,
-  Inbox,
   Search,
   Settings,
+  User,
   User2,
 } from "lucide-react"
 
@@ -21,29 +21,29 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import Image from "next/image"
+import Link from "next/link"
 
 // Menu items.
 const items = [
   {
     title: "Home",
-    url: "#",
+    url: "/admin",
     icon: Home,
   },
   {
-    title: "Inbox",
-    url: "#",
-    icon: Inbox,
+    title: "Users",
+    url: "/admin/users",
+    icon: User,
   },
   {
-    title: "Calendar",
+    title: "Products",
     url: "#",
-    icon: Calendar,
+    icon: Box,
   },
   {
     title: "Search",
@@ -60,20 +60,19 @@ const items = [
 const AdminSidebar = () => (
   <Sidebar>
     <SidebarContent>
-      <div className="mx-2 mt-2 flex items-center justify-between">
+      <div className="mx-3 mt-3 flex items-center justify-between">
         <Image src={logo} className="mt-1 h-8 w-auto" alt="logo" />
       </div>
       <SidebarGroup>
-        <SidebarGroupLabel>Application</SidebarGroupLabel>
         <SidebarGroupContent>
           <SidebarMenu>
             {items.map((item) => (
               <SidebarMenuItem key={item.title}>
                 <SidebarMenuButton asChild>
-                  <a href={item.url}>
+                  <Link href={item.url}>
                     <item.icon />
                     <span>{item.title}</span>
-                  </a>
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             ))}
