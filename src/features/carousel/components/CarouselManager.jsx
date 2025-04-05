@@ -11,7 +11,7 @@ import {
 import { TabsContent } from "@/components/ui/tabs"
 import { DragDropContext } from "@hello-pangea/dnd"
 import { useQueryClient } from "@tanstack/react-query"
-import { PlusCircle } from "lucide-react"
+import { LucideLoader2, PlusCircle } from "lucide-react"
 import { useState } from "react"
 import { useCarousel } from "../hooks/useCarousel"
 import { useReorderSlides } from "../hooks/useSlide"
@@ -65,7 +65,11 @@ export function CarouselManager() {
   }
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return (
+      <div className="flex items-center justify-center">
+        <LucideLoader2 className="animate-spin" />
+      </div>
+    )
   }
 
   return (
