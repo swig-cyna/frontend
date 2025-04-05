@@ -12,7 +12,7 @@ import { TabsContent } from "@/components/ui/tabs"
 import { DragDropContext } from "@hello-pangea/dnd"
 import { useQueryClient } from "@tanstack/react-query"
 import { LucideLoader2, PlusCircle } from "lucide-react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useCarousel } from "../hooks/useCarousel"
 import { useReorderSlides } from "../hooks/useSlide"
 import { AddSlideDialog } from "./AddSlideDialog"
@@ -64,6 +64,12 @@ export function CarouselManager() {
     )
   }
 
+  useEffect(() => {
+    if (slides) {
+      setLocalSlides(slides)
+    }
+  }, [slides])
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center">
@@ -84,7 +90,7 @@ export function CarouselManager() {
 
         <DragDropContext onDragEnd={handleDragEnd}>
           <SlideList
-            slides={localSlides.length ? localSlides : slides}
+            slides={localSlides}
             onEdit={setSlideToEdit}
             onDelete={setSlideToDelete}
           />
@@ -100,9 +106,7 @@ export function CarouselManager() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <CarouselPreview
-              slides={localSlides.length ? localSlides : slides}
-            />
+            <CarouselPreview slides={localSlides} />
           </CardContent>
         </Card>
       </TabsContent>
