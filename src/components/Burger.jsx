@@ -41,7 +41,7 @@ const Burger = () => {
             <div className="grid space-y-2 py-4">
               {session ? (
                 <LinkBurger
-                  href="/account-management"
+                  href="/user/account-management"
                   label={
                     <>
                       <User2 className="mr-2" />

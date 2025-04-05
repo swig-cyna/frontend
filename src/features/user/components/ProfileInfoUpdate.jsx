@@ -49,7 +49,7 @@ const ProfileInfoUpdate = () => {
       if (session.user.email !== values.email) {
         await changeEmail({
           newEmail: values.email,
-          callbackURL: `${process.env.NEXT_PUBLIC_FRONTEND}/account-management`,
+          callbackURL: `${process.env.NEXT_PUBLIC_FRONTEND}/user/account-management`,
         })
         setMessage({ content: t("emailUpdateInitiated"), type: "success" })
         setIsEmailChangeInitiated(true)
@@ -66,7 +66,7 @@ const ProfileInfoUpdate = () => {
     try {
       await sendVerificationEmail({
         email: session.user.email,
-        callbackURL: `${process.env.NEXT_PUBLIC_FRONTEND}/account-management`,
+        callbackURL: `${process.env.NEXT_PUBLIC_FRONTEND}/user/account-management`,
       })
     } catch (err) {
       console.error(`An error has occurred:" ${err}`)

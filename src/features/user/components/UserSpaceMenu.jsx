@@ -23,7 +23,7 @@ const UserSpaceMenu = ({ user }) => {
     {
       title: t("UserSpaceMenu.accountManagement"),
       icon: User2,
-      url: "/account-management",
+      url: "/user/account-management",
     },
     {
       title: t("UserSpaceMenu.subscriptionManagement"),
