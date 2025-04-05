@@ -34,19 +34,6 @@ export function UserTable({ users, refreshUsers }) {
   const [userToDelete, setUserToDelete] = useState(null)
   const { toast } = useToast()
 
-  const handleUpdateUserRole = (userId, newRole) => {
-    setUsers(
-      users.map((user) =>
-        user.id === userId ? { ...user, role: newRole } : user,
-      ),
-    )
-    toast({
-      title: "Role updated",
-      description: "The user's role has been updated successfully.",
-    })
-    setUserToEdit(null)
-  }
-
   if (users?.length === 0) return <div>Chargement...</div>
 
   return (
@@ -114,7 +101,7 @@ export function UserTable({ users, refreshUsers }) {
           user={userToEdit}
           open={Boolean(userToEdit)}
           onOpenChange={(open) => !open && setUserToEdit(null)}
-          onUpdateRole={handleUpdateUserRole}
+          onRoleUpdated={refreshUsers}
         />
       )}
 
