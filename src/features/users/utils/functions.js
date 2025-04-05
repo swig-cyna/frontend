@@ -6,7 +6,10 @@ export const getRoleBadgeVariant = (role) => {
     case "admin":
       return "secondary"
 
-    case "customer":
+    case "support":
+      return "secondary"
+
+    case "user":
       return "outline"
 
     default:
@@ -18,7 +21,8 @@ export const translateUserRole = (role) => {
   const roleTranslations = {
     superadmin: "Super Admin",
     admin: "Admin",
-    customer: "Customer",
+    user: "Customer",
+    support: "Support",
   }
 
   return roleTranslations[role] || role
