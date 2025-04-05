@@ -23,6 +23,11 @@ const Header = () => {
   const { data: session } = useSession()
   const router = useRouter()
 
+  const isAdmin =
+    session?.user?.role === "admin" ||
+    session?.user?.role === "superadmin" ||
+    session?.user?.role === "support"
+
   return (
     <Headroom className="z-50 w-full">
       <div className="flex w-full justify-center border-b bg-card shadow-xl xl:mt-3 xl:border-0 xl:bg-transparent xl:shadow-none">
@@ -61,6 +66,11 @@ const Header = () => {
                       {t("userSpace")}
                     </Link>
                   </DropdownMenuItem>
+                  {isAdmin && (
+                    <DropdownMenuItem>
+                      <Link href="/admin">{t("backoffice")}</Link>
+                    </DropdownMenuItem>
+                  )}
                   <DropdownMenuItem>
                     <button
                       onClick={async () => {
