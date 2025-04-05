@@ -1,7 +1,7 @@
 "use client"
 
 import logo from "@/assets/logoText.png"
-import { Search, ShoppingCart } from "lucide-react"
+import { Search, ShoppingCart, User2 } from "lucide-react"
 import { useTranslations } from "next-intl"
 import Image from "next/image"
 import Link from "next/link"
@@ -9,21 +9,36 @@ import Headroom from "react-headroom"
 import Burger from "./Burger"
 import LocaleSwitcher from "./LocaleSwitcher"
 import { Button } from "./ui/button"
+import { signOut, useSession } from "@/features/auth/utils/authClient"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { useRouter } from "next/navigation"
 
 const Header = () => {
   const t = useTranslations("Header")
+  const { data: session } = useSession()
+  const router = useRouter()
+
+  const isAdmin =
+    session?.user?.role === "admin" ||
+    session?.user?.role === "superadmin" ||
+    session?.user?.role === "support"
 
   return (
     <Headroom className="z-50 w-full">
-      <div className="bg-card xl:bg-transparent xl:mt-3 flex justify-center w-full border-b xl:border-0 xl:shadow-none shadow-xl">
-        <div className="max-w-[1200px] h-16 px-4 xl:mx-8 flex w-full justify-between items-center rounded-full xl:bg-card xl:border xl:shadow-md">
+      <div className="flex w-full justify-center border-b bg-card shadow-xl xl:mt-3 xl:border-0 xl:bg-transparent xl:shadow-none">
+        <div className="flex h-16 w-full max-w-[1200px] items-center justify-between rounded-full px-4 xl:mx-8 xl:border xl:bg-card xl:shadow-md">
           <Link href="/">
-            <Image src={logo} className="h-8 w-auto mt-1" alt="logo" />
+            <Image src={logo} className="mt-1 h-8 w-auto" alt="logo" />
           </Link>
-          <div className="flex gap-4 items-center">
+          <div className="flex items-center gap-4">
             <Button
               variant="secondary"
-              className="rounded-full w-40 justify-between hidden sm:flex"
+              className="hidden w-40 justify-between rounded-full sm:flex"
             >
               <p>{t("search")}</p>
               <Search />
@@ -37,9 +52,48 @@ const Header = () => {
               <ShoppingCart />
             </Link>
             <LocaleSwitcher />
-            <Link href="/signin">
-              <Button className="rounded-full">{t("signin")}</Button>
-            </Link>
+            {session ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Link href="/">
+                    <User2 />
+                    <span className="sr-only">{t("userMenu")}</span>
+                  </Link>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem>
+                    <Link href="/user/account-management">
+                      {t("userSpace")}
+                    </Link>
+                  </DropdownMenuItem>
+                  {isAdmin && (
+                    <DropdownMenuItem>
+                      <Link href="/admin">{t("backoffice")}</Link>
+                    </DropdownMenuItem>
+                  )}
+                  <DropdownMenuItem>
+                    <button
+                      onClick={async () => {
+                        await signOut({
+                          fetchOptions: {
+                            onSuccess: () => {
+                              router.push("/")
+                            },
+                          },
+                        })
+                      }}
+                    >
+                      {t("signout")}
+                    </button>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Link href="/signin">
+                <Button className="rounded-full">{t("signin")}</Button>
+              </Link>
+            )}
+
             <Burger />
           </div>
         </div>

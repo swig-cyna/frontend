@@ -1,15 +1,21 @@
 {
   "Header": {
     "search": "Rechercher",
-    "signin": "Se connecter"
+    "signin": "Se connecter",
+    "userMenu": "Menu utilisateur",
+    "userSpace": "Espace utilisateur",
+    "backoffice": "Portail administrateur",
+    "signout": "Se déconnecter"
   },
   "Burger": {
     "signin": "Se connecter",
     "home": "Accueil",
     "categories": "Catégories",
+    "backoffice": "Portail administrateur",
     "about": "À propos",
     "contact": "Contact",
-    "cgu": "CGU"
+    "cgu": "CGU",
+    "signout": "Se déconnecter"
   },
   "Footer": {
     "about": "À propos",
@@ -25,5 +31,143 @@
   },
   "ProductCard": {
     "showMore": "Voir plus"
+  },
+  "EmailVerification": {
+    "title": "Compte créé avec succès !",
+    "description": "Vérifiez votre email pour activer votre compte.",
+    "emailSent": "Un email de vérification a été envoyé à l'adresse suivante :",
+    "clickLink": "Veuillez cliquer sur le lien dans l'email pour activer votre compte.",
+    "resendError": "Échec de l'envoi de l'email de vérification. Veuillez réessayer plus tard.",
+    "resendButton": "Renvoyer l'email de vérification"
+  },
+  "PasswordForgetCard": {
+    "resetPasswordTitle": "Réinitialiser le mot de passe",
+    "resetPasswordDescription": "Entrez votre adresse e-mail pour recevoir un lien de réinitialisation.",
+    "sendResetLink": "Envoyer le lien de réinitialisation",
+    "emailSentTitle": "E-mail envoyé",
+    "emailSentDescription": "Si l'adresse e-mail que vous avez saisie est associée à un compte, vous recevrez sous peu un e-mail pour réinitialiser votre mot de passe. Veuillez vérifier votre boîte de réception.",
+    "resetEmailError": "Une erreur s'est produite lors de l'envoi de l'e-mail de réinitialisation.",
+    "resendButton": "Renvoyer le lien de réinitialisation du mot de passe",
+    "emailPlaceholder": "Adresse e-mail",
+    "emailLabel": "Adresse e-mail"
+  },
+  "PasswordResetCard": {
+    "resetPasswordTitle": "Réinitialiser le mot de passe",
+    "resetPasswordDescription": "Entrez votre nouveau mot de passe.",
+    "passwordPlaceholder": "Mot de passe",
+    "passwordLabel": "Mot de passe",
+    "confirmPasswordPlaceholder": "Confirmer le mot de passe",
+    "confirmPasswordLabel": "Confirmer le mot de passe",
+    "resetPasswordButton": "Réinitialiser le mot de passe",
+    "resetError": "Une erreur s'est produite lors de la réinitialisation du mot de passe.",
+    "resetCompleteTitle": "Mot de passe réinitialisé",
+    "resetCompleteDescription": "Votre mot de passe a été réinitialisé avec succès. Vous pouvez maintenant vous connecter avec votre nouveau mot de passe."
+  },
+  "ResendEmailButton": {
+    "resendInSeconds": "Renvoyer dans {seconds} secondes"
+  },
+  "SigninCard": {
+    "emailPlaceholder": "Email",
+    "emailLabel": "Email",
+    "passwordPlaceholder": "Mot de passe",
+    "passwordLabel": "Mot de passe",
+    "signinTitle": "Connexion",
+    "signinDescription": "Connectez-vous à votre compte",
+    "signinButton": "Se connecter",
+    "signinError": "Une erreur s'est produite lors de la connexion.",
+    "signinCompleteTitle": "Connexion réussie",
+    "signinCompleteDescription": "Vous êtes maintenant connecté à votre compte.",
+    "dontHaveAccount": "Vous n'avez pas de compte ?",
+    "signUp": "S'inscrire",
+    "forgotPassword": "Mot de passe oublié ?",
+    "rememberMeLabel": "Se souvenir de moi",
+    "twoFactorTitle": "Authentification à deux facteurs requise",
+    "twoFactorDescription": "Veuillez entrer le code généré par votre application d'authentification.",
+    "verifyOtpButton": "Vérifier le code",
+    "invalidOtp": "Le code doit contenir exactement six chiffres.",
+    "otpVerificationFailed": "La vérification du code a échoué.",
+    "notAuthenticatedTitle": "Accès restreint",
+    "notAuthenticatedDesc": "Vous devez vous connecter pour accéder à cette page.",
+    "tokenExpiredTitle": "Jeton expiré",
+    "tokenExpiredDesc": "Votre lien de vérification a expiré. Veuillez vous reconnecter pour recevoir un nouvel email de vérification."
+  },
+  "SignupCard": {
+    "signupTitle": "Inscription",
+    "signupDescription": "Créez un compte en utilisant votre email et mot de passe",
+    "firstnamePlaceholder": "Prénom",
+    "firstnameLabel": "Prénom",
+    "lastnamePlaceholder": "Nom",
+    "lastnameLabel": "Nom",
+    "emailPlaceholder": "Email",
+    "emailLabel": "Email",
+    "passwordPlaceholder": "Mot de passe",
+    "passwordLabel": "Mot de passe",
+    "confirmPasswordPlaceholder": "Confirmer le mot de passe",
+    "confirmPasswordLabel": "Confirmer le mot de passe",
+    "signupButton": "S'inscrire",
+    "signupError": "Une erreur s'est produite lors de l'inscription.",
+    "alreadyHaveAccount": "Vous avez déjà un compte ?",
+    "signin": "Se connecter"
+  },
+  "UserSpaceMenu": {
+    "accountManagement": "Gestion du compte utilisateur",
+    "subscriptionManagement": "Gestion des abonnements",
+    "orderHistory": "Historique de commandes et facturation",
+    "paymentManagement": "Gestion des paiements",
+    "addressBook": "Carnet d'adresses",
+    "support": "Assistance et support",
+    "preferences": "Préférences",
+    "logout": "Déconnexion"
+  },
+  "AccountManagement": {
+    "title": "Gérer votre compte",
+    "alertTitle": "Accès restreint",
+    "alertDescription": "Vous devez activer la double authentification pour accéder à cette page."
+  },
+  "ProfileInfoUpdate": {
+    "title": "Modifier vos données",
+    "description": "Vous pouvez ici modifier les informations associées à votre compte.",
+    "nameLabel": "Nom",
+    "emailLabel": "Email",
+    "updateButton": "Mettre à jour",
+    "updating": "Mise à jour en cours",
+    "emailUpdateError": "Erreur lors de la mise à jour de l'email",
+    "nameUpdateError": "Erreur lors de la mise à jour du nom",
+    "emailUpdateSuccess": "Email mis à jour avec succès",
+    "nameUpdateSuccess": "Nom mis à jour avec succès",
+    "emailUpdateInitiated": "Processus de changement d'email initié",
+    "emailUpdateInstructions": "Un email de confirmation a été envoyé à votre ancienne adresse. Veuillez suivre les instructions pour confirmer le changement.",
+    "emailChangeTitle": "Demande de changement d'adresse pris en compte",
+    "emailChangeDescription": "Vérifier votre identité pour valider la demande",
+    "emailChangeSent": "Pour sécuriser la modification de votre adresse e-mail, nous avons besoin de vérifier votre identité. Un email à été envoyé à votre adresse actuelle :",
+    "emailChangeClickLink": "Veuillez cliquer sur le lien dans l'email pour valider votre demande.",
+    "emailVerificationTitle": "Vérification de votre nouvelle adresse mail",
+    "emailVerificationDescription": "Vérifier votre nouvelle adresse pour finaliser la demande",
+    "emailVerificationSent": "Merci d'avoir confirmé votre identité. Pour finaliser le changement de votre adresse e-mail, vous trouverez un mail dans votre nouvelle adresse :",
+    "emailVerificationClickLink": "Veuillez cliquer sur le lien dans l'email pour finaliser votre demande.",
+    "resendButton": "Renvoyer l'email de vérification",
+    "resetPasswordLink": "Je souhaite réinitialiser mon mot de passe"
+  },
+  "TwoFactorAuthToggle": {
+    "enableSuccess": "Demande d'activation prise en compte",
+    "activationError": "Erreur d'activation",
+    "desactivatedSucces": "2FA désactivée",
+    "desactivationError": "Erreur de désactivation",
+    "activationSuccessful": "Activation réussie ! 2FA maintenant activée.",
+    "verificationError": "Code invalide ou expiré",
+    "passwordNeed": "Veuillez entrer votre mot de passe pour continuer",
+    "passwordPlaceholder": "Votre mot de passe",
+    "title": "Authentification à deux facteurs (2FA)",
+    "description": "Sécurisez votre compte avec l'authentification à deux facteurs",
+    "status": "Statut : ",
+    "statusActivated": "Activée",
+    "statusDesactivated": "Désactivée",
+    "stepOne": "Étape 1/2 : Scannez le QR Code ou entrez le secret dans votre application d'authentification.",
+    "secret": "Clé secrète :",
+    "codeInstruction": "Copiez ce code si vous ne pouvez pas scanner le QR Code",
+    "stepTwo": "Étape 2/2 : Entrez le code fourni par votre application d'authentification.",
+    "codePlaceholder": "Entrez le code à 6 chiffres",
+    "verifyButton": "Vérifier",
+    "loading": "Chargement..."
   }
 }

@@ -1,0 +1,172 @@
+{
+  "Header": {
+    "search": "חיפוש",
+    "signin": "התחבר",
+    "userMenu": "תפריט משתמש",
+    "backoffice": "פורטל מנהלים",
+    "userSpace": "אזור משתמש",
+    "signout": "התנתק"
+  },
+  "Burger": {
+    "signin": "להתחבר",
+    "home": "בית",
+    "categories": "קטגוריות",
+    "backoffice": "פורטל מנהלים",
+    "about": "אודות",
+    "contact": "צור קשר",
+    "cgu": "תנאי שימוש",
+    "signout": "להתנתק"
+  },
+  "Footer": {
+    "about": "אודות",
+    "contact": "צור קשר",
+    "cgu": "תנאי שימוש"
+  },
+  "NotFoundPage": {
+    "title": "הדף לא נמצא",
+    "backHome": "חזרה לדף הבית"
+  },
+  "HomePage": {
+    "categories": "קטגוריות"
+  },
+  "ProductCard": {
+    "showMore": "הצג עוד"
+  },
+  "EmailVerification": {
+    "title": "החשבון נוצר בהצלחה!",
+    "description": "בדוק את הדואר האלקטרוני שלך כדי להפעיל את החשבון.",
+    "emailSent": "דואר אלקטרוני לאימות נשלח לכתובת הבאה:",
+    "clickLink": "אנא לחץ על הקישור בדואר האלקטרוני כדי להפעיל את החשבון שלך.",
+    "resendError": "שליחת דואר אלקטרוני לאימות נכשלה. אנא נסה שוב מאוחר יותר.",
+    "resendButton": "שלח מחדש דואר אלקטרוני לאימות"
+  },
+  "PasswordForgetCard": {
+    "resetPasswordTitle": "איפוס סיסמה",
+    "resetPasswordDescription": "הזן את כתובת הדואר האלקטרוני שלך כדי לקבל קישור לאיפוס.",
+    "sendResetLink": "שלח קישור לאיפוס סיסמה",
+    "emailSentTitle": "דואר אלקטרוני נשלח",
+    "emailSentDescription": "אם כתובת הדואר האלקטרוני שהזנת משויכת לחשבון, תקבל בקרוב דואר אלקטרוני לאיפוס הסיסמה שלך. אנא בדוק את תיבת הדואר הנכנס שלך.",
+    "resetEmailError": "אירעה שגיאה בעת שליחת הדואר האלקטרוני לאיפוס.",
+    "resendButton": "שלח מחדש קישור לאיפוס סיסמה",
+    "emailPlaceholder": "כתובת דואר אלקטרוני",
+    "emailLabel": "כתובת דואר אלקטרוני"
+  },
+  "PasswordResetCard": {
+    "resetPasswordTitle": "איפוס סיסמה",
+    "resetPasswordDescription": "הזן את הסיסמה החדשה שלך.",
+    "passwordPlaceholder": "סיסמה",
+    "passwordLabel": "סיסמה",
+    "confirmPasswordPlaceholder": "אשר סיסמה",
+    "confirmPasswordLabel": "אשר סיסמה",
+    "resetPasswordButton": "איפוס סיסמה",
+    "resetError": "אירעה שגיאה בעת איפוס הסיסמה.",
+    "resetCompleteTitle": "הסיסמה אופסה",
+    "resetCompleteDescription": "הסיסמה שלך אופסה בהצלחה. כעת תוכל להתחבר עם הסיסמה החדשה שלך."
+  },
+  "ResendEmailButton": {
+    "resendInSeconds": "שלח שוב בעוד {seconds} שניות"
+  },
+  "SigninCard": {
+    "emailPlaceholder": "דוא\"ל",
+    "emailLabel": "דוא\"ל",
+    "passwordPlaceholder": "סיסמה",
+    "passwordLabel": "סיסמה",
+    "signinTitle": "התחברות",
+    "signinDescription": "התחבר לחשבון שלך",
+    "signinButton": "התחבר",
+    "signinError": "אירעה שגיאה בעת ההתחברות.",
+    "signinCompleteTitle": "התחברות הצליחה",
+    "signinCompleteDescription": "אתה מחובר כעת לחשבון שלך.",
+    "dontHaveAccount": "אין לך חשבון?",
+    "signUp": "הירשם",
+    "forgotPassword": "שכחת סיסמה?",
+    "rememberMeLabel": "זכור אותי",
+    "twoFactorTitle": "נדרשת אימות דו-שלבית",
+    "twoFactorDescription": "אנא הזן את הקוד שנוצר על ידי אפליקציית האימות שלך.",
+    "verifyOtpButton": "אמת קוד",
+    "invalidOtp": "הקוד חייב להכיל בדיוק שישה ספרות.",
+    "otpVerificationFailed": "אימות הקוד נכשל.",
+    "notAuthenticatedTitle": "גישה מוגבלת",
+    "notAuthenticatedDesc": "עליך להתחבר כדי לגשת לדף זה.",
+    "tokenExpiredTitle": "הטוקן פג תוקף",
+    "tokenExpiredDesc": "הקישור לאימות פג תוקף. אנא התחבר שוב כדי לקבל אימייל חדש לאימות"
+  },
+  "SignupCard": {
+    "signupTitle": "הרשמה",
+    "signupDescription": "צור חשבון באמצעות האימייל והסיסמה שלך",
+    "firstnamePlaceholder": "שם פרטי",
+    "firstnameLabel": "שם פרטי",
+    "lastnamePlaceholder": "שם משפחה",
+    "lastnameLabel": "שם משפחה",
+    "emailPlaceholder": "אימייל",
+    "emailLabel": "אימייל",
+    "passwordPlaceholder": "סיסמה",
+    "passwordLabel": "סיסמה",
+    "confirmPasswordPlaceholder": "אשר סיסמה",
+    "confirmPasswordLabel": "אשר סיסמה",
+    "signupButton": "הירשם",
+    "signupError": "אירעה שגיאה במהלך ההרשמה.",
+    "alreadyHaveAccount": "כבר יש לך חשבון?",
+    "signin": "התחבר"
+  },
+  "UserSpaceMenu": {
+    "accountManagement": "ניהול חשבון משתמש",
+    "subscriptionManagement": "ניהול מנויים",
+    "orderHistory": "היסטוריית הזמנות וחיובים",
+    "paymentManagement": "ניהול תשלומים",
+    "addressBook": "ספר כתובות",
+    "support": "תמיכה וסיוע",
+    "preferences": "העדפות",
+    "logout": "התנתקות"
+  },
+  "AccountManagement": {
+    "title": "נהל את החשבון שלך",
+    "alertTitle": "גישה מוגבלת",
+    "alertDescription": "עליך להפעיל אימות דו-גורמי כדי לגשת לדף זה."
+  },
+  "ProfileInfoUpdate": {
+    "title": "ערוך את הנתונים שלך",
+    "description": "כאן תוכלו לערוך את המידע המשויך לחשבון שלכם.",
+    "emailLabel": "אימייל",
+    "updateButton": "עדכן",
+    "updating": "מעדכן",
+    "emailUpdateError": "שגיאה בעדכון האימייל",
+    "nameUpdateError": "שגיאה בעדכון השם",
+    "emailUpdateSuccess": "האימייל עודכן בהצלחה",
+    "nameUpdateSuccess": "השם עודכן בהצלחה",
+    "emailUpdateInitiated": "תהליך שינוי האימייל החל",
+    "emailUpdateInstructions": "אימייל אישור נשלח לכתובת הישנה שלך. אנא עקוב אחר ההוראות כדי לאשר את השינוי.",
+    "emailChangeTitle": "בקשת שינוי האימייל התקבלה",
+    "emailChangeDescription": "אמת את זהותך כדי לאשר את הבקשה",
+    "emailChangeSent": "כדי לאבטח את שינוי כתובת האימייל שלך, עלינו לאמת את זהותך. אימייל נשלח לכתובת הנוכחית שלך:",
+    "emailChangeClickLink": "אנא לחץ על הקישור באימייל כדי לאשר את בקשתך.",
+    "emailVerificationTitle": "אימות כתובת האימייל החדשה שלך",
+    "emailVerificationDescription": "אמת את הכתובת החדשה שלך כדי לסיים את הבקשה",
+    "emailVerificationSent": "תודה שאישרת את זהותך. כדי לסיים את שינוי כתובת האימייל שלך, תמצא אימייל בכתובת החדשה שלך:",
+    "emailVerificationClickLink": "אנא לחץ על הקישור באימייל כדי לסיים את בקשתך.",
+    "resendButton": "שלח מחדש דואר אלקטרוני לאימות",
+    "resetPasswordLink": "אני רוצה לאפס את הסיסמה שלי"
+  },
+  "TwoFactorAuthToggle": {
+    "enableSuccess": "בקשת ההפעלה התקבלה",
+    "activationError": "שגיאת הפעלה",
+    "desactivatedSucces": "אימות דו-שלבי בוטל",
+    "desactivationError": "שגיאה בביטול האימות",
+    "activationSuccessful": "!ההפעלה הצליחה. אימות דו-שלבי הופעל כעת.",
+    "verificationError": "קוד לא חוקי או שפג תוקפו",
+    "passwordNeed": ".אנא הזן את הסיסמה שלך כדי להמשיך",
+    "passwordPlaceholder": ".הסיסמה שלך",
+    "title": "(אימות דו-שלבי (2FA",
+    "description": ".אבטח את חשבונך באמצעות אימות דו-שלבי",
+    "status": ":סטטוס ",
+    "statusActivated": ".מופעל",
+    "statusDesactivated": ".מושבת",
+    "stepOne": ":שלב ראשון מתוך שניים - סרוק את קוד ה-QR או הזן את המפתח הסודי באפליקציית האימות שלך.",
+    "secret": ":מפתח סודי ",
+    "codeInstruction": ".העתק קוד זה אם אינך יכול לסרוק את קוד ה-QR",
+    "stepTwo": ":שלב שני מתוך שניים - הזן את הקוד שסופק על ידי אפליקציית האימות שלך.",
+    "codePlaceholder": ".הזן את הקוד בן ששת הספרות כאן",
+    "verifyButton": ".אמת",
+    "loading": "...טוען"
+  }
+}
