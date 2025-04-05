@@ -14,19 +14,15 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import Link from "next/link"
 import { useForm } from "react-hook-form"
 import { signinSchema } from "../schemas/signin"
-import { authClient, signIn } from "@/features/auth/utils/authClient"
+import { signIn } from "@/features/auth/utils/authClient"
 import { useState } from "react"
 import { useTranslations } from "next-intl"
 import { Checkbox } from "@/components/ui/checkbox"
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSlot,
-} from "@/components/ui/input-otp"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { ShieldAlert } from "lucide-react"
 import EmailVerification from "./EmailVerification"
 import { useSearchParams } from "next/navigation"
+import TwoFactorCard from "./TwoFactorCard"
 
 const CALLBACK_URL = process.env.NEXT_PUBLIC_FRONTEND
 
@@ -39,7 +35,6 @@ const SigninCard = () => {
   const [isSigninComplete, setIsSigninComplete] = useState(false)
   const [rememberMe, setRememberMe] = useState(false)
   const [showTwoFactorCard, setShowTwoFactorCard] = useState(false)
-  const [totpCode, setTotpCode] = useState("")
   const [showEmailVerification, setShowEmailVerification] = useState(false)
 
   const form = useForm({
@@ -101,26 +96,6 @@ const SigninCard = () => {
     }
   }
 
-  async function handleTotpVerification() {
-    try {
-      if (totpCode.length !== 6) {
-        throw new Error(t("invalidOtp"))
-      }
-
-      const response = await authClient.twoFactor.verifyTotp({ code: totpCode })
-
-      if (response.error) {
-        throw new Error(response.error.message)
-      }
-
-      setIsSigninComplete(true)
-      window.location.href = CALLBACK_URL
-    } catch (err) {
-      console.error(`TOTP verification failed: ${err}`)
-      setError(err.message || t("otpVerificationFailed"))
-    }
-  }
-
   const handleRememberMe = (checked) => {
     setRememberMe(checked)
   }
@@ -141,41 +116,7 @@ const SigninCard = () => {
   }
 
   if (showTwoFactorCard) {
-    return (
-      <Card className="w-full max-w-md">
-        <CardHeader>
-          <CardTitle>{t("twoFactorTitle")}</CardTitle>
-          <CardDescription>{t("twoFactorDescription")}</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="mb-4 flex justify-center">
-            <InputOTP
-              maxLength={6}
-              value={totpCode}
-              onChange={(value) => setTotpCode(value)}
-            >
-              <InputOTPGroup>
-                {[...Array(6)].map((_, index) => (
-                  <InputOTPSlot
-                    key={index}
-                    index={index}
-                    className="m-1 h-12 w-9 rounded-md border text-center text-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                ))}
-              </InputOTPGroup>
-            </InputOTP>
-          </div>
-          {error && <p className="mt-2 text-red-500">{error}</p>}
-          <Button
-            onClick={handleTotpVerification}
-            className="mt-4 w-full"
-            disabled={totpCode.length !== 6}
-          >
-            {t("verifyOtpButton")}
-          </Button>
-        </CardContent>
-      </Card>
-    )
+    return <TwoFactorCard />
   }
 
   return (
