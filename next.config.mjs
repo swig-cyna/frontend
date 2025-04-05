@@ -13,6 +13,14 @@ const nextConfig = {
       },
     ],
   },
+  rewrites() {
+    return [
+      {
+        source: "/bucket/:path*",
+        destination: `${process.env.NEXT_PUBLIC_BUCKET}/:path*`,
+      },
+    ]
+  },
 }
 
 export default withNextIntl(nextConfig)

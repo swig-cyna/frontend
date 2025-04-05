@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable consistent-return */
+/* eslint-disable no-shadow */
 "use client"
 // Inspired by react-hot-toast library
 import * as React from "react"
@@ -160,3 +163,4 @@ function useToast() {
 }
 
 export { toast, useToast }
+
