@@ -30,38 +30,10 @@ import {
 import { useToast } from "@/hooks/useToast"
 import { authClient } from "@/features/auth/utils/authClient"
 
-export function UserTable() {
-  const [users, setUsers] = useState([])
+export function UserTable({ users, refreshUsers }) {
   const [userToEdit, setUserToEdit] = useState(null)
   const [userToDelete, setUserToDelete] = useState(null)
   const { toast } = useToast()
-
-  const fetchUsers = async () => {
-    try {
-      const { data, error } = await authClient.admin.listUsers({
-        query: {
-          limit: 100,
-          sortBy: "createdAt",
-          sortDirection: "desc",
-        },
-      })
-
-      if (error) throw new Error(error.message)
-
-      setUsers(data.users)
-      console.log(users)
-    } catch (error) {
-      toast({
-        title: "Erreur de chargement",
-        description: error.message || "Échec du chargement des utilisateurs",
-        variant: "destructive",
-      })
-    }
-  }
-
-  useEffect(() => {
-    fetchUsers()
-  }, [])
 
   const handleDeleteUser = (userId) => {
     setUsers(users.filter((user) => user.id !== userId))
