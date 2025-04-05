@@ -1,6 +1,7 @@
 "use client"
 
 import { generateFormFieldInput } from "@/components/functions"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -9,19 +10,18 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { Checkbox } from "@/components/ui/checkbox"
 import { Form, FormField } from "@/components/ui/form"
+import { signIn } from "@/features/auth/utils/authClient"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { ShieldAlert } from "lucide-react"
+import { useTranslations } from "next-intl"
 import Link from "next/link"
+import { useSearchParams } from "next/navigation"
+import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { signinSchema } from "../schemas/signin"
-import { signIn } from "@/features/auth/utils/authClient"
-import { useState } from "react"
-import { useTranslations } from "next-intl"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { ShieldAlert } from "lucide-react"
 import EmailVerification from "./EmailVerification"
-import { useSearchParams } from "next/navigation"
 import TwoFactorCard from "./TwoFactorCard"
 
 const CALLBACK_URL = process.env.NEXT_PUBLIC_FRONTEND
@@ -102,7 +102,7 @@ const SigninCard = () => {
 
   if (isSigninComplete) {
     return (
-      <Card>
+      <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle>{t("signinCompleteTitle")}</CardTitle>
           <CardDescription>{t("signinCompleteDescription")}</CardDescription>
@@ -120,7 +120,7 @@ const SigninCard = () => {
   }
 
   return (
-    <div>
+    <div className="flex w-full flex-col items-center justify-center">
       {reason === "not-authenticated" && (
         <Alert variant="destructive" className="mb-4 w-full max-w-md">
           <ShieldAlert className="h-4 w-4" />
