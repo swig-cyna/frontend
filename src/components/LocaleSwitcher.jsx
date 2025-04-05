@@ -26,10 +26,10 @@ const LocaleSwitcher = () => {
       <DropdownMenuContent sideOffset={5}>
         {LOCALE.map(({ code, flagCode, name }) => (
           <DropdownMenuItem key={code} onSelect={localSelect(code)}>
-            <button className="flex gap-2 items-center">
+            <button className="flex items-center gap-2">
               <Flag
                 code={flagCode || code}
-                className="rounded-sm object-fill h-6 w-6"
+                className="h-6 w-6 rounded-sm object-fill"
               />
               {name}
             </button>
