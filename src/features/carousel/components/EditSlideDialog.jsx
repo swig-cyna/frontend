@@ -119,7 +119,7 @@ export function EditSlideDialog({ slide, open, onOpenChange }) {
                   alt="Preview"
                   height={128}
                   width={128}
-                  className="mx-auto w-auto rounded-md object-cover"
+                  className="mx-auto h-32 w-auto rounded-md object-cover"
                 />
               )}
 
