@@ -67,6 +67,7 @@ const TwoFactorAuthToggle = () => {
       } else {
         setQrCodeURI(null)
         setSecret("")
+        window.location.reload()
       }
 
       if (result.error) {
@@ -117,6 +118,7 @@ const TwoFactorAuthToggle = () => {
       }
 
       await authClient.reloadSession()
+      window.location.reload()
       setIs2FAEnabled(true)
       setMessage({ content: t("activationSuccessful"), type: "success" })
     } catch (error) {

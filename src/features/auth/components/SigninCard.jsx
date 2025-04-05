@@ -26,19 +26,21 @@ import {
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { ShieldAlert } from "lucide-react"
 import EmailVerification from "./EmailVerification"
+import { useSearchParams } from "next/navigation"
 
 const CALLBACK_URL = process.env.NEXT_PUBLIC_FRONTEND
 
 const SigninCard = () => {
   const t = useTranslations("SigninCard")
+  const searchParams = useSearchParams()
+  const reason = searchParams.get("reason")
+
   const [error, setError] = useState(null)
   const [isSigninComplete, setIsSigninComplete] = useState(false)
   const [rememberMe, setRememberMe] = useState(false)
   const [showTwoFactorCard, setShowTwoFactorCard] = useState(false)
   const [totpCode, setTotpCode] = useState("")
   const [showEmailVerification, setShowEmailVerification] = useState(false)
-
-  const reason = new URLSearchParams(window.location.search).get("reason")
 
   const form = useForm({
     resolver: zodResolver(signinSchema),
@@ -76,6 +78,7 @@ const SigninCard = () => {
           onSuccess(context) {
             if (context.data.twoFactorRedirect) {
               setShowTwoFactorCard(true)
+              setError("")
             } else {
               setIsSigninComplete(true)
             }

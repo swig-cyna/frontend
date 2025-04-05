@@ -35,7 +35,7 @@ export default async function authMiddleware(request) {
 
   if (pathname.startsWith("/admin")) {
     const userRole = session.user.role
-    const has2FA = session.user.hasTwoFactorEnabled
+    const has2FA = session.user.twoFactorEnabled
 
     const allowedRoles = ["admin", "superadmin", "support"]
 
