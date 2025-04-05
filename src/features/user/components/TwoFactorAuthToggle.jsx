@@ -31,92 +31,99 @@ const TwoFactorAuthToggle = () => {
     setIs2FAEnabled(session?.user?.twoFactorEnabled || false)
   }, [session])
 
-  const enableTwoFactorAuth = async () => {
-    if (!password) {
-      return setMessage({ content: t("passwordNeed"), type: "error" })
+  const handleError = (error, defaultMessage) => {
+    console.error("Erreur, error")
+    setMessage({
+      content: error.message || defaultMessage,
+      type: error,
+    })
+  }
+
+  const validateInput = (input, errorMessage) => {
+    if (!input) {
+      setMessage({ content: errorMessage, type: "error" })
+
+      return false
+    }
+
+    return true
+  }
+
+  const toggleTwoFactorAuth = async (action, successMessage, errorMessage) => {
+    if (!validateInput(password, t("passwordNeed"))) {
+      return
     }
 
     setIsLoading(true)
     setMessage(null)
 
     try {
-      const { data, error } = await authClient.twoFactor.enable({ password })
-      if (error) throw new Error(error.message)
+      const result = await authClient.twoFactor[action]({ password })
 
-      setQrCodeURI(data.totpURI)
-      setSecret(extractSecret(data.totpURI))
-      setMessage({ content: t("enableSuccess"), type: "success" })
-      setIs2FAEnabled(true)
+      if (action === "enable") {
+        const urlParams = new URLSearchParams(result.data.totpURI.split("?")[1])
+        setQrCodeURI(result.data.totpURI)
+        setSecret(urlParams.get("secret"))
+      } else {
+        setQrCodeURI(null)
+        setSecret("")
+      }
+
+      if (result.error) {
+        throw new Error(result.error.message)
+      }
+
+      setIs2FAEnabled(action === "enable")
+      setMessage({ content: successMessage, type: "success" })
     } catch (error) {
-      console.error("Erreur lors de l'activation :", error)
-      setMessage({
-        content: error.message || t("activationError"),
-        type: "error",
-      })
+      handleError(error, errorMessage)
     } finally {
       setIsLoading(false)
       setPassword("")
-    }
-  }
-
-  const disableTwoFactorAuth = async () => {
-    if (!password) {
-      return setMessage({ content: t("passwordNeed"), type: "error" })
-    }
-
-    setIsLoading(true)
-    setMessage(null)
-
-    try {
-      const { error } = await authClient.twoFactor.disable({ password })
-      if (error) throw new Error(error.message)
-
-      setIs2FAEnabled(false)
-      setQrCodeURI(null)
-      setMessage({ content: t("desactivated"), type: "success" })
-    } catch (error) {
-      console.error("Erreur lors de la désactivation :", error)
-      setMessage({
-        content: error.message || t("desactivationError"),
-        type: "error",
-      })
-    } finally {
-      setIsLoading(false)
-      setPassword("")
-    }
-  }
-
-  const verifyTotpCode = async () => {
-    if (!verificationCode) {
-      return setMessage({ content: t("verificationError"), type: "error" })
-    }
-
-    setIsLoading(true)
-    setMessage(null)
-
-    try {
-      const { data, error } = await authClient.twoFactor.verifyTotp({
-        code: verificationCode,
-      })
-      if (error) throw new Error(error.message)
-
-      await authClient.reloadSession()
-      setIs2FAEnabled(true)
-      setMessage({ content: t("activationSuccessful"), type: "success" })
-    } catch (error) {
-      console.error("Erreur de vérification :", error)
-      setMessage({ content: t("verificationError"), type: "error" })
-    } finally {
-      setIsLoading(false)
-      setVerificationCode("")
     }
   }
 
   const handleToggle = async () => {
     if (is2FAEnabled) {
-      await disableTwoFactorAuth()
+      await toggleTwoFactorAuth(
+        "disable",
+        t("desactivatedSucces"),
+        t("desactivationError"),
+      )
     } else {
-      await enableTwoFactorAuth()
+      await toggleTwoFactorAuth(
+        "enable",
+        t("enableSuccess"),
+        t("activationError"),
+      )
+    }
+  }
+
+  const verifyTotpCode = async () => {
+    if (!validateInput(verificationCode, t("verificationError"))) {
+      return
+    }
+
+    setIsLoading(true)
+    setMessage(null)
+
+    try {
+      const { error } = await authClient.twoFactor.verifyTotp({
+        code: verificationCode,
+      })
+
+      if (error) {
+        throw new Error(error.message)
+      }
+
+      await authClient.reloadSession()
+      setIs2FAEnabled(true)
+      setMessage({ content: t("activationSuccessful"), type: "success" })
+    } catch (error) {
+      handleError(error, t("verificationError"))
+    } finally {
+      setIsLoading(false)
+      setVerificationCode("")
     }
   }
 
@@ -150,11 +157,11 @@ const TwoFactorAuthToggle = () => {
           />
         </div>
 
-        {message.content && (
+        {message?.content && (
           <p
             className={`text-${message.type === "success" ? "green" : "red"}-500`}
           >
-            {message.content}
+            {message?.content}
           </p>
         )}
 
