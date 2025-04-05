@@ -84,7 +84,9 @@
     "twoFactorDescription": "Veuillez entrer le code généré par votre application d'authentification.",
     "verifyOtpButton": "Vérifier le code",
     "invalidOtp": "Le code doit contenir exactement six chiffres.",
-    "otpVerificationFailed": "La vérification du code a échoué."
+    "otpVerificationFailed": "La vérification du code a échoué.",
+    "alertTitle": "Accès restreint",
+    "alertDescription": "Vous devez vous connecter pour accéder à cette page."
   },
   "SignupCard": {
     "signupTitle": "Inscription",
@@ -115,7 +117,9 @@
     "logout": "Déconnexion"
   },
   "AccountManagement": {
-    "title": "Gérer votre compte"
+    "title": "Gérer votre compte",
+    "alertTitle": "Accès restreint",
+    "alertDescription": "Vous devez activer la double authentification pour accéder à cette page."
   },
   "ProfileInfoUpdate": {
     "title": "Modifier vos données",
@@ -144,7 +148,7 @@
   "TwoFactorAuthToggle": {
     "enableSuccess": "Demande d'activation prise en compte",
     "activationError": "Erreur d'activation",
-    "desactivated": "2FA désactivée",
+    "desactivatedSucces": "2FA désactivée",
     "desactivationError": "Erreur de désactivation",
     "activationSuccessful": "Activation réussie ! 2FA maintenant activée.",
     "verificationError": "Code invalide ou expiré",

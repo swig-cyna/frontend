@@ -84,7 +84,9 @@
     "twoFactorDescription": "אנא הזן את הקוד שנוצר על ידי אפליקציית האימות שלך.",
     "verifyOtpButton": "אמת קוד",
     "invalidOtp": "הקוד חייב להכיל בדיוק שישה ספרות.",
-    "otpVerificationFailed": "אימות הקוד נכשל."
+    "otpVerificationFailed": "אימות הקוד נכשל.",
+    "alertTitle": "גישה מוגבלת",
+    "alertDescription": "עליך להתחבר כדי לגשת לדף זה."
   },
   "SignupCard": {
     "signupTitle": "הרשמה",
@@ -115,7 +117,9 @@
     "logout": "התנתקות"
   },
   "AccountManagement": {
-    "title": "נהל את החשבון שלך"
+    "title": "נהל את החשבון שלך",
+    "alertTitle": "גישה מוגבלת",
+    "alertDescription": "עליך להפעיל אימות דו-גורמי כדי לגשת לדף זה."
   },
   "ProfileInfoUpdate": {
     "title": "ערוך את הנתונים שלך",
@@ -143,7 +147,7 @@
   "TwoFactorAuthToggle": {
     "enableSuccess": "בקשת ההפעלה התקבלה",
     "activationError": "שגיאת הפעלה",
-    "desactivated": "אימות דו-שלבי בוטל",
+    "desactivatedSucces": "אימות דו-שלבי בוטל",
     "desactivationError": "שגיאה בביטול האימות",
     "activationSuccessful": "!ההפעלה הצליחה. אימות דו-שלבי הופעל כעת.",
     "verificationError": "קוד לא חוקי או שפג תוקפו",
