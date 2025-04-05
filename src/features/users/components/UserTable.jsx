@@ -28,21 +28,11 @@ import {
   translateUserRole,
 } from "@/features/users/utils/functions"
 import { useToast } from "@/hooks/useToast"
-import { authClient } from "@/features/auth/utils/authClient"
 
 export function UserTable({ users, refreshUsers }) {
   const [userToEdit, setUserToEdit] = useState(null)
   const [userToDelete, setUserToDelete] = useState(null)
   const { toast } = useToast()
-
-  const handleDeleteUser = (userId) => {
-    setUsers(users.filter((user) => user.id !== userId))
-    toast({
-      title: "User deleted",
-      description: "The user has been successfully deleted.",
-    })
-    setUserToDelete(null)
-  }
 
   const handleUpdateUserRole = (userId, newRole) => {
     setUsers(
@@ -133,7 +123,7 @@ export function UserTable({ users, refreshUsers }) {
           user={userToDelete}
           open={Boolean(userToDelete)}
           onOpenChange={(open) => !open && setUserToDelete(null)}
-          onConfirmDelete={() => handleDeleteUser(userToDelete.id)}
+          onUserRemoved={refreshUsers}
         />
       )}
     </>
