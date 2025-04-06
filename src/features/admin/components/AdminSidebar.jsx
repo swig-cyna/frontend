@@ -27,8 +27,9 @@ import {
 } from "@/components/ui/sidebar"
 import Image from "next/image"
 import Link from "next/link"
+import { signOut, useSession } from "@/features/auth/utils/authClient"
+import { useRouter } from "next/navigation"
 
-// Menu items.
 const items = [
   {
     title: "Home",
@@ -57,52 +58,69 @@ const items = [
   },
 ]
 
-const AdminSidebar = () => (
-  <Sidebar>
-    <SidebarContent>
-      <div className="mx-3 mt-3 flex items-center justify-between">
-        <Image src={logo} className="mt-1 h-8 w-auto" alt="logo" />
-      </div>
-      <SidebarGroup>
-        <SidebarGroupContent>
-          <SidebarMenu>
-            {items.map((item) => (
-              <SidebarMenuItem key={item.title}>
-                <SidebarMenuButton asChild>
-                  <Link href={item.url}>
-                    <item.icon />
-                    <span>{item.title}</span>
-                  </Link>
+const AdminSidebar = () => {
+  const router = useRouter()
+  const { data: session } = useSession()
+
+  return (
+    <Sidebar>
+      <SidebarContent>
+        <div className="mx-3 mt-3 flex items-center justify-between">
+          <Image src={logo} className="mt-1 h-8 w-auto" alt="logo" />
+        </div>
+        <SidebarGroup>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {items.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton asChild>
+                    <Link href={item.url}>
+                      <item.icon />
+                      <span>{item.title}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
+      <SidebarFooter>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <SidebarMenuButton>
+                  <User2 /> {session?.user?.name}
+                  <ChevronUp className="ml-auto" />
                 </SidebarMenuButton>
-              </SidebarMenuItem>
-            ))}
-          </SidebarMenu>
-        </SidebarGroupContent>
-      </SidebarGroup>
-    </SidebarContent>
-    <SidebarFooter>
-      <SidebarMenu>
-        <SidebarMenuItem>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <SidebarMenuButton>
-                <User2 /> Username
-                <ChevronUp className="ml-auto" />
-              </SidebarMenuButton>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-              side="top"
-              className="w-[--radix-popper-anchor-width]"
-            >
-              <DropdownMenuItem>
-                <span>Sign out</span>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </SidebarMenuItem>
-      </SidebarMenu>
-    </SidebarFooter>
-  </Sidebar>
-)
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                side="top"
+                className="w-[--radix-popper-anchor-width]"
+              >
+                <DropdownMenuItem>
+                  <button
+                    onClick={async () => {
+                      await signOut({
+                        fetchOptions: {
+                          onSuccess: () => {
+                            router.push("/")
+                          },
+                        },
+                      })
+                    }}
+                  >
+                    Sign out
+                  </button>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarFooter>
+    </Sidebar>
+  )
+}
 
 export default AdminSidebar
