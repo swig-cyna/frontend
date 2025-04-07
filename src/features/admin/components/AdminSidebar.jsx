@@ -1,11 +1,12 @@
 import {
-  Box,
+  Boxes,
   ChevronUp,
-  Home,
-  Search,
+  CreditCard,
+  LayoutDashboard,
+  LifeBuoy,
   Settings,
-  User,
   User2,
+  Users,
 } from "lucide-react"
 
 import logo from "@/assets/logoText.png"
@@ -32,24 +33,29 @@ import { useRouter } from "next/navigation"
 
 const items = [
   {
-    title: "Home",
+    title: "Dashboard",
     url: "/admin",
-    icon: Home,
-  },
-  {
-    title: "Users",
-    url: "/admin/users",
-    icon: User,
+    icon: LayoutDashboard,
   },
   {
     title: "Products",
     url: "#",
-    icon: Box,
+    icon: Boxes,
   },
   {
-    title: "Search",
+    title: "Users",
+    url: "/admin/users",
+    icon: Users,
+  },
+  {
+    title: "Orders & Subscriptions",
     url: "#",
-    icon: Search,
+    icon: CreditCard,
+  },
+  {
+    title: "Customer Support",
+    url: "#",
+    icon: LifeBuoy,
   },
   {
     title: "Settings",
@@ -99,6 +105,11 @@ const AdminSidebar = () => {
                 side="top"
                 className="w-[--radix-popper-anchor-width]"
               >
+                <DropdownMenuItem key="home">
+                  <Link href="/">
+                    <span>Back to shop</span>
+                  </Link>
+                </DropdownMenuItem>
                 <DropdownMenuItem>
                   <button
                     onClick={async () => {
