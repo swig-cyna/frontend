@@ -58,7 +58,9 @@ export function AddUserDialog({ open, onOpenChange, onUserAdded }) {
         role: values.role,
       })
 
-      if (error) throw error
+      if (error) {
+        throw error
+      }
 
       toast({
         title: "User added",
@@ -67,6 +69,7 @@ export function AddUserDialog({ open, onOpenChange, onUserAdded }) {
 
       form.reset()
       onOpenChange(false)
+
       if (onUserAdded) {
         onUserAdded()
       }

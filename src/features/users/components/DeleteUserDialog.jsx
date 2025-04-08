@@ -25,7 +25,9 @@ export function DeleteUserDialog({ user, open, onOpenChange, onUserRemoved }) {
         userId: user.id,
       })
 
-      if (error) throw error
+      if (error) {
+        throw error
+      }
 
       toast({
         title: "User deleted",
@@ -33,6 +35,7 @@ export function DeleteUserDialog({ user, open, onOpenChange, onUserRemoved }) {
       })
 
       onOpenChange(false)
+
       if (onUserRemoved) {
         onUserRemoved()
       }

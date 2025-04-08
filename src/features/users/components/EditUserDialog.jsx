@@ -51,7 +51,9 @@ export function EditUserDialog({ user, open, onOpenChange, onRoleUpdated }) {
         role: values.role,
       })
 
-      if (error) throw error
+      if (error) {
+        throw error
+      }
 
       toast({
         title: "Role updated",
@@ -60,6 +62,7 @@ export function EditUserDialog({ user, open, onOpenChange, onRoleUpdated }) {
 
       form.reset()
       onOpenChange(false)
+
       if (onRoleUpdated) {
         onRoleUpdated()
       }
