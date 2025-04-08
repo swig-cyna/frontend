@@ -1,16 +1,16 @@
 "use client"
 
-import { Edit, MoreHorizontal, Package, Trash2 } from "lucide-react"
+import {
+  Edit,
+  LucideLoader2,
+  MoreHorizontal,
+  Package,
+  Trash2,
+} from "lucide-react"
 import Image from "next/image"
 import { useState } from "react"
 
 import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -51,12 +51,9 @@ export function ProductList() {
 
   if (isLoading) {
     return (
-      <Card>
-        <CardHeader>
-          <CardTitle>Produits</CardTitle>
-          <CardDescription>Chargement...</CardDescription>
-        </CardHeader>
-      </Card>
+      <div className="flex items-center justify-center">
+        <LucideLoader2 className="animate-spin" />
+      </div>
     )
   }
 
