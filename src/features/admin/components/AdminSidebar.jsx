@@ -4,6 +4,7 @@ import {
   CreditCard,
   LayoutDashboard,
   LifeBuoy,
+  AppWindow,
   Settings,
   User2,
   Users,
@@ -56,6 +57,11 @@ const items = [
     title: "Customer Support",
     url: "#",
     icon: LifeBuoy,
+  },
+  {
+    title: "Carousel",
+    url: "/admin/carousel",
+    icon: AppWindow,
   },
   {
     title: "Settings",

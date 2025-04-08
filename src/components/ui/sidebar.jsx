@@ -34,6 +34,7 @@ const SidebarContext = React.createContext(null)
 
 function useSidebar() {
   const context = React.useContext(SidebarContext)
+  
   if (!context) {
     throw new Error("useSidebar must be used within a SidebarProvider.")
   }
@@ -64,6 +65,7 @@ const SidebarProvider = React.forwardRef(
     const setOpen = React.useCallback(
       (value) => {
         const openState = typeof value === "function" ? value(open) : value
+        
         if (setOpenProp) {
           setOpenProp(openState)
         } else {
@@ -77,11 +79,9 @@ const SidebarProvider = React.forwardRef(
     )
 
     // Helper to toggle the sidebar.
-    const toggleSidebar = React.useCallback(() => {
-      return isMobile
-        ? setOpenMobile((open) => !open)
-        : setOpen((open) => !open)
-    }, [isMobile, setOpen, setOpenMobile])
+    const toggleSidebar = React.useCallback(() => isMobile
+        ? setOpenMobile((open1) => !open1)
+        : setOpen((open2) => !open2), [isMobile, setOpen, setOpenMobile])
 
     // Adds a keyboard shortcut to toggle the sidebar.
     React.useEffect(() => {
@@ -96,6 +96,7 @@ const SidebarProvider = React.forwardRef(
       }
 
       window.addEventListener("keydown", handleKeyDown)
+      
       return () => window.removeEventListener("keydown", handleKeyDown)
     }, [toggleSidebar])
 
@@ -298,8 +299,7 @@ const SidebarRail = React.forwardRef(({ className, ...props }, ref) => {
 })
 SidebarRail.displayName = "SidebarRail"
 
-const SidebarInset = React.forwardRef(({ className, ...props }, ref) => {
-  return (
+const SidebarInset = React.forwardRef(({ className, ...props }, ref) => (
     <main
       ref={ref}
       className={cn(
@@ -309,12 +309,10 @@ const SidebarInset = React.forwardRef(({ className, ...props }, ref) => {
       )}
       {...props}
     />
-  )
-})
+  ))
 SidebarInset.displayName = "SidebarInset"
 
-const SidebarInput = React.forwardRef(({ className, ...props }, ref) => {
-  return (
+const SidebarInput = React.forwardRef(({ className, ...props }, ref) => (
     <Input
       ref={ref}
       data-sidebar="input"
@@ -324,48 +322,40 @@ const SidebarInput = React.forwardRef(({ className, ...props }, ref) => {
       )}
       {...props}
     />
-  )
-})
+  ))
 SidebarInput.displayName = "SidebarInput"
 
-const SidebarHeader = React.forwardRef(({ className, ...props }, ref) => {
-  return (
+const SidebarHeader = React.forwardRef(({ className, ...props }, ref) => (
     <div
       ref={ref}
       data-sidebar="header"
       className={cn("flex flex-col gap-2 p-2", className)}
       {...props}
     />
-  )
-})
+  ))
 SidebarHeader.displayName = "SidebarHeader"
 
-const SidebarFooter = React.forwardRef(({ className, ...props }, ref) => {
-  return (
+const SidebarFooter = React.forwardRef(({ className, ...props }, ref) => (
     <div
       ref={ref}
       data-sidebar="footer"
       className={cn("flex flex-col gap-2 p-2", className)}
       {...props}
     />
-  )
-})
+  ))
 SidebarFooter.displayName = "SidebarFooter"
 
-const SidebarSeparator = React.forwardRef(({ className, ...props }, ref) => {
-  return (
+const SidebarSeparator = React.forwardRef(({ className, ...props }, ref) => (
     <Separator
       ref={ref}
       data-sidebar="separator"
       className={cn("mx-2 w-auto bg-sidebar-border", className)}
       {...props}
     />
-  )
-})
+  ))
 SidebarSeparator.displayName = "SidebarSeparator"
 
-const SidebarContent = React.forwardRef(({ className, ...props }, ref) => {
-  return (
+const SidebarContent = React.forwardRef(({ className, ...props }, ref) => (
     <div
       ref={ref}
       data-sidebar="content"
@@ -375,20 +365,17 @@ const SidebarContent = React.forwardRef(({ className, ...props }, ref) => {
       )}
       {...props}
     />
-  )
-})
+  ))
 SidebarContent.displayName = "SidebarContent"
 
-const SidebarGroup = React.forwardRef(({ className, ...props }, ref) => {
-  return (
+const SidebarGroup = React.forwardRef(({ className, ...props }, ref) => (
     <div
       ref={ref}
       data-sidebar="group"
       className={cn("relative flex w-full min-w-0 flex-col p-2", className)}
       {...props}
     />
-  )
-})
+  ))
 SidebarGroup.displayName = "SidebarGroup"
 
 const SidebarGroupLabel = React.forwardRef(
@@ -517,6 +504,7 @@ const SidebarMenuButton = React.forwardRef(
     }
 
     if (typeof tooltip === "string") {
+      // eslint-disable-next-line no-param-reassign
       tooltip = {
         children: tooltip,
       }
@@ -585,9 +573,7 @@ SidebarMenuBadge.displayName = "SidebarMenuBadge"
 const SidebarMenuSkeleton = React.forwardRef(
   ({ className, showIcon = false, ...props }, ref) => {
     // Random width between 50 to 90%.
-    const width = React.useMemo(() => {
-      return `${Math.floor(Math.random() * 40) + 50}%`
-    }, [])
+    const width = React.useMemo(() => `${Math.floor(Math.random() * 40) + 50}%`, [])
 
     return (
       <div
@@ -683,5 +669,6 @@ export {
   SidebarRail,
   SidebarSeparator,
   SidebarTrigger,
-  useSidebar,
+  useSidebar
 }
+

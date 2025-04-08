@@ -1,9 +1,9 @@
 "use client"
-import Header from "@/components/Header"
 import Footer from "@/components/Footer"
-import UserSpaceMenu from "@/features/user/components/UserSpaceMenu"
-import { useSession } from "@/features/auth/utils/authClient"
+import Header from "@/components/Header"
 import { Card, CardHeader } from "@/components/ui/card"
+import { useSession } from "@/features/auth/utils/authClient"
+import UserSpaceMenu from "@/features/userspace/components/UserSpaceMenu"
 
 const UserLayout = ({ children }) => {
   const { data: session } = useSession()

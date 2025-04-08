@@ -1,73 +1,38 @@
 /* eslint-disable new-cap */
 "use client"
 
-import { Button } from "@/components/ui/button"
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel"
+import { Skeleton } from "@/components/ui/skeleton"
+import { CarouselPreview } from "@/features/carousel/components/CarouselPreview"
+import { useCarousel } from "@/features/carousel/hooks/useCarousel"
 import CategoriesItem from "@/features/categories/components/CategoriesItem"
 import CardProduct from "@/features/products/components/CardProduct"
-import Autoplay from "embla-carousel-autoplay"
 import { useTranslations } from "next-intl"
-import Image from "next/image"
 
 const Home = () => {
   const t = useTranslations("HomePage")
+  const { data: slides } = useCarousel()
 
   return (
-    <main className="flex flex-col gap-8 items-center sm:items-start w-full">
-      <Carousel
-        opts={{
-          align: "start",
-          loop: true,
-        }}
-        plugins={[
-          Autoplay({
-            delay: 15000,
-          }),
-        ]}
-        className="min-w-full max-w-sm rounded-lg overflow-hidden"
-      >
-        <CarouselContent className="ml-0">
-          {Array.from({ length: 5 }).map((_, index) => (
-            <CarouselItem className="pl-0" key={index}>
-              <div className="flex flex-col justify-center items-start py-6 px-12 pb-8 h-64 md:h-72 relative">
-                <h2 className="text-3xl font-semibold text-white drop-shadow-md">
-                  Slide {index + 1}
-                </h2>
-                <p className="drop-shadow-md">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit
-                </p>
-                <Button className="mt-4">Read more</Button>
-                <Image
-                  src="https://picsum.photos/700/500"
-                  alt="logo"
-                  fill
-                  className="absolute top-0 -z-10 h-screen w-full object-cover"
-                />
-              </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselNext className="right-2 border-none bg-background/20" />
-        <CarouselPrevious className="left-2 border-none bg-background/20" />
-      </Carousel>
+    <main className="flex w-full flex-col items-center gap-8 sm:items-start">
+      <div className="w-full">
+        {slides ? (
+          <CarouselPreview slides={slides} />
+        ) : (
+          <Skeleton className="h-[400px] w-full" />
+        )}
+      </div>
 
       <div className="w-full">
-        <h2 className="text-xl font-semibold mb-2">{t("categories")}</h2>
-        <div className="overflow-x-auto w-full pb-4 relative">
-          <div className="flex gap-2 min-w-max">
+        <h2 className="mb-2 text-xl font-semibold">{t("categories")}</h2>
+        <div className="relative w-full overflow-x-auto pb-4">
+          <div className="flex min-w-max gap-2">
             {Array.from({ length: 20 }).map((_, index) => (
               <CategoriesItem key={index} />
             ))}
-            <div className="z-10 bg-background flex-1 scale-150 w-7 sticky blur-sm -right-3"></div>
+            <div className="sticky -right-3 z-10 w-7 flex-1 scale-150 bg-background blur-sm"></div>
           </div>
         </div>
-        <div className="w-full grid gap-4 gird-cols-2 md:grid-cols-3 mt-3">
+        <div className="gird-cols-2 mt-3 grid w-full gap-4 md:grid-cols-3">
           {Array.from({ length: 6 }).map((_, index) => (
             <CardProduct key={index} />
           ))}
