@@ -61,7 +61,7 @@ const PasswordForgetCard = () => {
         <CardContent>
           <ResendEmailButton
             onResend={handleResendPasswordReset}
-            buttonText={t("ResendButton")}
+            buttonText={t("resendButton")}
           />
         </CardContent>
       </Card>
