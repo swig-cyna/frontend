@@ -60,6 +60,10 @@ const TwoFactorAuthToggle = () => {
     try {
       const result = await authClient.twoFactor[action]({ password })
 
+      if (result.error) {
+        throw new Error(result.error.message)
+      }
+
       if (action === "enable") {
         const urlParams = new URLSearchParams(result.data.totpURI.split("?")[1])
         setQrCodeURI(result.data.totpURI)
@@ -68,10 +72,6 @@ const TwoFactorAuthToggle = () => {
         setQrCodeURI(null)
         setSecret("")
         window.location.reload()
-      }
-
-      if (result.error) {
-        throw new Error(result.error.message)
       }
 
       setIs2FAEnabled(action === "enable")
