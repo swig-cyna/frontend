@@ -48,7 +48,7 @@ const UserSpaceMenu = ({ user }) => {
     {
       title: t("UserSpaceMenu.support"),
       icon: HelpCircle,
-      url: "#",
+      url: "/user/contact-form",
     },
     { title: t("UserSpaceMenu.logout"), icon: LogOut, url: "/" },
   ]
