@@ -13,6 +13,7 @@ import useCartStore from "@/features/cart/stores/cartStore"
 import { ProductImageCarousel } from "@/features/products/components/ProductImageCarousel"
 import { useProduct } from "@/features/products/hook/useProducts"
 import { toast } from "@/hooks/useToast"
+import MDEditor from "@uiw/react-md-editor"
 import { Loader2, ShoppingCart } from "lucide-react"
 import { useFormatter, useTranslations } from "next-intl"
 import { useParams } from "next/navigation"
@@ -62,8 +63,8 @@ const ProductPage = () => {
   }
 
   return (
-    <div className="flex w-full flex-col gap-4 md:flex-row">
-      <div className="flex-1">
+    <div className="relative flex w-full flex-col items-start gap-4 md:flex-row">
+      <div className="sticky left-0 top-14 flex-1">
         <ProductImageCarousel images={product.images} />
       </div>
       <div className="flex-1">
@@ -72,7 +73,10 @@ const ProductPage = () => {
             <CardTitle className="text-3xl">{product.name}</CardTitle>
           </CardHeader>
           <CardContent>
-            <pre className="text-sm">{product.description}</pre>
+            <MDEditor.Markdown
+              style={{ backgroundColor: "transparent" }}
+              source={product.description}
+            />
           </CardContent>
           <CardFooter className="flex flex-col items-start gap-2">
             <div>

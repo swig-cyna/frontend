@@ -17,9 +17,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
 import { ProductImageLoaded } from "@/features/products/components/ProductImageLoaded"
 import { zodResolver } from "@hookform/resolvers/zod"
+import MDEditor from "@uiw/react-md-editor"
 import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { createProductSchema } from "../schemas/createProduct"
@@ -132,10 +132,10 @@ export const ProductEdit = ({ product, onSave, isLoading }) => {
               <FormItem>
                 <FormLabel>Description</FormLabel>
                 <FormControl>
-                  <Textarea
-                    className="h-40"
-                    placeholder="Product description"
-                    {...field}
+                  <MDEditor
+                    className="tesssss"
+                    onChange={field.onChange}
+                    value={field.value}
                   />
                 </FormControl>
                 <FormMessage />
