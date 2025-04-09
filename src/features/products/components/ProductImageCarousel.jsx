@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import Image from "next/image"
 import { useState } from "react"
+import { getProductImageUrl } from "../utils/image"
 
 export function ProductImageCarousel({ images = [] }) {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -32,20 +33,20 @@ export function ProductImageCarousel({ images = [] }) {
   }
 
   return (
-    <div className="flex gap-4">
+    <div className="flex aspect-[4/3] gap-4 overflow-hidden">
       {images.length > 1 && (
-        <div className="order-2 flex flex-col gap-2">
+        <div className="order-2 flex h-full w-24 flex-col gap-2 overflow-y-auto overflow-x-hidden">
           {images.map((image, index) => (
             <button
               type="button"
               key={index}
-              className={`relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border-2 transition-all ${
+              className={`relative aspect-square w-full flex-shrink-0 overflow-hidden rounded-md border-2 transition-all ${
                 index === currentIndex ? "border-primary" : "border-transparent"
               }`}
               onClick={() => goToSlide(index)}
             >
               <Image
-                src={image || "/placeholder.svg"}
+                src={getProductImageUrl(image)}
                 alt={`Thumbnail ${index + 1}`}
                 fill
                 className="h-full w-full object-cover"
@@ -57,7 +58,7 @@ export function ProductImageCarousel({ images = [] }) {
 
       <div className="relative order-1 aspect-[4/3] flex-1 overflow-hidden rounded-md">
         <Image
-          src={images[currentIndex] || "/placeholder.svg"}
+          src={getProductImageUrl(images[currentIndex])}
           alt={`Image ${currentIndex + 1}`}
           fill
           className="h-full w-full object-cover transition-opacity duration-300"

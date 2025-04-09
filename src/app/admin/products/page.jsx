@@ -15,8 +15,8 @@ export default function Products() {
       >
         <Link href="/admin/products/new">
           <Button>
-            <Plus className="mr-2 h-4 w-4" />
-            Ajouter un produit
+            <Plus className="mr-1 h-4 w-4" />
+            Add product
           </Button>
         </Link>
       </DashboardHeader>
