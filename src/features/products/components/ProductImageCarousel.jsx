@@ -27,7 +27,7 @@ export function ProductImageCarousel({ images = [] }) {
   if (images.length === 0) {
     return (
       <div className="flex h-[300px] items-center justify-center rounded-md bg-muted">
-        <p className="text-muted-foreground">Aucune image disponible</p>
+        <p className="text-muted-foreground">No images available</p>
       </div>
     )
   }
@@ -35,7 +35,7 @@ export function ProductImageCarousel({ images = [] }) {
   return (
     <div className="flex aspect-[4/3] gap-4 overflow-hidden">
       {images.length > 1 && (
-        <div className="order-2 flex h-full w-24 flex-col gap-2 overflow-y-auto overflow-x-hidden">
+        <div className="order-1 flex h-full w-24 flex-col gap-2 overflow-y-auto overflow-x-hidden">
           {images.map((image, index) => (
             <button
               type="button"
@@ -56,7 +56,7 @@ export function ProductImageCarousel({ images = [] }) {
         </div>
       )}
 
-      <div className="relative order-1 aspect-[4/3] flex-1 overflow-hidden rounded-md">
+      <div className="relative order-2 aspect-[4/3] flex-1 overflow-hidden rounded-md">
         <Image
           src={getProductImageUrl(images[currentIndex])}
           alt={`Image ${currentIndex + 1}`}
@@ -74,7 +74,7 @@ export function ProductImageCarousel({ images = [] }) {
             }}
           >
             <ChevronLeft className="h-4 w-4" />
-            <span className="sr-only">Image précédente</span>
+            <span className="sr-only">Previous image</span>
           </Button>
           <Button
             variant="outline"
@@ -86,7 +86,7 @@ export function ProductImageCarousel({ images = [] }) {
             }}
           >
             <ChevronRight className="h-4 w-4" />
-            <span className="sr-only">Image suivante</span>
+            <span className="sr-only">Next image</span>
           </Button>
         </div>
         <div className="absolute bottom-4 right-4 rounded-full bg-background/80 px-2 py-1 text-xs backdrop-blur-sm">

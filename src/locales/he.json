@@ -168,5 +168,10 @@
     "codePlaceholder": ".הזן את הקוד בן ששת הספרות כאן",
     "verifyButton": ".אמת",
     "loading": "...טוען"
+  },
+  "Product": {
+    "addToCart": "הוסף לעגלה",
+    "addProductToastTitle": "המוצר נוסף לעגלה",
+    "addProductToastDescription": "המוצר נוסף בהצלחה לעגלת הקניות שלך."
   }
 }

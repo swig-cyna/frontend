@@ -169,5 +169,10 @@
     "codePlaceholder": "Entrez le code à 6 chiffres",
     "verifyButton": "Vérifier",
     "loading": "Chargement..."
+  },
+  "Product": {
+    "addToCart": "Ajouter au panier",
+    "addProductToastTitle": "Produit ajouté au panier",
+    "addProductToastDescription": "Le produit a été ajouté à votre panier."
   }
 }
