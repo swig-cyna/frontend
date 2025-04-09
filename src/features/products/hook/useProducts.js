@@ -1,16 +1,17 @@
 import { apiClient } from "@/utils/fetch"
+import { createErrorHandler } from "@/utils/query"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { createErrorHandler } from "next/dist/server/app-render/create-error-handler"
 
-export const useProducts = ({ page = 1, limit = 10 }) =>
+export const useProducts = ({ page = 1, limit = 10, search }) =>
   useQuery({
-    queryKey: ["products", page, limit],
+    queryKey: ["products", page, limit, search],
     queryFn: () =>
       apiClient
         .get(`products`, {
           searchParams: {
             page,
             limit,
+            ...(search && { search }),
           },
         })
         .json(),
