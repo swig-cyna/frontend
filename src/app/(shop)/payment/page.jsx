@@ -1,6 +1,5 @@
 "use client"
 
-import React from "react"
 import { useSession } from "@/features/auth/utils/authClient"
 import { LucideLoader2 } from "lucide-react"
 
@@ -18,7 +17,7 @@ const Subscriptions = () => {
   }
 
   return (
-    <main className="flex flex-1 flex-col items-center justify-center">
+    <main className="flex flex-1 flex-col items-center">
       <SubscriptionForm userId={session.user.id} />
     </main>
   )

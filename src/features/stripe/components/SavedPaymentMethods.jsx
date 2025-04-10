@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -6,16 +6,19 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { CreditCard, PlusCircle } from "lucide-react"
 import { usePaymentMethode } from "@/features/stripe/hooks/usePaymentMethode"
+import { useAddSubsciption } from "@/features/stripe/hooks/useSubscription"
+import { toast } from "@/hooks/use-toast"
+import { CreditCard, PlusCircle } from "lucide-react"
+import { useEffect, useState } from "react"
 
-const SavedPaymentMethods = ({ userId, onAddNew }) => {
+const SavedPaymentMethods = ({ userId, onAddNew, data }) => {
   const [paymentMethods, setPaymentMethods] = useState([])
   const [selectedMethod, setSelectedMethod] = useState(null)
   const { data: paymentMethodsData, isLoading } = usePaymentMethode(userId)
+  const { mutateAsync: addSubscription } = useAddSubsciption()
 
   useEffect(() => {
     if (paymentMethodsData?.data && Array.isArray(paymentMethodsData.data)) {
@@ -26,22 +29,6 @@ const SavedPaymentMethods = ({ userId, onAddNew }) => {
       }
     }
   }, [paymentMethodsData, selectedMethod])
-
-  if (isLoading) {
-    return (
-      <Card>
-        <CardHeader>
-          <CardTitle>Vos méthodes de paiement</CardTitle>
-          <CardDescription>
-            Sélectionnez une méthode de paiement à utiliser
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="py-6 text-center">Chargement en cours...</div>
-        </CardContent>
-      </Card>
-    )
-  }
 
   const handleSelectPaymentMethod = (methodId) => {
     setSelectedMethod(methodId)
@@ -63,26 +50,59 @@ const SavedPaymentMethods = ({ userId, onAddNew }) => {
 
   const formatLastFour = (last4) => `•••• ${last4}`
 
+  const handleSubmit = () => {
+    console.log(selectedMethod)
+    console.log(userId)
+    console.log(data[0].id)
+    console.log(data[0].quantity)
+
+    if (!selectedMethod) {
+      toast({
+        title: "Méthode de paiement requise",
+        description:
+          "Veuillez sélectionner une méthode de paiement pour continuer",
+        variant: "destructive",
+      })
+
+      return
+    }
+
+    data.forEach(async (product) => {
+      await addSubscription({
+        userId,
+        paymentMethodeId: selectedMethod,
+        productId: product.id,
+        quantity: product.quantity,
+      })
+    })
+  }
+
+  if (isLoading) {
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle>Vos méthodes de paiement</CardTitle>
+          <CardDescription>
+            Sélectionnez une méthode de paiement à utiliser
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="py-6 text-center">Chargement en cours...</div>
+        </CardContent>
+      </Card>
+    )
+  }
+
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Vos méthodes de paiement</CardTitle>
-        <CardDescription>
-          Sélectionnez une méthode de paiement à utiliser
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        {paymentMethods.length === 0 ? (
-          <div className="py-6 text-center">
-            <p className="text-muted-foreground">
-              Aucune méthode de paiement enregistrée
-            </p>
-            <Button variant="outline" className="mt-4" onClick={onAddNew}>
-              <PlusCircle className="mr-2 h-4 w-4" />
-              Ajouter une méthode de paiement
-            </Button>
-          </div>
-        ) : (
+    <>
+      <Card>
+        <CardHeader>
+          <CardTitle>Vos méthodes de paiement</CardTitle>
+          <CardDescription>
+            Sélectionnez une méthode de paiement à utiliser
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
           <RadioGroup
             value={selectedMethod}
             onValueChange={handleSelectPaymentMethod}
@@ -101,9 +121,20 @@ const SavedPaymentMethods = ({ userId, onAddNew }) => {
               </div>
             ))}
           </RadioGroup>
-        )}
-      </CardContent>
-    </Card>
+          <div className="py-2 text-center">
+            <Button variant="outline" className="mt-4" onClick={onAddNew}>
+              <PlusCircle className="mr-2 h-4 w-4" />
+              Ajouter une méthode de paiement
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+      <div className="flex flex-1 flex-col items-end justify-end">
+        <Button className="mt-4" onClick={handleSubmit}>
+          Payer
+        </Button>
+      </div>
+    </>
   )
 }
 
