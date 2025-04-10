@@ -6,6 +6,7 @@ import { NextIntlClientProvider } from "next-intl"
 import { getLocale } from "next-intl/server"
 import localFont from "next/font/local"
 import Script from "next/script"
+import { NuqsAdapter } from "nuqs/adapters/next/app"
 import { getLangDir } from "rtl-detect"
 import "./globals.css"
 
@@ -45,9 +46,11 @@ const RootLayout = async ({ children }) => {
           enableSystem
           disableTransitionOnChange
         >
-          <NextIntlClientProvider>
-            <TanstackProvider>{children}</TanstackProvider>
-          </NextIntlClientProvider>
+          <NuqsAdapter>
+            <NextIntlClientProvider>
+              <TanstackProvider>{children}</TanstackProvider>
+            </NextIntlClientProvider>
+          </NuqsAdapter>
         </ThemeProvider>
         <Toaster />
       </body>

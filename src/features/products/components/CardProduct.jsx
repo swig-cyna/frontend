@@ -14,6 +14,7 @@ const CardProduct = ({ product }) => {
   return (
     <Card className="overflow-hidden">
       <Image
+        className="h-[300px] w-full object-cover"
         src={getProductImageUrl(product.images[0])}
         alt="logo"
         width={700}
