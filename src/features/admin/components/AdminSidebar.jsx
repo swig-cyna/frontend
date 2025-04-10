@@ -1,10 +1,10 @@
 import {
+  AppWindow,
   Boxes,
   ChevronUp,
   CreditCard,
   LayoutDashboard,
   LifeBuoy,
-  AppWindow,
   Settings,
   User2,
   Users,
@@ -27,9 +27,9 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import { signOut, useSession } from "@/features/auth/utils/authClient"
 import Image from "next/image"
 import Link from "next/link"
-import { signOut, useSession } from "@/features/auth/utils/authClient"
 import { useRouter } from "next/navigation"
 
 const items = [
@@ -40,7 +40,7 @@ const items = [
   },
   {
     title: "Products",
-    url: "#",
+    url: "/admin/products",
     icon: Boxes,
   },
   {
@@ -116,20 +116,18 @@ const AdminSidebar = () => {
                     <span>Back to shop</span>
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <button
-                    onClick={async () => {
-                      await signOut({
-                        fetchOptions: {
-                          onSuccess: () => {
-                            router.push("/")
-                          },
+                <DropdownMenuItem
+                  onClick={async () => {
+                    await signOut({
+                      fetchOptions: {
+                        onSuccess: () => {
+                          router.push("/")
                         },
-                      })
-                    }}
-                  >
-                    Sign out
-                  </button>
+                      },
+                    })
+                  }}
+                >
+                  Sign out
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
