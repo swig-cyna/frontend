@@ -10,23 +10,42 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
+import { authClient } from "@/features/auth/utils/authClient"
+import { toast } from "@/hooks/useToast"
 import { useState } from "react"
 
-export function DeleteUserDialog({
-  user,
-  open,
-  onOpenChange,
-  onConfirmDelete,
-}) {
+export function DeleteUserDialog({ user, open, onOpenChange, onUserRemoved }) {
   const [isDeleting, setIsDeleting] = useState(false)
 
-  const handleDelete = () => {
-    setIsDeleting(true)
-    // Simulate API call
-    setTimeout(() => {
-      setIsDeleting(false)
-      onConfirmDelete()
-    }, 500)
+  const handleDelete = async () => {
+    try {
+      setIsDeleting(true)
+
+      const { error } = await authClient.admin.removeUser({
+        userId: user.id,
+      })
+
+      if (error) {
+        throw error
+      }
+
+      toast({
+        title: "User deleted",
+        description: `${user.name} has been successfully deleted.`,
+      })
+
+      onOpenChange(false)
+
+      if (onUserRemoved) {
+        onUserRemoved()
+      }
+    } catch (error) {
+      toast({
+        title: "Deletion failed",
+        description: error.message || "Failed to delete user",
+        variant: "destructive",
+      })
+    }
   }
 
   return (

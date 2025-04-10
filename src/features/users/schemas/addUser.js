@@ -7,7 +7,10 @@ export const addUserSchema = z.object({
   email: z.string().email({
     message: "Please enter a valid email address.",
   }),
-  role: z.string({
-    required_error: "Please select a role.",
-  }),
+  password: z
+    .string({
+      required_error: "Please select a role.",
+    })
+    .min(8),
+  role: z.enum(["superadmin", "admin", "support", "user"]),
 })

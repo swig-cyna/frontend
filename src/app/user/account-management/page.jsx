@@ -1,4 +1,4 @@
-import AccountManagement from "@/features/user/components/AccountManagement"
+import AccountManagement from "@/features/userspace/components/AccountManagement"
 
 const AccountPage = () => <AccountManagement />
 

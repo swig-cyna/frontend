@@ -1,7 +1,7 @@
 "use client"
 
 import { MoreHorizontal, Pencil, Trash2 } from "lucide-react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -29,57 +29,12 @@ import {
 } from "@/features/users/utils/functions"
 import { useToast } from "@/hooks/useToast"
 
-const initialUsers = [
-  {
-    id: "1",
-    name: "John Doe",
-    email: "john.doe@example.com",
-    role: "superadmin",
-    dateAdded: "2023-01-15",
-  },
-  {
-    id: "2",
-    name: "Mary Smith",
-    email: "mary.smith@example.com",
-    role: "admin",
-    dateAdded: "2023-02-20",
-  },
-  {
-    id: "3",
-    name: "Peter Brown",
-    email: "peter.brown@example.com",
-    role: "customer",
-    dateAdded: "2023-03-10",
-  },
-]
-
-export function UserTable() {
-  const [users, setUsers] = useState(initialUsers)
+export function UserTable({ users, refreshUsers }) {
   const [userToEdit, setUserToEdit] = useState(null)
   const [userToDelete, setUserToDelete] = useState(null)
   const { toast } = useToast()
 
-  const handleDeleteUser = (userId) => {
-    setUsers(users.filter((user) => user.id !== userId))
-    toast({
-      title: "User deleted",
-      description: "The user has been successfully deleted.",
-    })
-    setUserToDelete(null)
-  }
-
-  const handleUpdateUserRole = (userId, newRole) => {
-    setUsers(
-      users.map((user) =>
-        user.id === userId ? { ...user, role: newRole } : user,
-      ),
-    )
-    toast({
-      title: "Role updated",
-      description: "The user's role has been updated successfully.",
-    })
-    setUserToEdit(null)
-  }
+  if (users?.length === 0) return <div>Chargement...</div>
 
   return (
     <>
@@ -95,46 +50,48 @@ export function UserTable() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {users.map((user) => (
-              <TableRow key={user.id}>
-                <TableCell className="font-medium">{user.name}</TableCell>
-                <TableCell>{user.email}</TableCell>
-                <TableCell>
-                  <Badge variant={getRoleBadgeVariant(user.role)}>
-                    {translateUserRole(user.role)}
-                  </Badge>
-                </TableCell>
-                <TableCell>{user.dateAdded}</TableCell>
-                <TableCell>
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" className="h-8 w-8 p-0">
-                        <span className="sr-only">Open menu</span>
-                        <MoreHorizontal className="h-4 w-4" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem
-                        onClick={() => setUserToEdit(user)}
-                        className="cursor-pointer"
-                      >
-                        <Pencil className="mr-2 h-4 w-4" />
-                        Edit role
-                      </DropdownMenuItem>
-                      <DropdownMenuItem
-                        onClick={() => setUserToDelete(user)}
-                        className="cursor-pointer text-destructive focus:text-destructive"
-                      >
-                        <Trash2 className="mr-2 h-4 w-4" />
-                        Delete
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </TableCell>
-              </TableRow>
-            ))}
+            {users?.map((user) => {
+              return (
+                <TableRow key={user.id}>
+                  <TableCell className="font-medium">{user.name}</TableCell>
+                  <TableCell>{user.email}</TableCell>
+                  <TableCell>
+                    <Badge variant={getRoleBadgeVariant(user.role)}>
+                      {translateUserRole(user.role)}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>{user.createdAt.toLocaleDateString()}</TableCell>
+                  <TableCell>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="ghost" className="h-8 w-8 p-0">
+                          <span className="sr-only">Open menu</span>
+                          <MoreHorizontal className="h-4 w-4" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem
+                          onClick={() => setUserToEdit(user)}
+                          className="cursor-pointer"
+                        >
+                          <Pencil className="mr-2 h-4 w-4" />
+                          Edit role
+                        </DropdownMenuItem>
+                        <DropdownMenuItem
+                          onClick={() => setUserToDelete(user)}
+                          className="cursor-pointer text-destructive focus:text-destructive"
+                        >
+                          <Trash2 className="mr-2 h-4 w-4" />
+                          Delete
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </TableCell>
+                </TableRow>
+              )
+            })}
           </TableBody>
         </Table>
       </div>
@@ -144,7 +101,7 @@ export function UserTable() {
           user={userToEdit}
           open={Boolean(userToEdit)}
           onOpenChange={(open) => !open && setUserToEdit(null)}
-          onUpdateRole={handleUpdateUserRole}
+          onRoleUpdated={refreshUsers}
         />
       )}
 
@@ -153,7 +110,7 @@ export function UserTable() {
           user={userToDelete}
           open={Boolean(userToDelete)}
           onOpenChange={(open) => !open && setUserToDelete(null)}
-          onConfirmDelete={() => handleDeleteUser(userToDelete.id)}
+          onUserRemoved={refreshUsers}
         />
       )}
     </>

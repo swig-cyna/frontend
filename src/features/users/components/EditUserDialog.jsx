@@ -29,8 +29,10 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { editUserSchema } from "@/features/users/schemas/editUser"
+import { authClient } from "@/features/auth/utils/authClient"
+import { toast } from "@/hooks/useToast"
 
-export function EditUserDialog({ user, open, onOpenChange, onUpdateRole }) {
+export function EditUserDialog({ user, open, onOpenChange, onRoleUpdated }) {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const form = useForm({
@@ -40,14 +42,39 @@ export function EditUserDialog({ user, open, onOpenChange, onUpdateRole }) {
     },
   })
 
-  const onSubmit = (values) => {
-    setIsSubmitting(true)
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false)
-      onUpdateRole(user.id, values.role)
+  const onSubmit = async (values) => {
+    try {
+      setIsSubmitting(true)
+
+      const { error } = await authClient.admin.setRole({
+        userId: user.id,
+        role: values.role,
+      })
+
+      if (error) {
+        throw error
+      }
+
+      toast({
+        title: "Role updated",
+        description: `${user.name} is now ${values.role}.`,
+      })
+
+      form.reset()
       onOpenChange(false)
-    }, 500)
+
+      if (onRoleUpdated) {
+        onRoleUpdated()
+      }
+    } catch (error) {
+      toast({
+        title: "Role update failed",
+        description: error.message || "Failed to update role",
+        variant: "destructive",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -87,7 +114,8 @@ export function EditUserDialog({ user, open, onOpenChange, onUpdateRole }) {
                     <SelectContent>
                       <SelectItem value="superadmin">Super Admin</SelectItem>
                       <SelectItem value="admin">Admin</SelectItem>
-                      <SelectItem value="customer">Customer</SelectItem>
+                      <SelectItem value="support">Support</SelectItem>
+                      <SelectItem value="user">Customer</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />
