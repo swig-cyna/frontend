@@ -1,6 +1,20 @@
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
 
+// Fonction utilitaire pour recalculer les totaux
+const recalculateTotals = (cartItems) =>
+  cartItems.reduce(
+    (acc, item) => {
+      const price = Number(item.price)
+      const quantity = Number(item.quantity)
+      acc.totalPrice += price * quantity
+      acc.totalQuantity += quantity
+
+      return acc
+    },
+    { totalPrice: 0, totalQuantity: 0 },
+  )
+
 const useCartStore = create(
   persist(
     (set) => ({
@@ -11,82 +25,71 @@ const useCartStore = create(
       addItem: (item) => {
         const itemToAdd = {
           ...item,
-          quantity: item.quantity !== undefined ? item.quantity : 1,
+          price: Number(item.price),
+          quantity: item.quantity !== undefined ? Number(item.quantity) : 1,
         }
 
         set((state) => {
           const existingItemIndex = state.cartItems.findIndex(
-            (i) => i.id === itemToAdd.id
+            (i) => i.id === itemToAdd.id,
           )
 
+          let updatedItems = []
+
           if (existingItemIndex < 0) {
-            return {
-              cartItems: [...state.cartItems, itemToAdd],
-              totalQuantity: state.totalQuantity + itemToAdd.quantity,
-              totalPrice:
-                state.totalPrice + itemToAdd.price * itemToAdd.quantity,
-            }
+            updatedItems = [...state.cartItems, itemToAdd]
+          } else {
+            updatedItems = [...state.cartItems]
+            updatedItems[existingItemIndex].quantity += itemToAdd.quantity
           }
 
-          const updatedItems = [...state.cartItems]
-          updatedItems[existingItemIndex].quantity += itemToAdd.quantity
+          const totals = recalculateTotals(updatedItems)
 
           return {
             cartItems: updatedItems,
-            totalQuantity: state.totalQuantity + itemToAdd.quantity,
-            totalPrice: state.totalPrice + itemToAdd.price * itemToAdd.quantity,
+            ...totals,
           }
         })
       },
 
       removeItem: (itemId) => {
         set((state) => {
-          const itemToRemove = state.cartItems.find(
-            (item) => item.id === itemId
-          )
-
-          if (!itemToRemove) {
-            return state
-          }
-
           const updatedItems = state.cartItems.filter(
-            (item) => item.id !== itemId
+            (item) => item.id !== itemId,
           )
+
+          const totals = recalculateTotals(updatedItems)
 
           return {
             cartItems: updatedItems,
-            totalQuantity: state.totalQuantity - itemToRemove.quantity,
-            totalPrice:
-              state.totalPrice - itemToRemove.price * itemToRemove.quantity,
+            ...totals,
           }
         })
       },
 
       updateQuantity: (itemId, newQuantity = 1) => {
-        // Définir la quantité par défaut à 1 si elle n'est pas spécifiée
-        const quantity = newQuantity !== undefined ? newQuantity : 1
+        const quantity = Number(newQuantity)
 
         set((state) => {
           const itemIndex = state.cartItems.findIndex(
-            (item) => item.id === itemId
+            (item) => item.id === itemId,
           )
 
           if (itemIndex < 0) {
             return state
           }
 
-          const item = state.cartItems[itemIndex]
-          const quantityDifference = quantity - item.quantity
           const updatedItems = [...state.cartItems]
           updatedItems[itemIndex] = {
-            ...item,
+            ...updatedItems[itemIndex],
             quantity,
           }
 
+          const totals = recalculateTotals(updatedItems)
+
           return {
             cartItems: updatedItems,
-            totalQuantity: state.totalQuantity + quantityDifference,
-            totalPrice: state.totalPrice + item.price * quantityDifference,
+            ...totals,
           }
         })
       },
@@ -101,8 +104,8 @@ const useCartStore = create(
     }),
     {
       name: "cart-storage",
-    }
-  )
+    },
+  ),
 )
 
 export default useCartStore
