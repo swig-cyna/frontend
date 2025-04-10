@@ -1,6 +1,9 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { getProductImageUrl } from "@/features/products/utils/image"
 import { Trash } from "lucide-react"
 import Image from "next/image"
 import { useState } from "react"
@@ -24,10 +27,10 @@ const CartRowProduct = ({ data }) => {
   }
 
   return (
-    <Card className="p-2 grid grid-cols-[100px_1fr_auto] items-center">
+    <Card className="grid grid-cols-[100px_1fr_auto] items-center p-2">
       <Image
         className="rounded-lg"
-        src="https://picsum.photos/500/500"
+        src={getProductImageUrl(data.images[0])}
         alt="product"
         width={80}
         height={80}
@@ -38,7 +41,7 @@ const CartRowProduct = ({ data }) => {
           <Trash /> Remove
         </Button>
       </div>
-      <div className="flex gap-2 items-end flex-col">
+      <div className="flex flex-col items-end gap-2">
         <Input
           type="number"
           size="sm"
@@ -47,7 +50,7 @@ const CartRowProduct = ({ data }) => {
           value={quantity}
           min={1}
         />
-        <p className="font-semibold text-2xl">$ {data.price}</p>
+        <p className="text-2xl font-semibold">$ {data.price}</p>
       </div>
     </Card>
   )

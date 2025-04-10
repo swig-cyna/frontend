@@ -1,6 +1,7 @@
 /* eslint-disable new-cap */
 "use client"
 import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 import { CarouselPreview } from "@/features/carousel/components/CarouselPreview"
 import { useCarousel } from "@/features/carousel/hooks/useCarousel"
@@ -18,30 +19,29 @@ const Home = () => {
     useNewProducts()
 
   return (
-    <main className="flex w-full flex-col items-center gap-8 sm:items-start">
+    <main className="flex w-full flex-col items-center gap-8 space-y-10 sm:items-start">
       <div className="w-full">
         {slides ? (
           <CarouselPreview slides={slides} />
         ) : (
           <Skeleton className="h-[400px] w-full" />
         )}
-      </div>
-
-      <div className="w-full">
-        <h2 className="mb-2 text-2xl font-bold">{t("categories")}</h2>
-        <div className="mb-1 mt-2 h-1 w-16 rounded-full bg-primary text-2xl"></div>
 
         <div className="relative mt-4 w-full overflow-x-auto pb-4">
           <div className="flex min-w-max gap-2">
             {Array.from({ length: 20 }).map((_, index) => (
               <CategoriesItem key={index} />
             ))}
-            <div className="sticky -right-3 z-10 w-7 flex-1 scale-125 bg-background blur-sm"></div>
+            <div className="scale-120 sticky -right-3 z-10 w-7 flex-1 bg-background blur-sm"></div>
           </div>
         </div>
+      </div>
 
-        <h2 className="mb-2 mt-4 text-2xl font-bold">{t("newProducts")}</h2>
-        <div className="mb-1 mt-2 h-1 w-16 rounded-full bg-primary"></div>
+      <div className="w-full">
+        <div className="mb-8 flex flex-col items-center">
+          <h2 className="text-4xl font-bold">{t("newProducts")}</h2>
+          <div className="mt-2 h-1 w-16 rounded-full bg-primary text-2xl"></div>
+        </div>
 
         <div className="gird-cols-2 mt-3 grid w-full gap-4 md:grid-cols-4">
           {newProducts &&
@@ -50,7 +50,7 @@ const Home = () => {
             ))}
 
           {newProducts && (
-            <div className="flex w-full flex-col items-center justify-center rounded-md border border-dashed">
+            <div className="flex w-full flex-col items-center justify-center rounded-md border border-dashed py-8">
               <Package className="mb-2 h-12 w-12" />
               <h2 className="mb-2 border-dashed text-center text-xl font-bold">
                 {t("discoverServices")}
@@ -66,8 +66,8 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="mt-4 w-full">
-        <div className="pb-0">
+      <Card className="mt-4 w-full p-5">
+        <div>
           <div className="flex flex-col">
             <h2 className="text-2xl font-bold">{t("aboutUs")}</h2>
             <div className="mb-1 mt-2 h-1 w-16 rounded-full bg-primary"></div>
@@ -83,14 +83,17 @@ const Home = () => {
               <p className="mb-6 leading-relaxed text-card-foreground">
                 {t("aboutUsDesc2")}
               </p>
-              <div className="flex items-start justify-between">
-                <div className="mb-6 rounded border-l-4 border-primary bg-accent p-4">
+              <div className="flex flex-col items-start justify-between md:flex-row">
+                <div className="rounded border-l-4 border-primary bg-accent p-4">
                   <p className="font-medium text-accent-foreground">
-                    Pure player en cybersécurité pour PME et MSP
+                    {t("aboutPhrase")}
                   </p>
                 </div>
                 <Link href="https://cyna-it.fr/" target="_blank">
-                  <Button className="mt-2 bg-primary text-primary-foreground hover:bg-primary/90">
+                  <Button
+                    size="lg"
+                    className="mt-2 bg-primary text-primary-foreground hover:bg-primary/90"
+                  >
                     {t("learnMore")} <ArrowRight size={16} className="ml-1" />
                   </Button>
                 </Link>
@@ -98,7 +101,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </div>
+      </Card>
     </main>
   )
 }
