@@ -97,6 +97,8 @@ const SubscriptionForm = ({ userId }) => {
             onAddNew={handleAddNewCard}
             onPaymentComplete={handlePaymentComplete}
             onGoBack={handleBackToRecap}
+            cartItems={cartItems}
+            total={totalPrice}
           />
         )}
 
