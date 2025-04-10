@@ -8,7 +8,7 @@ const RecapCart = ({ onContinue, cartItems, total }) => (
     <div className="rounded-lg border bg-muted/30 p-6">
       <h2 className="mb-4 flex items-center text-lg font-medium">
         <ShoppingCart className="mr-2 h-5 w-5" />
-        Votre panier
+        Summary
       </h2>
 
       <div className="space-y-3">
@@ -39,7 +39,7 @@ const RecapCart = ({ onContinue, cartItems, total }) => (
 
     <div className="text-center">
       <Button onClick={onContinue} className="w-full max-w-md" size="lg">
-        Continuer vers le paiement
+        Continue to payment
         <ArrowRight className="ml-2 h-4 w-4" />
       </Button>
     </div>

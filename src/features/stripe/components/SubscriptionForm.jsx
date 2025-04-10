@@ -22,6 +22,10 @@ const SubscriptionForm = ({ userId }) => {
     setActiveStep("new")
   }
 
+  const handleBackToRecap = () => {
+    setActiveStep("recap")
+  }
+
   const handleCardAdded = () => {
     setActiveStep("saved")
   }
@@ -37,9 +41,9 @@ const SubscriptionForm = ({ userId }) => {
   return (
     <div className="container mx-auto max-w-5xl px-4 py-8">
       <div className="mb-8 text-center">
-        <h1 className="mb-2 text-3xl font-bold">Finaliser votre commande</h1>
+        <h1 className="mb-2 text-3xl font-bold">Finalize your order</h1>
         <p className="text-gray-500">
-          Suivez les étapes pour compléter votre paiement
+          Follow the steps to complete your payment
         </p>
       </div>
 
@@ -53,7 +57,7 @@ const SubscriptionForm = ({ userId }) => {
             >
               1
             </div>
-            <span className="text-sm">Panier</span>
+            <span className="text-sm">Summary</span>
           </div>
           <div
             className={`h-0.5 w-16 ${activeStep !== "recap" ? "bg-primary" : "bg-muted"}`}
@@ -66,7 +70,7 @@ const SubscriptionForm = ({ userId }) => {
             >
               2
             </div>
-            <span className="text-sm">Paiement</span>
+            <span className="text-sm">Payment</span>
           </div>
           <div className="h-0.5 w-16 bg-muted" />
           <div className="flex flex-1 flex-col items-center text-gray-500">
@@ -92,6 +96,7 @@ const SubscriptionForm = ({ userId }) => {
             userId={userId}
             onAddNew={handleAddNewCard}
             onPaymentComplete={handlePaymentComplete}
+            onGoBack={handleBackToRecap}
           />
         )}
 

@@ -14,7 +14,7 @@ import { toast } from "@/hooks/use-toast"
 import { CreditCard, PlusCircle } from "lucide-react"
 import { useEffect, useState } from "react"
 
-const SavedPaymentMethods = ({ userId, onAddNew, data }) => {
+const SavedPaymentMethods = ({ userId, onAddNew, data, onGoBack }) => {
   const [paymentMethods, setPaymentMethods] = useState([])
   const [selectedMethod, setSelectedMethod] = useState(null)
   const { data: paymentMethodsData, isLoading } = usePaymentMethode(userId)
@@ -51,11 +51,6 @@ const SavedPaymentMethods = ({ userId, onAddNew, data }) => {
   const formatLastFour = (last4) => `•••• ${last4}`
 
   const handleSubmit = () => {
-    console.log(selectedMethod)
-    console.log(userId)
-    console.log(data[0].id)
-    console.log(data[0].quantity)
-
     if (!selectedMethod) {
       toast({
         title: "Méthode de paiement requise",
@@ -81,13 +76,11 @@ const SavedPaymentMethods = ({ userId, onAddNew, data }) => {
     return (
       <Card>
         <CardHeader>
-          <CardTitle>Vos méthodes de paiement</CardTitle>
-          <CardDescription>
-            Sélectionnez une méthode de paiement à utiliser
-          </CardDescription>
+          <CardTitle>Your payment methods</CardTitle>
+          <CardDescription>Select a payment method to use</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="py-6 text-center">Chargement en cours...</div>
+          <div className="py-6 text-center">Loading in progress...</div>
         </CardContent>
       </Card>
     )
@@ -97,10 +90,8 @@ const SavedPaymentMethods = ({ userId, onAddNew, data }) => {
     <>
       <Card>
         <CardHeader>
-          <CardTitle>Vos méthodes de paiement</CardTitle>
-          <CardDescription>
-            Sélectionnez une méthode de paiement à utiliser
-          </CardDescription>
+          <CardTitle>Your payment methods</CardTitle>
+          <CardDescription>Select a payment method to use</CardDescription>
         </CardHeader>
         <CardContent>
           <RadioGroup
@@ -124,14 +115,17 @@ const SavedPaymentMethods = ({ userId, onAddNew, data }) => {
           <div className="py-2 text-center">
             <Button variant="outline" className="mt-4" onClick={onAddNew}>
               <PlusCircle className="mr-2 h-4 w-4" />
-              Ajouter une méthode de paiement
+              Add a payment method
             </Button>
           </div>
         </CardContent>
       </Card>
-      <div className="flex flex-1 flex-col items-end justify-end">
+      <div className="flex items-center justify-between">
+        <Button className="mt-4" onClick={onGoBack}>
+          Back
+        </Button>
         <Button className="mt-4" onClick={handleSubmit}>
-          Payer
+          Pay
         </Button>
       </div>
     </>
