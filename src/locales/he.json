@@ -184,5 +184,8 @@
     "addToCart": "הוסף לעגלה",
     "addProductToastTitle": "המוצר נוסף לעגלה",
     "addProductToastDescription": "המוצר נוסף בהצלחה לעגלת הקניות שלך."
+  },
+  "Category": {
+    "products": "מוצרים"
   }
 }

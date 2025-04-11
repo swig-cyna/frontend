@@ -185,5 +185,8 @@
     "addToCart": "Ajouter au panier",
     "addProductToastTitle": "Produit ajouté au panier",
     "addProductToastDescription": "Le produit a été ajouté à votre panier."
+  },
+  "Category": {
+    "products": "Produits"
   }
 }

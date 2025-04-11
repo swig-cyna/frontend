@@ -185,5 +185,8 @@
     "addToCart": "Add to cart",
     "addProductToastTitle": "Product added to cart",
     "addProductToastDescription": "The product has been added to your cart."
+  },
+  "Category": {
+    "products": "Products"
   }
 }

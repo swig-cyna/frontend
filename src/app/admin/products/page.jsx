@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { DashboardHeader } from "@/features/admin/components/DashboardHeader"
 import { ProductList } from "@/features/products/components/ProductsList"
-import { Plus } from "lucide-react"
+import { PlusCircle } from "lucide-react"
 import Link from "next/link"
 
 export default function Products() {
@@ -15,7 +15,7 @@ export default function Products() {
       >
         <Link href="/admin/products/new">
           <Button>
-            <Plus className="mr-1 h-4 w-4" />
+            <PlusCircle className="mr-1 h-4 w-4" />
             Add product
           </Button>
         </Link>
