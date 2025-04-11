@@ -185,5 +185,17 @@
     "addToCart": "Add to cart",
     "addProductToastTitle": "Product added to cart",
     "addProductToastDescription": "The product has been added to your cart."
+  },
+  "ProductsList": {
+    "listOfProducts": "Product List",
+    "searchProducts": "Search for products...",
+    "filters": "Filters",
+    "sortNewest": "Newest",
+    "sortPriceAsc": "Price: Low to High",
+    "sortPriceDesc": "Price: High to Low",
+    "productsFound": "products found",
+    "categories": "Categories",
+    "priceRange": "Price Range",
+    "resetFilters": "Reset Filters"
   }
 }

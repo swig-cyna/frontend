@@ -11,6 +11,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
 import { SheetFooter } from "@/components/ui/sheet"
 import { Slider } from "@/components/ui/slider"
+import { useTranslations } from "next-intl"
 import {
   parseAsArrayOf,
   parseAsInteger,
@@ -29,6 +30,8 @@ const categories = [
 ]
 
 export default function ProductFilters() {
+  const t = useTranslations("ProductsList")
+
   const [range, setRange] = useQueryState(
     "range",
     parseAsArrayOf(parseAsInteger, ",").withDefault([0, 500]),
@@ -57,7 +60,7 @@ export default function ProductFilters() {
   }
 
   return (
-    <div className="h-[calc(100vh-8rem)] overflow-auto py-4">
+    <div className="h-[calc(100vh-8rem)] overflow-auto overflow-x-hidden py-4">
       <div className="space-y-6">
         <Accordion
           type="multiple"
@@ -65,7 +68,7 @@ export default function ProductFilters() {
           className="w-full"
         >
           <AccordionItem value="categories">
-            <AccordionTrigger>Catégories</AccordionTrigger>
+            <AccordionTrigger>{t("categories")}</AccordionTrigger>
             <AccordionContent>
               <div className="space-y-2">
                 {categories.map((category) => (
@@ -91,7 +94,7 @@ export default function ProductFilters() {
           </AccordionItem>
 
           <AccordionItem value="price">
-            <AccordionTrigger>Prix</AccordionTrigger>
+            <AccordionTrigger>{t("priceRange")}</AccordionTrigger>
             <AccordionContent>
               <div className="space-y-4">
                 <Slider
@@ -114,7 +117,7 @@ export default function ProductFilters() {
 
       <SheetFooter className="flex gap-2 pt-4">
         <Button variant="outline" className="flex-1" onClick={resetFilters}>
-          Réinitialiser
+          {t("resetFilters")}
         </Button>
       </SheetFooter>
     </div>

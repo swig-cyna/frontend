@@ -31,6 +31,7 @@ import ProductFilters from "@/features/products/components/ProductFilters"
 import { useProducts } from "@/features/products/hook/useProducts"
 import { useDebounce } from "@uidotdev/usehooks"
 import { Filter, Loader2, SearchIcon, SlidersHorizontal } from "lucide-react"
+import { useTranslations } from "next-intl"
 import {
   parseAsArrayOf,
   parseAsInteger,
@@ -43,6 +44,7 @@ const ProductsPage = () => {
   const [search, setSearch] = useQueryState("search", { defaultValue: "" })
   const debouncedSearch = useDebounce(search, 300)
   const [sortOption, setSortOption] = useState("newest")
+  const t = useTranslations("ProductsList")
 
   const [selectedCategories] = useQueryState(
     "categories",
@@ -81,14 +83,14 @@ const ProductsPage = () => {
       <div className="mx-auto w-full px-4">
         <div className="flex flex-col gap-6">
           <div className="flex flex-col items-start justify-between gap-4 lg:flex-row lg:items-center">
-            <h1 className="text-2xl font-bold">Liste des produits</h1>
+            <h1 className="text-2xl font-bold">{t("listOfProducts")}</h1>
             <div className="flex w-full items-center gap-2 md:w-auto">
               {isFetching && <Loader2 className="h-6 w-6 animate-spin" />}
               <div className="relative flex-1 md:w-80">
                 <SearchIcon className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                 <Input
                   type="search"
-                  placeholder="Rechercher des produits..."
+                  placeholder={t("searchProducts")}
                   className="pl-8"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
@@ -98,12 +100,12 @@ const ProductsPage = () => {
                 <SheetTrigger asChild>
                   <Button variant="outline" className="flex items-center gap-2">
                     <Filter className="h-4 w-4" />
-                    <span className="hidden sm:inline">Filtres</span>
+                    <span className="hidden sm:inline">{t("filters")}</span>
                   </Button>
                 </SheetTrigger>
                 <SheetContent side="right" className="w-full sm:w-[400px]">
                   <SheetHeader>
-                    <SheetTitle>Filtres</SheetTitle>
+                    <SheetTitle>{t("filters")}</SheetTitle>
                   </SheetHeader>
                   <ProductFilters />
                 </SheetContent>
@@ -116,9 +118,11 @@ const ProductsPage = () => {
                   </div>
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="newest">Nouveautés</SelectItem>
-                  <SelectItem value="price-asc">Prix: croissant</SelectItem>
-                  <SelectItem value="price-desc">Prix: décroissant</SelectItem>
+                  <SelectItem value="newest">{t("sortNewest")}</SelectItem>
+                  <SelectItem value="price-asc">{t("sortPriceAsc")}</SelectItem>
+                  <SelectItem value="price-desc">
+                    {t("sortPriceDesc")}
+                  </SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -127,7 +131,7 @@ const ProductsPage = () => {
           {products && (
             <div className="flex flex-wrap gap-2">
               <Badge variant="outline" className="rounded-full px-3 py-1">
-                {products.data.length} produits
+                {products.data.length} {t("productsFound")}
               </Badge>
             </div>
           )}
