@@ -30,7 +30,13 @@ import CardProduct from "@/features/products/components/CardProduct"
 import ProductFilters from "@/features/products/components/ProductFilters"
 import { useProducts } from "@/features/products/hook/useProducts"
 import { useDebounce } from "@uidotdev/usehooks"
-import { Filter, Loader2, SearchIcon, SlidersHorizontal } from "lucide-react"
+import {
+  Filter,
+  Loader2,
+  PackageX,
+  SearchIcon,
+  SlidersHorizontal,
+} from "lucide-react"
 import { useTranslations } from "next-intl"
 import {
   parseAsArrayOf,
@@ -38,24 +44,30 @@ import {
   parseAsString,
   useQueryState,
 } from "nuqs"
-import { useState } from "react"
 
 const ProductsPage = () => {
+  const t = useTranslations("ProductsList")
+
   const [search, setSearch] = useQueryState("search", { defaultValue: "" })
   const debouncedSearch = useDebounce(search, 300)
-  const [sortOption, setSortOption] = useState("newest")
-  const t = useTranslations("ProductsList")
+
+  const [sortOption, setSortOption] = useQueryState("sort", {
+    defaultValue: "newest",
+  })
 
   const [selectedCategories] = useQueryState(
     "categories",
     parseAsArrayOf(parseAsString, ",").withDefault([]),
   )
+
   const [range] = useQueryState(
     "range",
     parseAsArrayOf(parseAsInteger, ",").withDefault([0, 500]),
   )
+  const debouncedRange = useDebounce(range, 300)
 
   const [limit] = useQueryState("limit", parseAsInteger.withDefault(20))
+
   const [currentPage, setCurrentPage] = useQueryState(
     "page",
     parseAsInteger.withDefault(1),
@@ -70,7 +82,7 @@ const ProductsPage = () => {
     limit,
     search: debouncedSearch,
     categories: selectedCategories,
-    range,
+    priceRange: debouncedRange,
     sortBy: sortOption,
   })
 
@@ -145,6 +157,15 @@ const ProductsPage = () => {
                 <Skeleton className="h-[350px]" key={i} />
               ))}
           </div>
+
+          {products.data.length === 0 && (
+            <div className="mt-2 flex flex-col items-center justify-center rounded-md border border-dashed p-12">
+              <PackageX className="mb-4 h-12 w-12 text-muted-foreground" />
+              <p className="mb-4 text-center text-muted-foreground">
+                {t("noProductsFound")}
+              </p>
+            </div>
+          )}
 
           {products?.pagination?.totalPages > 1 && (
             <div className="mt-6">

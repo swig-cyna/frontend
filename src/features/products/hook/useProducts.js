@@ -2,9 +2,16 @@ import { apiClient } from "@/utils/fetch"
 import { createErrorHandler } from "@/utils/query"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 
-export const useProducts = ({ page = 1, limit = 10, search }) =>
+export const useProducts = ({
+  page = 1,
+  limit = 10,
+  search,
+  categories,
+  priceRange,
+  sortBy,
+}) =>
   useQuery({
-    queryKey: ["products", page, limit, search],
+    queryKey: ["products", page, limit, search, categories, priceRange, sortBy],
     queryFn: () =>
       apiClient
         .get(`products`, {
@@ -12,6 +19,9 @@ export const useProducts = ({ page = 1, limit = 10, search }) =>
             page,
             limit,
             ...(search && { search }),
+            ...(categories && { categories }),
+            ...(priceRange && { priceRange }),
+            ...(sortBy && { sortBy }),
           },
         })
         .json(),

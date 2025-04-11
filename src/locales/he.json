@@ -195,6 +195,7 @@
     "productsFound": "מוצרים נמצאו",
     "categories": "קטגוריות",
     "priceRange": "טווח מחירים",
-    "resetFilters": "איפוס מסננים"
+    "resetFilters": "איפוס מסננים",
+    "noProductsFound": "לא נמצאו מוצרים. נסה לשנות את המסננים."
   }
 }

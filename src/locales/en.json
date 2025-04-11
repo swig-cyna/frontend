@@ -196,6 +196,7 @@
     "productsFound": "products found",
     "categories": "Categories",
     "priceRange": "Price Range",
-    "resetFilters": "Reset Filters"
+    "resetFilters": "Reset Filters",
+    "noProductsFound": "No products found. Try to change the filters."
   }
 }
