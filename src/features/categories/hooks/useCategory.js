@@ -6,7 +6,7 @@ export const useCategories = () =>
   useQuery({
     queryKey: ["categories"],
     queryFn: () =>
-      apiClient.get(`categories`, { searchParams: { limit: 1000 } }).json(),
+      apiClient.get(`categories`, { searchParams: { limit: 100 } }).json(),
   })
 
 export const useAddCategory = () => {
