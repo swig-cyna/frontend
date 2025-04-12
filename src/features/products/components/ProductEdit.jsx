@@ -24,7 +24,7 @@ import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { createProductSchema } from "../schemas/createProduct"
 
-export const ProductEdit = ({ product, onSave, isLoading }) => {
+export const ProductEdit = ({ product, categories, onSave, isLoading }) => {
   const [images, setImages] = useState([])
 
   const form = useForm({
@@ -33,6 +33,7 @@ export const ProductEdit = ({ product, onSave, isLoading }) => {
       name: product?.name || "",
       description: product?.description || "",
       interval: product?.interval || "month",
+      category_id: product?.category[0]?.id || "",
       price: product?.price || 0,
     },
   })
@@ -46,7 +47,9 @@ export const ProductEdit = ({ product, onSave, isLoading }) => {
   }
 
   const onSubmit = (data) => {
-    onSave({ ...data, images })
+    const categoryId = data.category_id <= 0 ? null : data.category_id
+
+    onSave({ ...data, category_id: categoryId, images })
   }
 
   useEffect(() => {
@@ -124,6 +127,46 @@ export const ProductEdit = ({ product, onSave, isLoading }) => {
               />
             </div>
           </div>
+
+          <FormField
+            control={form.control}
+            name="category_id"
+            render={({ field }) => {
+              const selectedCategory = categories.find(
+                // eslint-disable-next-line
+                (cat) => cat.id == field.value,
+              )
+
+              return (
+                <FormItem>
+                  <FormLabel>Category</FormLabel>
+                  <FormControl>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a category">
+                          {selectedCategory
+                            ? selectedCategory.name
+                            : "Select a category"}
+                        </SelectValue>
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value={null}>No category</SelectItem>
+                        {categories.map((category) => (
+                          <SelectItem key={category.id} value={category.id}>
+                            {category.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )
+            }}
+          />
 
           <FormField
             control={form.control}

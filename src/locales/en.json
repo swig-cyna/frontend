@@ -198,5 +198,8 @@
     "priceRange": "Price Range",
     "resetFilters": "Reset Filters",
     "noProductsFound": "No products found. Try to change the filters."
+  },
+  "Category": {
+    "products": "Products"
   }
 }

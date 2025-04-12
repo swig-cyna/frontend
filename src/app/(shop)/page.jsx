@@ -5,6 +5,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { CarouselPreview } from "@/features/carousel/components/CarouselPreview"
 import { useCarousel } from "@/features/carousel/hooks/useCarousel"
 import CategoriesItem from "@/features/categories/components/CategoriesItem"
+import { useCategories } from "@/features/categories/hooks/useCategory"
 import CardProduct from "@/features/products/components/CardProduct"
 import { useNewProducts } from "@/features/products/hook/useNewProducts"
 import { Package } from "lucide-react"
@@ -16,6 +17,7 @@ const Home = () => {
   const { data: slides } = useCarousel()
   const { data: newProducts, isLoading: isNewProductsLoading } =
     useNewProducts()
+  const { data: categories, isLoading: isCategoriesLoading } = useCategories({})
 
   return (
     <main className="flex w-full flex-col items-center gap-8 space-y-10 sm:items-start">
@@ -26,11 +28,18 @@ const Home = () => {
           <Skeleton className="h-[400px] w-full" />
         )}
 
+        <h2 className="mt-4 text-xl font-bold">{t("categories")}</h2>
         <div className="relative mt-4 w-full overflow-x-auto pb-4">
           <div className="flex min-w-max gap-2">
-            {Array.from({ length: 20 }).map((_, index) => (
-              <CategoriesItem key={index} />
-            ))}
+            {isCategoriesLoading &&
+              Array.from({ length: 5 }).map((_, index) => (
+                <Skeleton className="h-[70px] w-[150px]" key={index} />
+              ))}
+
+            {categories &&
+              categories.data.map((category, index) => (
+                <CategoriesItem key={index} category={category} />
+              ))}
             <div className="scale-120 sticky -right-3 z-10 w-7 flex-1 bg-background blur-sm"></div>
           </div>
         </div>

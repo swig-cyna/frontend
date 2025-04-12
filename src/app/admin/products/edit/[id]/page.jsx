@@ -2,6 +2,7 @@
 
 import { Card } from "@/components/ui/card"
 import { DashboardHeader } from "@/features/admin/components/DashboardHeader"
+import { useCategories } from "@/features/categories/hooks/useCategory"
 import { ProductEdit } from "@/features/products/components/ProductEdit"
 import {
   useProduct,
@@ -15,7 +16,8 @@ export default function CreateProduct() {
   const router = useRouter()
   const params = useParams()
 
-  const { data: product, isLoading } = useProduct(params.id)
+  const { data: product, isLoading: isProductLoading } = useProduct(params.id)
+  const { data: categories, isLoading: isCategoriesLoading } = useCategories()
   const { mutateAsync: createProduct, isPending: isUpdating } =
     useUpdateProduct(params.id)
 
@@ -29,7 +31,7 @@ export default function CreateProduct() {
     router.push("/admin/products")
   }
 
-  if (isLoading) {
+  if (isProductLoading || isCategoriesLoading) {
     return (
       <div className="flex items-center justify-center">
         <Loader2 className="animate-spin" />
@@ -43,6 +45,7 @@ export default function CreateProduct() {
       <Card className="mt-4 p-6">
         <ProductEdit
           product={product}
+          categories={categories.data}
           onSave={handleCreateProduct}
           isLoading={isUpdating}
         />

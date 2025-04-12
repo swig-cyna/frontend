@@ -6,6 +6,7 @@ import {
   LayoutDashboard,
   LifeBuoy,
   Settings,
+  Tag,
   User2,
   Users,
 } from "lucide-react"
@@ -42,6 +43,11 @@ const items = [
     title: "Products",
     url: "/admin/products",
     icon: Boxes,
+  },
+  {
+    title: "Categories",
+    url: "/admin/categories",
+    icon: Tag,
   },
   {
     title: "Users",

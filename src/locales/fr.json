@@ -198,5 +198,8 @@
     "priceRange": "Plage de prix",
     "resetFilters": "Reinitialiser les filtres",
     "noProductsFound": "Aucun produit trouvé, essayez de modifier vos filtres"
+  },
+  "Category": {
+    "products": "Produits"
   }
 }

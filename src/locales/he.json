@@ -197,5 +197,8 @@
     "priceRange": "טווח מחירים",
     "resetFilters": "איפוס מסננים",
     "noProductsFound": "לא נמצאו מוצרים. נסה לשנות את המסננים."
+  },
+  "Category": {
+    "products": "מוצרים"
   }
 }

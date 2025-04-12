@@ -1,27 +1,30 @@
-import Image from "next/image"
+"use client"
+
+import { useTranslations } from "next-intl"
 import Link from "next/link"
 
-const CategoriesItem = () => (
-  <div className="relative aspect-square h-40 overflow-hidden rounded-md bg-card">
+const CategoriesItem = ({ category }) => {
+  const t = useTranslations("Category")
+
+  return (
     <Link
-      href={`/categories`}
-      className="group relative h-full w-full overflow-hidden rounded-lg"
+      href={category.id ? `/products?categories=${category.id}` : ""}
+      className="group brightness-110 transition-all"
     >
-      <div className="relative aspect-square">
-        <Image
-          src={"/placeholder.svg"}
-          alt="category"
-          fill
-          className="object-cover transition-transform group-hover:scale-105"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-          <h3 className="font-semibold">"Category"</h3>
-          <p className="text-sm text-white/80">XXX produits</p>
+      <div
+        className="relative flex min-w-24 items-center justify-center overflow-hidden rounded-lg group-hover:brightness-110"
+        style={{ backgroundColor: category.color }}
+      >
+        <div className="z-10 m-[1px] rounded-lg bg-card px-6 py-2">
+          <p className="font-semibold drop-shadow-md">
+            {category.name || "Category Name"}
+          </p>
+          <p className="text-xs drop-shadow-md">
+            {category.count} {t("products")}
+          </p>
         </div>
       </div>
     </Link>
-  </div>
-)
-
+  )
+}
 export default CategoriesItem
