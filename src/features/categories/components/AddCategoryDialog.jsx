@@ -34,7 +34,7 @@ export function AddCategoryDialog({ open, onOpenChange }) {
     resolver: zodResolver(addCategorySchema),
     defaultValues: {
       name: "",
-      color: "",
+      color: "#6e0dfc",
     },
   })
 
