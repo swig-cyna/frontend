@@ -38,12 +38,7 @@ import {
   SlidersHorizontal,
 } from "lucide-react"
 import { useTranslations } from "next-intl"
-import {
-  parseAsArrayOf,
-  parseAsInteger,
-  parseAsString,
-  useQueryState,
-} from "nuqs"
+import { parseAsArrayOf, parseAsInteger, useQueryState } from "nuqs"
 
 const ProductsPage = () => {
   const t = useTranslations("ProductsList")
@@ -57,7 +52,7 @@ const ProductsPage = () => {
 
   const [selectedCategories] = useQueryState(
     "categories",
-    parseAsArrayOf(parseAsString, ",").withDefault([]),
+    parseAsArrayOf(parseAsInteger, ",").withDefault([]),
   )
 
   const [range] = useQueryState(
@@ -158,7 +153,7 @@ const ProductsPage = () => {
               ))}
           </div>
 
-          {products.data.length === 0 && (
+          {products?.data?.length === 0 && (
             <div className="mt-2 flex flex-col items-center justify-center rounded-md border border-dashed p-12">
               <PackageX className="mb-4 h-12 w-12 text-muted-foreground" />
               <p className="mb-4 text-center text-muted-foreground">

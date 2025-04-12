@@ -10,27 +10,16 @@ import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
 import { SheetFooter } from "@/components/ui/sheet"
+import { Skeleton } from "@/components/ui/skeleton"
 import { Slider } from "@/components/ui/slider"
+import { useCategories } from "@/features/categories/hooks/useCategory"
 import { useTranslations } from "next-intl"
-import {
-  parseAsArrayOf,
-  parseAsInteger,
-  parseAsString,
-  useQueryState,
-} from "nuqs"
-
-// Données fictives pour les filtres
-const categories = [
-  { id: "electronics", name: "Électronique" },
-  { id: "fashion", name: "Mode" },
-  { id: "home", name: "Maison" },
-  { id: "sports", name: "Sports & Loisirs" },
-  { id: "beauty", name: "Beauté & Santé" },
-  { id: "food", name: "Alimentation" },
-]
+import { parseAsArrayOf, parseAsInteger, useQueryState } from "nuqs"
 
 export default function ProductFilters() {
   const t = useTranslations("ProductsList")
+
+  const { data: categories, isLoading: isCategoriesLoading } = useCategories()
 
   const [range, setRange] = useQueryState(
     "range",
@@ -39,7 +28,7 @@ export default function ProductFilters() {
 
   const [selectedCategories, setSelectedCategories] = useQueryState(
     "categories",
-    parseAsArrayOf(parseAsString, ",").withDefault([]),
+    parseAsArrayOf(parseAsInteger, ",").withDefault([]),
   )
 
   const handleCategoryChange = (categoryId) => {
@@ -71,7 +60,7 @@ export default function ProductFilters() {
             <AccordionTrigger>{t("categories")}</AccordionTrigger>
             <AccordionContent>
               <div className="space-y-2">
-                {categories.map((category) => (
+                {categories?.data?.map((category) => (
                   <div
                     key={category.id}
                     className="flex items-center space-x-2"
@@ -89,6 +78,11 @@ export default function ProductFilters() {
                     </Label>
                   </div>
                 ))}
+
+                {isCategoriesLoading &&
+                  Array.from({ length: 5 }).map((_, index) => (
+                    <Skeleton className="h-6 w-full" key={index} />
+                  ))}
               </div>
             </AccordionContent>
           </AccordionItem>
