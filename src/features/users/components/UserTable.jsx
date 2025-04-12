@@ -1,7 +1,7 @@
 "use client"
 
 import { MoreHorizontal, Pencil, Trash2 } from "lucide-react"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -27,14 +27,14 @@ import {
   getRoleBadgeVariant,
   translateUserRole,
 } from "@/features/users/utils/functions"
-import { useToast } from "@/hooks/useToast"
 
 export function UserTable({ users, refreshUsers }) {
   const [userToEdit, setUserToEdit] = useState(null)
   const [userToDelete, setUserToDelete] = useState(null)
-  const { toast } = useToast()
 
-  if (users?.length === 0) return <div>Chargement...</div>
+  if (users?.length === 0) {
+    return <div>Chargement...</div>
+  }
 
   return (
     <>
@@ -50,48 +50,46 @@ export function UserTable({ users, refreshUsers }) {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {users?.map((user) => {
-              return (
-                <TableRow key={user.id}>
-                  <TableCell className="font-medium">{user.name}</TableCell>
-                  <TableCell>{user.email}</TableCell>
-                  <TableCell>
-                    <Badge variant={getRoleBadgeVariant(user.role)}>
-                      {translateUserRole(user.role)}
-                    </Badge>
-                  </TableCell>
-                  <TableCell>{user.createdAt.toLocaleDateString()}</TableCell>
-                  <TableCell>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" className="h-8 w-8 p-0">
-                          <span className="sr-only">Open menu</span>
-                          <MoreHorizontal className="h-4 w-4" />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem
-                          onClick={() => setUserToEdit(user)}
-                          className="cursor-pointer"
-                        >
-                          <Pencil className="mr-2 h-4 w-4" />
-                          Edit role
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                          onClick={() => setUserToDelete(user)}
-                          className="cursor-pointer text-destructive focus:text-destructive"
-                        >
-                          <Trash2 className="mr-2 h-4 w-4" />
-                          Delete
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </TableCell>
-                </TableRow>
-              )
-            })}
+            {users?.map((user) => (
+              <TableRow key={user.id}>
+                <TableCell className="font-medium">{user.name}</TableCell>
+                <TableCell>{user.email}</TableCell>
+                <TableCell>
+                  <Badge variant={getRoleBadgeVariant(user.role)}>
+                    {translateUserRole(user.role)}
+                  </Badge>
+                </TableCell>
+                <TableCell>{user.createdAt.toLocaleDateString()}</TableCell>
+                <TableCell>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="ghost" className="h-8 w-8 p-0">
+                        <span className="sr-only">Open menu</span>
+                        <MoreHorizontal className="h-4 w-4" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                      <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem
+                        onClick={() => setUserToEdit(user)}
+                        className="cursor-pointer"
+                      >
+                        <Pencil className="mr-2 h-4 w-4" />
+                        Edit role
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        onClick={() => setUserToDelete(user)}
+                        className="cursor-pointer text-destructive focus:text-destructive"
+                      >
+                        <Trash2 className="mr-2 h-4 w-4" />
+                        Delete
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </div>
