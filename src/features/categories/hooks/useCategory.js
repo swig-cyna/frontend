@@ -2,10 +2,11 @@ import { apiClient } from "@/utils/fetch"
 import { createErrorHandler } from "@/utils/query"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 
-export const useCategories = ({ page = 1, limit = 10 }) =>
+export const useCategories = () =>
   useQuery({
-    queryKey: ["categories", page, limit],
-    queryFn: () => apiClient.get(`categories`).json(),
+    queryKey: ["categories"],
+    queryFn: () =>
+      apiClient.get(`categories`, { searchParams: { limit: 1000 } }).json(),
   })
 
 export const useAddCategory = () => {
