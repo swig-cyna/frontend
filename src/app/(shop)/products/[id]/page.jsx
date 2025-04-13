@@ -63,8 +63,8 @@ const ProductPage = () => {
   }
 
   return (
-    <div className="relative flex w-full flex-col items-start gap-4 md:flex-row">
-      <div className="sticky left-0 top-14 flex-1">
+    <div className="relative flex w-full flex-col items-stretch gap-4 md:flex-row md:items-start">
+      <div className="static flex-1 md:sticky md:left-0 md:top-14">
         <ProductImageCarousel images={product.images} />
       </div>
       <div className="flex-1">

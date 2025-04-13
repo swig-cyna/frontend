@@ -1,6 +1,6 @@
 "use client"
 import { Button } from "@/components/ui/button"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight, ImageOff } from "lucide-react"
 import Image from "next/image"
 import { useState } from "react"
 import { getProductImageUrl } from "../utils/image"
@@ -26,21 +26,22 @@ export function ProductImageCarousel({ images = [] }) {
 
   if (images.length === 0) {
     return (
-      <div className="flex h-[300px] items-center justify-center rounded-md bg-muted">
-        <p className="text-muted-foreground">No images available</p>
+      <div className="flex min-h-[500px] flex-col items-center justify-center gap-3 rounded-md bg-muted text-muted-foreground">
+        <ImageOff className="h-16 w-16" />
+        <p>No images available</p>
       </div>
     )
   }
 
   return (
-    <div className="flex aspect-[4/3] gap-4 overflow-hidden">
+    <div className="flex flex-col gap-4">
       {images.length > 1 && (
-        <div className="order-1 flex h-full w-24 flex-col gap-2 overflow-y-auto overflow-x-hidden">
+        <div className="order-2 flex w-full gap-2 overflow-y-auto overflow-x-hidden">
           {images.map((image, index) => (
             <button
               type="button"
               key={index}
-              className={`relative aspect-square w-full flex-shrink-0 overflow-hidden rounded-md border-2 transition-all ${
+              className={`relative aspect-square w-24 flex-shrink-0 overflow-hidden rounded-md border-2 transition-all ${
                 index === currentIndex ? "border-primary" : "border-transparent"
               }`}
               onClick={() => goToSlide(index)}
@@ -56,12 +57,12 @@ export function ProductImageCarousel({ images = [] }) {
         </div>
       )}
 
-      <div className="relative order-2 aspect-[4/3] flex-1 overflow-hidden rounded-md">
+      <div className="relative order-1 min-h-[500px] flex-1 overflow-hidden rounded-md">
         <Image
           src={getProductImageUrl(images[currentIndex])}
           alt={`Image ${currentIndex + 1}`}
           fill
-          className="h-full w-full object-cover transition-opacity duration-300"
+          className="h-[400px] w-full object-cover transition-opacity duration-300"
         />
         <div className="absolute inset-0 flex items-center justify-between p-4">
           <Button
