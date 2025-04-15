@@ -1,12 +1,13 @@
 "use client"
 
+import { useSession } from "@/features/auth/utils/authClient"
+import { zodResolver } from "@hookform/resolvers/zod"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
 import { contactFormSchema } from "../schemas/contactFormSchema"
 import { sendSupportEmail } from "../utils/emailUtils"
-import { useSession } from "@/features/auth/utils/authClient"
 
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -14,9 +15,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
@@ -25,6 +23,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
 import {
   Select,
   SelectContent,
@@ -32,6 +31,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { Textarea } from "@/components/ui/textarea"
 
 const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)

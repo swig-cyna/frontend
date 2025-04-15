@@ -4,10 +4,10 @@ import { PlusCircle } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { DashboardHeader } from "@/features/admin/components/DashboardHeader"
+import { authClient } from "@/features/auth/utils/authClient"
 import { AddUserDialog } from "@/features/users/components/AddUserDialog"
 import { UserTable } from "@/features/users/components/UserTable"
-import { useState, useEffect } from "react"
-import { authClient } from "@/features/auth/utils/authClient"
+import { useEffect, useState } from "react"
 
 const Page = () => {
   const [users, setUsers] = useState([])
@@ -22,7 +22,11 @@ const Page = () => {
           sortDirection: "desc",
         },
       })
-      if (error) throw new Error(error.message)
+
+      if (error) {
+        throw new Error(error.message)
+      }
+
       setUsers(data.users)
     } catch (error) {
       console.error("Erreur de chargement des utilisateurs :", error.message)
