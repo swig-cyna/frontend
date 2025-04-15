@@ -1,9 +1,6 @@
 "use client"
 
-import { useState } from "react"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useTranslations } from "next-intl"
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -11,17 +8,20 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Form, FormField } from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import ResendEmailButton from "@/features/auth/components/ResendEmailButton"
 import {
   changeEmail,
   sendVerificationEmail,
   updateUser,
   useSession,
 } from "@/features/auth/utils/authClient"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useTranslations } from "next-intl"
 import Link from "next/link"
-import ResendEmailButton from "@/features/auth/components/ResendEmailButton"
+import { useState } from "react"
+import { useForm } from "react-hook-form"
 import { accountSchema } from "../schemas/changeEmail"
 
 const ProfileInfoUpdate = () => {
@@ -80,7 +80,7 @@ const ProfileInfoUpdate = () => {
     return (
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl">{t("emailChangeTitle")}</CardTitle>
+          <CardTitle className="text-xl">{t("emailChangeTitle")}</CardTitle>
           <CardDescription>{t("emailChangeDescription")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -96,7 +96,7 @@ const ProfileInfoUpdate = () => {
     return (
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl">
+          <CardTitle className="text-xl">
             {t("emailVerificationTitle")}
           </CardTitle>
           <CardDescription>{t("emailVerificationDescription")}</CardDescription>
@@ -117,7 +117,7 @@ const ProfileInfoUpdate = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-2xl">{t("title")}</CardTitle>
+        <CardTitle className="text-xl">{t("title")}</CardTitle>
         <CardDescription>{t("description")}</CardDescription>
       </CardHeader>
       <CardContent>

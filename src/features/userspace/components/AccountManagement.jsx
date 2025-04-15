@@ -2,14 +2,12 @@
 
 import { useTranslations } from "next-intl"
 
-import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card"
-
-import ProfileInfoUpdate from "./ProfileInfoUpdate"
-import TwoFactorAuthToggle from "./TwoFactorAuthToggle"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { useSession } from "@/features/auth/utils/authClient"
 import { ShieldAlert } from "lucide-react"
 import { useSearchParams } from "next/navigation"
-import { useSession } from "@/features/auth/utils/authClient"
+import ProfileInfoUpdate from "./ProfileInfoUpdate"
+import TwoFactorAuthToggle from "./TwoFactorAuthToggle"
 
 const AccountManagement = () => {
   const t = useTranslations("AccountManagement")
@@ -26,15 +24,10 @@ const AccountManagement = () => {
           <AlertDescription>{t("alertDescription")}</AlertDescription>
         </Alert>
       )}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-3xl">{t("title")}</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <ProfileInfoUpdate />
-          <TwoFactorAuthToggle />
-        </CardContent>
-      </Card>
+      <div className="mx-auto flex w-full max-w-xl flex-col gap-6">
+        <ProfileInfoUpdate />
+        <TwoFactorAuthToggle />
+      </div>
     </div>
   )
 }

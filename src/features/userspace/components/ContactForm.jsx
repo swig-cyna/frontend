@@ -74,7 +74,7 @@ const ContactForm = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Contactez le support</CardTitle>
+        <CardTitle className="text-xl">Contactez le support</CardTitle>
         <CardDescription>
           Nous vous répondrons dans les plus brefs délais.
         </CardDescription>
