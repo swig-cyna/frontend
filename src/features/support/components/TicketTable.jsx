@@ -24,6 +24,7 @@ import {
 import { useFormatter } from "next-intl"
 import { getStatusVariant, getSubjectVariant } from "../utils/functions"
 import { DeleteTicketDialog } from "./DeleteTicketDialog"
+import { EditTicketDialog } from "./EditTicketDialog"
 
 export function TicketTable({ tickets, refreshTickets }) {
   const [ticketToEdit, setTicketToEdit] = useState(null)
@@ -137,14 +138,14 @@ export function TicketTable({ tickets, refreshTickets }) {
           </TableBody>
         </Table>
       </div>
-      {/* {ticketToEdit && (
+      {ticketToEdit && (
         <EditTicketDialog
           ticket={ticketToEdit}
           open={Boolean(ticketToEdit)}
           onOpenChange={(open) => !open && setTicketToEdit(null)}
-          onRoleUpdated={refreshTickets}
+          onTicketUpdated={refreshTickets}
         />
-      )} */}
+      )}
 
       {ticketToDelete && (
         <DeleteTicketDialog

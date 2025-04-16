@@ -32,8 +32,6 @@ export function DeleteTicketDialog({
         })
         .json()
 
-      console.log(response)
-
       if (response.error) {
         throw response.error
       }
