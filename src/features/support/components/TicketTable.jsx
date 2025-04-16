@@ -88,7 +88,7 @@ export function TicketTable({ tickets, refreshTickets }) {
                     })}
                   </TableCell>
                   <TableCell className="break-all">
-                    {ticket.assigned_to ? ticket.assigned_to : "nobody"}
+                    {ticket.assigned_to ? ticket.assigned_to_name : "nobody"}
                   </TableCell>
                   <TableCell>
                     <Badge className={getStatusVariant(ticket.status)}>
