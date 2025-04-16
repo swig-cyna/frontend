@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/table"
 import { useFormatter } from "next-intl"
 import { getStatusVariant, getSubjectVariant } from "../utils/functions"
+import { DeleteTicketDialog } from "./DeleteTicketDialog"
 
 export function TicketTable({ tickets, refreshTickets }) {
   const [ticketToEdit, setTicketToEdit] = useState(null)
@@ -145,14 +146,14 @@ export function TicketTable({ tickets, refreshTickets }) {
         />
       )} */}
 
-      {/* {ticketToDelete && (
+      {ticketToDelete && (
         <DeleteTicketDialog
           ticket={ticketToDelete}
           open={Boolean(ticketToDelete)}
           onOpenChange={(open) => !open && setTicketToDelete(null)}
           onTicketRemoved={refreshTickets}
         />
-      )} */}
+      )}
     </>
   )
 }
