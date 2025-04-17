@@ -99,6 +99,7 @@ const SubscriptionForm = ({ userId }) => {
             onGoBack={handleBackToRecap}
             cartItems={cartItems}
             total={totalPrice}
+            stripePromise={stripePromise}
           />
         )}
 
