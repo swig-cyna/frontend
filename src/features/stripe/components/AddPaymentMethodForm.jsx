@@ -12,6 +12,7 @@ import { Separator } from "@/components/ui/separator"
 import { useAttachPaymentMethod } from "@/features/stripe/hooks/usePaymentMethode"
 import { toast } from "@/hooks/useToast"
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js"
+import { CreditCard, ShieldCheck } from "lucide-react"
 import { useState } from "react"
 
 const AddPaymentMethodForm = ({ userId, onSuccess }) => {
@@ -123,9 +124,12 @@ const AddPaymentMethodForm = ({ userId, onSuccess }) => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Ajouter une nouvelle carte bancaire</CardTitle>
+        <CardTitle className="flex items-center">
+          <CreditCard className="mr-2 h-5 w-5" />
+          Ajouter une nouvelle carte
+        </CardTitle>
         <CardDescription>
-          Saisissez les informations de votre carte
+          Vos informations de paiement sont sécurisées
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -133,11 +137,12 @@ const AddPaymentMethodForm = ({ userId, onSuccess }) => {
           <div className="grid gap-6">
             <div className="grid gap-3">
               <Label htmlFor="card-element">Informations de carte</Label>
-              <div className="rounded-md border p-3">
+              <div className="rounded-md border p-4">
                 <CardElement id="card-element" options={cardElementOptions} />
               </div>
-              <p className="text-sm text-muted-foreground">
-                Votre carte sera traitée de manière sécurisée par Stripe.
+              <p className="flex items-center text-sm text-muted-foreground">
+                <ShieldCheck className="mr-1 h-4 w-4" />
+                Votre carte est traitée de manière sécurisée par Stripe.
               </p>
             </div>
 
@@ -168,7 +173,7 @@ const AddPaymentMethodForm = ({ userId, onSuccess }) => {
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid gap-4 md:grid-cols-2">
               <div className="grid gap-3">
                 <Label htmlFor="city">Ville</Label>
                 <Input
@@ -202,13 +207,19 @@ const AddPaymentMethodForm = ({ userId, onSuccess }) => {
               />
             </div>
 
-            <Button
-              type="submit"
-              className="mt-4 w-full"
-              disabled={!stripe || loading}
-            >
-              {loading ? "Traitement en cours..." : "Ajouter cette carte"}
-            </Button>
+            <div className="flex space-x-2">
+              <Button
+                variant="outline"
+                className="flex-1"
+                type="button"
+                onClick={() => onSuccess()}
+              >
+                Annuler
+              </Button>
+              <Button type="submit" className="flex-1" disabled={loading}>
+                {loading ? "Traitement en cours..." : "Ajouter cette carte"}
+              </Button>
+            </div>
           </div>
         </form>
       </CardContent>
