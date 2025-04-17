@@ -1,7 +1,7 @@
 import { apiClient } from "@/utils/fetch"
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 
-export const usePaymentMethode = (userId) =>
+export const usePaymentMethod = (userId) =>
   useQuery({
     queryKey: ["paymentMethode"],
     queryFn: () => apiClient.get(`payment-methods/${userId}`).json(),
