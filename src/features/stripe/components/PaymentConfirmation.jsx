@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { CheckCircle } from "lucide-react"
+import Link from "next/link"
 
 const PaymentConfirmation = () => (
   <div className="py-10 text-center">
@@ -10,22 +11,9 @@ const PaymentConfirmation = () => (
     <p className="mb-6 text-gray-600">
       Merci pour votre commande. Un reçu a été envoyé à votre adresse email.
     </p>
-    <div className="mx-auto max-w-md rounded-lg bg-muted/30 p-6">
-      <h3 className="mb-3 font-medium">Détails de la commande</h3>
-      <div className="mb-2 flex justify-between">
-        <span>Numéro de commande</span>
-        <span className="font-mono">#12345678</span>
-      </div>
-      <div className="mb-2 flex justify-between">
-        <span>Date</span>
-        <span>09/04/2025</span>
-      </div>
-      <div className="mb-2 flex justify-between">
-        <span>Montant</span>
-        <span>€59.99</span>
-      </div>
-    </div>
-    <Button className="mt-6">Retour à l'accueil</Button>
+    <Link href="/">
+      <Button className="mt-6">Retour à l'accueil</Button>
+    </Link>
   </div>
 )
 
