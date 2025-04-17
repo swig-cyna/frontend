@@ -11,8 +11,11 @@ import {
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Separator } from "@/components/ui/separator"
-import { usePaymentMethode } from "@/features/stripe/hooks/usePaymentMethode"
-import { useAddSubsciption } from "@/features/stripe/hooks/useSubscription"
+import {
+  usePaymentConfirm,
+  usePaymentIntent,
+} from "@/features/stripe/hooks/usePaymentIntent"
+import { usePaymentMethod } from "@/features/stripe/hooks/usePaymentMethode"
 import { toast } from "@/hooks/use-toast"
 import { CreditCard, PlusCircle, ShieldCheck } from "lucide-react"
 import { useEffect, useState } from "react"
@@ -24,12 +27,15 @@ const SavedPaymentMethods = ({
   onGoBack,
   cartItems,
   total,
+  stripePromise,
 }) => {
   const [paymentMethods, setPaymentMethods] = useState([])
   const [selectedMethod, setSelectedMethod] = useState(null)
-  const { data: paymentMethodsData, isLoading } = usePaymentMethode(userId)
-  const { mutateAsync: addSubscription } = useAddSubsciption()
+  const { data: paymentMethodsData, isLoading } = usePaymentMethod(userId)
+  const { mutateAsync: createPaymentIntent } = usePaymentIntent()
+  const { mutateAsync: confirmPayment } = usePaymentConfirm()
   const [isProcessing, setIsProcessing] = useState(false)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     if (paymentMethodsData?.data && Array.isArray(paymentMethodsData.data)) {
@@ -55,7 +61,9 @@ const SavedPaymentMethods = ({
     return brands[brand] || brand
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    const stripe = await stripePromise
+
     if (!selectedMethod) {
       toast({
         title: "Méthode de paiement requise",
@@ -68,34 +76,82 @@ const SavedPaymentMethods = ({
     }
 
     setIsProcessing(true)
+    setError(null)
 
-    cartItems.forEach(async (product) => {
-      await addSubscription({
+    try {
+      const cartItemsForApi = cartItems.map((item) => ({
+        productId: item.id,
+        quantity: item.quantity,
+      }))
+
+      const paymentIntentResponse = await createPaymentIntent({
         userId,
-        paymentMethodeId: selectedMethod,
-        productId: product.id,
-        quantity: product.quantity,
+        cartItems: cartItemsForApi,
+        paymentMethodId: selectedMethod,
       })
-    })
 
-    setTimeout(() => {
-      setIsProcessing(false)
-
-      if (onPaymentComplete) {
-        onPaymentComplete()
+      if (!paymentIntentResponse || !paymentIntentResponse.clientSecret) {
+        throw new Error("Erreur lors de la création de l'intention de paiement")
       }
-    }, 2000)
+
+      console.log("Réponse de l'intention de paiement:", paymentIntentResponse)
+
+      const result = await stripe.confirmCardPayment(
+        paymentIntentResponse.clientSecret,
+        {
+          payment_method: selectedMethod,
+        },
+      )
+
+      if (result.error) {
+        throw new Error(`Erreur de paiement: ${result.error.message}`)
+      }
+
+      if (result.paymentIntent && result.paymentIntent.status === "succeeded") {
+        const confirmationResponse = await confirmPayment({
+          paymentIntentId: result.paymentIntent.id,
+        })
+
+        if (confirmationResponse && confirmationResponse.success) {
+          toast({
+            title: "Paiement réussi",
+            description: "Votre commande a été validée avec succès",
+          })
+
+          console.log("paymentId", paymentIntentResponse.paymentId)
+
+          onPaymentComplete()
+        } else {
+          throw new Error(
+            confirmationResponse.message ||
+              "Erreur lors de la confirmation du paiement",
+          )
+        }
+      }
+    } catch (err) {
+      console.error("Erreur de paiement:", err)
+      setError(err.message || "Une erreur est survenue lors du paiement")
+      toast({
+        title: "Erreur de paiement",
+        description: err.message || "Une erreur est survenue lors du paiement",
+        variant: "destructive",
+      })
+    } finally {
+      setIsProcessing(false)
+    }
   }
 
   if (isLoading) {
     return (
       <Card>
         <CardHeader>
-          <CardTitle>Your payment methods</CardTitle>
-          <CardDescription>Select a payment method to use</CardDescription>
+          <CardTitle>Vos méthodes de paiement</CardTitle>
+          <CardDescription>
+            Sélectionnez une méthode de paiement
+          </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="py-6 text-center">Loading in progress...</div>
+          <div className="py-6 text-center">Chargement en cours...</div>
         </CardContent>
       </Card>
     )
@@ -110,53 +166,41 @@ const SavedPaymentMethods = ({
             Vos méthodes de paiement
           </CardTitle>
           <CardDescription>
-            Sélectionnez une carte pour finaliser votre commande
+            Sélectionnez une carte pour finaliser votre achat
           </CardDescription>
         </CardHeader>
         <CardContent>
-          {paymentMethods.length === 0 ? (
-            <div className="py-10 text-center">
-              <p className="mb-4 text-gray-500">
-                Aucune méthode de paiement enregistrée
-              </p>
-              <Button onClick={onAddNew} variant="outline">
-                <PlusCircle className="mr-2 h-4 w-4" />
-                Ajouter une carte
-              </Button>
-            </div>
-          ) : (
-            <RadioGroup
-              value={selectedMethod}
-              onValueChange={setSelectedMethod}
-              className="space-y-2"
-            >
-              {paymentMethods.map((method) => (
-                <div
-                  key={method.id}
-                  className="flex items-center space-x-2 rounded-lg border p-4 transition-colors hover:bg-muted/50"
+          <RadioGroup
+            value={selectedMethod}
+            onValueChange={setSelectedMethod}
+            className="space-y-2"
+          >
+            {paymentMethods.map((method) => (
+              <div
+                key={method.id}
+                className="flex items-center space-x-2 rounded-lg border p-4 transition-colors hover:bg-muted/50"
+              >
+                <RadioGroupItem value={method.id} id={method.id} />
+                <Label
+                  htmlFor={method.id}
+                  className="flex flex-1 cursor-pointer items-center"
                 >
-                  <RadioGroupItem value={method.id} id={method.id} />
-                  <Label
-                    htmlFor={method.id}
-                    className="flex flex-1 cursor-pointer items-center"
-                  >
-                    <div className="flex items-center">
-                      <CreditCard className="mr-3 h-5 w-5 text-primary" />
-                      <div>
-                        <div className="font-medium">
-                          {formatCardBrand(method.card.brand)} ••••{" "}
-                          {method.card.last4}
-                        </div>
-                        <div className="text-sm text-gray-500">
-                          Expire {method.card.exp_month}/{method.card.exp_year}
-                        </div>
+                  <div className="flex items-center">
+                    <CreditCard className="mr-3 h-5 w-5 text-primary" />
+                    <div>
+                      <div className="font-medium">
+                        {formatCardBrand(method.card.brand)} ••••{" "}
+                        {method.card.last4}
+                      </div>
+                      <div className="text-sm text-gray-500">
+                        Expire {method.card.exp_month}/{method.card.exp_year}
                       </div>
                     </div>
-                  </Label>
-                </div>
-              ))}
-            </RadioGroup>
-          )}
+                  </div>
+                </Label>
+              </div>
+            ))}
+          </RadioGroup>
 
           <div className="mt-6 flex justify-center">
             <Button variant="outline" onClick={onAddNew}>
@@ -165,7 +209,11 @@ const SavedPaymentMethods = ({
             </Button>
           </div>
         </CardContent>
-        <Button onClick={onGoBack}>Back</Button>
+        <CardFooter>
+          <Button onClick={onGoBack} variant="outline" className="mr-2">
+            Retour
+          </Button>
+        </CardFooter>
       </Card>
 
       <div className="space-y-4">
@@ -186,20 +234,33 @@ const SavedPaymentMethods = ({
             ))}
             <Separator className="my-2" />
             <div className="flex justify-between py-1">
-              <span>Total avec TVA</span>
-              <span className="font-bold">€{(total * 1.2).toFixed(2)}</span>
+              <span>Total</span>
+              <span className="font-bold">€{total.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between py-1 text-sm text-muted-foreground">
+              <span>dont TVA (20%)</span>
+              <span>€{(total * 0.2).toFixed(2)}</span>
             </div>
           </CardContent>
           <CardFooter className="pt-2">
             <Button
               className="w-full"
               onClick={handleSubmit}
-              disabled={!selectedMethod || isProcessing}
+              disabled={
+                !selectedMethod || isProcessing || cartItems.length === 0
+              }
             >
-              {isProcessing ? "Traitement..." : "Payer maintenant"}
+              {isProcessing ? "Traitement..." : `Payer ${total.toFixed(2)} €`}
             </Button>
           </CardFooter>
         </Card>
+
+        {error && (
+          <Alert variant="destructive">
+            <AlertTitle>Erreur</AlertTitle>
+            <AlertDescription>{error}</AlertDescription>
+          </Alert>
+        )}
 
         <Alert className="border-muted bg-muted/50">
           <ShieldCheck className="h-4 w-4" />
@@ -208,6 +269,7 @@ const SavedPaymentMethods = ({
           </AlertTitle>
           <AlertDescription className="text-xs">
             Vos informations de paiement sont protégées par un chiffrement SSL.
+            Nous n'enregistrons jamais vos données de carte complètes.
           </AlertDescription>
         </Alert>
       </div>
