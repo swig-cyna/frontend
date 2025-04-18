@@ -31,8 +31,9 @@ import {
 } from "@/components/ui/select"
 import { addUserSchema } from "@/features/users/schemas/addUser"
 import { useToast } from "@/hooks/useToast"
+import { authClient } from "@/features/auth/utils/authClient"
 
-export function AddUserDialog({ open, onOpenChange }) {
+export function AddUserDialog({ open, onOpenChange, onUserAdded }) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { toast } = useToast()
 
@@ -41,23 +42,46 @@ export function AddUserDialog({ open, onOpenChange }) {
     defaultValues: {
       name: "",
       email: "",
+      password: "",
       role: "",
     },
   })
 
-  const onSubmit = (values) => {
-    setIsSubmitting(true)
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false)
-      onOpenChange(false)
+  const onSubmit = async (values) => {
+    try {
+      setIsSubmitting(true)
 
-      form.reset()
+      const { error } = await authClient.admin.createUser({
+        name: values.name,
+        email: values.email,
+        password: values.password,
+        role: values.role,
+      })
+
+      if (error) {
+        throw error
+      }
+
       toast({
         title: "User added",
         description: `${values.name} has been added successfully.`,
       })
-    }, 1000)
+
+      form.reset()
+      onOpenChange(false)
+
+      if (onUserAdded) {
+        onUserAdded()
+      }
+    } catch (error) {
+      toast({
+        title: "Creation failed",
+        description: error.message || "Failed to create user",
+        variant: "destructive",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const generatePassword = () => {
@@ -140,7 +164,8 @@ export function AddUserDialog({ open, onOpenChange }) {
                     <SelectContent>
                       <SelectItem value="superadmin">Super Admin</SelectItem>
                       <SelectItem value="admin">Admin</SelectItem>
-                      <SelectItem value="customer">Customer</SelectItem>
+                      <SelectItem value="support">Support</SelectItem>
+                      <SelectItem value="user">Customer</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />

@@ -4,12 +4,38 @@ import { PlusCircle } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { DashboardHeader } from "@/features/admin/components/DashboardHeader"
+import { authClient } from "@/features/auth/utils/authClient"
 import { AddUserDialog } from "@/features/users/components/AddUserDialog"
 import { UserTable } from "@/features/users/components/UserTable"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 const Page = () => {
+  const [users, setUsers] = useState([])
   const [isAddUserOpen, setIsAddUserOpen] = useState(false)
+
+  const refreshUsers = async () => {
+    try {
+      const { data, error } = await authClient.admin.listUsers({
+        query: {
+          limit: 100,
+          sortBy: "createdAt",
+          sortDirection: "desc",
+        },
+      })
+
+      if (error) {
+        throw new Error(error.message)
+      }
+
+      setUsers(data.users)
+    } catch (error) {
+      console.error("Erreur de chargement des utilisateurs :", error.message)
+    }
+  }
+
+  useEffect(() => {
+    refreshUsers()
+  }, [])
 
   return (
     <>
@@ -23,9 +49,13 @@ const Page = () => {
         </Button>
       </DashboardHeader>
       <div className="p-6">
-        <UserTable />
+        <UserTable users={users} refreshUsers={refreshUsers} />
       </div>
-      <AddUserDialog open={isAddUserOpen} onOpenChange={setIsAddUserOpen} />
+      <AddUserDialog
+        open={isAddUserOpen}
+        onOpenChange={setIsAddUserOpen}
+        onUserAdded={refreshUsers}
+      />
     </>
   )
 }
