@@ -27,58 +27,13 @@ import {
   getRoleBadgeVariant,
   translateUserRole,
 } from "@/features/users/utils/functions"
-import { useToast } from "@/hooks/useToast"
 
-const initialUsers = [
-  {
-    id: "1",
-    name: "John Doe",
-    email: "john.doe@example.com",
-    role: "superadmin",
-    dateAdded: "2023-01-15",
-  },
-  {
-    id: "2",
-    name: "Mary Smith",
-    email: "mary.smith@example.com",
-    role: "admin",
-    dateAdded: "2023-02-20",
-  },
-  {
-    id: "3",
-    name: "Peter Brown",
-    email: "peter.brown@example.com",
-    role: "customer",
-    dateAdded: "2023-03-10",
-  },
-]
-
-export function UserTable() {
-  const [users, setUsers] = useState(initialUsers)
+export function UserTable({ users, refreshUsers }) {
   const [userToEdit, setUserToEdit] = useState(null)
   const [userToDelete, setUserToDelete] = useState(null)
-  const { toast } = useToast()
 
-  const handleDeleteUser = (userId) => {
-    setUsers(users.filter((user) => user.id !== userId))
-    toast({
-      title: "User deleted",
-      description: "The user has been successfully deleted.",
-    })
-    setUserToDelete(null)
-  }
-
-  const handleUpdateUserRole = (userId, newRole) => {
-    setUsers(
-      users.map((user) =>
-        user.id === userId ? { ...user, role: newRole } : user,
-      ),
-    )
-    toast({
-      title: "Role updated",
-      description: "The user's role has been updated successfully.",
-    })
-    setUserToEdit(null)
+  if (users?.length === 0) {
+    return <div>Chargement...</div>
   }
 
   return (
@@ -95,7 +50,7 @@ export function UserTable() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {users.map((user) => (
+            {users?.map((user) => (
               <TableRow key={user.id}>
                 <TableCell className="font-medium">{user.name}</TableCell>
                 <TableCell>{user.email}</TableCell>
@@ -104,7 +59,7 @@ export function UserTable() {
                     {translateUserRole(user.role)}
                   </Badge>
                 </TableCell>
-                <TableCell>{user.dateAdded}</TableCell>
+                <TableCell>{user.createdAt.toLocaleDateString()}</TableCell>
                 <TableCell>
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -144,7 +99,7 @@ export function UserTable() {
           user={userToEdit}
           open={Boolean(userToEdit)}
           onOpenChange={(open) => !open && setUserToEdit(null)}
-          onUpdateRole={handleUpdateUserRole}
+          onRoleUpdated={refreshUsers}
         />
       )}
 
@@ -153,7 +108,7 @@ export function UserTable() {
           user={userToDelete}
           open={Boolean(userToDelete)}
           onOpenChange={(open) => !open && setUserToDelete(null)}
-          onConfirmDelete={() => handleDeleteUser(userToDelete.id)}
+          onUserRemoved={refreshUsers}
         />
       )}
     </>

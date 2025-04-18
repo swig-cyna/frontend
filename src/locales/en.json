@@ -27,7 +27,18 @@
     "backHome": "Back to home"
   },
   "HomePage": {
-    "categories": "Categories"
+    "categories": "Categories",
+    "newProducts": "New products",
+    "discoverServices": "Discover our services",
+    "showAllServices": "Show all services"
+  },
+  "AboutUs": {
+    "title": "About Us",
+    "subTitle": "Cyna, your cybersecurity expert",
+    "desc1": "Founded by passionate experts, Cyna has established itself as a key player in the field of cybersecurity for SMEs and Managed Service Providers (MSPs). Our mission is clear: to make cybersecurity accessible and effective for businesses of all sizes.",
+    "desc2": "As a pure cybersecurity player, we focus all our expertise and resources on protecting your digital environment against increasingly sophisticated threats.",
+    "phrase": "Pure cybersecurity player for SMEs and MSPs",
+    "learnMore": "Learn more"
   },
   "ProductCard": {
     "showMore": "Show more"
@@ -169,5 +180,13 @@
     "codePlaceholder": "Enter the 6-digit code",
     "verifyButton": "Verify",
     "loading": "Loading..."
+  },
+  "Product": {
+    "addToCart": "Add to cart",
+    "addProductToastTitle": "Product added to cart",
+    "addProductToastDescription": "The product has been added to your cart."
+  },
+  "Category": {
+    "products": "Products"
   }
 }

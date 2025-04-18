@@ -5,6 +5,7 @@ import clsx from "clsx"
 import { NextIntlClientProvider } from "next-intl"
 import { getLocale } from "next-intl/server"
 import localFont from "next/font/local"
+import Script from "next/script"
 import { getLangDir } from "rtl-detect"
 import "./globals.css"
 
@@ -50,6 +51,11 @@ const RootLayout = async ({ children }) => {
         </ThemeProvider>
         <Toaster />
       </body>
+      <Script
+        async
+        src={`${process.env.UMAMI_URL}/script.js`}
+        data-website-id={process.env.UMAMI_WEBSITE_ID}
+      />
     </html>
   )
 }

@@ -1,3 +1,5 @@
+"use client"
+
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -20,6 +22,7 @@ import {
 } from "@/features/auth/utils/authClient"
 import Link from "next/link"
 import ResendEmailButton from "@/features/auth/components/ResendEmailButton"
+import { accountSchema } from "../schemas/changeEmail"
 
 const ProfileInfoUpdate = () => {
   const { data: session } = useSession()
@@ -29,7 +32,7 @@ const ProfileInfoUpdate = () => {
   const [isEmailChangeInitiated, setIsEmailChangeInitiated] = useState(false)
 
   const form = useForm({
-    resolver: zodResolver(changeEmail),
+    resolver: zodResolver(accountSchema),
     defaultValues: {
       name: session?.user?.name || "",
       email: session?.user?.email || "",
