@@ -18,6 +18,7 @@ import {
 import { usePaymentMethod } from "@/features/stripe/hooks/usePaymentMethode"
 import { toast } from "@/hooks/use-toast"
 import { CreditCard, PlusCircle, ShieldCheck } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { useEffect, useState } from "react"
 
 const SavedPaymentMethods = ({
@@ -29,6 +30,7 @@ const SavedPaymentMethods = ({
   total,
   stripePromise,
 }) => {
+  const t = useTranslations("SavedPaymentMethods")
   const [paymentMethods, setPaymentMethods] = useState([])
   const [selectedMethod, setSelectedMethod] = useState(null)
   const { data: paymentMethodsData, isLoading } = usePaymentMethod(userId)
@@ -66,9 +68,8 @@ const SavedPaymentMethods = ({
 
     if (!selectedMethod) {
       toast({
-        title: "Méthode de paiement requise",
-        description:
-          "Veuillez sélectionner une méthode de paiement pour continuer",
+        title: t("paymentMethodRequired"),
+        description: t("paymentMethodRequiredDesc"),
         variant: "destructive",
       })
 
@@ -91,7 +92,7 @@ const SavedPaymentMethods = ({
       })
 
       if (!paymentIntentResponse || !paymentIntentResponse.clientSecret) {
-        throw new Error("Erreur lors de la création de l'intention de paiement")
+        throw new Error(t("createPaymentIntentError"))
       }
 
       console.log("Réponse de l'intention de paiement:", paymentIntentResponse)
@@ -104,7 +105,7 @@ const SavedPaymentMethods = ({
       )
 
       if (result.error) {
-        throw new Error(`Erreur de paiement: ${result.error.message}`)
+        throw new Error(`${t("paymentError")}: ${result.error.message}`)
       }
 
       if (result.paymentIntent && result.paymentIntent.status === "succeeded") {
@@ -114,8 +115,8 @@ const SavedPaymentMethods = ({
 
         if (confirmationResponse && confirmationResponse.success) {
           toast({
-            title: "Paiement réussi",
-            description: "Votre commande a été validée avec succès",
+            title: "paymentSuccess",
+            description: "orderConfirmed",
           })
 
           console.log("paymentId", paymentIntentResponse.paymentId)
@@ -129,11 +130,11 @@ const SavedPaymentMethods = ({
         }
       }
     } catch (err) {
-      console.error("Erreur de paiement:", err)
-      setError(err.message || "Une erreur est survenue lors du paiement")
+      console.error(`${t("paymentError")}:`, err)
+      setError(err.message || t("paymentErrorDefault"))
       toast({
-        title: "Erreur de paiement",
-        description: err.message || "Une erreur est survenue lors du paiement",
+        title: t("paymentError"),
+        description: err.message || t("paymentErrorDefault"),
         variant: "destructive",
       })
     } finally {
@@ -145,13 +146,11 @@ const SavedPaymentMethods = ({
     return (
       <Card>
         <CardHeader>
-          <CardTitle>Vos méthodes de paiement</CardTitle>
-          <CardDescription>
-            Sélectionnez une méthode de paiement
-          </CardDescription>
+          <CardTitle>{t("title")}</CardTitle>
+          <CardDescription>{t("selectDescription")}</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="py-6 text-center">Chargement en cours...</div>
+          <div className="py-6 text-center">{t("loading")}</div>
         </CardContent>
       </Card>
     )
@@ -163,11 +162,9 @@ const SavedPaymentMethods = ({
         <CardHeader>
           <CardTitle className="flex items-center">
             <CreditCard className="mr-2 h-5 w-5" />
-            Vos méthodes de paiement
+            {t("title")}
           </CardTitle>
-          <CardDescription>
-            Sélectionnez une carte pour finaliser votre achat
-          </CardDescription>
+          <CardDescription>{t("description")}</CardDescription>
         </CardHeader>
         <CardContent>
           <RadioGroup
@@ -205,13 +202,13 @@ const SavedPaymentMethods = ({
           <div className="mt-6 flex justify-center">
             <Button variant="outline" onClick={onAddNew}>
               <PlusCircle className="mr-2 h-4 w-4" />
-              Ajouter une nouvelle carte
+              {t("addNewCard")}
             </Button>
           </div>
         </CardContent>
         <CardFooter>
           <Button onClick={onGoBack} variant="outline" className="mr-2">
-            Retour
+            {t("back")}
           </Button>
         </CardFooter>
       </Card>
@@ -219,7 +216,7 @@ const SavedPaymentMethods = ({
       <div className="space-y-4">
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-lg">Récapitulatif</CardTitle>
+            <CardTitle className="text-lg">{t("summary")}</CardTitle>
           </CardHeader>
           <CardContent className="pb-2">
             {cartItems.map((item) => (
@@ -234,11 +231,11 @@ const SavedPaymentMethods = ({
             ))}
             <Separator className="my-2" />
             <div className="flex justify-between py-1">
-              <span>Total</span>
+              <span>{t("total")}</span>
               <span className="font-bold">€{total.toFixed(2)}</span>
             </div>
             <div className="flex justify-between py-1 text-sm text-muted-foreground">
-              <span>dont TVA (20%)</span>
+              <span>{t("vatIncluded")}</span>
               <span>€{(total * 0.2).toFixed(2)}</span>
             </div>
           </CardContent>
@@ -250,7 +247,9 @@ const SavedPaymentMethods = ({
                 !selectedMethod || isProcessing || cartItems.length === 0
               }
             >
-              {isProcessing ? "Traitement..." : `Payer ${total.toFixed(2)} €`}
+              {isProcessing
+                ? t("processingButton")
+                : `${t("payButton")} ${total.toFixed(2)} €`}
             </Button>
           </CardFooter>
         </Card>
@@ -265,11 +264,10 @@ const SavedPaymentMethods = ({
         <Alert className="border-muted bg-muted/50">
           <ShieldCheck className="h-4 w-4" />
           <AlertTitle className="text-sm font-medium">
-            Paiement sécurisé
+            {t("securePaymentTitle")}
           </AlertTitle>
           <AlertDescription className="text-xs">
-            Vos informations de paiement sont protégées par un chiffrement SSL.
-            Nous n'enregistrons jamais vos données de carte complètes.
+            {t("securePaymentDesc")}
           </AlertDescription>
         </Alert>
       </div>

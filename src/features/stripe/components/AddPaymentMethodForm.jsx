@@ -13,9 +13,11 @@ import { useAttachPaymentMethod } from "@/features/stripe/hooks/usePaymentMethod
 import { toast } from "@/hooks/useToast"
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import { CreditCard, ShieldCheck } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 
 const AddPaymentMethodForm = ({ userId, onSuccess }) => {
+  const t = useTranslations("AddPaymentMethodForm")
   const stripe = useStripe()
   const elements = useElements()
   const [loading, setLoading] = useState(false)
@@ -45,8 +47,8 @@ const AddPaymentMethodForm = ({ userId, onSuccess }) => {
 
     if (!billingDetails.name.trim()) {
       toast({
-        title: "Information manquante",
-        description: "Veuillez indiquer le nom du titulaire de la carte",
+        title: t("missingInfo"),
+        description: t("nameRequired"),
         variant: "destructive",
       })
 
@@ -77,8 +79,8 @@ const AddPaymentMethodForm = ({ userId, onSuccess }) => {
       await attachPaymentMethod({ userId, paymentMethodId: paymentMethod.id })
 
       toast({
-        title: "Succès",
-        description: "Nouvelle méthode de paiement ajoutée",
+        title: t("success"),
+        description: t("addedPaymentMethod"),
       })
 
       elements.getElement(CardElement).clear()
@@ -96,9 +98,8 @@ const AddPaymentMethodForm = ({ userId, onSuccess }) => {
     } catch (error) {
       console.error("Erreur lors de l'ajout de la méthode de paiement:", error)
       toast({
-        title: "Erreur",
-        description:
-          error.message || "Impossible d'ajouter cette méthode de paiement",
+        title: t("error"),
+        description: error.message || t("cannotAddPayment"),
         variant: "destructive",
       })
     } finally {
@@ -126,32 +127,30 @@ const AddPaymentMethodForm = ({ userId, onSuccess }) => {
       <CardHeader>
         <CardTitle className="flex items-center">
           <CreditCard className="mr-2 h-5 w-5" />
-          Ajouter une nouvelle carte
+          {t("cardTitle")}
         </CardTitle>
-        <CardDescription>
-          Vos informations de paiement sont sécurisées
-        </CardDescription>
+        <CardDescription>{t("cardDescription")}</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit}>
           <div className="grid gap-6">
             <div className="grid gap-3">
-              <Label htmlFor="card-element">Informations de carte</Label>
+              <Label htmlFor="card-element">{t("cardInfoLabel")}</Label>
               <div className="rounded-md border p-4">
                 <CardElement id="card-element" options={cardElementOptions} />
               </div>
               <p className="flex items-center text-sm text-muted-foreground">
                 <ShieldCheck className="mr-1 h-4 w-4" />
-                Votre carte est traitée de manière sécurisée par Stripe.
+                {t("secureProcessing")}
               </p>
             </div>
 
             <div className="grid gap-3">
-              <Label htmlFor="name">Nom du titulaire</Label>
+              <Label htmlFor="name">{t("cardholderName")}</Label>
               <Input
                 id="name"
                 name="name"
-                placeholder="Jean Dupont"
+                placeholder={t("cardholderNamePlaceholder")}
                 value={billingDetails.name}
                 onChange={handleInputChange}
                 required
@@ -160,14 +159,14 @@ const AddPaymentMethodForm = ({ userId, onSuccess }) => {
 
             <Separator className="my-4" />
 
-            <h3 className="text-lg font-medium">Adresse de facturation</h3>
+            <h3 className="text-lg font-medium">{t("billingAddress")}</h3>
 
             <div className="grid gap-3">
-              <Label htmlFor="addressLine1">Adresse</Label>
+              <Label htmlFor="addressLine1">{t("addressLabel")}</Label>
               <Input
                 id="addressLine1"
                 name="addressLine1"
-                placeholder="123 rue de Paris"
+                placeholder={t("addressPlaceholder")}
                 value={billingDetails.addressLine1}
                 onChange={handleInputChange}
               />
@@ -175,21 +174,21 @@ const AddPaymentMethodForm = ({ userId, onSuccess }) => {
 
             <div className="grid gap-4 md:grid-cols-2">
               <div className="grid gap-3">
-                <Label htmlFor="city">Ville</Label>
+                <Label htmlFor="city">{t("cityLabel")}</Label>
                 <Input
                   id="city"
                   name="city"
-                  placeholder="Paris"
+                  placeholder={t("cityPlaceholder")}
                   value={billingDetails.city}
                   onChange={handleInputChange}
                 />
               </div>
               <div className="grid gap-3">
-                <Label htmlFor="postalCode">Code postal</Label>
+                <Label htmlFor="postalCode">{t("postalCodeLabel")}</Label>
                 <Input
                   id="postalCode"
                   name="postalCode"
-                  placeholder="75001"
+                  placeholder={t("postalCodePlaceholder")}
                   value={billingDetails.postalCode}
                   onChange={handleInputChange}
                 />
@@ -197,11 +196,11 @@ const AddPaymentMethodForm = ({ userId, onSuccess }) => {
             </div>
 
             <div className="grid gap-3">
-              <Label htmlFor="country">Pays</Label>
+              <Label htmlFor="country">{t("countryLabel")}</Label>
               <Input
                 id="country"
                 name="country"
-                placeholder="France"
+                placeholder={t("countryPlaceholder")}
                 value={billingDetails.country}
                 onChange={handleInputChange}
               />
@@ -214,10 +213,10 @@ const AddPaymentMethodForm = ({ userId, onSuccess }) => {
                 type="button"
                 onClick={() => onSuccess()}
               >
-                Annuler
+                {t("cancelButton")}
               </Button>
               <Button type="submit" className="flex-1" disabled={loading}>
-                {loading ? "Traitement en cours..." : "Ajouter cette carte"}
+                {loading ? t("processingButton") : t("addCardButton")}
               </Button>
             </div>
           </div>

@@ -3,7 +3,7 @@
 import { useSession } from "@/features/auth/utils/authClient"
 import { LucideLoader2 } from "lucide-react"
 
-import SubscriptionForm from "@/features/stripe/components/SubscriptionForm"
+import PaymentForm from "@/features/stripe/components/PaymentForm"
 
 const Subscriptions = () => {
   const { data: session } = useSession()
@@ -18,7 +18,7 @@ const Subscriptions = () => {
 
   return (
     <main className="flex flex-1 flex-col items-center">
-      <SubscriptionForm userId={session.user.id} />
+      <PaymentForm userId={session.user.id} />
     </main>
   )
 }
