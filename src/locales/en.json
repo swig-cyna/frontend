@@ -181,6 +181,78 @@
     "verifyButton": "Verify",
     "loading": "Loading..."
   },
+  "AddPaymentMethodForm": {
+    "cardTitle": "Add a new card",
+    "cardDescription": "Your payment information is secure",
+    "cardInfoLabel": "Card information",
+    "secureProcessing": "Your card is securely processed by Stripe.",
+    "cardholderName": "Cardholder name",
+    "cardholderNamePlaceholder": "John Doe",
+    "billingAddress": "Billing address",
+    "addressLabel": "Address",
+    "addressPlaceholder": "123 Main St",
+    "cityLabel": "City",
+    "cityPlaceholder": "New York",
+    "postalCodeLabel": "Postal code",
+    "postalCodePlaceholder": "10001",
+    "countryLabel": "Country",
+    "countryPlaceholder": "United States",
+    "cancelButton": "Cancel",
+    "addCardButton": "Add this card",
+    "processingButton": "Processing...",
+    "missingInfo": "Missing information",
+    "nameRequired": "Please provide the cardholder's name",
+    "success": "Success",
+    "addedPaymentMethod": "New payment method added",
+    "error": "Error",
+    "cannotAddPayment": "Unable to add this payment method"
+  },
+  "PaymentConfirmation": {
+    "title": "Payment confirmed!",
+    "description": "Thank you for your order. A receipt has been sent to your email address.",
+    "backToHome": "Back to home"
+  },
+  "RecapCart": {
+    "summary": "Summary",
+    "subtotal": "Subtotal",
+    "vat": "VAT (20%)",
+    "total": "Total",
+    "continueToPayment": "Continue to payment"
+  },
+  "RecapRowProduct": {
+    "quantity": "Qty:",
+    "perUnit": "per unit"
+  },
+  "SavedPaymentMethods": {
+    "title": "Your payment methods",
+    "description": "Select a card to finalize your purchase",
+    "selectDescription": "Select a payment method",
+    "loading": "Loading...",
+    "addNewCard": "Add a new card",
+    "summary": "Summary",
+    "total": "Total",
+    "vatIncluded": "including VAT (20%)",
+    "back": "Back",
+    "payButton": "Pay",
+    "processingButton": "Processing...",
+    "paymentMethodRequired": "Payment method required",
+    "paymentMethodRequiredDesc": "Please select a payment method to continue",
+    "paymentError": "Payment error",
+    "paymentErrorDefault": "An error occurred during the payment",
+    "paymentSuccess": "Payment successful",
+    "orderConfirmed": "Your order has been successfully confirmed",
+    "createPaymentIntentError": "Error creating payment intent",
+    "paymentErrorPrefix": "Payment error:",
+    "securePaymentTitle": "Secure payment",
+    "securePaymentDesc": "Your payment information is protected by SSL encryption. We never store your complete card details."
+  },
+  "PaymentForm": {
+    "title": "Finalize your order",
+    "description": "Follow the steps to complete your payment",
+    "step1": "Summary",
+    "step2": "Payment",
+    "step3": "Confirmation"
+  },
   "Product": {
     "addToCart": "Add to cart",
     "addProductToastTitle": "Product added to cart",
