@@ -1,4 +1,5 @@
 import { Card } from "@/components/ui/card"
+import { getProductImageUrl } from "@/features/products/utils/image"
 import { useTranslations } from "next-intl"
 import Image from "next/image"
 
@@ -11,7 +12,7 @@ const RecapRowProduct = ({ data }) => {
         <div className="h-16 w-16 overflow-hidden rounded-lg bg-gray-100">
           <Image
             className="h-full w-full object-cover"
-            src="https://picsum.photos/500/500"
+            src={getProductImageUrl(data.images[0])}
             alt={data.name}
             width={80}
             height={80}

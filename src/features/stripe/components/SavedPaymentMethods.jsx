@@ -11,6 +11,7 @@ import {
 import { Label } from "@/components/ui/label"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Separator } from "@/components/ui/separator"
+import { Skeleton } from "@/components/ui/skeleton"
 import {
   usePaymentConfirm,
   usePaymentIntent,
@@ -144,21 +145,16 @@ const SavedPaymentMethods = ({
 
   if (isLoading) {
     return (
-      <Card>
-        <CardHeader>
-          <CardTitle>{t("title")}</CardTitle>
-          <CardDescription>{t("selectDescription")}</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="py-6 text-center">{t("loading")}</div>
-        </CardContent>
-      </Card>
+      <div className="grid gap-6 md:grid-cols-[1fr_300px]">
+        <Skeleton className="h-80" />
+        <Skeleton className="h-80" />
+      </div>
     )
   }
 
   return (
     <div className="grid gap-6 md:grid-cols-[1fr_300px]">
-      <Card>
+      <Card className="flex flex-col">
         <CardHeader>
           <CardTitle className="flex items-center">
             <CreditCard className="mr-2 h-5 w-5" />
@@ -166,7 +162,7 @@ const SavedPaymentMethods = ({
           </CardTitle>
           <CardDescription>{t("description")}</CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="flex-1">
           <RadioGroup
             value={selectedMethod}
             onValueChange={setSelectedMethod}

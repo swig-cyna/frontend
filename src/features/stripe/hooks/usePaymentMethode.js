@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 
 export const usePaymentMethod = (userId) =>
   useQuery({
+    retry: false,
     queryKey: ["paymentMethode"],
     queryFn: () => apiClient.get(`payment-methods/${userId}`).json(),
   })
