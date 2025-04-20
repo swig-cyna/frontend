@@ -20,8 +20,6 @@ export const sendSupportEmail = async ({
       credentials: "include",
     })
 
-    console.log(response)
-
     if (!response.ok) {
       throw new Error("Erreur lors de la création du ticket")
     }

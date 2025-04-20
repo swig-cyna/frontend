@@ -1,7 +1,6 @@
 import { z } from "zod"
 
 export const editTicketSchema = z.object({
-  status: z.string({
-    required_error: "Please select a status.",
-  }),
+  status: z.enum(["open", "in_progress", "closed"]),
+  assigned_to: z.string().nullable().optional(),
 })

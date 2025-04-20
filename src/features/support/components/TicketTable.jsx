@@ -1,6 +1,6 @@
 "use client"
 
-import { MoreHorizontal, Pencil, Trash2 } from "lucide-react"
+import { ChevronDown, MoreHorizontal, Pencil, Trash2 } from "lucide-react"
 import React, { useState } from "react"
 
 import { Badge } from "@/components/ui/badge"
@@ -48,11 +48,11 @@ export function TicketTable({ tickets, refreshTickets }) {
             <TableRow>
               <TableHead>Title</TableHead>
               <TableHead>Subject</TableHead>
-              <TableHead className="w-24">Creation</TableHead>
-              <TableHead className="w-24">Updated</TableHead>
-              <TableHead className="w-32">Assigned</TableHead>
+              <TableHead className="w-24">Last updated</TableHead>
+              <TableHead className="w-24">Assigned</TableHead>
               <TableHead className="w-24">Status</TableHead>
               <TableHead className="w-16">Actions</TableHead>
+              <TableHead className="w-16"></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -62,21 +62,12 @@ export function TicketTable({ tickets, refreshTickets }) {
                   className="cursor-pointer"
                   onClick={() => toggleRow(ticket.id)}
                 >
-                  <TableCell className="font-medium">{ticket.title}</TableCell>
+                  <TableCell>{ticket.title}</TableCell>
                   <TableCell>
                     <Badge className={getSubjectVariant(ticket.theme)}>
                       {ticket.theme.charAt(0).toUpperCase() +
                         ticket.theme.slice(1)}
                     </Badge>
-                  </TableCell>
-                  <TableCell>
-                    {format.dateTime(new Date(ticket.created_at), {
-                      year: "numeric",
-                      month: "short",
-                      day: "numeric",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
                   </TableCell>
                   <TableCell>
                     {format.dateTime(new Date(ticket.updated_at), {
@@ -88,7 +79,7 @@ export function TicketTable({ tickets, refreshTickets }) {
                     })}
                   </TableCell>
                   <TableCell className="break-all">
-                    {ticket.assigned_to ? ticket.assigned_to_name : "nobody"}
+                    {ticket.assigned_to ? ticket.assigned_to_name : "Nobody"}
                   </TableCell>
                   <TableCell>
                     <Badge className={getStatusVariant(ticket.status)}>
@@ -113,7 +104,7 @@ export function TicketTable({ tickets, refreshTickets }) {
                           className="cursor-pointer"
                         >
                           <Pencil className="mr-2 h-4 w-4" />
-                          Edit role
+                          Edit ticket
                         </DropdownMenuItem>
                         <DropdownMenuItem
                           onClick={() => setTicketToDelete(ticket)}
@@ -125,11 +116,14 @@ export function TicketTable({ tickets, refreshTickets }) {
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </TableCell>
+                  <TableCell>
+                    <ChevronDown />
+                  </TableCell>
                 </TableRow>
                 {openRows.includes(ticket.id) && (
                   <TableRow>
                     <TableCell colSpan={7} className="bg-muted p-4">
-                      {ticket.description}
+                      Details : {ticket.description}
                     </TableCell>
                   </TableRow>
                 )}

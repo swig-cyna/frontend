@@ -1,7 +1,7 @@
 "use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 
 import { Button } from "@/components/ui/button"
@@ -31,6 +31,7 @@ import {
 import { editTicketSchema } from "@/features/support/schemas/editTicket"
 import { toast } from "@/hooks/useToast"
 import { apiClient } from "@/utils/fetch"
+import { ComboboxUser } from "./ComboboxUser"
 
 export function EditTicketDialog({
   ticket,
@@ -39,14 +40,40 @@ export function EditTicketDialog({
   onTicketUpdated,
 }) {
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [users, setUsers] = useState([])
+  const [comboOpen, setComboOpen] = useState(false)
 
   const form = useForm({
     resolver: zodResolver(editTicketSchema),
     defaultValues: {
       status: ticket.status,
-      assigned_to: ticket.assigned_to || "",
+      assigned_to: ticket.assigned_to || null,
     },
   })
+
+  useEffect(() => {
+    async function fetchUsers() {
+      try {
+        const res = await apiClient.get(
+          "admin/users?role=support%2Cadmin%2Csuperadmin",
+          {
+            credentials: "include",
+          },
+        )
+        const data = await res.json()
+        setUsers(
+          data.users.map((user) => ({
+            label: `${user.name}`,
+            value: user.id,
+          })),
+        )
+      } catch (e) {
+        console.error(e)
+        setUsers([])
+      }
+    }
+    fetchUsers()
+  }, [])
 
   const onSubmit = async (values) => {
     try {
@@ -118,6 +145,34 @@ export function EditTicketDialog({
                       <SelectItem value="closed">Closed</SelectItem>
                     </SelectContent>
                   </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="assigned_to"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Assigné à</FormLabel>
+                  <FormControl>
+                    <ComboboxUser
+                      options={users}
+                      value={field.value ?? ""}
+                      onValueChange={(value) => {
+                        field.onChange(value === "" ? null : value)
+                        setTimeout(() => {
+                          console.log(
+                            "Form value after change:",
+                            form.getValues("assigned_to"),
+                          )
+                        }, 0)
+                      }}
+                      open={comboOpen}
+                      onOpenChange={setComboOpen}
+                      placeholder="Sélectionner un utilisateur..."
+                    />
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
