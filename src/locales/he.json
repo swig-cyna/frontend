@@ -223,6 +223,78 @@
     "successMessage": "הפנייה שלך נוצרה בהצלחה.",
     "errorMessage": "אירעה שגיאה. נסה שוב מאוחר יותר."
   },
+  "AddPaymentMethodForm": {
+    "cardTitle": "הוסף כרטיס חדש",
+    "cardDescription": "פרטי התשלום שלך מאובטחים",
+    "cardInfoLabel": "פרטי כרטיס",
+    "secureProcessing": "הכרטיס שלך מעובד באופן מאובטח על ידי Stripe.",
+    "cardholderName": "שם בעל הכרטיס",
+    "cardholderNamePlaceholder": "ישראל ישראלי",
+    "billingAddress": "כתובת לחיוב",
+    "addressLabel": "כתובת",
+    "addressPlaceholder": "רחוב הרצל 123",
+    "cityLabel": "עיר",
+    "cityPlaceholder": "תל אביב",
+    "postalCodeLabel": "מיקוד",
+    "postalCodePlaceholder": "6701101",
+    "countryLabel": "מדינה",
+    "countryPlaceholder": "ישראל",
+    "cancelButton": "ביטול",
+    "addCardButton": "הוסף כרטיס זה",
+    "processingButton": "מעבד...",
+    "missingInfo": "מידע חסר",
+    "nameRequired": "אנא הזן את שם בעל הכרטיס",
+    "success": "הצלחה",
+    "addedPaymentMethod": "אמצעי תשלום חדש נוסף",
+    "error": "שגיאה",
+    "cannotAddPayment": "לא ניתן להוסיף את אמצעי התשלום הזה"
+  },
+  "PaymentConfirmation": {
+    "title": "התשלום אושר!",
+    "description": "תודה על הזמנתך. קבלה נשלחה לכתובת האימייל שלך.",
+    "backToHome": "חזרה לדף הבית"
+  },
+  "RecapCart": {
+    "summary": "סיכום",
+    "subtotal": "סכום ביניים",
+    "vat": "מע\"מ (20%)",
+    "total": "סה\"כ",
+    "continueToPayment": "המשך לתשלום"
+  },
+  "RecapRowProduct": {
+    "quantity": "כמות:",
+    "perUnit": "ליחידה"
+  },
+  "SavedPaymentMethods": {
+    "title": "אמצעי התשלום שלך",
+    "description": "בחר כרטיס לסיום הרכישה",
+    "selectDescription": "בחר אמצעי תשלום",
+    "loading": "טוען...",
+    "addNewCard": "הוסף כרטיס חדש",
+    "summary": "סיכום",
+    "total": "סה\"כ",
+    "vatIncluded": "כולל מע\"מ (20%)",
+    "back": "חזרה",
+    "payButton": "שלם",
+    "processingButton": "מעבד...",
+    "paymentMethodRequired": "אמצעי תשלום נדרש",
+    "paymentMethodRequiredDesc": "אנא בחר אמצעי תשלום כדי להמשיך",
+    "paymentError": "שגיאת תשלום",
+    "paymentErrorDefault": "אירעה שגיאה במהלך התשלום",
+    "paymentSuccess": "התשלום הצליח",
+    "orderConfirmed": "הזמנתך אושרה בהצלחה",
+    "createPaymentIntentError": "שגיאה ביצירת כוונת תשלום",
+    "paymentErrorPrefix": "שגיאת תשלום:",
+    "securePaymentTitle": "תשלום מאובטח",
+    "securePaymentDesc": "פרטי התשלום שלך מוגנים באמצעות הצפנת SSL. לעולם איננו שומרים את פרטי הכרטיס המלאים שלך."
+  },
+  "PaymentForm": {
+    "title": "סיים את ההזמנה שלך",
+    "description": "עקוב אחר השלבים להשלמת התשלום",
+    "step1": "סיכום",
+    "step2": "תשלום",
+    "step3": "אישור"
+  },
   "Product": {
     "addToCart": "הוסף לעגלה",
     "addProductToastTitle": "המוצר נוסף לעגלה",

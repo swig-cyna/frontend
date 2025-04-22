@@ -224,6 +224,78 @@
     "successMessage": "Votre ticket a été créé avec succès.",
     "errorMessage": "Une erreur est survenue. Veuillez réessayer plus tard."
   },
+  "AddPaymentMethodForm": {
+    "cardTitle": "Ajouter une nouvelle carte",
+    "cardDescription": "Vos informations de paiement sont sécurisées",
+    "cardInfoLabel": "Informations de carte",
+    "secureProcessing": "Votre carte est traitée de manière sécurisée par Stripe.",
+    "cardholderName": "Nom du titulaire",
+    "cardholderNamePlaceholder": "Jean Dupont",
+    "billingAddress": "Adresse de facturation",
+    "addressLabel": "Adresse",
+    "addressPlaceholder": "123 rue de Paris",
+    "cityLabel": "Ville",
+    "cityPlaceholder": "Paris",
+    "postalCodeLabel": "Code postal",
+    "postalCodePlaceholder": "75001",
+    "countryLabel": "Pays",
+    "countryPlaceholder": "France",
+    "cancelButton": "Annuler",
+    "addCardButton": "Ajouter cette carte",
+    "processingButton": "Traitement en cours...",
+    "missingInfo": "Information manquante",
+    "nameRequired": "Veuillez indiquer le nom du titulaire de la carte",
+    "success": "Succès",
+    "addedPaymentMethod": "Nouvelle méthode de paiement ajoutée",
+    "error": "Erreur",
+    "cannotAddPayment": "Impossible d'ajouter cette méthode de paiement"
+  },
+  "PaymentConfirmation": {
+    "title": "Paiement confirmé !",
+    "description": "Merci pour votre commande. Un reçu a été envoyé à votre adresse email.",
+    "backToHome": "Retour à l'accueil"
+  },
+  "RecapCart": {
+    "summary": "Récapitulatif",
+    "subtotal": "Sous-total",
+    "vat": "TVA (20%)",
+    "total": "Total",
+    "continueToPayment": "Continuer vers le paiement"
+  },
+  "RecapRowProduct": {
+    "quantity": "Qté:",
+    "perUnit": "par unité"
+  },
+  "SavedPaymentMethods": {
+    "title": "Vos méthodes de paiement",
+    "description": "Sélectionnez une carte pour finaliser votre achat",
+    "selectDescription": "Sélectionnez une méthode de paiement",
+    "loading": "Chargement en cours...",
+    "addNewCard": "Ajouter une nouvelle carte",
+    "summary": "Récapitulatif",
+    "total": "Total",
+    "vatIncluded": "dont TVA (20%)",
+    "back": "Retour",
+    "payButton": "Payer",
+    "processingButton": "Traitement...",
+    "paymentMethodRequired": "Méthode de paiement requise",
+    "paymentMethodRequiredDesc": "Veuillez sélectionner une méthode de paiement pour continuer",
+    "paymentError": "Erreur de paiement",
+    "paymentErrorDefault": "Une erreur est survenue lors du paiement",
+    "paymentSuccess": "Paiement réussi",
+    "orderConfirmed": "Votre commande a été validée avec succès",
+    "createPaymentIntentError": "Erreur lors de la création de l'intention de paiement",
+    "paymentErrorPrefix": "Erreur de paiement:",
+    "securePaymentTitle": "Paiement sécurisé",
+    "securePaymentDesc": "Vos informations de paiement sont protégées par un chiffrement SSL. Nous n'enregistrons jamais vos données de carte complètes."
+  },
+  "PaymentForm": {
+    "title": "Finaliser votre commande",
+    "description": "Suivez les étapes pour compléter votre paiement",
+    "step1": "Récapitulatif",
+    "step2": "Paiement",
+    "step3": "Confirmation"
+  },
   "Product": {
     "addToCart": "Ajouter au panier",
     "addProductToastTitle": "Produit ajouté au panier",
