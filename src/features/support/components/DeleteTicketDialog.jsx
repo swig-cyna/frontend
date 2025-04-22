@@ -11,8 +11,8 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
 import { toast } from "@/hooks/useToast"
-import { apiClient } from "@/utils/fetch"
 import { useState } from "react"
+import { TicketService } from "../utils/apiTicketService"
 
 export function DeleteTicketDialog({
   ticket,
@@ -26,11 +26,7 @@ export function DeleteTicketDialog({
     try {
       setIsDeleting(true)
 
-      const response = await apiClient
-        .delete(`tickets/${ticket.id}`, {
-          credentials: "include",
-        })
-        .json()
+      const response = await TicketService.deleteTicket(ticket.id)
 
       if (response.error) {
         throw response.error

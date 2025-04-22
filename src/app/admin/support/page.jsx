@@ -3,11 +3,11 @@
 import { Badge } from "@/components/ui/badge"
 import { DashboardHeader } from "@/features/admin/components/DashboardHeader"
 import { TicketTable } from "@/features/support/components/TicketTable"
+import { TicketService } from "@/features/support/utils/apiTicketService"
 import {
   getStatusVariant,
   getSubjectVariant,
 } from "@/features/support/utils/functions"
-import { apiClient } from "@/utils/fetch"
 import { useFormatter } from "next-intl"
 import { useEffect, useState } from "react"
 
@@ -17,15 +17,7 @@ const Page = () => {
 
   const refreshTickets = async () => {
     try {
-      const response = await apiClient.get("tickets?context=backoffice", {
-        credentials: "include",
-      })
-
-      if (!response.ok) {
-        throw new Error("Échec du chargement des tickets")
-      }
-
-      const data = await response.json()
+      const data = await TicketService.fetchTickets("backoffice")
       setTickets(data)
     } catch (error) {
       console.error("Erreur de chargement des tickets :", error.message)

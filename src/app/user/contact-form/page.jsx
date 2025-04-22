@@ -10,9 +10,9 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { TicketTable } from "@/features/support/components/TicketTable"
+import { TicketService } from "@/features/support/utils/apiTicketService"
 import { getStatusVariant } from "@/features/support/utils/functions"
 import ContactForm from "@/features/userspace/components/ContactForm"
-import { apiClient } from "@/utils/fetch"
 import { useFormatter } from "next-intl"
 import { useEffect, useState } from "react"
 
@@ -24,16 +24,7 @@ const ContactPage = () => {
 
   const refreshTickets = async () => {
     try {
-      setLoading(true)
-      const response = await apiClient.get("tickets?context=userspace", {
-        credentials: "include",
-      })
-
-      if (!response.ok) {
-        throw new Error("Échec du chargement des tickets")
-      }
-
-      const data = await response.json()
+      const data = await TicketService.fetchTickets("userspace")
       setTickets(data)
     } catch (error) {
       console.error("Erreur de chargement des tickets :", error.message)

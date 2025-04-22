@@ -30,7 +30,7 @@ import {
 } from "@/components/ui/select"
 import { editTicketSchema } from "@/features/support/schemas/editTicket"
 import { toast } from "@/hooks/useToast"
-import { apiClient } from "@/utils/fetch"
+import { TicketService } from "../utils/apiTicketService"
 import { ComboboxUser } from "./ComboboxUser"
 
 export function EditTicketDialog({
@@ -54,19 +54,8 @@ export function EditTicketDialog({
   useEffect(() => {
     async function fetchUsers() {
       try {
-        const res = await apiClient.get(
-          "admin/users?role=support%2Cadmin%2Csuperadmin",
-          {
-            credentials: "include",
-          },
-        )
-        const data = await res.json()
-        setUsers(
-          data.users.map((user) => ({
-            label: `${user.name}`,
-            value: user.id,
-          })),
-        )
+        const usersData = await TicketService.fetchSupportUsers()
+        setUsers(usersData)
       } catch (e) {
         console.error(e)
         setUsers([])
@@ -79,12 +68,9 @@ export function EditTicketDialog({
     try {
       setIsSubmitting(true)
 
-      const { error } = await apiClient.patch(`tickets/${ticket.id}`, {
-        json: {
-          ...values,
-          assigned_to: values.assigned_to || null,
-        },
-        credentials: "include",
+      const { error } = await TicketService.updateTicket(ticket.id, {
+        ...values,
+        assigned_to: values.assigned_to || null,
       })
 
       if (error) {
@@ -161,12 +147,6 @@ export function EditTicketDialog({
                       value={field.value ?? ""}
                       onValueChange={(value) => {
                         field.onChange(value === "" ? null : value)
-                        setTimeout(() => {
-                          console.log(
-                            "Form value after change:",
-                            form.getValues("assigned_to"),
-                          )
-                        }, 0)
                       }}
                       open={comboOpen}
                       onOpenChange={setComboOpen}

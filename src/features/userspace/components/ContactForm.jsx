@@ -5,7 +5,6 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { contactFormSchema } from "../schemas/contactFormSchema"
-import { sendSupportEmail } from "../utils/emailUtils"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -32,6 +31,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
+import { TicketService } from "@/features/support/utils/apiTicketService"
 
 const ContactForm = ({ onSend }) => {
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -54,7 +54,14 @@ const ContactForm = ({ onSend }) => {
     setMessage({ content: "", type: "" })
 
     try {
-      await sendSupportEmail(data)
+      await TicketService.createTicket({
+        user_name: data.name,
+        user_email: data.email,
+        title: data.subject,
+        theme: data.theme,
+        description: data.message,
+        status: "open",
+      })
       setMessage({
         content: "Votre ticket a été créé avec succès.",
         type: "success",
