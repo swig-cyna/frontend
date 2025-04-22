@@ -27,7 +27,18 @@
     "backHome": "Retour à l'accueil"
   },
   "HomePage": {
-    "categories": "Catégories"
+    "categories": "Catégories",
+    "newProducts": "Nouveaux produits",
+    "discoverServices": "Découvrez nos services",
+    "showAllServices": "Voir tous nos services"
+  },
+  "AboutUs": {
+    "title": "Qui sommes-nous",
+    "subTitle": "Cyna, votre expert en cybersécurité",
+    "desc1": "Fondée par des experts passionnés, Cyna s'est établie comme un acteur de référence dans le domaine de la cybersécurité pour les PME et les fournisseurs de services managés (MSP). Notre mission est claire : rendre la cybersécurité accessible et efficace pour les entreprises de toutes tailles.",
+    "desc2": "En tant que pure player en cybersécurité, nous concentrons toute notre expertise et nos ressources sur la protection de votre environnement numérique contre les menaces toujours plus sophistiquées.",
+    "phrase": "Pure player en cybersécurité pour PME et MSP",
+    "learnMore": "En savoir plus"
   },
   "ProductCard": {
     "showMore": "Voir plus"
@@ -212,5 +223,13 @@
     "send": "Envoyer la demande",
     "successMessage": "Votre ticket a été créé avec succès.",
     "errorMessage": "Une erreur est survenue. Veuillez réessayer plus tard."
+  },
+  "Product": {
+    "addToCart": "Ajouter au panier",
+    "addProductToastTitle": "Produit ajouté au panier",
+    "addProductToastDescription": "Le produit a été ajouté à votre panier."
+  },
+  "Category": {
+    "products": "Produits"
   }
 }

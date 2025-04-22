@@ -38,7 +38,7 @@ export function UserTable({ users, refreshUsers, loading }) {
       <TableSkeleton
         columns={["Name", "Email", "Role", "Date Added", "Actions"]}
         rows={5}
-      ></TableSkeleton>
+      />
     )
   }
 

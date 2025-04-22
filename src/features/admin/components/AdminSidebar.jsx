@@ -6,6 +6,7 @@ import {
   LayoutDashboard,
   LifeBuoy,
   Settings,
+  Tag,
   User2,
   Users,
 } from "lucide-react"
@@ -40,8 +41,13 @@ const items = [
   },
   {
     title: "Products",
-    url: "#",
+    url: "/admin/products",
     icon: Boxes,
+  },
+  {
+    title: "Categories",
+    url: "/admin/categories",
+    icon: Tag,
   },
   {
     title: "Users",
@@ -116,20 +122,18 @@ const AdminSidebar = () => {
                     <span>Back to shop</span>
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <button
-                    onClick={async () => {
-                      await signOut({
-                        fetchOptions: {
-                          onSuccess: () => {
-                            router.push("/")
-                          },
+                <DropdownMenuItem
+                  onClick={async () => {
+                    await signOut({
+                      fetchOptions: {
+                        onSuccess: () => {
+                          router.push("/")
                         },
-                      })
-                    }}
-                  >
-                    Sign out
-                  </button>
+                      },
+                    })
+                  }}
+                >
+                  Sign out
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
