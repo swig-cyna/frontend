@@ -77,9 +77,15 @@ export function EditTicketDialog({
         throw error
       }
 
+      let assignedName = "Nobody"
+      if (values.assigned_to) {
+        const userObj = users.find((u) => u.value === values.assigned_to)
+        assignedName = userObj ? userObj.label : values.assigned_to
+      }
+
       toast({
         title: "Ticket updated",
-        description: `Status : ${values.status} | Assigned to : ${values.assigned_to || "Nobody"}`,
+        description: `Status : ${values.status} | Assigned to : ${assignedName || "Nobody"}`,
       })
 
       form.reset()
