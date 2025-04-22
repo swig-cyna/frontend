@@ -33,7 +33,7 @@ import {
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 
-const ContactForm = () => {
+const ContactForm = ({ onSend }) => {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [message, setMessage] = useState({ content: "", type: "" })
   const { data: session } = useSession()
@@ -59,6 +59,11 @@ const ContactForm = () => {
         content: "Votre ticket a été créé avec succès.",
         type: "success",
       })
+
+      if (onSend) {
+        onSend()
+      }
+
       form.reset()
     } catch (error) {
       console.error("Erreur lors de la création du ticket :", error)
