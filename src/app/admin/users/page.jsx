@@ -12,8 +12,10 @@ import { useEffect, useState } from "react"
 const Page = () => {
   const [users, setUsers] = useState([])
   const [isAddUserOpen, setIsAddUserOpen] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   const refreshUsers = async () => {
+    setLoading(true)
     try {
       const { data, error } = await authClient.admin.listUsers({
         query: {
@@ -30,6 +32,8 @@ const Page = () => {
       setUsers(data.users)
     } catch (error) {
       console.error("Erreur de chargement des utilisateurs :", error.message)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -49,7 +53,11 @@ const Page = () => {
         </Button>
       </DashboardHeader>
       <div className="p-6">
-        <UserTable users={users} refreshUsers={refreshUsers} />
+        <UserTable
+          users={users}
+          refreshUsers={refreshUsers}
+          loading={loading}
+        />
       </div>
       <AddUserDialog
         open={isAddUserOpen}

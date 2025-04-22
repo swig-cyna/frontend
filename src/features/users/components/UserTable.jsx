@@ -29,17 +29,21 @@ import {
   translateUserRole,
 } from "@/features/users/utils/functions"
 
-export function UserTable({ users, refreshUsers }) {
+export function UserTable({ users, refreshUsers, loading }) {
   const [userToEdit, setUserToEdit] = useState(null)
   const [userToDelete, setUserToDelete] = useState(null)
 
-  if (users?.length === 0) {
+  if (loading) {
     return (
       <TableSkeleton
         columns={["Name", "Email", "Role", "Date Added", "Actions"]}
         rows={5}
       ></TableSkeleton>
     )
+  }
+
+  if (users?.length === 0) {
+    return <div>No user to display</div>
   }
 
   return (
