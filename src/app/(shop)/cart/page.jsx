@@ -49,10 +49,6 @@ const CartPage = () => {
                 <h2>Discount Code</h2>
                 <Input className="mt-3" placeholder="Enter discount code" />
               </div>
-
-              <div className="pt-4">
-                <h2>Address</h2>
-              </div>
             </CardContent>
             <CardFooter className="flex w-full items-center justify-center">
               <Link href={"/payment"}>
