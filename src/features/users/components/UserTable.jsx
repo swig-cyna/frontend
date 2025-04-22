@@ -3,6 +3,7 @@
 import { MoreHorizontal, Pencil, Trash2 } from "lucide-react"
 import { useState } from "react"
 
+import { TableSkeleton } from "@/components/TableSkeleton"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
@@ -33,7 +34,12 @@ export function UserTable({ users, refreshUsers }) {
   const [userToDelete, setUserToDelete] = useState(null)
 
   if (users?.length === 0) {
-    return <div>Loading...</div>
+    return (
+      <TableSkeleton
+        columns={["Name", "Email", "Role", "Date Added", "Actions"]}
+        rows={5}
+      ></TableSkeleton>
+    )
   }
 
   return (

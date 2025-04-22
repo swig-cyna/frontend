@@ -6,6 +6,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { Skeleton } from "./ui/skeleton"
 
 export function TableSkeleton({ columns = [], rows = 3 }) {
   return (
@@ -14,7 +15,7 @@ export function TableSkeleton({ columns = [], rows = 3 }) {
         <TableRow>
           {columns.map((col, i) => (
             <TableHead key={i} className={col.className || ""}>
-              <div className="h-4 w-3/4 animate-pulse rounded bg-gray-900" />
+              <Skeleton className="h-4 w-3/4" />
             </TableHead>
           ))}
         </TableRow>
@@ -23,7 +24,7 @@ export function TableSkeleton({ columns = [], rows = 3 }) {
         {[...Array(rows)].map((_, rowIdx) => (
           <TableRow key={rowIdx}>
             <TableCell colSpan={columns.length}>
-              <div className="h-4 w-full animate-pulse rounded bg-gray-800" />
+              <Skeleton className="h-4 w-full" />
             </TableCell>
           </TableRow>
         ))}
