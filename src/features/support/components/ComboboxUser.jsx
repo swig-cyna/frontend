@@ -18,21 +18,9 @@ import * as React from "react"
 
 export const ComboboxUser = React.forwardRef(
   (
-    {
-      options,
-      value,
-      onValueChange,
-      placeholder = "Select a user...",
-      open: controlledOpen,
-      onOpenChange: controlledOnOpenChange,
-    },
+    { options, value, onValueChange, placeholder = "Select a user..." },
     ref,
   ) => {
-    const [uncontrolledOpen, setUncontrolledOpen] = React.useState(false)
-    const open =
-      controlledOpen !== undefined ? controlledOpen : uncontrolledOpen
-    const setOpen = controlledOnOpenChange || setUncontrolledOpen
-
     const [search, setSearch] = React.useState("")
     const inputRef = React.useRef(null)
 
@@ -41,7 +29,7 @@ export const ComboboxUser = React.forwardRef(
     )
 
     return (
-      <Popover open={open} onOpenChange={setOpen}>
+      <Popover>
         <PopoverTrigger asChild>
           <Button
             ref={ref}
@@ -72,7 +60,6 @@ export const ComboboxUser = React.forwardRef(
                   value={option.label}
                   onSelect={() => {
                     onValueChange(option.value)
-                    setOpen(false)
                     setSearch("")
                   }}
                 >

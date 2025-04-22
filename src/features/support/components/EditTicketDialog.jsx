@@ -41,7 +41,6 @@ export function EditTicketDialog({
 }) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [users, setUsers] = useState([])
-  const [comboOpen, setComboOpen] = useState(false)
 
   const form = useForm({
     resolver: zodResolver(editTicketSchema),
@@ -154,8 +153,6 @@ export function EditTicketDialog({
                       onValueChange={(value) => {
                         field.onChange(value === "" ? null : value)
                       }}
-                      open={comboOpen}
-                      onOpenChange={setComboOpen}
                       placeholder="Sélectionner un utilisateur..."
                     />
                   </FormControl>
