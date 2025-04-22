@@ -1,4 +1,5 @@
 import { apiClient } from "@/utils/fetch"
+import { parseApiError } from "./parseApiError"
 
 export const TicketService = {
   fetchTickets: async (context) => {
@@ -8,13 +9,13 @@ export const TicketService = {
       })
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
+        throw { response: { status: response.status, data: response.json() } }
       }
 
-      return await response.json()
+      return response.json()
     } catch (error) {
       console.error("Failed to fetch tickets:", error)
-      throw error
+      throw new Error(parseApiError(error))
     }
   },
 
@@ -26,14 +27,13 @@ export const TicketService = {
       })
 
       if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.message || "Failed to create ticket")
+        throw { response: { status: response.status, data: response.json() } }
       }
 
       return await response.json()
     } catch (error) {
       console.error("Ticket creation failed:", error)
-      throw error
+      throw new Error(parseApiError(error))
     }
   },
 
@@ -45,14 +45,13 @@ export const TicketService = {
       })
 
       if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.message || "Failed to update ticket")
+        throw { response: { status: response.status, data: response.json() } }
       }
 
       return await response.json()
     } catch (error) {
       console.error("Ticket update failed:", error)
-      throw error
+      throw new Error(parseApiError(error))
     }
   },
 
@@ -63,14 +62,13 @@ export const TicketService = {
       })
 
       if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.message || "Failed to delete ticket")
+        throw { response: { status: response.status, data: response.json() } }
       }
 
       return true
     } catch (error) {
       console.error("Ticket deletion failed:", error)
-      throw error
+      throw new Error(parseApiError(error))
     }
   },
 
@@ -82,7 +80,7 @@ export const TicketService = {
       )
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
+        throw { response: { status: response.status, data: response.json() } }
       }
 
       const data = await response.json()
@@ -93,7 +91,7 @@ export const TicketService = {
       }))
     } catch (error) {
       console.error("Failed to fetch support users:", error)
-      throw error
+      throw new Error(parseApiError(error))
     }
   },
 }
