@@ -1,9 +1,6 @@
 "use client"
 
-import { useState } from "react"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useTranslations } from "next-intl"
+import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -11,18 +8,21 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Form, FormField } from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import ResendEmailButton from "@/features/auth/components/ResendEmailButton"
 import {
   changeEmail,
   sendVerificationEmail,
   updateUser,
   useSession,
 } from "@/features/auth/utils/authClient"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useTranslations } from "next-intl"
 import Link from "next/link"
-import ResendEmailButton from "@/features/auth/components/ResendEmailButton"
-import { accountSchema } from "../schemas/changeEmail"
+import { useState } from "react"
+import { useForm } from "react-hook-form"
+import { accountSchema } from "../../schemas/changeEmail"
 
 const ProfileInfoUpdate = () => {
   const { data: session } = useSession()

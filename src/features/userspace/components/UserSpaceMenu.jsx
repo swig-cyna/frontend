@@ -1,18 +1,18 @@
 "use client"
 
-import Image from "next/image"
-import { Card, CardHeader, CardContent } from "@/components/ui/card"
+import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { signOut } from "@/features/auth/utils/authClient"
 import {
-  User2,
-  TicketCheck,
-  Package,
   CreditCard,
-  MapPin,
   HelpCircle,
   LogOut,
+  MapPin,
+  Package,
+  TicketCheck,
+  User2,
 } from "lucide-react"
 import { useTranslations } from "next-intl"
+import Image from "next/image"
 import { useRouter } from "next/navigation"
 
 const UserSpaceMenu = ({ user }) => {
@@ -38,7 +38,7 @@ const UserSpaceMenu = ({ user }) => {
     {
       title: t("UserSpaceMenu.paymentManagement"),
       icon: CreditCard,
-      url: "#",
+      url: "/user/payment-management",
     },
     {
       title: t("UserSpaceMenu.addressBook"),
