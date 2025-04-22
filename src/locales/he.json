@@ -259,5 +259,37 @@
   },
   "Category": {
     "products": "מוצרים"
+  },
+  "PaymentManagement": {
+    "title": "אמצעי התשלום שלך",
+    "loading": "טוען...",
+    "noPaymentMethods": "לא נרשמו אמצעי תשלום",
+    "addNewCard": "הוסף כרטיס חדש",
+    "addNewCardTitle": "הוסף כרטיס חדש",
+    "updateCardTitle": "עדכן פרטי כרטיס",
+    "deleteTitle": "אשר מחיקה",
+    "deleteDescription": "האם אתה בטוח שברצונך למחוק את אמצעי התשלום הזה? פעולה זו היא בלתי הפיכה.",
+    "cancelButton": "ביטול",
+    "confirmButton": "אישור",
+    "editButton": "ערוך",
+    "deleteButton": "מחק",
+    "expiresOn": "תוקף"
+  },
+  "PaymentMethodUpdate": {
+    "cardholderName": "שם בעל הכרטיס",
+    "cardholderNamePlaceholder": "שם על הכרטיס",
+    "expiryMonth": "חודש תפוגה",
+    "expiryYear": "שנת תפוגה",
+    "monthPlaceholder": "חודש",
+    "yearPlaceholder": "שנה",
+    "cancelButton": "ביטול",
+    "updateButton": "עדכן כרטיס",
+    "processingButton": "מעבד...",
+    "missingInfo": "מידע חסר",
+    "nameRequired": "נדרש שם בעל הכרטיס",
+    "success": "הצלחה",
+    "cardUpdated": "אמצעי התשלום עודכן",
+    "error": "שגיאה",
+    "cannotUpdateCard": "לא ניתן לעדכן את אמצעי התשלום"
   }
 }

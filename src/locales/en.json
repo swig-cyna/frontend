@@ -260,5 +260,37 @@
   },
   "Category": {
     "products": "Products"
+  },
+  "PaymentManagement": {
+    "title": "Your payment methods",
+    "loading": "Loading...",
+    "noPaymentMethods": "No payment methods registered",
+    "addNewCard": "Add a new card",
+    "addNewCardTitle": "Add a new card",
+    "updateCardTitle": "Update card information",
+    "deleteTitle": "Confirm deletion",
+    "deleteDescription": "Are you sure you want to delete this payment method? This action is irreversible.",
+    "cancelButton": "Cancel",
+    "confirmButton": "Confirm",
+    "editButton": "Edit",
+    "deleteButton": "Delete",
+    "expiresOn": "Expires"
+  },
+  "PaymentMethodUpdate": {
+    "cardholderName": "Cardholder name",
+    "cardholderNamePlaceholder": "Name on card",
+    "expiryMonth": "Expiration month",
+    "expiryYear": "Expiration year",
+    "monthPlaceholder": "Month",
+    "yearPlaceholder": "Year",
+    "cancelButton": "Cancel",
+    "updateButton": "Update card",
+    "processingButton": "Processing...",
+    "missingInfo": "Missing information",
+    "nameRequired": "Cardholder name is required",
+    "success": "Success",
+    "cardUpdated": "Payment method has been updated",
+    "error": "Error",
+    "cannotUpdateCard": "Unable to update payment method"
   }
 }
