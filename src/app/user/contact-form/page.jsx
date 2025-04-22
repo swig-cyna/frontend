@@ -1,5 +1,6 @@
 "use client"
 
+import { TableSkeleton } from "@/components/TableSkeleton"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -9,40 +10,33 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { TicketTable } from "@/features/support/components/TicketTable"
-import { TicketService } from "@/features/support/utils/apiTicketService"
 import { userTicketColumns } from "@/features/support/utils/ticketTableColumns"
+import { useTickets } from "@/features/support/utils/useTickets"
 import ContactForm from "@/features/userspace/components/ContactForm"
+import { toast } from "@/hooks/useToast"
 import { useFormatter } from "next-intl"
 import { useEffect, useState } from "react"
 
-const ContactPage = () => {
-  const [tickets, setTickets] = useState([])
-  const [visibleTickets, setVisibleTickets] = useState(3)
-  const [loading, setLoading] = useState(true)
-  const format = useFormatter()
+const INITIAL_VISIBLE_TICKETS = 3
 
-  const refreshTickets = async () => {
-    try {
-      const data = await TicketService.fetchTickets("userspace")
-      setTickets(data)
-    } catch (error) {
-      console.error("Erreur de chargement des tickets :", error.message)
-    } finally {
-      setLoading(false)
-    }
-  }
+const ContactPage = () => {
+  const format = useFormatter()
+  const { tickets, loading, error, refresh } = useTickets("userspace")
+  const [visibleTickets, setVisibleTickets] = useState(INITIAL_VISIBLE_TICKETS)
 
   const loadMoreTickets = () => {
-    setVisibleTickets((prev) => prev + 3)
+    setVisibleTickets((prev) => prev + INITIAL_VISIBLE_TICKETS)
   }
 
   useEffect(() => {
-    refreshTickets()
-  }, [])
-
-  if (loading) {
-    return <div>Loading...</div>
-  }
+    if (error) {
+      toast({
+        title: "Error",
+        description: error,
+        variant: "destructive",
+      })
+    }
+  }, [error, toast])
 
   return (
     <div className="mx-auto flex w-full max-w-xl flex-col gap-6">
@@ -55,11 +49,15 @@ const ContactPage = () => {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <TicketTable
-            tickets={tickets.slice(0, visibleTickets)}
-            refreshTickets={refreshTickets}
-            columns={userTicketColumns(format)}
-          />
+          {loading ? (
+            <TableSkeleton columns={userTicketColumns(format)} rows={3} />
+          ) : (
+            <TicketTable
+              tickets={tickets.slice(0, visibleTickets)}
+              refreshTickets={refresh}
+              columns={userTicketColumns(format)}
+            />
+          )}
           {visibleTickets < tickets.length && (
             <div className="mt-4 flex">
               <Button onClick={loadMoreTickets} className="ml-auto px-3 py-1">
@@ -69,7 +67,7 @@ const ContactPage = () => {
           )}
         </CardContent>
       </Card>
-      <ContactForm onSend={refreshTickets} />
+      <ContactForm onSend={refresh} />
     </div>
   )
 }

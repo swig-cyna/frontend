@@ -1,28 +1,27 @@
 "use client"
 
+import { TableSkeleton } from "@/components/TableSkeleton"
 import { DashboardHeader } from "@/features/admin/components/DashboardHeader"
 import { TicketTable } from "@/features/support/components/TicketTable"
-import { TicketService } from "@/features/support/utils/apiTicketService"
 import { adminTicketColumns } from "@/features/support/utils/ticketTableColumns"
+import { useTickets } from "@/features/support/utils/useTickets"
+import { toast } from "@/hooks/useToast"
 import { useFormatter } from "next-intl"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 
 const Page = () => {
-  const [tickets, setTickets] = useState([])
   const format = useFormatter()
-
-  const refreshTickets = async () => {
-    try {
-      const data = await TicketService.fetchTickets("backoffice")
-      setTickets(data)
-    } catch (error) {
-      console.error("Erreur de chargement des tickets :", error.message)
-    }
-  }
+  const { tickets, loading, error, refresh } = useTickets("backoffice")
 
   useEffect(() => {
-    refreshTickets()
-  }, [])
+    if (error) {
+      toast({
+        title: "Error",
+        description: error,
+        variant: "destructive",
+      })
+    }
+  }, [error, toast])
 
   return (
     <>
@@ -31,12 +30,16 @@ const Page = () => {
         text="Add, edit, or delete tickets"
       />
       <div className="p-6">
-        <TicketTable
-          tickets={tickets}
-          refreshTickets={refreshTickets}
-          columns={adminTicketColumns(format)}
-          actions
-        />
+        {loading ? (
+          <TableSkeleton columns={adminTicketColumns(format)} rows={5} />
+        ) : (
+          <TicketTable
+            tickets={tickets}
+            refreshTickets={refresh}
+            columns={adminTicketColumns(format)}
+            actions
+          />
+        )}
       </div>
     </>
   )
