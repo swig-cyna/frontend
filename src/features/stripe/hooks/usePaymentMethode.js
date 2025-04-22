@@ -26,3 +26,34 @@ export const useAttachPaymentMethod = () => {
     },
   })
 }
+
+export const useUpdatePaymentMethod = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: (data) =>
+      apiClient
+        .put(`payment-methods`, {
+          json: data,
+        })
+        .json(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["paymentMethode"] })
+    },
+  })
+}
+
+export const useDeletePaymentMethod = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: (paymentMethodId) =>
+      apiClient.delete(`payment-methods/${paymentMethodId}`).json(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["paymentMethode"] })
+    },
+    onError: (err) => {
+      console.error(err)
+    },
+  })
+}
