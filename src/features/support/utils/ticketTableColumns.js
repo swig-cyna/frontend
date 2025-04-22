@@ -4,15 +4,15 @@ import {
   getSubjectVariant,
 } from "@/features/support/utils/functions"
 
-export const userTicketColumns = (format) => [
+export const userTicketColumns = (format, t) => [
   {
     key: "title",
-    label: "Sujet",
+    label: t("subject"),
     render: (ticket) => ticket.title,
   },
   {
     key: "created_at",
-    label: "Date de création",
+    label: t("creationDate"),
     render: (ticket) =>
       format.dateTime(new Date(ticket.created_at), {
         year: "numeric",
@@ -24,12 +24,12 @@ export const userTicketColumns = (format) => [
   },
   {
     key: "status",
-    label: "Status",
+    label: t("status"),
     render: (ticket) => (
       <Badge className={getStatusVariant(ticket.status)}>
-        {ticket.status === "open" && "Ouvert"}
-        {ticket.status === "in_progress" && "En cours"}
-        {ticket.status === "closed" && "Fermé"}
+        {ticket.status === "open" && t("ticketStatusOpen")}
+        {ticket.status === "in_progress" && t("ticketStatusInProgress")}
+        {ticket.status === "closed" && t("ticketStatusClose")}
       </Badge>
     ),
   },

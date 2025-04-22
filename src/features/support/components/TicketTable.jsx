@@ -26,10 +26,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { useTranslations } from "next-intl"
 import { DeleteTicketDialog } from "./DeleteTicketDialog"
 import { EditTicketDialog } from "./EditTicketDialog"
 
 export function TicketTable({ tickets, refreshTickets, columns, actions }) {
+  const t = useTranslations("TicketTable")
   const [ticketToEdit, setTicketToEdit] = useState(null)
   const [ticketToDelete, setTicketToDelete] = useState(null)
   const [openRows, setOpenRows] = useState([])
@@ -47,26 +49,26 @@ export function TicketTable({ tickets, refreshTickets, columns, actions }) {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="h-8 w-8 p-0">
-            <span className="sr-only">Open menu</span>
+            <span className="sr-only">{t("openMenu")}</span>
             <MoreHorizontal className="h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuLabel>Actions</DropdownMenuLabel>
+          <DropdownMenuLabel>{t("actions")}</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem
             onClick={() => setTicketToEdit(ticket)}
             className="cursor-pointer"
           >
             <Pencil className="mr-2 h-4 w-4" />
-            Edit ticket
+            {t("editTicket")}
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => setTicketToDelete(ticket)}
             className="cursor-pointer text-destructive focus:text-destructive"
           >
             <Trash2 className="mr-2 h-4 w-4" />
-            Delete
+            {t("delete")}
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
@@ -74,7 +76,7 @@ export function TicketTable({ tickets, refreshTickets, columns, actions }) {
   )
 
   if (!tickets || tickets.length === 0) {
-    return <div>Aucun ticket à afficher</div>
+    return <div>{t("noTickets")}</div>
   }
 
   return (
@@ -88,7 +90,7 @@ export function TicketTable({ tickets, refreshTickets, columns, actions }) {
                   {col.label}
                 </TableHead>
               ))}
-              {actions && <TableHead>Actions</TableHead>}
+              {actions && <TableHead>{t("actions")}</TableHead>}
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -118,7 +120,7 @@ export function TicketTable({ tickets, refreshTickets, columns, actions }) {
                       colSpan={columns.length + (actions ? 1 : 0) + 1}
                       className="bg-muted p-4"
                     >
-                      Details : {ticket.description}
+                      {t("details")} {ticket.description}
                     </TableCell>
                   </TableRow>
                 )}

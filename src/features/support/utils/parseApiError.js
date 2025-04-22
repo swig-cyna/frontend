@@ -1,5 +1,3 @@
-// Centralized error parser for API responses
-
 export function parseApiError(error) {
   if (error?.name === "TypeError" && error.message === "Failed to fetch") {
     return "Erreur réseau. Vérifiez votre connexion internet."

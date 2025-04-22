@@ -22,7 +22,7 @@ export const ComboboxUser = React.forwardRef(
       options,
       value,
       onValueChange,
-      placeholder = "Sélectionner un utilisateur...",
+      placeholder = "Select a user...",
       open: controlledOpen,
       onOpenChange: controlledOnOpenChange,
     },
@@ -60,11 +60,11 @@ export const ComboboxUser = React.forwardRef(
           <Command>
             <CommandInput
               ref={inputRef}
-              placeholder="Rechercher..."
+              placeholder="Search..."
               value={search}
               onValueChange={setSearch}
             />
-            <CommandEmpty>Aucun utilisateur trouvé.</CommandEmpty>
+            <CommandEmpty>No user found.</CommandEmpty>
             <CommandGroup>
               {filteredOptions.map((option) => (
                 <CommandItem

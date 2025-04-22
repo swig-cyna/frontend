@@ -169,5 +169,48 @@
     "codePlaceholder": "Entrez le code à 6 chiffres",
     "verifyButton": "Vérifier",
     "loading": "Chargement..."
+  },
+  "UserTickets": {
+    "error": "Erreur",
+    "myTickets": "Mes tickets",
+    "myTicketsDescription": "Retrouvez ici l’ensemble de vos tickets, leur date de création ainsi que leur statut actuel.",
+    "seeMoreTickets": "Voir plus de tickets",
+    "subject": "Sujet",
+    "creationDate": "Date de création",
+    "status": "Statut",
+    "ticketStatusOpen": "Ouvert",
+    "ticketStatusInProgress": "En cours",
+    "ticketStatusClose": "Fermé"
+  },
+  "TicketTable": {
+    "noTickets": "Aucun ticket à afficher",
+    "actions": "Actions",
+    "editTicket": "Modifier le ticket",
+    "delete": "Supprimer",
+    "details": "Détails :",
+    "openMenu": "Ouvrir le menu"
+  },
+  "ContactForm": {
+    "title": "Contactez le support",
+    "description": "Nous vous répondrons dans les plus brefs délais.",
+    "fullName": "Nom complet",
+    "fullNamePlaceholder": "Jean Dupont",
+    "email": "Email",
+    "emailPlaceholder": "contact@exemple.com",
+    "theme": "Type de demande",
+    "themePlaceholder": "Sélectionnez un thème",
+    "themeBug": "Bug technique",
+    "themeQuestion": "Question générale",
+    "themePayment": "Problème de paiement",
+    "themeDelivery": "Problème de livraison",
+    "themeOther": "Autre",
+    "subject": "Objet",
+    "subjectPlaceholder": "Titre de votre demande",
+    "detailedDescription": "Description détaillée",
+    "detailedDescriptionPlaceholder": "Décrivez votre problème en détail...",
+    "sending": "Envoi en cours...",
+    "send": "Envoyer la demande",
+    "successMessage": "Votre ticket a été créé avec succès.",
+    "errorMessage": "Une erreur est survenue. Veuillez réessayer plus tard."
   }
 }

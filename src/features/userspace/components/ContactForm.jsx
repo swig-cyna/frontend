@@ -32,8 +32,10 @@ import {
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { TicketService } from "@/features/support/utils/apiTicketService"
+import { useTranslations } from "next-intl"
 
 const ContactForm = ({ onSend }) => {
+  const t = useTranslations("ContactForm")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [message, setMessage] = useState({ content: "", type: "" })
   const { data: session } = useSession()
@@ -63,7 +65,7 @@ const ContactForm = ({ onSend }) => {
         status: "open",
       })
       setMessage({
-        content: "Votre ticket a été créé avec succès.",
+        content: t("successMessage"),
         type: "success",
       })
 
@@ -75,7 +77,7 @@ const ContactForm = ({ onSend }) => {
     } catch (error) {
       console.error("Erreur lors de la création du ticket :", error)
       setMessage({
-        content: "Une erreur est survenue. Veuillez réessayer plus tard.",
+        content: t("errorMessage"),
         type: "error",
       })
     } finally {
@@ -86,10 +88,8 @@ const ContactForm = ({ onSend }) => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-xl">Contactez le support</CardTitle>
-        <CardDescription>
-          Nous vous répondrons dans les plus brefs délais.
-        </CardDescription>
+        <CardTitle className="text-xl">{t("title")}</CardTitle>
+        <CardDescription>{t("description")}</CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -99,9 +99,9 @@ const ContactForm = ({ onSend }) => {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Nom complet</FormLabel>
+                  <FormLabel>{t("fullName")}</FormLabel>
                   <FormControl>
-                    <Input placeholder="Jean Dupont" {...field} />
+                    <Input placeholder={t("fullNamePlaceholder")} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -113,9 +113,9 @@ const ContactForm = ({ onSend }) => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>{t("email")}</FormLabel>
                   <FormControl>
-                    <Input placeholder="contact@exemple.com" {...field} />
+                    <Input placeholder={t("emailPlaceholder")} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -127,28 +127,28 @@ const ContactForm = ({ onSend }) => {
               name="theme"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Type de demande</FormLabel>
+                  <FormLabel>{t("theme")}</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Sélectionnez un thème" />
+                        <SelectValue placeholder={t("themePlaceholder")} />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value="bug">Bug technique</SelectItem>
+                      <SelectItem value="bug">{t("themeBug")}</SelectItem>
                       <SelectItem value="question">
-                        Question générale
+                        {t("themeQuestion")}
                       </SelectItem>
                       <SelectItem value="payment">
-                        Problème de paiement
+                        {t("themePayment")}
                       </SelectItem>
                       <SelectItem value="delivery">
-                        Problème de livraison
+                        {t("themeDelivery")}
                       </SelectItem>
-                      <SelectItem value="other">Autre</SelectItem>
+                      <SelectItem value="other">{t("themeOther")}</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -161,9 +161,9 @@ const ContactForm = ({ onSend }) => {
               name="subject"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Objet</FormLabel>
+                  <FormLabel>{t("subject")}</FormLabel>
                   <FormControl>
-                    <Input placeholder="Titre de votre demande" {...field} />
+                    <Input placeholder={t("subjectPlaceholder")} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -175,10 +175,10 @@ const ContactForm = ({ onSend }) => {
               name="message"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Description détaillée</FormLabel>
+                  <FormLabel>{t("detailedDescription")}</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Décrivez votre problème en détail..."
+                      placeholder={t("detailedDescriptionPlaceholder")}
                       className="min-h-[120px]"
                       {...field}
                     />
@@ -189,7 +189,7 @@ const ContactForm = ({ onSend }) => {
             />
 
             <Button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? "Envoi en cours..." : "Envoyer la demande"}
+              {isSubmitting ? t("sending") : t("send")}
             </Button>
 
             {message.content && (
