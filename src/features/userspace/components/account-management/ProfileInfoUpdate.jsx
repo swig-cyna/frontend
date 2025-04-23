@@ -80,7 +80,7 @@ const ProfileInfoUpdate = () => {
     return (
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl">{t("emailChangeTitle")}</CardTitle>
+          <CardTitle className="text-xl">{t("emailChangeTitle")}</CardTitle>
           <CardDescription>{t("emailChangeDescription")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -96,7 +96,7 @@ const ProfileInfoUpdate = () => {
     return (
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl">
+          <CardTitle className="text-xl">
             {t("emailVerificationTitle")}
           </CardTitle>
           <CardDescription>{t("emailVerificationDescription")}</CardDescription>
@@ -117,7 +117,7 @@ const ProfileInfoUpdate = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-2xl">{t("title")}</CardTitle>
+        <CardTitle className="text-xl">{t("title")}</CardTitle>
         <CardDescription>{t("description")}</CardDescription>
       </CardHeader>
       <CardContent>

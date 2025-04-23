@@ -1,19 +1,19 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { authClient, useSession } from "@/features/auth/utils/authClient"
+import { Button } from "@/components/ui/button"
 import {
   Card,
-  CardHeader,
   CardContent,
-  CardTitle,
   CardDescription,
+  CardHeader,
+  CardTitle,
 } from "@/components/ui/card"
-import { Switch } from "@/components/ui/switch"
 import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import QRCode from "react-qr-code"
+import { Switch } from "@/components/ui/switch"
+import { authClient, useSession } from "@/features/auth/utils/authClient"
 import { useTranslations } from "next-intl"
+import { useEffect, useState } from "react"
+import QRCode from "react-qr-code"
 
 const TwoFactorAuthToggle = () => {
   const t = useTranslations("TwoFactorAuthToggle")
@@ -132,7 +132,7 @@ const TwoFactorAuthToggle = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-2xl">{t("title")}</CardTitle>
+        <CardTitle className="text-xl">{t("title")}</CardTitle>
         <CardDescription>{t("description")}</CardDescription>
       </CardHeader>
 

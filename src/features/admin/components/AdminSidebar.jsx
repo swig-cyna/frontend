@@ -61,7 +61,7 @@ const items = [
   },
   {
     title: "Customer Support",
-    url: "#",
+    url: "/admin/support",
     icon: LifeBuoy,
   },
   {
