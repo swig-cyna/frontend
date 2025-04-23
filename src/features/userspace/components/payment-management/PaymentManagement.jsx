@@ -56,7 +56,6 @@ const PaymentManagement = () => {
   }
 
   const handleUpdateCard = (method) => {
-    console.log(method)
     setCardToUpdate(method)
     setIsDialogOpenUpdate(true)
   }

@@ -96,8 +96,6 @@ const SavedPaymentMethods = ({
         throw new Error(t("createPaymentIntentError"))
       }
 
-      console.log("Réponse de l'intention de paiement:", paymentIntentResponse)
-
       const result = await stripe.confirmCardPayment(
         paymentIntentResponse.clientSecret,
         {
@@ -119,8 +117,6 @@ const SavedPaymentMethods = ({
             title: "paymentSuccess",
             description: "orderConfirmed",
           })
-
-          console.log("paymentId", paymentIntentResponse.paymentId)
 
           onPaymentComplete()
         } else {
