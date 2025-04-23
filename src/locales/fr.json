@@ -303,5 +303,37 @@
   },
   "Category": {
     "products": "Produits"
+  },
+  "PaymentManagement": {
+    "title": "Vos méthodes de paiement",
+    "loading": "Chargement en cours...",
+    "noPaymentMethods": "Aucune méthode de paiement enregistrée",
+    "addNewCard": "Ajouter une nouvelle carte",
+    "addNewCardTitle": "Ajouter une nouvelle carte",
+    "updateCardTitle": "Modifier les informations de la carte",
+    "deleteTitle": "Confirmer la suppression",
+    "deleteDescription": "Êtes-vous sûr de vouloir supprimer cette méthode de paiement ? Cette action est irréversible.",
+    "cancelButton": "Annuler",
+    "confirmButton": "Confirmer",
+    "editButton": "Modifier",
+    "deleteButton": "Supprimer",
+    "expiresOn": "Expire"
+  },
+  "PaymentMethodUpdate": {
+    "cardholderName": "Nom du titulaire",
+    "cardholderNamePlaceholder": "Nom sur la carte",
+    "expiryMonth": "Mois d'expiration",
+    "expiryYear": "Année d'expiration",
+    "monthPlaceholder": "Mois",
+    "yearPlaceholder": "Année",
+    "cancelButton": "Annuler",
+    "updateButton": "Mettre à jour la carte",
+    "processingButton": "Traitement en cours...",
+    "missingInfo": "Informations manquantes",
+    "nameRequired": "Le nom du titulaire est requis",
+    "success": "Succès",
+    "cardUpdated": "La méthode de paiement a été mise à jour",
+    "error": "Erreur",
+    "cannotUpdateCard": "Impossible de mettre à jour la méthode de paiement"
   }
 }

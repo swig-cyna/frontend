@@ -39,7 +39,7 @@ const UserSpaceMenu = ({ user }) => {
     {
       title: t("UserSpaceMenu.paymentManagement"),
       icon: CreditCard,
-      url: "#",
+      url: "/user/payment-management",
     },
     {
       title: t("UserSpaceMenu.addressBook"),

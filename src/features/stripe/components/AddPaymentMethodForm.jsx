@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Separator } from "@/components/ui/separator"
 import { useAttachPaymentMethod } from "@/features/stripe/hooks/usePaymentMethode"
 import { toast } from "@/hooks/useToast"
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js"
@@ -24,10 +23,6 @@ const AddPaymentMethodForm = ({ userId, onSuccess }) => {
   const { mutateAsync: attachPaymentMethod } = useAttachPaymentMethod()
   const [billingDetails, setBillingDetails] = useState({
     name: "",
-    addressLine1: "",
-    city: "",
-    postalCode: "",
-    country: "",
   })
 
   const handleInputChange = (e) => {
@@ -63,12 +58,6 @@ const AddPaymentMethodForm = ({ userId, onSuccess }) => {
         card: elements.getElement(CardElement),
         billing_details: {
           name: billingDetails.name,
-          address: {
-            line1: billingDetails.addressLine1,
-            city: billingDetails.city,
-            postal_code: billingDetails.postalCode,
-            country: billingDetails.country,
-          },
         },
       })
 
@@ -86,10 +75,6 @@ const AddPaymentMethodForm = ({ userId, onSuccess }) => {
       elements.getElement(CardElement).clear()
       setBillingDetails({
         name: "",
-        addressLine1: "",
-        city: "",
-        postalCode: "",
-        country: "",
       })
 
       if (onSuccess) {
@@ -154,55 +139,6 @@ const AddPaymentMethodForm = ({ userId, onSuccess }) => {
                 value={billingDetails.name}
                 onChange={handleInputChange}
                 required
-              />
-            </div>
-
-            <Separator className="my-4" />
-
-            <h3 className="text-lg font-medium">{t("billingAddress")}</h3>
-
-            <div className="grid gap-3">
-              <Label htmlFor="addressLine1">{t("addressLabel")}</Label>
-              <Input
-                id="addressLine1"
-                name="addressLine1"
-                placeholder={t("addressPlaceholder")}
-                value={billingDetails.addressLine1}
-                onChange={handleInputChange}
-              />
-            </div>
-
-            <div className="grid gap-4 md:grid-cols-2">
-              <div className="grid gap-3">
-                <Label htmlFor="city">{t("cityLabel")}</Label>
-                <Input
-                  id="city"
-                  name="city"
-                  placeholder={t("cityPlaceholder")}
-                  value={billingDetails.city}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="grid gap-3">
-                <Label htmlFor="postalCode">{t("postalCodeLabel")}</Label>
-                <Input
-                  id="postalCode"
-                  name="postalCode"
-                  placeholder={t("postalCodePlaceholder")}
-                  value={billingDetails.postalCode}
-                  onChange={handleInputChange}
-                />
-              </div>
-            </div>
-
-            <div className="grid gap-3">
-              <Label htmlFor="country">{t("countryLabel")}</Label>
-              <Input
-                id="country"
-                name="country"
-                placeholder={t("countryPlaceholder")}
-                value={billingDetails.country}
-                onChange={handleInputChange}
               />
             </div>
 

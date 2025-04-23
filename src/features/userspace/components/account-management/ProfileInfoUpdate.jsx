@@ -22,7 +22,7 @@ import { useTranslations } from "next-intl"
 import Link from "next/link"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
-import { accountSchema } from "../schemas/changeEmail"
+import { accountSchema } from "../../schemas/changeEmail"
 
 const ProfileInfoUpdate = () => {
   const { data: session } = useSession()
