@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { toast } from "@/hooks/useToast"
 import { AddressElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import { LucideLoader2 } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { useCreateAddress, useUpdateAddress } from "../../hooks/useAddress"
 
@@ -13,6 +14,7 @@ const AddressStripeForm = ({ mode = "add", address, onSuccess }) => {
   const { mutateAsync: createAddress } = useCreateAddress()
   const { mutateAsync: updateAddress } = useUpdateAddress()
   const [loading, setLoading] = useState(false)
+  const t = useTranslations("AddressManagement")
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -25,7 +27,7 @@ const AddressStripeForm = ({ mode = "add", address, onSuccess }) => {
     const { value, complete } = await addressElement.getValue()
 
     if (!complete) {
-      toast({ title: "Adresse incomplète", variant: "destructive" })
+      toast({ title: t("incomplete_address_toast"), variant: "destructive" })
 
       return
     }
@@ -35,7 +37,7 @@ const AddressStripeForm = ({ mode = "add", address, onSuccess }) => {
 
       if (mode === "add") {
         await createAddress({
-          alias: value.name || "Adresse",
+          alias: value.name || t("default_alias"),
           line1: value.address.line1,
           line2: value.address.line2,
           city: value.address.city,
@@ -57,7 +59,7 @@ const AddressStripeForm = ({ mode = "add", address, onSuccess }) => {
       onSuccess?.()
     } catch (err) {
       toast({
-        title: "Erreur",
+        title: t("error_toast_title"),
         description: err.message,
         variant: "destructive",
       })
@@ -66,7 +68,8 @@ const AddressStripeForm = ({ mode = "add", address, onSuccess }) => {
     }
   }
 
-  const buttonText = mode === "add" ? "Ajouter l'adresse" : "Mettre à jour"
+  const buttonText =
+    mode === "add" ? t("add_address_button") : t("update_address_button")
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">

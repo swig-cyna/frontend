@@ -334,5 +334,22 @@
     "cardUpdated": "אמצעי התשלום עודכן",
     "error": "שגיאה",
     "cannotUpdateCard": "לא ניתן לעדכן את אמצעי התשלום"
+  },
+  "AddressManagement": {
+    "title": "ספר הכתובות שלי",
+    "edit": "ערוך",
+    "delete": "מחק",
+    "no_addresses": "אין כתובות",
+    "add_address": "הוסף כתובת",
+    "edit_address": "ערוך כתובת זו",
+    "delete_address": "מחק כתובת זו",
+    "cancel": "ביטול",
+    "confirm": "אישור",
+    "error_loading": "שגיאה בטעינת הכתובות",
+    "add_address_button": "הוסף כתובת",
+    "update_address_button": "עדכן",
+    "incomplete_address_toast": "כתובת לא מלאה",
+    "error_toast_title": "שגיאה",
+    "default_alias": "כתובת"
   }
 }

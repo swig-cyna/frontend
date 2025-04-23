@@ -335,5 +335,22 @@
     "cardUpdated": "Payment method has been updated",
     "error": "Error",
     "cannotUpdateCard": "Unable to update payment method"
+  },
+  "AddressManagement": {
+    "title": "My address book",
+    "edit": "Edit",
+    "delete": "Delete",
+    "no_addresses": "No addresses",
+    "add_address": "Add an address",
+    "edit_address": "Edit this address",
+    "delete_address": "Delete this address",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "error_loading": "Error loading addresses",
+    "add_address_button": "Add address",
+    "update_address_button": "Update",
+    "incomplete_address_toast": "Incomplete address",
+    "error_toast_title": "Error",
+    "default_alias": "Address"
   }
 }

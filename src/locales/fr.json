@@ -335,5 +335,22 @@
     "cardUpdated": "La méthode de paiement a été mise à jour",
     "error": "Erreur",
     "cannotUpdateCard": "Impossible de mettre à jour la méthode de paiement"
+  },
+  "AddressManagement": {
+    "title": "Mon carnet d'adresses",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "no_addresses": "Pas d'adresses",
+    "add_address": "Ajouter une adresse",
+    "edit_address": "Modifier cette adresse",
+    "delete_address": "Supprimer cette adresse",
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "error_loading": "Erreur lors du chargement des adresses",
+    "add_address_button": "Ajouter l'adresse",
+    "update_address_button": "Mettre à jour",
+    "incomplete_address_toast": "Adresse incomplète",
+    "error_toast_title": "Erreur",
+    "default_alias": "Adresse"
   }
 }

@@ -21,6 +21,7 @@ import {
   PlusCircle,
   Trash2,
 } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { useAddresses, useDeleteAddress } from "../../hooks/useAddress"
 import AddressStripeForm from "./AddressStripeForm"
@@ -36,6 +37,7 @@ const AddressManagement = () => {
   const [addressToUpdate, setAddressToUpdate] = useState(null)
   const [isDialogOpenDelete, setIsDialogOpenDelete] = useState(false)
   const [addressToDelete, setAddressToDelete] = useState(null)
+  const t = useTranslations("AddressManagement")
 
   const options = {
     appearance: {
@@ -73,7 +75,7 @@ const AddressManagement = () => {
   }
 
   if (error) {
-    return <div>Erreur lors du chargement des adresses</div>
+    return <div>{t("error_loading")}</div>
   }
 
   return (
@@ -81,7 +83,7 @@ const AddressManagement = () => {
       <CardHeader className="border-b pb-6">
         <CardTitle className="flex items-center text-3xl">
           <MapPin className="mr-3 h-6 w-6 text-primary" />
-          Mon carnet d'adresses
+          {t("title")}
         </CardTitle>
       </CardHeader>
       <CardContent className="flex-1 p-6">
@@ -117,7 +119,7 @@ const AddressManagement = () => {
                     className="h-8 px-2 text-blue-600 hover:bg-blue-50 hover:text-blue-700"
                   >
                     <Pencil className="h-4 w-4" />
-                    <span className="ml-1">Modifier</span>
+                    <span className="ml-1">{t("edit")}</span>
                   </Button>
                   <Button
                     variant="outline"
@@ -129,14 +131,14 @@ const AddressManagement = () => {
                     className="h-8 px-2 text-red-600 hover:bg-red-50 hover:text-red-700"
                   >
                     <Trash2 className="h-4 w-4 text-destructive" />
-                    <span className="ml-1">Supprimer</span>
+                    <span className="ml-1">{t("delete")}</span>
                   </Button>
                 </div>
               </div>
             ))
           ) : (
             <div className="py-12 text-center text-gray-500">
-              Pas d'adresses
+              {t("no_addresses")}
             </div>
           )}
         </div>
@@ -147,7 +149,7 @@ const AddressManagement = () => {
             onClick={() => setIsDialogOpenAdd(true)}
           >
             <PlusCircle className="mr-2 h-4 w-4" />
-            Ajouter une addresse
+            {t("add_address")}
           </Button>
         </div>
 
@@ -156,7 +158,7 @@ const AddressManagement = () => {
             <DialogHeader>
               <DialogTitle className="flex items-center gap-2">
                 <PlusCircle className="h-5 w-5" />
-                Ajouter une adresse
+                {t("add_address")}
               </DialogTitle>
             </DialogHeader>
             <Elements stripe={stripePromise} options={options}>
@@ -170,7 +172,7 @@ const AddressManagement = () => {
             <DialogHeader>
               <DialogTitle className="flex items-center gap-2">
                 <Pencil className="h-5 w-5" />
-                Modifier cette adresse
+                {t("edit_address")}
               </DialogTitle>
             </DialogHeader>
             <Elements stripe={stripePromise} options={options}>
@@ -188,7 +190,7 @@ const AddressManagement = () => {
             <DialogHeader>
               <DialogTitle className="flex items-center gap-2 text-destructive">
                 <AlertCircle className="h-5 w-5" />
-                Supprimer cette adresses
+                {t("delete_address")}
               </DialogTitle>
             </DialogHeader>
             <div className="flex justify-end gap-2">
@@ -196,13 +198,13 @@ const AddressManagement = () => {
                 variant="outline"
                 onClick={() => setIsDialogOpenDelete(false)}
               >
-                Cancel
+                {t("cancel")}
               </Button>
               <Button
                 variant="destructive"
                 onClick={() => handleDelete(addressToDelete)}
               >
-                Confirmer
+                {t("confirm")}
               </Button>
             </div>
           </DialogContent>
