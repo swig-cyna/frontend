@@ -25,10 +25,12 @@ const UserLayout = ({ children }) => {
   return (
     <>
       <Header />
-      <div className="flex w-full max-w-[1200px] flex-1 flex-col justify-items-center p-8 font-[family-name:var(--font-geist-sans)]">
+      <div className="mx-auto flex w-full max-w-[1200px] flex-1 flex-col p-8">
         <div className="flex flex-1 flex-col gap-8 md:flex-row">
-          <UserSpaceMenu user={session.user} />
-          <main className="flex flex-1 flex-col items-center justify-center">
+          <aside className="md:max-w-1/3 w-full md:basis-1/3">
+            <UserSpaceMenu user={session.user} />
+          </aside>
+          <main className="flex w-full flex-1 flex-col items-center justify-center">
             {children}
           </main>
         </div>

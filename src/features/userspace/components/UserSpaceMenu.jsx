@@ -1,23 +1,24 @@
 "use client"
 
-import Image from "next/image"
-import { Card, CardHeader, CardContent } from "@/components/ui/card"
+import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { signOut } from "@/features/auth/utils/authClient"
 import {
-  User2,
-  TicketCheck,
-  Package,
   CreditCard,
-  MapPin,
   HelpCircle,
   LogOut,
+  MapPin,
+  Package,
+  TicketCheck,
+  User2,
 } from "lucide-react"
 import { useTranslations } from "next-intl"
-import { useRouter } from "next/navigation"
+import Image from "next/image"
+import { usePathname, useRouter } from "next/navigation"
 
 const UserSpaceMenu = ({ user }) => {
   const t = useTranslations()
   const router = useRouter()
+  const pathname = usePathname()
 
   const userMenuItems = [
     {
@@ -48,7 +49,7 @@ const UserSpaceMenu = ({ user }) => {
     {
       title: t("UserSpaceMenu.support"),
       icon: HelpCircle,
-      url: "#",
+      url: "/user/contact-form",
     },
     { title: t("UserSpaceMenu.logout"), icon: LogOut, url: "/" },
   ]
@@ -92,7 +93,9 @@ const UserSpaceMenu = ({ user }) => {
           <div
             key={item.title}
             onClick={() => handleItemClick(item)}
-            className="flex cursor-pointer items-center rounded-md p-2 hover:bg-gray-800"
+            className={`flex cursor-pointer items-center rounded-md p-2 hover:bg-gray-800 ${
+              pathname === item.url ? "bg-primary text-white" : ""
+            }`}
           >
             <item.icon className="mr-2" />
             <span>{item.title}</span>
