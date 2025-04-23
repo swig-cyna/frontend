@@ -16,6 +16,7 @@ const Page = () => {
 
   const refreshUsers = async () => {
     setLoading(true)
+
     try {
       const { data, error } = await authClient.admin.listUsers({
         query: {
