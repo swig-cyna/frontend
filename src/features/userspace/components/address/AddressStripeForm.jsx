@@ -36,7 +36,7 @@ const AddressStripeForm = ({ mode = "add", address, onSuccess }) => {
       setLoading(true)
 
       if (mode === "add") {
-        await createAddress({
+        const newAddress = await createAddress({
           alias: value.name || t("default_alias"),
           line1: value.address.line1,
           line2: value.address.line2,
@@ -44,8 +44,9 @@ const AddressStripeForm = ({ mode = "add", address, onSuccess }) => {
           postal_code: value.address.postal_code,
           country: value.address.country,
         })
+        onSuccess?.(newAddress)
       } else if (mode === "edit" && address) {
-        await updateAddress({
+        const updatedAddress = await updateAddress({
           id: address.id,
           alias: value.name || address.alias,
           line1: value.address.line1,
@@ -54,9 +55,8 @@ const AddressStripeForm = ({ mode = "add", address, onSuccess }) => {
           postal_code: value.address.postal_code,
           country: value.address.country,
         })
+        onSuccess?.(updatedAddress)
       }
-
-      onSuccess?.()
     } catch (err) {
       toast({
         title: t("error_toast_title"),

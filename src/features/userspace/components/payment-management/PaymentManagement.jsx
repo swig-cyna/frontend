@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dialog"
 import { Label } from "@/components/ui/label"
 import { useSession } from "@/features/auth/utils/authClient"
-import AddPaymentMethodForm from "@/features/stripe/components/AddPaymentMethodForm"
+import AddPaymentMethodForm from "@/features/stripe/components/PaymentMethod/AddPaymentMethodForm"
 import {
   useDeletePaymentMethod,
   usePaymentMethod,

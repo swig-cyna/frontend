@@ -24,6 +24,7 @@ import {
 import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { useAddresses, useDeleteAddress } from "../../hooks/useAddress"
+import { stripeOptions } from "../../utils/stripeAddressOptions"
 import AddressStripeForm from "./AddressStripeForm"
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_KEY_STRIPE)
@@ -38,22 +39,6 @@ const AddressManagement = () => {
   const [isDialogOpenDelete, setIsDialogOpenDelete] = useState(false)
   const [addressToDelete, setAddressToDelete] = useState(null)
   const t = useTranslations("AddressManagement")
-
-  const options = {
-    appearance: {
-      theme: "night",
-      variables: {
-        fontFamily: "Arial, Helvetica, sans-serif",
-        fontSizeBase: "16px",
-        borderRadius: "8px",
-        colorPrimary: "hsl(266 97% 47%)",
-        colorBackground: "hsl(240 3% 6%)",
-        colorText: "hsl(0 0% 98%)",
-        colorTextPlaceholder: "hsl(265 5% 49%)",
-        colorDanger: "hsl(0 84% 60%)",
-      },
-    },
-  }
 
   const handleAddSuccess = () => setIsDialogOpenAdd(false)
   const handleUpdateSuccess = () => {
@@ -161,7 +146,7 @@ const AddressManagement = () => {
                 {t("add_address")}
               </DialogTitle>
             </DialogHeader>
-            <Elements stripe={stripePromise} options={options}>
+            <Elements stripe={stripePromise} options={stripeOptions}>
               <AddressStripeForm mode="add" onSuccess={handleAddSuccess} />
             </Elements>
           </DialogContent>
@@ -175,7 +160,7 @@ const AddressManagement = () => {
                 {t("edit_address")}
               </DialogTitle>
             </DialogHeader>
-            <Elements stripe={stripePromise} options={options}>
+            <Elements stripe={stripePromise} options={stripeOptions}>
               <AddressStripeForm
                 mode="edit"
                 address={addressToUpdate}

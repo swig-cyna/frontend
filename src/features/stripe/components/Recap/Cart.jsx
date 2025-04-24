@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
-import RecapRowProduct from "@/features/stripe/components/RecapRowProduct"
+import RecapRowProduct from "@/features/stripe/components/Recap/RowProduct"
 import { ArrowRight, ShoppingCart } from "lucide-react"
 import { useTranslations } from "next-intl"
 
