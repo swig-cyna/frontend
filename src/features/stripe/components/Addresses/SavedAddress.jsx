@@ -26,8 +26,11 @@ const SavedAddresses = ({ userId, selectedAddress, onSelect, onAddNew }) => {
   return (
     <div>
       <RadioGroup
-        value={selectedAddress?.id}
-        onValueChange={onSelect}
+        value={selectedAddress ? selectedAddress.id : ""}
+        onValueChange={(id) => {
+          const address = addresses.find((addr) => addr.id === id)
+          onSelect(address)
+        }}
         className="space-y-2"
       >
         {addresses?.map((address) => (

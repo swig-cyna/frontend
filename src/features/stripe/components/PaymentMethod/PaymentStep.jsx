@@ -15,7 +15,7 @@ const PaymentStep = ({
       <AddPaymentMethodForm
         userId={userId}
         onSuccess={(card) => {
-          setSelectedPaymentMethod(card)
+          setSelectedPaymentMethod(card.id)
           setAddingPaymentMethod(false)
         }}
       />

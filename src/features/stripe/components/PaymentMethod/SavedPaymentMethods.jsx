@@ -5,7 +5,6 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { usePaymentMethod } from "@/features/stripe/hooks/usePaymentMethode"
 import { CreditCard, PlusCircle } from "lucide-react"
 import { useTranslations } from "next-intl"
-import { useEffect, useState } from "react"
 
 const SavedPaymentMethods = ({
   userId,
@@ -14,18 +13,8 @@ const SavedPaymentMethods = ({
   selectedMethod,
 }) => {
   const t = useTranslations("SavedPaymentMethods")
-  const [paymentMethods, setPaymentMethods] = useState([])
   const { data: paymentMethodsData, isLoading } = usePaymentMethod(userId)
-
-  useEffect(() => {
-    if (paymentMethodsData?.data && Array.isArray(paymentMethodsData.data)) {
-      setPaymentMethods(paymentMethodsData.data)
-
-      if (paymentMethodsData.data.length > 0 && !selectedMethod) {
-        onSelect(paymentMethodsData.data[0].id)
-      }
-    }
-  }, [paymentMethodsData, onSelect, selectedMethod])
+  const paymentMethods = paymentMethodsData?.data || []
 
   const formatCardBrand = (brand) => {
     const brands = {
@@ -53,7 +42,7 @@ const SavedPaymentMethods = ({
   return (
     <div className="md:grid-cols-1fr grid gap-6">
       <RadioGroup
-        value={selectedMethod?.id}
+        value={selectedMethod || ""}
         onValueChange={onSelect}
         className="space-y-2"
       >
