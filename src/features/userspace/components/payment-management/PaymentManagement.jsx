@@ -19,6 +19,7 @@ import {
 } from "@/features/stripe/hooks/usePaymentMethode"
 import { Elements } from "@stripe/react-stripe-js"
 import { loadStripe } from "@stripe/stripe-js"
+import { useQueryClient } from "@tanstack/react-query"
 import {
   AlertCircle,
   CreditCard,
@@ -28,7 +29,7 @@ import {
   Trash2,
 } from "lucide-react"
 import { useTranslations } from "next-intl"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import PaymentMethodUpdate from "./PaymentMethodUpdate"
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_KEY_STRIPE)
@@ -36,22 +37,20 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_KEY_STRIPE)
 const PaymentManagement = () => {
   const { data: session } = useSession()
   const { mutateAsync: deletePaymentMethod } = useDeletePaymentMethod()
-  const { data: paymentMethodsData } = usePaymentMethod(session?.user.id)
-  const [paymentMethods, setPaymentMethods] = useState([])
+  const { data: paymentMethodsData, loading } = usePaymentMethod(
+    session?.user.id,
+  )
+  const paymentMethods = paymentMethodsData?.data || []
   const [isDialogOpenAddCard, setIsDialogOpenAddCard] = useState(false)
   const [isDialogOpenUpdate, setIsDialogOpenUpdate] = useState(false)
   const [cardToUpdate, setCardToUpdate] = useState(null)
   const [isDialogOpenDelete, setIsDialogOpenDelete] = useState(false)
   const [cardToDelete, setCardToDelete] = useState(null)
+  const queryClient = useQueryClient()
   const t = useTranslations("PaymentManagement")
 
-  useEffect(() => {
-    if (paymentMethodsData?.data && Array.isArray(paymentMethodsData.data)) {
-      setPaymentMethods(paymentMethodsData.data)
-    }
-  }, [paymentMethodsData])
-
-  const handleAddCardSuccess = () => {
+  const handleAddCardSuccess = async () => {
+    await queryClient.invalidateQueries({ queryKey: ["paymentMethode"] })
     setIsDialogOpenAddCard(false)
   }
 
@@ -65,7 +64,8 @@ const PaymentManagement = () => {
     setIsDialogOpenDelete(true)
   }
 
-  const handleUpdateCardSuccess = () => {
+  const handleUpdateCardSuccess = async () => {
+    await queryClient.invalidateQueries({ queryKey: ["paymentMethode"] })
     setIsDialogOpenUpdate(false)
     setCardToUpdate(null)
   }
@@ -91,7 +91,7 @@ const PaymentManagement = () => {
     return brands[brand] || brand
   }
 
-  if (!session) {
+  if (!session || loading) {
     return (
       <div className="flex h-64 items-center justify-center">
         <LucideLoader2 className="animate-spin" />
