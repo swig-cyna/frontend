@@ -309,7 +309,7 @@
   "PaymentPanel": {
     "summary": "Order Summary",
     "total": "Total",
-    "vatIncluded": "VAT included (20%)",
+    "vatIncluded": "VAT (20%)",
     "processingButton": "Processing payment...",
     "payButton": "Pay",
     "errorTitle": "Payment Error",

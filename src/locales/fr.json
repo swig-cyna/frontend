@@ -309,7 +309,7 @@
   "PaymentPanel": {
     "summary": "Récapitulatif",
     "total": "Total",
-    "vatIncluded": "TVA incluse (20%)",
+    "vatIncluded": "TVA (20%)",
     "processingButton": "Traitement du paiement...",
     "payButton": "Payer",
     "errorTitle": "Erreur de paiement",

@@ -308,7 +308,7 @@
   "PaymentPanel": {
     "summary": "סיכום הזמנה",
     "total": "סך הכל",
-    "vatIncluded": "כולל מע״מ (20%)",
+    "vatIncluded": "כולל (20%)",
     "processingButton": "מעבד תשלום...",
     "payButton": "שלם",
     "errorTitle": "שגיאת תשלום",
