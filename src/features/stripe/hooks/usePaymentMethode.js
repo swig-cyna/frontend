@@ -3,9 +3,9 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 
 export const usePaymentMethod = (userId) =>
   useQuery({
-    retry: false,
-    queryKey: ["paymentMethode"],
+    queryKey: ["paymentMethod"],
     queryFn: () => apiClient.get(`payment-methods/${userId}`).json(),
+    enabled: Boolean(userId),
   })
 
 export const useAttachPaymentMethod = () => {
@@ -19,7 +19,7 @@ export const useAttachPaymentMethod = () => {
         })
         .json(),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["attachPaymentMethod"] })
+      queryClient.invalidateQueries({ queryKey: ["paymentMethod"] })
     },
     onError: (err) => {
       console.error(err)
@@ -38,7 +38,7 @@ export const useUpdatePaymentMethod = () => {
         })
         .json(),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["paymentMethode"] })
+      queryClient.invalidateQueries({ queryKey: ["paymentMethod"] })
     },
   })
 }
@@ -50,7 +50,7 @@ export const useDeletePaymentMethod = () => {
     mutationFn: (paymentMethodId) =>
       apiClient.delete(`payment-methods/${paymentMethodId}`).json(),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["paymentMethode"] })
+      queryClient.invalidateQueries({ queryKey: ["paymentMethod"] })
     },
     onError: (err) => {
       console.error(err)
