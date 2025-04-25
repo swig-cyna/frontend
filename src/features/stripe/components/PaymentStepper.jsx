@@ -7,10 +7,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { useSession } from "@/features/auth/utils/authClient"
 import { toast } from "@/hooks/useToast"
 import { useTranslations } from "next-intl"
 import { useEffect, useState } from "react"
 import { usePaymentConfirm, usePaymentIntent } from "../hooks/usePaymentIntent"
+import { useUpdatePaymentMethod } from "../hooks/usePaymentMethode"
 import { PaymentSteps, stepsConfig } from "../utils/paymentSteps"
 import BillingStep from "./Addresses/BillingStep"
 import ShippingStep from "./Addresses/ShippingStep"
@@ -38,8 +40,10 @@ const PaymentStepper = ({
 
   const { mutateAsync: createPaymentIntent } = usePaymentIntent()
   const { mutateAsync: confirmPayment } = usePaymentConfirm()
+  const { mutateAsync: updatePaymentMethod } = useUpdatePaymentMethod()
   const [isProcessing, setIsProcessing] = useState(false)
   const [error, setError] = useState(null)
+  const { data: session } = useSession()
 
   const t = useTranslations("PaymentStepper")
 
@@ -145,62 +149,80 @@ const PaymentStepper = ({
 
   const handleSubmit = async () => {
     const stripe = await stripePromise
-
     setIsProcessing(true)
     setError(null)
 
     try {
-      const cartItemsForApi = cartItems.map((item) => ({
-        productId: item.id,
-        quantity: item.quantity,
-      }))
+      const formatStripeAddress = (address) => ({
+        address: {
+          line1: address.line1,
+          line2: address.line2 || "",
+          city: address.city,
+          postal_code: address.postal_code,
+          country: address.country,
+        },
+        name: session.user.name,
+      })
 
       const paymentIntentResponse = await createPaymentIntent({
         userId,
-        cartItems: cartItemsForApi,
+        cartItems: cartItems.map((item) => ({
+          productId: item.id,
+          quantity: item.quantity,
+        })),
         paymentMethodId: selectedPaymentMethod,
+        shipping: formatStripeAddress(shippingAddress),
       })
 
-      if (!paymentIntentResponse || !paymentIntentResponse.clientSecret) {
+      if (!paymentIntentResponse?.clientSecret) {
         throw new Error(t("createPaymentIntentError"))
       }
+
+      await updatePaymentMethod({
+        paymentMethodId: selectedPaymentMethod,
+        name: session.user.name,
+        email: session.user.email,
+        address: {
+          line1: useSameAddress ? shippingAddress.line1 : billingAddress.line1,
+          line2: useSameAddress
+            ? shippingAddress.line2 || ""
+            : billingAddress.line2 || "",
+          city: useSameAddress ? shippingAddress.city : billingAddress.city,
+          postal_code: useSameAddress
+            ? shippingAddress.postal_code
+            : billingAddress.postal_code,
+          country: useSameAddress
+            ? shippingAddress.country
+            : billingAddress.country,
+        },
+      })
 
       const result = await stripe.confirmCardPayment(
         paymentIntentResponse.clientSecret,
         {
           payment_method: selectedPaymentMethod,
+          receipt_email: session.user.email,
         },
       )
 
-      if (result.error) {
-        throw new Error(`${t("paymentError")}: ${result.error.message}`)
-      }
+      if (result.error) throw new Error(result.error.message)
 
-      if (result.paymentIntent && result.paymentIntent.status === "succeeded") {
-        const confirmationResponse = await confirmPayment({
+      if (result.paymentIntent?.status === "succeeded") {
+        await confirmPayment({
           paymentIntentId: result.paymentIntent.id,
+          shippingAddress,
+          billingAddress: useSameAddress ? shippingAddress : billingAddress,
         })
 
-        if (confirmationResponse && confirmationResponse.success) {
-          toast({
-            title: "paymentSuccess",
-            description: "orderConfirmed",
-          })
-
-          onPaymentComplete()
-        } else {
-          throw new Error(
-            confirmationResponse.message ||
-              "Erreur lors de la confirmation du paiement",
-          )
-        }
+        onPaymentComplete()
+        toast({ title: t("success"), description: t("orderConfirmed") })
       }
     } catch (err) {
       console.error(`${t("paymentError")}:`, err)
       setError(err.message || t("paymentErrorDefault"))
       toast({
         title: t("paymentError"),
-        description: err.message || t("paymentErrorDefault"),
+        description: err.message,
         variant: "destructive",
       })
     } finally {
