@@ -215,7 +215,7 @@ const PaymentStepper = ({
         })
 
         onPaymentComplete()
-        toast({ title: t("success"), description: t("orderConfirmed") })
+        toast({ title: t("paymentSuccess"), description: t("orderConfirmed") })
       }
     } catch (err) {
       console.error(`${t("paymentError")}:`, err)
