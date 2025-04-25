@@ -10,6 +10,7 @@ import CardProduct from "@/features/products/components/CardProduct"
 import { useNewProducts } from "@/features/products/hook/useNewProducts"
 import { Package } from "lucide-react"
 import { useTranslations } from "next-intl"
+import Link from "next/link"
 
 const Home = () => {
   const t = useTranslations("HomePage")
@@ -62,7 +63,9 @@ const Home = () => {
               <h2 className="mb-2 border-dashed text-center text-xl font-bold">
                 {t("discoverServices")}
               </h2>
-              <Button className="mt-2">{t("showAllServices")}</Button>
+              <Link href="/products">
+                <Button className="mt-2">{t("showAllServices")}</Button>
+              </Link>
             </div>
           )}
 
