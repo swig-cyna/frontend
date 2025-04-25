@@ -29,12 +29,12 @@ const UserSpaceMenu = ({ user }) => {
     {
       title: t("UserSpaceMenu.subscriptionManagement"),
       icon: TicketCheck,
-      url: "#",
+      url: "/user/subscription-management",
     },
     {
       title: t("UserSpaceMenu.orderHistory"),
       icon: Package,
-      url: "#",
+      url: "/user/order-history",
     },
     {
       title: t("UserSpaceMenu.paymentManagement"),
