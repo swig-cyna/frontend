@@ -75,7 +75,10 @@ const SavedPaymentMethods = ({
                     {method.card.last4}
                   </div>
                   <div className="text-sm text-gray-500">
-                    Expire {method.card.exp_month}/{method.card.exp_year}
+                    {t("expireLabel", {
+                      month: method.card.exp_month,
+                      year: method.card.exp_year,
+                    })}
                   </div>
                 </div>
               </div>

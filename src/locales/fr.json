@@ -225,21 +225,10 @@
     "errorMessage": "Une erreur est survenue. Veuillez réessayer plus tard."
   },
   "AddPaymentMethodForm": {
-    "cardTitle": "Ajouter une nouvelle carte",
-    "cardDescription": "Vos informations de paiement sont sécurisées",
     "cardInfoLabel": "Informations de carte",
     "secureProcessing": "Votre carte est traitée de manière sécurisée par Stripe.",
     "cardholderName": "Nom du titulaire",
     "cardholderNamePlaceholder": "Jean Dupont",
-    "billingAddress": "Adresse de facturation",
-    "addressLabel": "Adresse",
-    "addressPlaceholder": "123 rue de Paris",
-    "cityLabel": "Ville",
-    "cityPlaceholder": "Paris",
-    "postalCodeLabel": "Code postal",
-    "postalCodePlaceholder": "75001",
-    "countryLabel": "Pays",
-    "countryPlaceholder": "France",
     "cancelButton": "Annuler",
     "addCardButton": "Ajouter cette carte",
     "processingButton": "Traitement en cours...",
@@ -267,27 +256,8 @@
     "perUnit": "par unité"
   },
   "SavedPaymentMethods": {
-    "title": "Vos méthodes de paiement",
-    "description": "Sélectionnez une carte pour finaliser votre achat",
-    "selectDescription": "Sélectionnez une méthode de paiement",
-    "loading": "Chargement en cours...",
-    "addNewCard": "Ajouter une nouvelle carte",
-    "summary": "Récapitulatif",
-    "total": "Total",
-    "vatIncluded": "dont TVA (20%)",
-    "back": "Retour",
-    "payButton": "Payer",
-    "processingButton": "Traitement...",
-    "paymentMethodRequired": "Méthode de paiement requise",
-    "paymentMethodRequiredDesc": "Veuillez sélectionner une méthode de paiement pour continuer",
-    "paymentError": "Erreur de paiement",
-    "paymentErrorDefault": "Une erreur est survenue lors du paiement",
-    "paymentSuccess": "Paiement réussi",
-    "orderConfirmed": "Votre commande a été validée avec succès",
-    "createPaymentIntentError": "Erreur lors de la création de l'intention de paiement",
-    "paymentErrorPrefix": "Erreur de paiement:",
-    "securePaymentTitle": "Paiement sécurisé",
-    "securePaymentDesc": "Vos informations de paiement sont protégées par un chiffrement SSL. Nous n'enregistrons jamais vos données de carte complètes."
+    "addNewCard": "Ajouter une carte",
+    "expireLabel": "Expire le {month}/{year}"
   },
   "PaymentForm": {
     "title": "Finaliser votre commande",
@@ -336,6 +306,46 @@
     "error": "Erreur",
     "cannotUpdateCard": "Impossible de mettre à jour la méthode de paiement"
   },
+  "PaymentPanel": {
+    "summary": "Récapitulatif",
+    "total": "Total",
+    "vatIncluded": "TVA incluse (20%)",
+    "processingButton": "Traitement du paiement...",
+    "payButton": "Payer",
+    "errorTitle": "Erreur de paiement",
+    "securePaymentTitle": "Paiement sécurisé",
+    "securePaymentDesc": "Vos informations de paiement sont chiffrées et traitées de manière sécurisée."
+  },
+  "PaymentStepper": {
+    "validationError": "Erreur de validation",
+    "selectShippingAddress": "Veuillez sélectionner une adresse de livraison.",
+    "shippingAddressRequired": "L'adresse de livraison est requise.",
+    "selectBillingAddress": "Veuillez sélectionner une adresse de facturation.",
+    "selectPaymentMethod": "Veuillez sélectionner un moyen de paiement.",
+    "createPaymentIntentError": "Échec de la création de l'intention de paiement.",
+    "paymentError": "Erreur de paiement",
+    "paymentErrorDefault": "Une erreur est survenue lors du paiement.",
+    "back": "Retour",
+    "next": "Suivant",
+    "paymentSuccess": "Paiement réussi",
+    "orderConfirmed": "Votre commande a été confirmée."
+  },
+  "Steps": {
+    "steps": {
+      "SHIPPING": {
+        "title": "Adresse de livraison",
+        "description": "Sélectionnez ou ajoutez votre adresse de livraison."
+      },
+      "BILLING": {
+        "title": "Adresse de facturation",
+        "description": "Sélectionnez ou ajoutez votre adresse de facturation."
+      },
+      "PAYMENT": {
+        "title": "Paiement",
+        "description": "Choisissez votre méthode de paiement préférée."
+      }
+    }
+  },
   "AddressManagement": {
     "title": "Mon carnet d'adresses",
     "edit": "Modifier",
@@ -352,5 +362,12 @@
     "incomplete_address_toast": "Adresse incomplète",
     "error_toast_title": "Erreur",
     "default_alias": "Adresse"
+  },
+  "SavedAddresses": {
+    "error_loading": "Erreur lors du chargement des adresses.",
+    "addNewCard": "Ajouter une nouvelle adresse"
+  },
+  "ShippingStep": {
+    "use_same_address": "Utiliser la même adresse pour la facturation"
   }
 }

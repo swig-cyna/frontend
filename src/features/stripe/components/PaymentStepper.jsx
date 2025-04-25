@@ -26,7 +26,7 @@ const PaymentStepper = ({
   stripePromise,
 }) => {
   const [step, setStep] = useState(PaymentSteps.SHIPPING)
-  const currentStepConfig = stepsConfig[step]
+  const currentStepConfig = stepsConfig(useTranslations("Steps"))[step]
   const [shippingAddress, setShippingAddress] = useState(null)
   const [billingAddress, setBillingAddress] = useState(null)
   const [useSameAddress, setUseSameAddress] = useState(true)
@@ -41,7 +41,7 @@ const PaymentStepper = ({
   const [isProcessing, setIsProcessing] = useState(false)
   const [error, setError] = useState(null)
 
-  const t = useTranslations("SavedPaymentMethods")
+  const t = useTranslations("PaymentStepper")
 
   const isShippingValid = Boolean(shippingAddress)
   const isBillingValid = useSameAddress
@@ -274,7 +274,6 @@ const PaymentStepper = ({
           canPay={canPay}
           isProcessing={isProcessing}
           error={error}
-          t={t}
           handleSubmit={handleSubmit}
         />
       </div>

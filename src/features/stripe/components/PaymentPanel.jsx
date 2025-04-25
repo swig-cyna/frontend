@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/card"
 import { Separator } from "@radix-ui/react-dropdown-menu"
 import { ShieldCheck } from "lucide-react"
+import { useFormatter, useTranslations } from "next-intl"
 
 const PaymentPanel = ({
   cartItems,
@@ -16,62 +17,75 @@ const PaymentPanel = ({
   canPay,
   isProcessing,
   error,
-  t,
   handleSubmit,
-}) => (
-  <>
-    <Card>
-      <CardHeader className="pb-2">
-        <CardTitle className="text-lg">{t("summary")}</CardTitle>
-      </CardHeader>
-      <CardContent className="pb-2">
-        {cartItems?.map((item) => (
-          <div key={item.id} className="flex justify-between py-1">
-            <span className="text-sm">
-              {item.name} (x{item.quantity})
-            </span>
-            <span className="text-sm font-medium">
-              €{(item.price * item.quantity).toFixed(2)}
+  currency = "EUR",
+}) => {
+  const t = useTranslations("PaymentPanel")
+  const format = useFormatter()
+
+  return (
+    <>
+      <Card>
+        <CardHeader className="pb-2">
+          <CardTitle className="text-lg">{t("summary")}</CardTitle>
+        </CardHeader>
+        <CardContent className="pb-2">
+          {cartItems?.map((item) => (
+            <div key={item.id} className="flex justify-between py-1">
+              <span className="text-sm">
+                {item.name} (x{item.quantity})
+              </span>
+              <span className="text-sm font-medium">
+                {format.number(item.price * item.quantity, {
+                  style: "currency",
+                  currency,
+                })}
+              </span>
+            </div>
+          ))}
+          <Separator className="my-2" />
+          <div className="flex justify-between py-1">
+            <span>{t("total")}</span>
+            <span className="font-bold">
+              {format.number(total, { style: "currency", currency })}
             </span>
           </div>
-        ))}
-        <Separator className="my-2" />
-        <div className="flex justify-between py-1">
-          <span>{t("total")}</span>
-          <span className="font-bold">€{total?.toFixed(2)}</span>
-        </div>
-        <div className="flex justify-between py-1 text-sm text-muted-foreground">
-          <span>{t("vatIncluded")}</span>
-          <span>€{(total * 0.2)?.toFixed(2)}</span>
-        </div>
-      </CardContent>
-      <CardFooter className="pt-2">
-        <Button
-          className="w-full"
-          onClick={handleSubmit}
-          disabled={!canPay || isProcessing || cartItems.length === 0}
-        >
-          {isProcessing
-            ? t("processingButton")
-            : `${t("payButton")} ${(total * 1.2)?.toFixed(2)} €`}
-        </Button>
-      </CardFooter>
-    </Card>
-    {error && (
-      <Alert variant="destructive">
-        <AlertTitle>Erreur</AlertTitle>
-        <AlertDescription>{error}</AlertDescription>
+          <div className="flex justify-between py-1 text-sm text-muted-foreground">
+            <span>{t("vatIncluded")}</span>
+            <span>
+              {format.number(total * 0.2, { style: "currency", currency })}
+            </span>
+          </div>
+        </CardContent>
+        <CardFooter className="pt-2">
+          <Button
+            className="w-full"
+            onClick={handleSubmit}
+            disabled={!canPay || isProcessing || cartItems.length === 0}
+          >
+            {isProcessing
+              ? t("processingButton")
+              : `${t("payButton")} ${format.number(total * 1.2, { style: "currency", currency })}`}
+          </Button>
+        </CardFooter>
+      </Card>
+      {error && (
+        <Alert variant="destructive">
+          <AlertTitle>{t("errorTitle")}</AlertTitle>
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+      )}
+      <Alert className="border-muted bg-muted/50">
+        <ShieldCheck className="h-4 w-4" />
+        <AlertTitle className="text-sm font-medium">
+          {t("securePaymentTitle")}
+        </AlertTitle>
+        <AlertDescription className="text-xs">
+          {t("securePaymentDesc")}
+        </AlertDescription>
       </Alert>
-    )}
-    <Alert className="border-muted bg-muted/50">
-      <ShieldCheck className="h-4 w-4" />
-      <AlertTitle className="text-sm font-medium">
-        {t("securePaymentTitle")}
-      </AlertTitle>
-      <AlertDescription className="text-xs">
-        {t("securePaymentDesc")}
-      </AlertDescription>
-    </Alert>
-  </>
-)
+    </>
+  )
+}
+
 export default PaymentPanel
