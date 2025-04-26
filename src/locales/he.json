@@ -270,6 +270,19 @@
     "addProductToastTitle": "המוצר נוסף לעגלה",
     "addProductToastDescription": "המוצר נוסף בהצלחה לעגלת הקניות שלך."
   },
+  "ProductsList": {
+    "listOfProducts": "רשימת מוצרים",
+    "searchProducts": "חיפוש מוצרים...",
+    "filters": "מסננים",
+    "sortNewest": "החדשים ביותר",
+    "sortPriceAsc": "מחיר: מהנמוך לגבוה",
+    "sortPriceDesc": "מחיר: מהגבוה לנמוך",
+    "productsFound": "מוצרים נמצאו",
+    "categories": "קטגוריות",
+    "priceRange": "טווח מחירים",
+    "resetFilters": "איפוס מסננים",
+    "noProductsFound": "לא נמצאו מוצרים. נסה לשנות את המסננים."
+  },
   "Category": {
     "products": "מוצרים"
   },

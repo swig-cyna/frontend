@@ -271,6 +271,19 @@
     "addProductToastTitle": "Produit ajouté au panier",
     "addProductToastDescription": "Le produit a été ajouté à votre panier."
   },
+  "ProductsList": {
+    "listOfProducts": "Liste des produits",
+    "searchProducts": "Rechercher des produits...",
+    "filters": "Filtres",
+    "sortNewest": "Nouveauté",
+    "sortPriceAsc": "Prix croissant",
+    "sortPriceDesc": "Prix decroissant",
+    "productsFound": "produits trouvés",
+    "categories": "Categories",
+    "priceRange": "Plage de prix",
+    "resetFilters": "Reinitialiser les filtres",
+    "noProductsFound": "Aucun produit trouvé, essayez de modifier vos filtres"
+  },
   "Category": {
     "products": "Produits"
   },
