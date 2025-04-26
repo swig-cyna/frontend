@@ -42,10 +42,7 @@ export function RecentOrders() {
       {recentOrders.map((order) => (
         <div key={order.id} className="flex items-center">
           <Avatar className="h-9 w-9 flex-shrink-0">
-            <AvatarImage
-              src={order.userImage || "/placeholder.svg"}
-              alt={`${order.userName}`}
-            />
+            <AvatarImage src={order.userImage} alt={`${order.userName}`} />
             <AvatarFallback>{order.userName.charAt(0)}</AvatarFallback>
           </Avatar>
           <div className="ml-4 flex-1 space-y-1">

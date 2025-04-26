@@ -42,10 +42,7 @@ export function RecentTickets() {
       {recentTickets.tickets.map((ticket) => (
         <div key={ticket.id} className="flex items-center">
           <Avatar className="h-9 w-9 flex-shrink-0">
-            <AvatarImage
-              src={ticket.userImage || "/placeholder.svg"}
-              alt={`${ticket.userName}`}
-            />
+            <AvatarImage src={ticket.userImage} alt={`${ticket.userName}`} />
             <AvatarFallback>{ticket.userName.charAt(0)}</AvatarFallback>
           </Avatar>
           <div className="ml-4 flex-1 space-y-1">
