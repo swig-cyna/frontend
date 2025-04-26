@@ -90,7 +90,6 @@ export function ProductList() {
   }
 
   const handleSearch = (e) => {
-    console.log(e.target.value)
     setSearch(e.target.value)
     setCurrentPage(1)
   }
@@ -102,7 +101,6 @@ export function ProductList() {
 
   useEffect(() => {
     setCurrentPage(1)
-    console.log("Page changed to 1")
   }, [debouncedSearch])
 
   if (isLoading) {
