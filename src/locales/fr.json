@@ -335,5 +335,19 @@
     "cardUpdated": "La méthode de paiement a été mise à jour",
     "error": "Erreur",
     "cannotUpdateCard": "Impossible de mettre à jour la méthode de paiement"
+  },
+  "OrderHistory": {
+    "title": "Historique des commandes",
+    "orderSingular": "commande",
+    "ordersPlural": "commandes",
+    "orderNumber": "Commande #{id}",
+    "orderDetails": "Détails de la commande",
+    "items": "articles",
+    "product": "Produit",
+    "unitPrice": "Prix unitaire",
+    "quantity": "Quantité",
+    "total": "Total",
+    "noOrdersFound": "Aucune commande trouvée",
+    "noOrdersDescription": "Vous n'avez pas encore passé de commande sur notre boutique."
   }
 }

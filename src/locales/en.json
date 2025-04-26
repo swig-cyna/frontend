@@ -335,5 +335,19 @@
     "cardUpdated": "Payment method has been updated",
     "error": "Error",
     "cannotUpdateCard": "Unable to update payment method"
+  },
+  "OrderHistory": {
+    "title": "Order History",
+    "orderSingular": "order",
+    "ordersPlural": "orders",
+    "orderNumber": "Order #{id}",
+    "orderDetails": "Order Details",
+    "items": "items",
+    "product": "Product",
+    "unitPrice": "Unit Price",
+    "quantity": "Quantity",
+    "total": "Total",
+    "noOrdersFound": "No orders found",
+    "noOrdersDescription": "You haven't placed any orders in our store yet."
   }
 }
