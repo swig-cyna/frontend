@@ -225,21 +225,10 @@
     "errorMessage": "An error occurred. Please try again later."
   },
   "AddPaymentMethodForm": {
-    "cardTitle": "Add a new card",
-    "cardDescription": "Your payment information is secure",
     "cardInfoLabel": "Card information",
     "secureProcessing": "Your card is securely processed by Stripe.",
     "cardholderName": "Cardholder name",
     "cardholderNamePlaceholder": "John Doe",
-    "billingAddress": "Billing address",
-    "addressLabel": "Address",
-    "addressPlaceholder": "123 Main St",
-    "cityLabel": "City",
-    "cityPlaceholder": "New York",
-    "postalCodeLabel": "Postal code",
-    "postalCodePlaceholder": "10001",
-    "countryLabel": "Country",
-    "countryPlaceholder": "United States",
     "cancelButton": "Cancel",
     "addCardButton": "Add this card",
     "processingButton": "Processing...",
@@ -267,27 +256,8 @@
     "perUnit": "per unit"
   },
   "SavedPaymentMethods": {
-    "title": "Your payment methods",
-    "description": "Select a card to finalize your purchase",
-    "selectDescription": "Select a payment method",
-    "loading": "Loading...",
     "addNewCard": "Add a new card",
-    "summary": "Summary",
-    "total": "Total",
-    "vatIncluded": "including VAT (20%)",
-    "back": "Back",
-    "payButton": "Pay",
-    "processingButton": "Processing...",
-    "paymentMethodRequired": "Payment method required",
-    "paymentMethodRequiredDesc": "Please select a payment method to continue",
-    "paymentError": "Payment error",
-    "paymentErrorDefault": "An error occurred during the payment",
-    "paymentSuccess": "Payment successful",
-    "orderConfirmed": "Your order has been successfully confirmed",
-    "createPaymentIntentError": "Error creating payment intent",
-    "paymentErrorPrefix": "Payment error:",
-    "securePaymentTitle": "Secure payment",
-    "securePaymentDesc": "Your payment information is protected by SSL encryption. We never store your complete card details."
+    "expireLabel": "Expires {month}/{year}"
   },
   "PaymentForm": {
     "title": "Finalize your order",
@@ -300,6 +270,19 @@
     "addToCart": "Add to cart",
     "addProductToastTitle": "Product added to cart",
     "addProductToastDescription": "The product has been added to your cart."
+  },
+  "ProductsList": {
+    "listOfProducts": "Product List",
+    "searchProducts": "Search for products...",
+    "filters": "Filters",
+    "sortNewest": "Newest",
+    "sortPriceAsc": "Price: Low to High",
+    "sortPriceDesc": "Price: High to Low",
+    "productsFound": "products found",
+    "categories": "Categories",
+    "priceRange": "Price Range",
+    "resetFilters": "Reset Filters",
+    "noProductsFound": "No products found. Try to change the filters."
   },
   "Category": {
     "products": "Products"
@@ -335,5 +318,83 @@
     "cardUpdated": "Payment method has been updated",
     "error": "Error",
     "cannotUpdateCard": "Unable to update payment method"
+  },
+  "OrderHistory": {
+    "title": "Order History",
+    "orderSingular": "order",
+    "ordersPlural": "orders",
+    "orderNumber": "Order #{id}",
+    "orderDetails": "Order Details",
+    "items": "items",
+    "product": "Product",
+    "unitPrice": "Unit Price",
+    "quantity": "Quantity",
+    "total": "Total",
+    "noOrdersFound": "No orders found",
+    "noOrdersDescription": "You haven't placed any orders in our store yet."
+  },
+  "PaymentPanel": {
+    "summary": "Order Summary",
+    "total": "Total",
+    "vatIncluded": "VAT (20%)",
+    "processingButton": "Processing payment...",
+    "payButton": "Pay",
+    "errorTitle": "Payment Error",
+    "securePaymentTitle": "Secure Payment",
+    "securePaymentDesc": "Your payment information is encrypted and processed securely."
+  },
+  "PaymentStepper": {
+    "validationError": "Validation error",
+    "selectShippingAddress": "Please select a shipping address.",
+    "shippingAddressRequired": "Shipping address is required.",
+    "selectBillingAddress": "Please select a billing address.",
+    "selectPaymentMethod": "Please select a payment method.",
+    "createPaymentIntentError": "Failed to create payment intent.",
+    "paymentError": "Payment error",
+    "paymentErrorDefault": "An error occurred during payment.",
+    "back": "Back",
+    "next": "Next",
+    "paymentSuccess": "Payment successful",
+    "orderConfirmed": "Your order has been confirmed."
+  },
+  "Steps": {
+    "steps": {
+      "SHIPPING": {
+        "title": "Shipping address",
+        "description": "Select or add your shipping address."
+      },
+      "BILLING": {
+        "title": "Billing address",
+        "description": "Select or add your billing address."
+      },
+      "PAYMENT": {
+        "title": "Payment",
+        "description": "Choose your preferred payment method."
+      }
+    }
+  },
+  "AddressManagement": {
+    "title": "My address book",
+    "edit": "Edit",
+    "delete": "Delete",
+    "no_addresses": "No addresses",
+    "add_address": "Add an address",
+    "edit_address": "Edit this address",
+    "delete_address": "Delete this address",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "error_loading": "Error loading addresses",
+    "add_address_button": "Add address",
+    "update_address_button": "Update",
+    "incomplete_address_toast": "Incomplete address",
+    "error_toast_title": "Error",
+    "default_alias": "Address"
+  },
+  "SavedAddresses": {
+    "error_loading": "Error loading addresses.",
+    "addNewCard": "Add a new address"
+  },
+  "ShippingStep": {
+    "use_same_address": "Use the same address for billing"
   }
 }

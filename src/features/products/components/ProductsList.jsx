@@ -90,7 +90,6 @@ export function ProductList() {
   }
 
   const handleSearch = (e) => {
-    console.log(e.target.value)
     setSearch(e.target.value)
     setCurrentPage(1)
   }
@@ -102,7 +101,6 @@ export function ProductList() {
 
   useEffect(() => {
     setCurrentPage(1)
-    console.log("Page changed to 1")
   }, [debouncedSearch])
 
   if (isLoading) {
@@ -203,17 +201,6 @@ export function ProductList() {
               </TableCell>
             </TableRow>
           ))}
-          {products.length === 0 && (
-            <TableRow>
-              <TableCell
-                colSpan={6}
-                className="py-8 text-center text-muted-foreground"
-              >
-                <Package className="mx-auto mb-2 h-8 w-8" />
-                <p>Aucun produit trouvé</p>
-              </TableCell>
-            </TableRow>
-          )}
         </TableBody>
       </Table>
 

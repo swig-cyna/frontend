@@ -1,22 +1,22 @@
 "use client"
 
 import logo from "@/assets/logoText.png"
-import { Search, ShoppingCart, User2 } from "lucide-react"
-import { useTranslations } from "next-intl"
-import Image from "next/image"
-import Link from "next/link"
-import Headroom from "react-headroom"
-import Burger from "./Burger"
-import LocaleSwitcher from "./LocaleSwitcher"
-import { Button } from "./ui/button"
-import { signOut, useSession } from "@/features/auth/utils/authClient"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { signOut, useSession } from "@/features/auth/utils/authClient"
+import { Search, ShoppingCart, User2 } from "lucide-react"
+import { useTranslations } from "next-intl"
+import Image from "next/image"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
+import Headroom from "react-headroom"
+import Burger from "./Burger"
+import LocaleSwitcher from "./LocaleSwitcher"
+import { Button } from "./ui/button"
 
 const Header = () => {
   const t = useTranslations("Header")
@@ -54,37 +54,36 @@ const Header = () => {
             <LocaleSwitcher />
             {session ? (
               <DropdownMenu>
-                <DropdownMenuTrigger asChild>
+                <DropdownMenuTrigger asChild className="cursor-pointer">
                   <Link href="/">
                     <User2 />
                     <span className="sr-only">{t("userMenu")}</span>
                   </Link>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                  <DropdownMenuItem>
+                  <DropdownMenuItem asChild className="cursor-pointer">
                     <Link href="/user/account-management">
                       {t("userSpace")}
                     </Link>
                   </DropdownMenuItem>
                   {isAdmin && (
-                    <DropdownMenuItem>
+                    <DropdownMenuItem asChild className="cursor-pointer">
                       <Link href="/admin">{t("backoffice")}</Link>
                     </DropdownMenuItem>
                   )}
-                  <DropdownMenuItem>
-                    <button
-                      onClick={async () => {
-                        await signOut({
-                          fetchOptions: {
-                            onSuccess: () => {
-                              router.push("/")
-                            },
+                  <DropdownMenuItem
+                    className="cursor-pointer"
+                    onClick={async () => {
+                      await signOut({
+                        fetchOptions: {
+                          onSuccess: () => {
+                            router.push("/")
                           },
-                        })
-                      }}
-                    >
-                      {t("signout")}
-                    </button>
+                        },
+                      })
+                    }}
+                  >
+                    {t("signout")}
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

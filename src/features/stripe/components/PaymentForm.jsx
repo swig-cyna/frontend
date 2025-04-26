@@ -1,12 +1,12 @@
 import useCartStore from "@/features/cart/stores/cartStore"
-import AddPaymentMethodForm from "@/features/stripe/components/AddPaymentMethodForm"
-import PaymentConfirmation from "@/features/stripe/components/PaymentConfirmation"
-import RecapCart from "@/features/stripe/components/RecapCart"
-import SavedPaymentMethods from "@/features/stripe/components/SavedPaymentMethods"
+import RecapCart from "@/features/stripe/components/Recap/Cart"
 import { Elements } from "@stripe/react-stripe-js"
 import { loadStripe } from "@stripe/stripe-js"
 import { useTranslations } from "next-intl"
 import { useState } from "react"
+import PaymentConfirmation from "./PaymentConfirmation"
+import AddPaymentMethodForm from "./PaymentMethod/AddPaymentMethodForm"
+import PaymentStepper from "./PaymentStepper"
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_KEY_STRIPE)
 
@@ -18,10 +18,6 @@ const PaymentForm = ({ userId }) => {
 
   const handleContinueToPayment = () => {
     setActiveStep("saved")
-  }
-
-  const handleAddNewCard = () => {
-    setActiveStep("new")
   }
 
   const handleBackToRecap = () => {
@@ -92,9 +88,8 @@ const PaymentForm = ({ userId }) => {
         )}
 
         {activeStep === "saved" && (
-          <SavedPaymentMethods
+          <PaymentStepper
             userId={userId}
-            onAddNew={handleAddNewCard}
             onPaymentComplete={handlePaymentComplete}
             onGoBack={handleBackToRecap}
             cartItems={cartItems}

@@ -224,21 +224,10 @@
     "errorMessage": "אירעה שגיאה. נסה שוב מאוחר יותר."
   },
   "AddPaymentMethodForm": {
-    "cardTitle": "הוסף כרטיס חדש",
-    "cardDescription": "פרטי התשלום שלך מאובטחים",
     "cardInfoLabel": "פרטי כרטיס",
     "secureProcessing": "הכרטיס שלך מעובד באופן מאובטח על ידי Stripe.",
     "cardholderName": "שם בעל הכרטיס",
     "cardholderNamePlaceholder": "ישראל ישראלי",
-    "billingAddress": "כתובת לחיוב",
-    "addressLabel": "כתובת",
-    "addressPlaceholder": "רחוב הרצל 123",
-    "cityLabel": "עיר",
-    "cityPlaceholder": "תל אביב",
-    "postalCodeLabel": "מיקוד",
-    "postalCodePlaceholder": "6701101",
-    "countryLabel": "מדינה",
-    "countryPlaceholder": "ישראל",
     "cancelButton": "ביטול",
     "addCardButton": "הוסף כרטיס זה",
     "processingButton": "מעבד...",
@@ -266,27 +255,8 @@
     "perUnit": "ליחידה"
   },
   "SavedPaymentMethods": {
-    "title": "אמצעי התשלום שלך",
-    "description": "בחר כרטיס לסיום הרכישה",
-    "selectDescription": "בחר אמצעי תשלום",
-    "loading": "טוען...",
     "addNewCard": "הוסף כרטיס חדש",
-    "summary": "סיכום",
-    "total": "סה\"כ",
-    "vatIncluded": "כולל מע\"מ (20%)",
-    "back": "חזרה",
-    "payButton": "שלם",
-    "processingButton": "מעבד...",
-    "paymentMethodRequired": "אמצעי תשלום נדרש",
-    "paymentMethodRequiredDesc": "אנא בחר אמצעי תשלום כדי להמשיך",
-    "paymentError": "שגיאת תשלום",
-    "paymentErrorDefault": "אירעה שגיאה במהלך התשלום",
-    "paymentSuccess": "התשלום הצליח",
-    "orderConfirmed": "הזמנתך אושרה בהצלחה",
-    "createPaymentIntentError": "שגיאה ביצירת כוונת תשלום",
-    "paymentErrorPrefix": "שגיאת תשלום:",
-    "securePaymentTitle": "תשלום מאובטח",
-    "securePaymentDesc": "פרטי התשלום שלך מוגנים באמצעות הצפנת SSL. לעולם איננו שומרים את פרטי הכרטיס המלאים שלך."
+    "expireLabel": "תפוגה {month}/{year}"
   },
   "PaymentForm": {
     "title": "סיים את ההזמנה שלך",
@@ -299,6 +269,19 @@
     "addToCart": "הוסף לעגלה",
     "addProductToastTitle": "המוצר נוסף לעגלה",
     "addProductToastDescription": "המוצר נוסף בהצלחה לעגלת הקניות שלך."
+  },
+  "ProductsList": {
+    "listOfProducts": "רשימת מוצרים",
+    "searchProducts": "חיפוש מוצרים...",
+    "filters": "מסננים",
+    "sortNewest": "החדשים ביותר",
+    "sortPriceAsc": "מחיר: מהנמוך לגבוה",
+    "sortPriceDesc": "מחיר: מהגבוה לנמוך",
+    "productsFound": "מוצרים נמצאו",
+    "categories": "קטגוריות",
+    "priceRange": "טווח מחירים",
+    "resetFilters": "איפוס מסננים",
+    "noProductsFound": "לא נמצאו מוצרים. נסה לשנות את המסננים."
   },
   "Category": {
     "products": "מוצרים"
@@ -334,5 +317,83 @@
     "cardUpdated": "אמצעי התשלום עודכן",
     "error": "שגיאה",
     "cannotUpdateCard": "לא ניתן לעדכן את אמצעי התשלום"
+  },
+  "OrderHistory": {
+    "title": "היסטוריית הזמנות",
+    "orderSingular": "הזמנה",
+    "ordersPlural": "הזמנות",
+    "orderNumber": "הזמנה #{id}",
+    "orderDetails": "פרטי ההזמנה",
+    "items": "פריטים",
+    "product": "מוצר",
+    "unitPrice": "מחיר ליחידה",
+    "quantity": "כמות",
+    "total": "סה״כ",
+    "noOrdersFound": "לא נמצאו הזמנות",
+    "noOrdersDescription": "עדיין לא ביצעת הזמנות בחנות שלנו."
+  },
+  "PaymentPanel": {
+    "summary": "סיכום הזמנה",
+    "total": "סך הכל",
+    "vatIncluded": "כולל (20%)",
+    "processingButton": "מעבד תשלום...",
+    "payButton": "שלם",
+    "errorTitle": "שגיאת תשלום",
+    "securePaymentTitle": "תשלום מאובטח",
+    "securePaymentDesc": "פרטי התשלום שלך מוצפנים ומעובדים בצורה מאובטחת."
+  },
+  "PaymentStepper": {
+    "validationError": "שגיאת אימות",
+    "selectShippingAddress": "אנא בחר כתובת משלוח.",
+    "shippingAddressRequired": "נדרש כתובת משלוח.",
+    "selectBillingAddress": "אנא בחר כתובת לחיוב.",
+    "selectPaymentMethod": "אנא בחר אמצעי תשלום.",
+    "createPaymentIntentError": "יצירת בקשת תשלום נכשלה.",
+    "paymentError": "שגיאת תשלום",
+    "paymentErrorDefault": "אירעה שגיאה במהלך התשלום.",
+    "back": "חזור",
+    "next": "הבא",
+    "paymentSuccess": "התשלום הצליח",
+    "orderConfirmed": "ההזמנה שלך אושרה."
+  },
+  "Steps": {
+    "steps": {
+      "SHIPPING": {
+        "title": "כתובת משלוח",
+        "description": "בחר או הוסף כתובת משלוח."
+      },
+      "BILLING": {
+        "title": "כתובת לחיוב",
+        "description": "בחר או הוסף כתובת לחיוב."
+      },
+      "PAYMENT": {
+        "title": "תשלום",
+        "description": "בחר את אמצעי התשלום המועדף עליך."
+      }
+    }
+  },
+  "AddressManagement": {
+    "title": "ספר הכתובות שלי",
+    "edit": "ערוך",
+    "delete": "מחק",
+    "no_addresses": "אין כתובות",
+    "add_address": "הוסף כתובת",
+    "edit_address": "ערוך כתובת זו",
+    "delete_address": "מחק כתובת זו",
+    "cancel": "ביטול",
+    "confirm": "אישור",
+    "error_loading": "שגיאה בטעינת הכתובות",
+    "add_address_button": "הוסף כתובת",
+    "update_address_button": "עדכן",
+    "incomplete_address_toast": "כתובת לא מלאה",
+    "error_toast_title": "שגיאה",
+    "default_alias": "כתובת"
+  },
+  "SavedAddresses": {
+    "error_loading": "שגיאה בטעינת הכתובות.",
+    "addNewCard": "הוסף כתובת חדשה"
+  },
+  "ShippingStep": {
+    "use_same_address": "להשתמש באותו כתובת לחיוב"
   }
 }

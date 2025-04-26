@@ -76,8 +76,6 @@ const PaymentMethodUpdate = ({ paymentMethod, onSuccess }) => {
     try {
       setLoading(true)
 
-      console.log(billingDetails)
-
       await updatePaymentMethod({
         paymentMethodId: paymentMethod.id,
         name: billingDetails.name,
