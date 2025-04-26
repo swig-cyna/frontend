@@ -98,7 +98,7 @@ export function CarouselManager() {
       </TabsContent>
 
       <TabsContent value="preview">
-        <Card>
+        <Card className="mx-auto max-w-5xl">
           <CardHeader>
             <CardTitle>Carousel Preview</CardTitle>
             <CardDescription>
