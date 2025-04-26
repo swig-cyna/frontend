@@ -271,6 +271,19 @@
     "addProductToastTitle": "Product added to cart",
     "addProductToastDescription": "The product has been added to your cart."
   },
+  "ProductsList": {
+    "listOfProducts": "Product List",
+    "searchProducts": "Search for products...",
+    "filters": "Filters",
+    "sortNewest": "Newest",
+    "sortPriceAsc": "Price: Low to High",
+    "sortPriceDesc": "Price: High to Low",
+    "productsFound": "products found",
+    "categories": "Categories",
+    "priceRange": "Price Range",
+    "resetFilters": "Reset Filters",
+    "noProductsFound": "No products found. Try to change the filters."
+  },
   "Category": {
     "products": "Products"
   },
@@ -305,6 +318,20 @@
     "cardUpdated": "Payment method has been updated",
     "error": "Error",
     "cannotUpdateCard": "Unable to update payment method"
+  },
+  "OrderHistory": {
+    "title": "Order History",
+    "orderSingular": "order",
+    "ordersPlural": "orders",
+    "orderNumber": "Order #{id}",
+    "orderDetails": "Order Details",
+    "items": "items",
+    "product": "Product",
+    "unitPrice": "Unit Price",
+    "quantity": "Quantity",
+    "total": "Total",
+    "noOrdersFound": "No orders found",
+    "noOrdersDescription": "You haven't placed any orders in our store yet."
   },
   "PaymentPanel": {
     "summary": "Order Summary",

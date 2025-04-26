@@ -270,6 +270,19 @@
     "addProductToastTitle": "המוצר נוסף לעגלה",
     "addProductToastDescription": "המוצר נוסף בהצלחה לעגלת הקניות שלך."
   },
+  "ProductsList": {
+    "listOfProducts": "רשימת מוצרים",
+    "searchProducts": "חיפוש מוצרים...",
+    "filters": "מסננים",
+    "sortNewest": "החדשים ביותר",
+    "sortPriceAsc": "מחיר: מהנמוך לגבוה",
+    "sortPriceDesc": "מחיר: מהגבוה לנמוך",
+    "productsFound": "מוצרים נמצאו",
+    "categories": "קטגוריות",
+    "priceRange": "טווח מחירים",
+    "resetFilters": "איפוס מסננים",
+    "noProductsFound": "לא נמצאו מוצרים. נסה לשנות את המסננים."
+  },
   "Category": {
     "products": "מוצרים"
   },
@@ -304,6 +317,20 @@
     "cardUpdated": "אמצעי התשלום עודכן",
     "error": "שגיאה",
     "cannotUpdateCard": "לא ניתן לעדכן את אמצעי התשלום"
+  },
+  "OrderHistory": {
+    "title": "היסטוריית הזמנות",
+    "orderSingular": "הזמנה",
+    "ordersPlural": "הזמנות",
+    "orderNumber": "הזמנה #{id}",
+    "orderDetails": "פרטי ההזמנה",
+    "items": "פריטים",
+    "product": "מוצר",
+    "unitPrice": "מחיר ליחידה",
+    "quantity": "כמות",
+    "total": "סה״כ",
+    "noOrdersFound": "לא נמצאו הזמנות",
+    "noOrdersDescription": "עדיין לא ביצעת הזמנות בחנות שלנו."
   },
   "PaymentPanel": {
     "summary": "סיכום הזמנה",
