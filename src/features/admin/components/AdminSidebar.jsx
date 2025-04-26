@@ -34,46 +34,14 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 
 const items = [
-  {
-    title: "Dashboard",
-    url: "/admin",
-    icon: LayoutDashboard,
-  },
-  {
-    title: "Products",
-    url: "/admin/products",
-    icon: Boxes,
-  },
-  {
-    title: "Categories",
-    url: "/admin/categories",
-    icon: Tag,
-  },
-  {
-    title: "Users",
-    url: "/admin/users",
-    icon: Users,
-  },
-  {
-    title: "Orders & Subscriptions",
-    url: "#",
-    icon: CreditCard,
-  },
-  {
-    title: "Customer Support",
-    url: "/admin/support",
-    icon: LifeBuoy,
-  },
-  {
-    title: "Carousel",
-    url: "/admin/carousel",
-    icon: AppWindow,
-  },
-  {
-    title: "Settings",
-    url: "#",
-    icon: Settings,
-  },
+  { title: "Dashboard", url: "/admin", icon: LayoutDashboard },
+  { title: "Products", url: "/admin/products", icon: Boxes },
+  { title: "Categories", url: "/admin/categories", icon: Tag },
+  { title: "Users", url: "/admin/users", icon: Users },
+  { title: "Orders & Subscriptions", url: "#", icon: CreditCard },
+  { title: "Customer Support", url: "/admin/support", icon: LifeBuoy },
+  { title: "Carousel", url: "/admin/carousel", icon: AppWindow },
+  { title: "Settings", url: "#", icon: Settings },
 ]
 
 const AdminSidebar = () => {
@@ -117,12 +85,13 @@ const AdminSidebar = () => {
                 side="top"
                 className="w-[--radix-popper-anchor-width]"
               >
-                <DropdownMenuItem key="home">
+                <DropdownMenuItem asChild key="home" className="cursor-pointer">
                   <Link href="/">
                     <span>Back to shop</span>
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem
+                  className="cursor-pointer"
                   onClick={async () => {
                     await signOut({
                       fetchOptions: {
