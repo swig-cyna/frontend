@@ -336,6 +336,7 @@
   "PaymentPanel": {
     "summary": "Récapitulatif",
     "total": "Total",
+    "discount": "Remise (-{discount}%)",
     "vatIncluded": "TVA (20%)",
     "processingButton": "Traitement du paiement...",
     "payButton": "Payer",

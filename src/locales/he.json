@@ -335,6 +335,7 @@
   "PaymentPanel": {
     "summary": "סיכום הזמנה",
     "total": "סך הכל",
+    "discount": "(-{discount}%) דִיסקוֹנט",
     "vatIncluded": "כולל (20%)",
     "processingButton": "מעבד תשלום...",
     "payButton": "שלם",

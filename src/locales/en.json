@@ -336,6 +336,7 @@
   "PaymentPanel": {
     "summary": "Order Summary",
     "total": "Total",
+    "discount": "Discount (-{discount}%)",
     "vatIncluded": "VAT (20%)",
     "processingButton": "Processing payment...",
     "payButton": "Pay",
