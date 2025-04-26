@@ -44,7 +44,7 @@ const UserSpaceMenu = ({ user }) => {
     {
       title: t("UserSpaceMenu.addressBook"),
       icon: MapPin,
-      url: "#",
+      url: "/user/address-book",
     },
     {
       title: t("UserSpaceMenu.support"),

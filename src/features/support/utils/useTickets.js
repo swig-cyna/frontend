@@ -9,6 +9,7 @@ export function useTickets(context) {
   const refresh = useCallback(async () => {
     setLoading(true)
     setError(null)
+
     try {
       const data = await TicketService.fetchTickets(context)
       setTickets(data)
