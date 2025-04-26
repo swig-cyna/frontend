@@ -305,6 +305,20 @@
     "error": "שגיאה",
     "cannotUpdateCard": "לא ניתן לעדכן את אמצעי התשלום"
   },
+  "OrderHistory": {
+    "title": "היסטוריית הזמנות",
+    "orderSingular": "הזמנה",
+    "ordersPlural": "הזמנות",
+    "orderNumber": "הזמנה #{id}",
+    "orderDetails": "פרטי ההזמנה",
+    "items": "פריטים",
+    "product": "מוצר",
+    "unitPrice": "מחיר ליחידה",
+    "quantity": "כמות",
+    "total": "סה״כ",
+    "noOrdersFound": "לא נמצאו הזמנות",
+    "noOrdersDescription": "עדיין לא ביצעת הזמנות בחנות שלנו."
+  },
   "PaymentPanel": {
     "summary": "סיכום הזמנה",
     "total": "סך הכל",
