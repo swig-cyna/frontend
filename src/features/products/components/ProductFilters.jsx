@@ -23,7 +23,7 @@ export default function ProductFilters() {
 
   const [range, setRange] = useQueryState(
     "range",
-    parseAsArrayOf(parseAsInteger, ",").withDefault([0, 500]),
+    parseAsArrayOf(parseAsInteger, ",").withDefault([0, 10000]),
   )
 
   const [selectedCategories, setSelectedCategories] = useQueryState(
@@ -94,7 +94,7 @@ export default function ProductFilters() {
                 <Slider
                   defaultValue={range}
                   min={0}
-                  max={500}
+                  max={10000}
                   step={10}
                   value={range}
                   onValueChange={handlePriceChange}

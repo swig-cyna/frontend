@@ -57,7 +57,7 @@ const ProductsPage = () => {
 
   const [range] = useQueryState(
     "range",
-    parseAsArrayOf(parseAsInteger, ",").withDefault([0, 500]),
+    parseAsArrayOf(parseAsInteger, ",").withDefault([0, 10000]),
   )
   const debouncedRange = useDebounce(range, 300)
 
