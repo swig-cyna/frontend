@@ -2,8 +2,8 @@ import { create } from "zustand"
 import { persist } from "zustand/middleware"
 
 // Fonction utilitaire pour recalculer les totaux
-const recalculateTotals = (cartItems) =>
-  cartItems.reduce(
+const recalculateTotals = (cartItems) => {
+  const result = cartItems.reduce(
     (acc, item) => {
       const price = Number(item.price)
       const quantity = Number(item.quantity)
@@ -14,6 +14,10 @@ const recalculateTotals = (cartItems) =>
     },
     { totalPrice: 0, totalQuantity: 0 },
   )
+  result.totalPrice = Math.round(result.totalPrice * 100) / 100
+
+  return result
+}
 
 const useCartStore = create(
   persist(

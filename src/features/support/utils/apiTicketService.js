@@ -9,7 +9,9 @@ export const TicketService = {
       })
 
       if (!response.ok) {
-        throw { response: { status: response.status, data: response.json() } }
+        throw new Error({
+          response: { status: response.status, data: response.json() },
+        })
       }
 
       return response.json()
@@ -27,7 +29,9 @@ export const TicketService = {
       })
 
       if (!response.ok) {
-        throw { response: { status: response.status, data: response.json() } }
+        throw new Error({
+          response: { status: response.status, data: response.json() },
+        })
       }
 
       return await response.json()
@@ -45,7 +49,9 @@ export const TicketService = {
       })
 
       if (!response.ok) {
-        throw { response: { status: response.status, data: response.json() } }
+        throw new Error({
+          response: { status: response.status, data: response.json() },
+        })
       }
 
       return await response.json()
@@ -62,7 +68,9 @@ export const TicketService = {
       })
 
       if (!response.ok) {
-        throw { response: { status: response.status, data: response.json() } }
+        throw new Error({
+          response: { status: response.status, data: response.json() },
+        })
       }
 
       return true
@@ -80,7 +88,9 @@ export const TicketService = {
       )
 
       if (!response.ok) {
-        throw { response: { status: response.status, data: response.json() } }
+        throw new Error({
+          response: { status: response.status, data: response.json() },
+        })
       }
 
       const data = await response.json()
