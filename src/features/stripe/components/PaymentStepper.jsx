@@ -7,7 +7,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { Skeleton } from "@/components/ui/skeleton"
 import { useSession } from "@/features/auth/utils/authClient"
+import { useSubscription } from "@/features/subscriptions/hooks/useSubscription"
 import { toast } from "@/hooks/useToast"
 import { useTranslations } from "next-intl"
 import { useEffect, useState } from "react"
@@ -28,6 +30,7 @@ const PaymentStepper = ({
   stripePromise,
 }) => {
   const [step, setStep] = useState(PaymentSteps.SHIPPING)
+  const { data: subscriptionData, isLoading } = useSubscription(userId)
   const currentStepConfig = stepsConfig(useTranslations("Steps"))[step]
   const [shippingAddress, setShippingAddress] = useState(null)
   const [billingAddress, setBillingAddress] = useState(null)
@@ -205,7 +208,9 @@ const PaymentStepper = ({
         },
       )
 
-      if (result.error) throw new Error(result.error.message)
+      if (result.error) {
+        throw new Error(result.error.message)
+      }
 
       if (result.paymentIntent?.status === "succeeded") {
         await confirmPayment({
@@ -228,6 +233,81 @@ const PaymentStepper = ({
     } finally {
       setIsProcessing(false)
     }
+  }
+
+  if (isLoading) {
+    return (
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 p-4 md:flex-row">
+        <div className="w-full space-y-6 rounded-lg bg-black/5 p-6 dark:bg-white/5 md:w-2/3">
+          <div className="mb-4 flex items-center gap-2">
+            <div className="h-6 w-6">
+              <Skeleton className="h-6 w-6 rounded-md" />
+            </div>
+            <Skeleton className="h-6 w-48" />
+          </div>
+
+          <Skeleton className="h-4 w-full max-w-md" />
+          <div className="my-6 flex items-center gap-2">
+            <Skeleton className="h-5 w-5 rounded-sm" />
+            <Skeleton className="h-4 w-64" />
+          </div>
+          <div className="mb-6 rounded-lg border border-gray-200 p-4 dark:border-gray-700">
+            <div className="mb-3 flex items-center gap-3">
+              <Skeleton className="h-5 w-5 rounded-full" />
+              <Skeleton className="h-5 w-32" />
+            </div>
+            <Skeleton className="ml-8 h-4 w-48" />
+          </div>
+          <div className="flex justify-center">
+            <Skeleton className="h-10 w-64 rounded-md" />
+          </div>
+          <div className="mt-10 flex justify-between">
+            <Skeleton className="h-10 w-24 rounded-md" />
+            <Skeleton className="h-10 w-24 rounded-md" />
+          </div>
+        </div>
+        <div className="w-full space-y-6 md:w-1/3">
+          <div className="rounded-lg bg-black/5 p-6 dark:bg-white/5">
+            <Skeleton className="mb-6 h-6 w-32" />
+            <div className="mb-6 space-y-4">
+              <div className="flex items-center justify-between">
+                <Skeleton className="h-4 w-32" />
+                <Skeleton className="h-4 w-16" />
+              </div>
+              <div className="flex items-center justify-between">
+                <Skeleton className="h-4 w-24" />
+                <Skeleton className="h-4 w-20" />
+              </div>
+            </div>
+            <div className="space-y-3 border-t border-gray-200 pt-4 dark:border-gray-700">
+              <div className="flex items-center justify-between">
+                <Skeleton className="h-5 w-16" />
+                <Skeleton className="h-5 w-24" />
+              </div>
+              <div className="flex items-center justify-between">
+                <Skeleton className="h-4 w-24" />
+                <Skeleton className="h-4 w-16" />
+              </div>
+              <div className="flex items-center justify-between">
+                <Skeleton className="h-4 w-32" />
+                <Skeleton className="h-4 w-16" />
+              </div>
+            </div>
+            <div className="mt-6">
+              <Skeleton className="h-12 w-full rounded-md" />
+            </div>
+          </div>
+          <div className="rounded-lg bg-black/5 p-6 dark:bg-white/5">
+            <div className="mb-3 flex items-center gap-2">
+              <Skeleton className="h-5 w-5 rounded-md" />
+              <Skeleton className="h-5 w-40" />
+            </div>
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="mt-2 h-4 w-3/4" />
+          </div>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -291,6 +371,7 @@ const PaymentStepper = ({
       </Card>
       <div className="space-y-4">
         <PaymentPanel
+          subscriptionData={subscriptionData}
           cartItems={cartItems}
           total={total}
           canPay={canPay}
