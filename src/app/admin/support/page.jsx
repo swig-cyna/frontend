@@ -21,7 +21,7 @@ const Page = () => {
         variant: "destructive",
       })
     }
-  }, [error, toast])
+  }, [error])
 
   return (
     <>

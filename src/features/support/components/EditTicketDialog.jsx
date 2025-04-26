@@ -77,6 +77,7 @@ export function EditTicketDialog({
       }
 
       let assignedName = "Nobody"
+
       if (values.assigned_to) {
         const userObj = users.find((u) => u.value === values.assigned_to)
         assignedName = userObj ? userObj.label : values.assigned_to

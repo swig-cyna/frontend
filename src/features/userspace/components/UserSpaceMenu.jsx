@@ -34,7 +34,7 @@ const UserSpaceMenu = ({ user }) => {
     {
       title: t("UserSpaceMenu.orderHistory"),
       icon: Package,
-      url: "#",
+      url: "/user/order-history",
     },
     {
       title: t("UserSpaceMenu.paymentManagement"),
@@ -44,7 +44,7 @@ const UserSpaceMenu = ({ user }) => {
     {
       title: t("UserSpaceMenu.addressBook"),
       icon: MapPin,
-      url: "#",
+      url: "/user/address-book",
     },
     {
       title: t("UserSpaceMenu.support"),
