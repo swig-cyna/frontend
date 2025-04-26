@@ -12,6 +12,7 @@ import { ShieldCheck } from "lucide-react"
 import { useFormatter, useTranslations } from "next-intl"
 
 const PaymentPanel = ({
+  subscriptionData,
   cartItems,
   total,
   canPay,
@@ -22,6 +23,21 @@ const PaymentPanel = ({
 }) => {
   const t = useTranslations("PaymentPanel")
   const format = useFormatter()
+
+  let totalWithDiscount = total
+  let newTotal = total
+  let remise = 0
+
+  if (subscriptionData) {
+    if (subscriptionData.length > 0) {
+      newTotal -= (newTotal * subscriptionData[0].plant_discount) / 100
+      totalWithDiscount -=
+        (totalWithDiscount * subscriptionData[0].plant_discount) / 100
+      remise = (newTotal * subscriptionData[0].plant_discount) / 100
+    }
+  }
+
+  newTotal *= 1.2
 
   return (
     <>
@@ -43,17 +59,35 @@ const PaymentPanel = ({
               </span>
             </div>
           ))}
+          {subscriptionData.length > 0 && (
+            <div className="flex justify-between py-1 text-sm text-muted-foreground">
+              <span>
+                {t("discount", {
+                  discount: subscriptionData[0].plant_discount,
+                })}
+              </span>
+              <span>
+                {format.number(remise, { style: "currency", currency })}
+              </span>
+            </div>
+          )}
           <Separator className="my-2" />
           <div className="flex justify-between py-1">
             <span>{t("total")}</span>
             <span className="font-bold">
-              {format.number(total, { style: "currency", currency })}
+              {format.number(totalWithDiscount, {
+                style: "currency",
+                currency,
+              })}
             </span>
           </div>
           <div className="flex justify-between py-1 text-sm text-muted-foreground">
             <span>{t("vatIncluded")}</span>
             <span>
-              {format.number(total * 0.2, { style: "currency", currency })}
+              {format.number(totalWithDiscount * 0.2, {
+                style: "currency",
+                currency,
+              })}
             </span>
           </div>
         </CardContent>
@@ -65,7 +99,7 @@ const PaymentPanel = ({
           >
             {isProcessing
               ? t("processingButton")
-              : `${t("payButton")} ${format.number(total * 1.2, { style: "currency", currency })}`}
+              : `${t("payButton")} ${format.number(newTotal, { style: "currency", currency })}`}
           </Button>
         </CardFooter>
       </Card>
