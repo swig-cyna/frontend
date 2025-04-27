@@ -1,5 +1,5 @@
 import { apiClient } from "@/utils/fetch"
-import { useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 
 export const usePlants = () =>
   useQuery({
@@ -7,8 +7,57 @@ export const usePlants = () =>
     queryFn: () => apiClient.get(`plants/`).json(),
   })
 
-export const usePlant = (userId) =>
+export const usePlant = (id) =>
   useQuery({
-    queryKey: ["plants"],
-    queryFn: () => apiClient.get(`plants/${userId}`).json(),
+    queryKey: ["plants", id],
+    queryFn: () => apiClient.get(`plants/${id}`).json(),
   })
+
+export const useAddPlant = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: (data) =>
+      apiClient
+        .post(`plants/`, {
+          json: data,
+        })
+        .json(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["plants"] })
+    },
+    onError: (err) => {
+      console.error(err)
+    },
+  })
+}
+
+export const useUpdatePlant = (id) => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: (data) =>
+      apiClient
+        .put(`plants/${id}`, {
+          json: data,
+        })
+        .json(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["plants"] })
+    },
+  })
+}
+
+export const useDeletePlant = () => {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: (plantId) => apiClient.delete(`plants/${plantId}`).json(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["plants"] })
+    },
+    onError: (err) => {
+      console.error(err)
+    },
+  })
+}
