@@ -412,7 +412,10 @@
       "choosePlan": "Choisir ce plan",
       "dialogTitle": "Abonnement déjà actif",
       "dialogDescription": "Un abonnement est déjà actif. Si vous voulez choisir un autre abonnement, vous devez d'abord annuler l'abonnement actuel.",
-      "cancelButton": "Annuler"
+      "cancelButton": "Annuler",
+      "loginRequired": "Connexion requise",
+      "loginToSubscribe": "Veuillez vous connecter pour vous abonner à ce plan.",
+      "login": "Se connecter"
     },
     "Payment": {
       "title": "Paiement",

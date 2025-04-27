@@ -21,7 +21,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { useSession } from "@/features/auth/utils/authClient"
 import { usePlants } from "@/features/subscriptions/hooks/usePlants"
 import { useSubscription } from "@/features/subscriptions/hooks/useSubscription"
-import { AlertCircle, Check } from "lucide-react"
+import { AlertCircle, Check, LogIn } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
@@ -30,11 +30,18 @@ const SubscriptionsPage = () => {
   const t = useTranslations()
   const router = useRouter()
   const { data: session } = useSession()
-  const { data: subscriptionData } = useSubscription(session?.user.id)
-  const { data: plants, isLoading } = usePlants()
+  const { data: subscriptionData } = useSubscription(session?.user?.id)
+  const { data: plants, isLoading: plantsLoading } = usePlants()
   const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [showLoginDialog, setShowLoginDialog] = useState(false)
 
   const handleChoosePlan = (plan) => {
+    if (!session) {
+      setShowLoginDialog(true)
+
+      return
+    }
+
     if (subscriptionData?.length > 0) {
       setIsDialogOpen(true)
 
@@ -60,7 +67,11 @@ const SubscriptionsPage = () => {
     router.push("/subscriptions/payment")
   }
 
-  if (!session || isLoading) {
+  const handleLogin = () => {
+    router.push("/signin")
+  }
+
+  if (plantsLoading) {
     return (
       <div className="container mx-auto p-6">
         <div className="grid gap-6 md:grid-cols-2">
@@ -185,6 +196,28 @@ const SubscriptionsPage = () => {
           <DialogFooter className="flex justify-end space-x-2 pt-4">
             <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
               {t("Subscriptions.Plans.cancelButton")}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={showLoginDialog} onOpenChange={setShowLoginDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center">
+              <LogIn className="mr-2 h-5 w-5" />
+              {t("Subscriptions.Plans.loginRequired")}
+            </DialogTitle>
+            <DialogDescription className="pt-2">
+              {t("Subscriptions.Plans.loginToSubscribe")}
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className="flex justify-end space-x-2 pt-4">
+            <Button variant="outline" onClick={() => setShowLoginDialog(false)}>
+              {t("Subscriptions.Plans.cancelButton")}
+            </Button>
+            <Button onClick={handleLogin}>
+              {t("Subscriptions.Plans.login")}
             </Button>
           </DialogFooter>
         </DialogContent>

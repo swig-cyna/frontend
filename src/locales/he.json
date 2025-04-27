@@ -411,7 +411,10 @@
       "choosePlan": "בחר תוכנית זו",
       "dialogTitle": "מנוי כבר פעיל",
       "dialogDescription": "קיים מנוי פעיל. אם ברצונך לבחור מנוי אחר, עליך לבטל תחילה את המנוי הנוכחי.",
-      "cancelButton": "ביטול"
+      "cancelButton": "ביטול",
+      "loginRequired": "נדרשת כניסה",
+      "loginToSubscribe": "אנא התחבר כדי להירשם לתוכנית זו.",
+      "login": "התחברות"
     },
     "Payment": {
       "title": "תשלום",

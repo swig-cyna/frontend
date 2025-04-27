@@ -412,7 +412,10 @@
       "choosePlan": "Choose this plan",
       "dialogTitle": "Subscription already active",
       "dialogDescription": "A subscription is already active. If you want to choose another subscription, you must first cancel your current subscription.",
-      "cancelButton": "Cancel"
+      "cancelButton": "Cancel",
+      "loginRequired": "Required connection",
+      "loginToSubscribe": "Please login to subscribe to this plan.",
+      "login": "Login"
     },
     "Payment": {
       "title": "Payment",
