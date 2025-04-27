@@ -18,7 +18,7 @@ const CardProduct = ({ product }) => {
         <Image
           src={getProductImageUrl(product.images[0])}
           alt="logo"
-          className="aspect-square"
+          className="aspect-square object-cover"
           width={700}
           height={500}
         />
