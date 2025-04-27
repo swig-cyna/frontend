@@ -45,7 +45,7 @@ export function SubscriptionList() {
   const router = useRouter()
   const [limit, setLimit] = useState(10)
   const [search, setSearch] = useState("")
-  const [currentPage, setCurrentPage] = useState(1)
+  const [setCurrentPage] = useState(1)
   const [isDeleting, setIsDeleting] = useState(false)
   const [productToDelete, setProductToDelete] = useState(null)
 
