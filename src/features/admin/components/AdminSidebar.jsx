@@ -1,5 +1,6 @@
 import {
   AppWindow,
+  BadgePercent,
   Boxes,
   ChevronUp,
   CreditCard,
@@ -36,6 +37,7 @@ import { useRouter } from "next/navigation"
 const items = [
   { title: "Dashboard", url: "/admin", icon: LayoutDashboard },
   { title: "Products", url: "/admin/products", icon: Boxes },
+  { title: "Subscriptions", url: "/admin/subscriptions", icon: BadgePercent },
   { title: "Categories", url: "/admin/categories", icon: Tag },
   { title: "Users", url: "/admin/users", icon: Users },
   { title: "Orders & Subscriptions", url: "#", icon: CreditCard },
