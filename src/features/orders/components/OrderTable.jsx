@@ -186,7 +186,7 @@ export function OrderTable() {
           </DialogHeader>
           <Elements stripe={stripePromise} options={stripeOptions}>
             <AddressStripeForm
-              mode="edit"
+              mode="order"
               address={currentAddress}
               onSuccess={handleSubmitSuccess}
             />
