@@ -6,7 +6,6 @@ import {
   CreditCard,
   LayoutDashboard,
   LifeBuoy,
-  Settings,
   Tag,
   User2,
   Users,
@@ -40,10 +39,9 @@ const items = [
   { title: "Subscriptions", url: "/admin/subscriptions", icon: BadgePercent },
   { title: "Categories", url: "/admin/categories", icon: Tag },
   { title: "Users", url: "/admin/users", icon: Users },
-  { title: "Orders & Subscriptions", url: "#", icon: CreditCard },
+  { title: "Orders & Subscriptions", url: "/admin/orders", icon: CreditCard },
   { title: "Customer Support", url: "/admin/support", icon: LifeBuoy },
   { title: "Carousel", url: "/admin/carousel", icon: AppWindow },
-  { title: "Settings", url: "#", icon: Settings },
 ]
 
 const AdminSidebar = () => {
