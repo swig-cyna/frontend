@@ -16,28 +16,36 @@ import { Separator } from "@/components/ui/separator"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useSession } from "@/features/auth/utils/authClient"
 import PaymentConfirmation from "@/features/stripe/components/PaymentConfirmation"
+import AddPaymentMethodForm from "@/features/stripe/components/PaymentMethod/AddPaymentMethodForm"
 import { usePaymentMethod } from "@/features/stripe/hooks/usePaymentMethode"
 import { useAddSubsciption } from "@/features/subscriptions/hooks/useSubscription"
 import { toast } from "@/hooks/use-toast"
+import { Elements } from "@stripe/react-stripe-js"
+import { loadStripe } from "@stripe/stripe-js"
 import { CreditCard, PlusCircle, ShieldCheck } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_KEY_STRIPE)
+
 const PaymentSubscriptionPage = () => {
   const router = useRouter()
+  const t = useTranslations("Subscriptions")
   const { data: session } = useSession()
   const { data: paymentMethodsData, isLoading } = usePaymentMethod(
     session?.user.id,
   )
   const { mutateAsync: createSubscription } = useAddSubsciption()
-  const [cartItems, setCartItems] = useState([])
-  const [total, setTotal] = useState(0)
+  const [cartItem, setCartItem] = useState([])
+  const [totals, setTotals] = useState(0)
   const [paymentMethods, setPaymentMethods] = useState([])
   const [selectedMethod, setSelectedMethod] = useState(null)
   const [isProcessing, setIsProcessing] = useState(false)
   const [error, setError] = useState(null)
   const [showNewCardForm, setShowNewCardForm] = useState(false)
   const [paymentComplete, setPaymentComplete] = useState(false)
+  const [activeStep, setActiveStep] = useState("saved")
 
   useEffect(() => {
     if (paymentMethodsData?.data && Array.isArray(paymentMethodsData.data)) {
@@ -54,8 +62,8 @@ const PaymentSubscriptionPage = () => {
 
         if (planData) {
           const { cartItems, total } = JSON.parse(planData)
-          setCartItems(cartItems)
-          setTotal(total)
+          setCartItem(cartItems)
+          setTotals(total)
         } else {
           router.push("/")
         }
@@ -85,8 +93,8 @@ const PaymentSubscriptionPage = () => {
   const handleSubmit = async () => {
     if (!selectedMethod) {
       toast({
-        title: "Méthode de paiement requise",
-        description: "Veuillez sélectionner une méthode de paiement",
+        title: t("Payment.paymentMethodRequired"),
+        description: t("Payment.selectPaymentMethodError"),
         variant: "destructive",
       })
 
@@ -98,9 +106,9 @@ const PaymentSubscriptionPage = () => {
 
     const subscription = await createSubscription({
       userId: session?.user.id,
-      plantId: cartItems[0].id,
+      plantId: cartItem[0].id,
       paymentMethodId: selectedMethod,
-      interval: cartItems[0].interval,
+      interval: cartItem[0].interval,
     })
 
     if (subscription) {
@@ -109,7 +117,11 @@ const PaymentSubscriptionPage = () => {
   }
 
   const handleAddNewCard = () => {
-    setShowNewCardForm(true)
+    setActiveStep("new")
+  }
+
+  const handleCardAdded = () => {
+    setActiveStep("saved")
   }
 
   const handleGoBack = () => {
@@ -133,20 +145,20 @@ const PaymentSubscriptionPage = () => {
 
   return (
     <div className="container mx-auto p-6">
-      <h1 className="mb-6 text-2xl font-bold">Paiement</h1>
+      <h1 className="mb-6 text-2xl font-bold">{t("Payment.title")}</h1>
       <div className="grid gap-6 md:grid-cols-[1fr_300px]">
-        <Card className="flex flex-col">
-          <CardHeader>
-            <CardTitle className="flex items-center">
-              <CreditCard className="mr-2 h-5 w-5" />
-              Méthodes de paiement
-            </CardTitle>
-            <CardDescription>
-              Sélectionnez votre méthode de paiement préférée
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="flex-1">
-            {!showNewCardForm ? (
+        {activeStep === "saved" ? (
+          <Card className="flex flex-col">
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <CreditCard className="mr-2 h-5 w-5" />
+                {t("Payment.paymentMethods")}
+              </CardTitle>
+              <CardDescription>
+                {t("Payment.selectPaymentMethod")}
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="flex-1">
               <>
                 <RadioGroup
                   value={selectedMethod}
@@ -184,41 +196,36 @@ const PaymentSubscriptionPage = () => {
                 <div className="mt-6 flex justify-center">
                   <Button variant="outline" onClick={handleAddNewCard}>
                     <PlusCircle className="mr-2 h-4 w-4" />
-                    Ajouter une nouvelle carte
+                    {t("Payment.addNewCard")}
                   </Button>
                 </div>
               </>
-            ) : (
-              <div className="space-y-4">
-                <div className="text-center">
-                  {/* Formulaire simplifié pour ajouter une nouvelle carte */}
-                  <p className="mb-4">
-                    Formulaire d'ajout de carte (à intégrer avec votre solution
-                    de paiement)
-                  </p>
-                  <Button onClick={() => setShowNewCardForm(false)}>
-                    Retour aux cartes sauvegardées
-                  </Button>
-                </div>
-              </div>
-            )}
-          </CardContent>
-          <CardFooter>
-            <Button onClick={handleGoBack} variant="outline" className="mr-2">
-              Retour
-            </Button>
-          </CardFooter>
-        </Card>
-
+            </CardContent>
+            <CardFooter>
+              <Button onClick={handleGoBack} variant="outline" className="mr-2">
+                {t("Payment.backButton")}
+              </Button>
+            </CardFooter>
+          </Card>
+        ) : (
+          <Elements stripe={stripePromise}>
+            <AddPaymentMethodForm
+              onSuccess={handleCardAdded}
+              userId={session?.user.id}
+            />
+          </Elements>
+        )}
         <div className="space-y-4">
           <Card>
             <CardHeader className="pb-2">
-              <CardTitle className="text-lg">Résumé de commande</CardTitle>
+              <CardTitle className="text-lg">
+                {t("Payment.orderSummary")}
+              </CardTitle>
             </CardHeader>
             <CardContent className="pb-2">
-              {cartItems.map((item) => (
+              {cartItem.map((item) => (
                 <div key={item.id} className="flex justify-between py-1">
-                  <span className="text-sm">{item.description}</span>
+                  <span className="text-sm">{`${t("Payment.subscription")} ${item.name}`}</span>
                   <span className="text-sm font-medium">
                     €{item.price.toFixed(2)}
                   </span>
@@ -226,12 +233,12 @@ const PaymentSubscriptionPage = () => {
               ))}
               <Separator className="my-2" />
               <div className="flex justify-between py-1">
-                <span>Total</span>
-                <span className="font-bold">€{total.toFixed(2)}</span>
+                <span>{t("Payment.total")}</span>
+                <span className="font-bold">€{totals.toFixed(2)}</span>
               </div>
               <div className="flex justify-between py-1 text-sm text-muted-foreground">
-                <span>TVA incluse</span>
-                <span>€{(total * 0.2).toFixed(2)}</span>
+                <span>{t("Payment.vatIncluded")}</span>
+                <span>€{(totals * 0.2).toFixed(2)}</span>
               </div>
             </CardContent>
             <CardFooter className="pt-2">
@@ -241,20 +248,20 @@ const PaymentSubscriptionPage = () => {
                 disabled={
                   !selectedMethod ||
                   isProcessing ||
-                  cartItems.length === 0 ||
+                  cartItem.length === 0 ||
                   showNewCardForm
                 }
               >
                 {isProcessing
-                  ? "Traitement en cours..."
-                  : `Payer ${total.toFixed(2)} €`}
+                  ? t("Payment.processingPayment")
+                  : t("Payment.payAmount", { amount: totals.toFixed(2) })}
               </Button>
             </CardFooter>
           </Card>
 
           {error && (
             <Alert variant="destructive">
-              <AlertTitle>Erreur</AlertTitle>
+              <AlertTitle>{t("Payment.errorTitle")}</AlertTitle>
               <AlertDescription>{error}</AlertDescription>
             </Alert>
           )}
@@ -262,11 +269,10 @@ const PaymentSubscriptionPage = () => {
           <Alert className="border-muted bg-muted/50">
             <ShieldCheck className="h-4 w-4" />
             <AlertTitle className="text-sm font-medium">
-              Paiement sécurisé
+              {t("Payment.securePaymentTitle")}
             </AlertTitle>
             <AlertDescription className="text-xs">
-              Toutes vos données de paiement sont cryptées et sécurisées. Nous
-              ne stockons pas vos informations de carte.
+              {t("Payment.securePaymentDesc")}
             </AlertDescription>
           </Alert>
         </div>

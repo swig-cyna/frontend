@@ -397,5 +397,59 @@
   },
   "ShippingStep": {
     "use_same_address": "Utiliser la même adresse pour la facturation"
+  },
+  "Subscriptions": {
+    "Plans": {
+      "title": "Abonnements",
+      "noPlansAvailable": "Aucun plan d'abonnement disponible pour le moment",
+      "tryAgainLater": "Veuillez réessayer ultérieurement",
+      "bestOffer": "Meilleure offre",
+      "maxFlexibility": "Flexibilité maximale",
+      "yearlyCommitment": "Économisez avec l'engagement",
+      "perMonth": "/mois",
+      "perYear": "/an",
+      "discountLabel": "% de remise sur le panier",
+      "choosePlan": "Choisir ce plan",
+      "dialogTitle": "Abonnement déjà actif",
+      "dialogDescription": "Un abonnement est déjà actif. Si vous voulez choisir un autre abonnement, vous devez d'abord annuler l'abonnement actuel.",
+      "cancelButton": "Annuler"
+    },
+    "Payment": {
+      "title": "Paiement",
+      "paymentMethods": "Méthodes de paiement",
+      "selectPaymentMethod": "Sélectionnez votre méthode de paiement préférée",
+      "addNewCard": "Ajouter une nouvelle carte",
+      "backButton": "Retour",
+      "orderSummary": "Résumé de commande",
+      "subscription": "Abonnement",
+      "total": "Total",
+      "vatIncluded": "TVA incluse",
+      "processingPayment": "Traitement en cours...",
+      "payAmount": "Payer {amount} €",
+      "paymentMethodRequired": "Méthode de paiement requise",
+      "selectPaymentMethodError": "Veuillez sélectionner une méthode de paiement",
+      "errorTitle": "Erreur",
+      "securePaymentTitle": "Paiement sécurisé",
+      "securePaymentDesc": "Toutes vos données de paiement sont cryptées et sécurisées. Nous ne stockons pas vos informations de carte."
+    },
+    "Management": {
+      "loading": "Chargement...",
+      "noActiveSubscription": "Aucun abonnement actif",
+      "noActiveSubscriptionDesc": "Vous n'avez actuellement aucun abonnement actif.",
+      "discoverPlans": "Découvrir nos plans d'abonnement",
+      "activeSubscriptionTitle": "Votre abonnement actif",
+      "activeSubscriptionDesc": "Détails de votre abonnement en cours",
+      "subscriptionLabel": "Abonnement",
+      "statusLabel": "Statut",
+      "statusActive": "Actif",
+      "startDateLabel": "Date de début",
+      "nextRenewalLabel": "Prochain renouvellement",
+      "changeSubscription": "Changer d'abonnement",
+      "cancelSubscription": "Annuler l'abonnement",
+      "confirmCancelTitle": "Confirmer l'annulation de l'abonnement",
+      "confirmCancelDesc": "Êtes-vous sûr de vouloir annuler cette abonnement ? Cette action est irréversible.",
+      "cancelAction": "Annuler",
+      "confirmAction": "Confirmer"
+    }
   }
 }

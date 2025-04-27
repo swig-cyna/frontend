@@ -67,7 +67,7 @@ export const SubscriptionEdit = ({ plant, onSave, isLoading }) => {
                     <FormLabel>Price</FormLabel>
                     <FormControl>
                       <Input
-                        type="number"
+                        type="decimal"
                         min={0}
                         placeholder="100 €"
                         {...field}

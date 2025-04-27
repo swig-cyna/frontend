@@ -22,18 +22,20 @@ import { useSession } from "@/features/auth/utils/authClient"
 import { usePlants } from "@/features/subscriptions/hooks/usePlants"
 import { useSubscription } from "@/features/subscriptions/hooks/useSubscription"
 import { AlertCircle, Check } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 
 const SubscriptionsPage = () => {
+  const t = useTranslations()
   const router = useRouter()
   const { data: session } = useSession()
   const { data: subscriptionData } = useSubscription(session?.user.id)
-  const { data: plants } = usePlants()
+  const { data: plants, isLoading } = usePlants()
   const [isDialogOpen, setIsDialogOpen] = useState(false)
 
   const handleChoosePlan = (plan) => {
-    if (subscriptionData.length > 0) {
+    if (subscriptionData?.length > 0) {
       setIsDialogOpen(true)
 
       return
@@ -58,10 +60,10 @@ const SubscriptionsPage = () => {
     router.push("/subscriptions/payment")
   }
 
-  if (!session) {
+  if (!session || isLoading) {
     return (
       <div className="container mx-auto p-6">
-        <div className="grid gap-6 md:grid-cols-[1fr_550px]">
+        <div className="grid gap-6 md:grid-cols-2">
           <Skeleton className="h-80" />
           <Skeleton className="h-80" />
         </div>
@@ -69,123 +71,120 @@ const SubscriptionsPage = () => {
     )
   }
 
+  if (!plants || plants.length === 0) {
+    return (
+      <div className="container mx-auto p-6 text-center">
+        <h2 className="text-xl font-semibold">
+          {t("Subscriptions.Plans.noPlansAvailable")}
+        </h2>
+        <p className="mt-2 text-gray-600">
+          {t("Subscriptions.Plans.tryAgainLater")}
+        </p>
+      </div>
+    )
+  }
+
+  const sortedPlans = [...plants].sort((a, b) => a.price - b.price)
+
   return (
     <div className="mx-auto flex w-full max-w-4xl flex-col gap-6 p-4 md:flex-row">
-      <Card className="flex flex-1 flex-col border border-gray-200 shadow-lg transition-all duration-300 hover:shadow-xl">
-        <CardHeader className="bg-gradient-to-r from-blue-50 to-indigo-50 px-6 pb-8 pt-6">
-          <div className="flex items-start justify-between">
-            <div>
-              <CardTitle className="text-2xl font-bold text-gray-800">
-                Mensuel
-              </CardTitle>
-              <CardDescription className="mt-2 text-gray-600">
-                Flexibilité maximale
-              </CardDescription>
-            </div>
-            <div className="text-right">
-              <span className="text-3xl font-bold text-gray-800">49,99€</span>
-              <p className="text-sm text-gray-600">/mois</p>
-            </div>
-          </div>
-        </CardHeader>
-        <CardContent className="flex-grow pt-6">
-          <ul className="space-y-3">
-            <li className="flex items-start">
-              <Check className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0 text-green-500" />
-              <span>Sans engagement</span>
-            </li>
-            <li className="flex items-start">
-              <Check className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0 text-green-500" />
-              <span>Reconduit automatiquement</span>
-            </li>
-            <li className="flex items-start">
-              <Check className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0 text-green-500" />
-              <span>Facturation mensuelle</span>
-            </li>
-            <li className="flex items-start">
-              <Check className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0 text-green-500" />
-              <span>5% de remise le panier</span>
-            </li>
-          </ul>
-        </CardContent>
-        <CardFooter className="pb-6 pt-4">
-          <Button
-            className="w-full"
-            onClick={() =>
-              handleChoosePlan(plants.find((plan) => plan.id === 1))
-            }
-          >
-            Choisir ce plan
-          </Button>
-        </CardFooter>
-      </Card>
+      {sortedPlans.map((plan) => {
+        const isYearlyPlan = plan.interval === "year"
+        const priceDisplay = new Intl.NumberFormat("fr-FR", {
+          style: "currency",
+          currency: "EUR",
+          maximumFractionDigits: 2,
+          minimumFractionDigits: 2,
+        }).format(plan.price)
 
-      <Card className="relative flex flex-1 flex-col border-2 border-blue-500 shadow-lg transition-all duration-300 hover:shadow-xl">
-        <div className="absolute -top-3 left-1/2 -translate-x-1/2 transform rounded-full bg-blue-600 px-4 py-1 text-sm font-medium text-white">
-          Meilleure offre
-        </div>
-        <CardHeader className="bg-gradient-to-r from-blue-100 to-indigo-100 px-6 pb-8 pt-6">
-          <div className="flex items-start justify-between">
-            <div>
-              <CardTitle className="text-2xl font-bold text-gray-800">
-                Annuel
-              </CardTitle>
-              <CardDescription className="mt-2 text-gray-600">
-                Économisez avec l'engagement
-              </CardDescription>
-            </div>
-            <div className="text-right">
-              <span className="text-3xl font-bold text-gray-800">499,90€</span>
-              <p className="text-sm text-gray-600">/an</p>
-            </div>
-          </div>
-        </CardHeader>
-        <CardContent className="flex-grow pt-6">
-          <ul className="space-y-3">
-            <li className="flex items-start">
-              <Check className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0 text-green-500" />
-              <span>2 mois offerts</span>
-            </li>
-            <li className="flex items-start">
-              <Check className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0 text-green-500" />
-              <span>Paiement en 1 seule fois</span>
-            </li>
-            <li className="flex items-start">
-              <Check className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0 text-green-500" />
-              <span>Économisez 99,98€ par an</span>
-            </li>
-            <li className="flex items-start">
-              <Check className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0 text-green-500" />
-              <span>5% de remise le panier</span>
-            </li>
-          </ul>
-        </CardContent>
-        <CardFooter className="pb-6 pt-4">
-          <Button
-            className="w-full"
-            onClick={() =>
-              handleChoosePlan(plants.find((plan) => plan.id === 2))
-            }
+        const descriptionItems = plan.description
+          .split("\n")
+          .filter((item) => item.trim() !== "")
+
+        return (
+          <Card
+            key={plan.id}
+            className={`relative flex flex-1 flex-col shadow-lg transition-all duration-300 hover:shadow-xl ${
+              isYearlyPlan
+                ? "border-2 border-blue-500"
+                : "border border-gray-200"
+            }`}
           >
-            Choisir ce plan
-          </Button>
-        </CardFooter>
-      </Card>
+            {isYearlyPlan && (
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 transform rounded-full bg-blue-600 px-4 py-1 text-sm font-medium text-white">
+                {t("Subscriptions.Plans.bestOffer")}
+              </div>
+            )}
+            <CardHeader
+              className={`bg-gradient-to-r ${
+                isYearlyPlan
+                  ? "from-blue-100 to-indigo-100"
+                  : "from-blue-50 to-indigo-50"
+              } px-6 pb-8 pt-6`}
+            >
+              <div className="flex items-start justify-between">
+                <div>
+                  <CardTitle className="text-2xl font-bold text-gray-800">
+                    {plan.name}
+                  </CardTitle>
+                  <CardDescription className="mt-2 text-gray-600">
+                    {isYearlyPlan
+                      ? t("Subscriptions.Plans.yearlyCommitment")
+                      : t("Subscriptions.Plans.maxFlexibility")}
+                  </CardDescription>
+                </div>
+                <div className="text-right">
+                  <span className="text-3xl font-bold text-gray-800">
+                    {priceDisplay}
+                  </span>
+                  <p className="text-sm text-gray-600">
+                    {plan.interval === "month"
+                      ? t("Subscriptions.Plans.perMonth")
+                      : t("Subscriptions.Plans.perYear")}
+                  </p>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="flex-grow pt-6">
+              <ul className="space-y-3">
+                {descriptionItems.map((item, index) => (
+                  <li key={index} className="flex items-start">
+                    <Check className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0 text-green-500" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+                <li className="flex items-start">
+                  <Check className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0 text-green-500" />
+                  <span>
+                    {plan.discount}
+                    {t("Subscriptions.Plans.discountLabel")}
+                  </span>
+                </li>
+              </ul>
+            </CardContent>
+            <CardFooter className="pb-6 pt-4">
+              <Button className="w-full" onClick={() => handleChoosePlan(plan)}>
+                {t("Subscriptions.Plans.choosePlan")}
+              </Button>
+            </CardFooter>
+          </Card>
+        )
+      })}
+
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle className="flex items-center text-red-600">
               <AlertCircle className="mr-2 h-5 w-5" />
-              Abonnement déjà actif
+              {t("Subscriptions.Plans.dialogTitle")}
             </DialogTitle>
             <DialogDescription className="pt-2">
-              Un abonnement est déjà actif. Si vous voulez choisir un autre
-              abonnement, vous devez d'abord annuler l'abonnement actuel.
+              {t("Subscriptions.Plans.dialogDescription")}
             </DialogDescription>
           </DialogHeader>
           <DialogFooter className="flex justify-end space-x-2 pt-4">
             <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
-              Annuler
+              {t("Subscriptions.Plans.cancelButton")}
             </Button>
           </DialogFooter>
         </DialogContent>

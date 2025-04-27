@@ -397,5 +397,59 @@
   },
   "ShippingStep": {
     "use_same_address": "Use the same address for billing"
+  },
+  "Subscriptions": {
+    "Plans": {
+      "title": "Subscriptions",
+      "noPlansAvailable": "No subscription plans available at the moment",
+      "tryAgainLater": "Please try again later",
+      "bestOffer": "Best offer",
+      "maxFlexibility": "Maximum flexibility",
+      "yearlyCommitment": "Save with commitment",
+      "perMonth": "/month",
+      "perYear": "/year",
+      "discountLabel": "% discount on cart",
+      "choosePlan": "Choose this plan",
+      "dialogTitle": "Subscription already active",
+      "dialogDescription": "A subscription is already active. If you want to choose another subscription, you must first cancel your current subscription.",
+      "cancelButton": "Cancel"
+    },
+    "Payment": {
+      "title": "Payment",
+      "paymentMethods": "Payment Methods",
+      "selectPaymentMethod": "Select your preferred payment method",
+      "addNewCard": "Add a new card",
+      "backButton": "Back",
+      "orderSummary": "Order Summary",
+      "subscription": "Subscription",
+      "total": "Total",
+      "vatIncluded": "VAT included",
+      "processingPayment": "Processing...",
+      "payAmount": "Pay {amount} €",
+      "paymentMethodRequired": "Payment method required",
+      "selectPaymentMethodError": "Please select a payment method",
+      "errorTitle": "Error",
+      "securePaymentTitle": "Secure Payment",
+      "securePaymentDesc": "All your payment data is encrypted and secured. We do not store your card information."
+    },
+    "Management": {
+      "loading": "Loading...",
+      "noActiveSubscription": "No active subscription",
+      "noActiveSubscriptionDesc": "You currently don't have any active subscription.",
+      "discoverPlans": "Discover our subscription plans",
+      "activeSubscriptionTitle": "Your active subscription",
+      "activeSubscriptionDesc": "Details of your current subscription",
+      "subscriptionLabel": "Subscription",
+      "statusLabel": "Status",
+      "statusActive": "Active",
+      "startDateLabel": "Start date",
+      "nextRenewalLabel": "Next renewal",
+      "changeSubscription": "Change subscription",
+      "cancelSubscription": "Cancel subscription",
+      "confirmCancelTitle": "Confirm subscription cancellation",
+      "confirmCancelDesc": "Are you sure you want to cancel this subscription? This action is irreversible.",
+      "cancelAction": "Cancel",
+      "confirmAction": "Confirm"
+    }
   }
 }
