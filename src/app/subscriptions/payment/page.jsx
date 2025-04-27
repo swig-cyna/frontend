@@ -19,7 +19,7 @@ import PaymentConfirmation from "@/features/stripe/components/PaymentConfirmatio
 import AddPaymentMethodForm from "@/features/stripe/components/PaymentMethod/AddPaymentMethodForm"
 import { usePaymentMethod } from "@/features/stripe/hooks/usePaymentMethode"
 import { useAddSubsciption } from "@/features/subscriptions/hooks/useSubscription"
-import { toast } from "@/hooks/use-toast"
+import { toast } from "@/hooks/useToast"
 import { Elements } from "@stripe/react-stripe-js"
 import { loadStripe } from "@stripe/stripe-js"
 import { CreditCard, PlusCircle, ShieldCheck } from "lucide-react"
@@ -43,7 +43,7 @@ const PaymentSubscriptionPage = () => {
   const [selectedMethod, setSelectedMethod] = useState(null)
   const [isProcessing, setIsProcessing] = useState(false)
   const [error, setError] = useState(null)
-  const [showNewCardForm, setShowNewCardForm] = useState(false)
+  const [showNewCardForm] = useState(false)
   const [paymentComplete, setPaymentComplete] = useState(false)
   const [activeStep, setActiveStep] = useState("saved")
 
