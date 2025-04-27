@@ -40,7 +40,10 @@ import { useState } from "react"
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_KEY_STRIPE)
 
 const formatAddress = (address) => {
-  if (!address) return "Not provided"
+  if (!address) {
+    return "Not provided"
+  }
+
   return `${address.line1}, ${address.postal_code} ${address.city}, ${address.country}`
 }
 
@@ -81,9 +84,9 @@ export function OrderTable() {
       } else {
         await updateBillingAddress.mutateAsync(mutationParams)
       }
-    } catch (error) {
-      console.error("Mutation error:", error)
-      throw error
+    } catch (error2) {
+      console.error("Mutation error:", error2)
+      throw error2
     } finally {
       setIsDialogOpen(false)
       setCurrentOrder(null)
@@ -92,8 +95,13 @@ export function OrderTable() {
     }
   }
 
-  if (isLoading) return <LoadingSkeleton />
-  if (error) return <div>Erreur lors du chargement des commandes</div>
+  if (isLoading) {
+    return <LoadingSkeleton />
+  }
+
+  if (error) {
+    return <div>Error to try to load orders</div>
+  }
 
   return (
     <>

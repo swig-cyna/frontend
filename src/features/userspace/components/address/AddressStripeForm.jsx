@@ -45,7 +45,6 @@ const AddressStripeForm = ({ mode = "add", address, onSuccess }) => {
 
       if (mode === "order") {
         onSuccess?.(formattedAddress)
-        return
       } else if (mode === "add") {
         const newAddress = await createAddress({
           alias: value.name || t("default_alias"),
