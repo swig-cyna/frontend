@@ -1,0 +1,196 @@
+"use client"
+
+import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
+import { Skeleton } from "@/components/ui/skeleton"
+import { useSession } from "@/features/auth/utils/authClient"
+import { usePlants } from "@/features/subscriptions/hooks/usePlants"
+import { useSubscription } from "@/features/subscriptions/hooks/useSubscription"
+import { AlertCircle, Check } from "lucide-react"
+import { useTranslations } from "next-intl"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
+
+const SubscriptionsPage = () => {
+  const t = useTranslations()
+  const router = useRouter()
+  const { data: session } = useSession()
+  const { data: subscriptionData } = useSubscription(session?.user.id)
+  const { data: plants, isLoading } = usePlants()
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
+
+  const handleChoosePlan = (plan) => {
+    if (subscriptionData?.length > 0) {
+      setIsDialogOpen(true)
+
+      return
+    }
+
+    localStorage.setItem(
+      "selectedPlan",
+      JSON.stringify({
+        cartItems: [
+          {
+            id: plan.id,
+            name: plan.name,
+            description: plan.description,
+            price: plan.price,
+            interval: plan.interval,
+          },
+        ],
+        total: plan.price,
+      }),
+    )
+
+    router.push("/subscriptions/payment")
+  }
+
+  if (!session || isLoading) {
+    return (
+      <div className="container mx-auto p-6">
+        <div className="grid gap-6 md:grid-cols-2">
+          <Skeleton className="h-80" />
+          <Skeleton className="h-80" />
+        </div>
+      </div>
+    )
+  }
+
+  if (!plants || plants.length === 0) {
+    return (
+      <div className="container mx-auto p-6 text-center">
+        <h2 className="text-xl font-semibold">
+          {t("Subscriptions.Plans.noPlansAvailable")}
+        </h2>
+        <p className="mt-2 text-gray-600">
+          {t("Subscriptions.Plans.tryAgainLater")}
+        </p>
+      </div>
+    )
+  }
+
+  const sortedPlans = [...plants].sort((a, b) => a.price - b.price)
+
+  return (
+    <div className="mx-auto flex w-full max-w-4xl flex-col gap-6 p-4 md:flex-row">
+      {sortedPlans.map((plan) => {
+        const isYearlyPlan = plan.interval === "year"
+        const priceDisplay = new Intl.NumberFormat("fr-FR", {
+          style: "currency",
+          currency: "EUR",
+          maximumFractionDigits: 2,
+          minimumFractionDigits: 2,
+        }).format(plan.price)
+
+        const descriptionItems = plan.description
+          .split("\n")
+          .filter((item) => item.trim() !== "")
+
+        return (
+          <Card
+            key={plan.id}
+            className={`relative flex flex-1 flex-col shadow-lg transition-all duration-300 hover:shadow-xl ${
+              isYearlyPlan
+                ? "border-2 border-blue-500"
+                : "border border-gray-200"
+            }`}
+          >
+            {isYearlyPlan && (
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 transform rounded-full bg-blue-600 px-4 py-1 text-sm font-medium text-white">
+                {t("Subscriptions.Plans.bestOffer")}
+              </div>
+            )}
+            <CardHeader
+              className={`bg-gradient-to-r ${
+                isYearlyPlan
+                  ? "from-blue-100 to-indigo-100"
+                  : "from-blue-50 to-indigo-50"
+              } px-6 pb-8 pt-6`}
+            >
+              <div className="flex items-start justify-between">
+                <div>
+                  <CardTitle className="text-2xl font-bold text-gray-800">
+                    {plan.name}
+                  </CardTitle>
+                  <CardDescription className="mt-2 text-gray-600">
+                    {isYearlyPlan
+                      ? t("Subscriptions.Plans.yearlyCommitment")
+                      : t("Subscriptions.Plans.maxFlexibility")}
+                  </CardDescription>
+                </div>
+                <div className="text-right">
+                  <span className="text-3xl font-bold text-gray-800">
+                    {priceDisplay}
+                  </span>
+                  <p className="text-sm text-gray-600">
+                    {plan.interval === "month"
+                      ? t("Subscriptions.Plans.perMonth")
+                      : t("Subscriptions.Plans.perYear")}
+                  </p>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="flex-grow pt-6">
+              <ul className="space-y-3">
+                {descriptionItems.map((item, index) => (
+                  <li key={index} className="flex items-start">
+                    <Check className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0 text-green-500" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+                <li className="flex items-start">
+                  <Check className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0 text-green-500" />
+                  <span>
+                    {plan.discount}
+                    {t("Subscriptions.Plans.discountLabel")}
+                  </span>
+                </li>
+              </ul>
+            </CardContent>
+            <CardFooter className="pb-6 pt-4">
+              <Button className="w-full" onClick={() => handleChoosePlan(plan)}>
+                {t("Subscriptions.Plans.choosePlan")}
+              </Button>
+            </CardFooter>
+          </Card>
+        )
+      })}
+
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center text-red-600">
+              <AlertCircle className="mr-2 h-5 w-5" />
+              {t("Subscriptions.Plans.dialogTitle")}
+            </DialogTitle>
+            <DialogDescription className="pt-2">
+              {t("Subscriptions.Plans.dialogDescription")}
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className="flex justify-end space-x-2 pt-4">
+            <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
+              {t("Subscriptions.Plans.cancelButton")}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </div>
+  )
+}
+
+export default SubscriptionsPage

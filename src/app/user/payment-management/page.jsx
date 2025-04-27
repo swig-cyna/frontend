@@ -1,5 +1,5 @@
 import PaymentManagement from "@/features/userspace/components/payment-management/PaymentManagement"
 
-const AccountPage = () => <PaymentManagement />
+const PaymentManagementPage = () => <PaymentManagement />
 
-export default AccountPage
+export default PaymentManagementPage

@@ -335,6 +335,7 @@
   "PaymentPanel": {
     "summary": "סיכום הזמנה",
     "total": "סך הכל",
+    "discount": "(-{discount}%) דִיסקוֹנט",
     "vatIncluded": "כולל (20%)",
     "processingButton": "מעבד תשלום...",
     "payButton": "שלם",
@@ -395,5 +396,59 @@
   },
   "ShippingStep": {
     "use_same_address": "להשתמש באותו כתובת לחיוב"
+  },
+  "Subscriptions": {
+    "Plans": {
+      "title": "מנויים",
+      "noPlansAvailable": "אין תוכניות מנוי זמינות כרגע",
+      "tryAgainLater": "אנא נסה שוב מאוחר יותר",
+      "bestOffer": "ההצעה הטובה ביותר",
+      "maxFlexibility": "גמישות מרבית",
+      "yearlyCommitment": "חסוך עם התחייבות",
+      "perMonth": "/חודש",
+      "perYear": "/שנה",
+      "discountLabel": "% הנחה על העגלה",
+      "choosePlan": "בחר תוכנית זו",
+      "dialogTitle": "מנוי כבר פעיל",
+      "dialogDescription": "קיים מנוי פעיל. אם ברצונך לבחור מנוי אחר, עליך לבטל תחילה את המנוי הנוכחי.",
+      "cancelButton": "ביטול"
+    },
+    "Payment": {
+      "title": "תשלום",
+      "paymentMethods": "אמצעי תשלום",
+      "selectPaymentMethod": "בחר את אמצעי התשלום המועדף עליך",
+      "addNewCard": "הוסף כרטיס חדש",
+      "backButton": "חזרה",
+      "orderSummary": "סיכום הזמנה",
+      "subscription": "מנוי",
+      "total": "סה\"כ",
+      "vatIncluded": "כולל מע\"מ",
+      "processingPayment": "מעבד...",
+      "payAmount": "שלם {amount} €",
+      "paymentMethodRequired": "נדרש אמצעי תשלום",
+      "selectPaymentMethodError": "אנא בחר אמצעי תשלום",
+      "errorTitle": "שגיאה",
+      "securePaymentTitle": "תשלום מאובטח",
+      "securePaymentDesc": "כל נתוני התשלום שלך מוצפנים ומאובטחים. איננו שומרים את פרטי הכרטיס שלך."
+    },
+    "Management": {
+      "loading": "טוען...",
+      "noActiveSubscription": "אין מנוי פעיל",
+      "noActiveSubscriptionDesc": "אין לך כרגע מנוי פעיל.",
+      "discoverPlans": "גלה את תוכניות המנוי שלנו",
+      "activeSubscriptionTitle": "המנוי הפעיל שלך",
+      "activeSubscriptionDesc": "פרטי המנוי הנוכחי שלך",
+      "subscriptionLabel": "מנוי",
+      "statusLabel": "סטטוס",
+      "statusActive": "פעיל",
+      "startDateLabel": "תאריך התחלה",
+      "nextRenewalLabel": "החידוש הבא",
+      "changeSubscription": "שנה מנוי",
+      "cancelSubscription": "בטל מנוי",
+      "confirmCancelTitle": "אשר ביטול מנוי",
+      "confirmCancelDesc": "האם אתה בטוח שברצונך לבטל מנוי זה? פעולה זו בלתי הפיכה.",
+      "cancelAction": "ביטול",
+      "confirmAction": "אישור"
+    }
   }
 }

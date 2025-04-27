@@ -26,7 +26,9 @@ export default async function authMiddleware(request) {
 
   if (
     !session &&
-    (pathname.startsWith("/user") || pathname.startsWith("/admin"))
+    (pathname.startsWith("/user") ||
+      pathname.startsWith("/admin") ||
+      pathname.startsWith("/cart"))
   ) {
     return NextResponse.redirect(
       new URL("/signin?reason=not-authenticated", request.url),

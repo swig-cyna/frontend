@@ -1,25 +1,30 @@
 import { apiClient } from "@/utils/fetch"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 
-export const usePaymentMethod = (userId) =>
+export const usePlants = () =>
   useQuery({
-    queryKey: ["paymentMethod"],
-    queryFn: () => apiClient.get(`payment-methods/${userId}`).json(),
-    enabled: Boolean(userId),
+    queryKey: ["plants"],
+    queryFn: () => apiClient.get(`plants/`).json(),
   })
 
-export const useAttachPaymentMethod = () => {
+export const usePlant = (id) =>
+  useQuery({
+    queryKey: ["plants", id],
+    queryFn: () => apiClient.get(`plants/${id}`).json(),
+  })
+
+export const useAddPlant = () => {
   const queryClient = useQueryClient()
 
   return useMutation({
     mutationFn: (data) =>
       apiClient
-        .post(`payment-methods/attach-payment-method`, {
+        .post(`plants/`, {
           json: data,
         })
         .json(),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["paymentMethod"] })
+      queryClient.invalidateQueries({ queryKey: ["plants"] })
     },
     onError: (err) => {
       console.error(err)
@@ -27,30 +32,29 @@ export const useAttachPaymentMethod = () => {
   })
 }
 
-export const useUpdatePaymentMethod = () => {
+export const useUpdatePlant = (id) => {
   const queryClient = useQueryClient()
 
   return useMutation({
     mutationFn: (data) =>
       apiClient
-        .put(`payment-methods`, {
+        .put(`plants/${id}`, {
           json: data,
         })
         .json(),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["paymentMethod"] })
+      queryClient.invalidateQueries({ queryKey: ["plants"] })
     },
   })
 }
 
-export const useDeletePaymentMethod = () => {
+export const useDeletePlant = () => {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: (paymentMethodId) =>
-      apiClient.delete(`payment-methods/${paymentMethodId}`).json(),
+    mutationFn: (plantId) => apiClient.delete(`plants/${plantId}`).json(),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["paymentMethod"] })
+      queryClient.invalidateQueries({ queryKey: ["plants"] })
     },
     onError: (err) => {
       console.error(err)
