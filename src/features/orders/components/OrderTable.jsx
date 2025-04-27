@@ -40,7 +40,7 @@ import { useState } from "react"
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_KEY_STRIPE)
 
 const formatAddress = (address) => {
-  if (!address) return "Non renseignée"
+  if (!address) return "Not provided"
   return `${address.line1}, ${address.postal_code} ${address.city}, ${address.country}`
 }
 
@@ -103,11 +103,11 @@ export function OrderTable() {
             <TableHead>ID</TableHead>
             <TableHead>Date</TableHead>
             <TableHead>Client</TableHead>
-            <TableHead>Livraison</TableHead>
-            <TableHead>Facturation</TableHead>
-            <TableHead>Produits</TableHead>
+            <TableHead>Shipping</TableHead>
+            <TableHead>Billing</TableHead>
+            <TableHead>Products</TableHead>
             <TableHead>Total</TableHead>
-            <TableHead>Statut paiement</TableHead>
+            <TableHead>Payment status</TableHead>
             <TableHead className="w-[80px]">Actions</TableHead>
           </TableRow>
         </TableHeader>
@@ -156,7 +156,7 @@ export function OrderTable() {
                       className="cursor-pointer"
                     >
                       <Pencil className="mr-2 h-4 w-4" />
-                      Modifier adresse livraison
+                      Edit shipping address
                     </DropdownMenuItem>
                     <DropdownMenuItem
                       onClick={() =>
@@ -165,7 +165,7 @@ export function OrderTable() {
                       className="cursor-pointer"
                     >
                       <Pencil className="mr-2 h-4 w-4" />
-                      Modifier adresse facturation
+                      Edit billing address
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
