@@ -1,10 +1,18 @@
 import { Button } from "@/components/ui/button"
+import useCartStore from "@/features/cart/stores/cartStore"
 import { CheckCircle } from "lucide-react"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
+import { useEffect } from "react"
 
 const PaymentConfirmation = () => {
   const t = useTranslations("PaymentConfirmation")
+  const { clearCart } = useCartStore()
+
+  useEffect(() => {
+    clearCart()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <div className="py-10 text-center">
