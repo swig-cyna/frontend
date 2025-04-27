@@ -205,7 +205,9 @@ const PaymentStepper = ({
         },
       )
 
-      if (result.error) throw new Error(result.error.message)
+      if (result.error) {
+        throw new Error(result.error.message)
+      }
 
       if (result.paymentIntent?.status === "succeeded") {
         await confirmPayment({
