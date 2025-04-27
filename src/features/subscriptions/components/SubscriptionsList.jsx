@@ -124,7 +124,7 @@ export function SubscriptionList() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {products.map((product) => (
+          {products?.map((product) => (
             <TableRow key={product.id}>
               <TableCell className="font-medium">
                 <div>
@@ -167,7 +167,7 @@ export function SubscriptionList() {
         </TableBody>
       </Table>
 
-      {products.length === 0 && (
+      {products?.length === 0 && (
         <div className="mt-2 flex flex-col items-center justify-center rounded-md border border-dashed p-12">
           <Package className="mb-4 h-12 w-12 text-muted-foreground" />
           <p className="mb-4 text-center text-muted-foreground">
