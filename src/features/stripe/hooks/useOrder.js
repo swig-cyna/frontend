@@ -1,5 +1,5 @@
 import { apiClient } from "@/utils/fetch"
-import { useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 
 export const useAllOrders = () =>
   useQuery({
@@ -14,3 +14,26 @@ export const useOrder = (userId) =>
     queryKey: ["order"],
     queryFn: () => apiClient.get(`orders/${userId}`).json(),
   })
+
+const updateAddressFactory = (type) => {
+  const endpoint = type === "shipping" ? "shipping-address" : "billing-address"
+
+  return () => {
+    const queryClient = useQueryClient()
+
+    return useMutation({
+      mutationFn: ({ id, address }) =>
+        apiClient.patch(`orders/${id}/${endpoint}`, { json: address }).json(),
+      onSuccess: (updatedOrder) => {
+        queryClient.setQueryData(["orders"], (old) =>
+          old.map((order) =>
+            order.id === updatedOrder.id ? updatedOrder : order,
+          ),
+        )
+      },
+    })
+  }
+}
+
+export const useUpdateShippingAddress = updateAddressFactory("shipping")
+export const useUpdateBillingAddress = updateAddressFactory("billing")
