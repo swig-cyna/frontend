@@ -127,6 +127,7 @@
   "ProfileInfoUpdate": {
     "title": "ערוך את הנתונים שלך",
     "description": "כאן תוכלו לערוך את המידע המשויך לחשבון שלכם.",
+    "nameLabel": "שֵׁם",
     "emailLabel": "אימייל",
     "updateButton": "עדכן",
     "updating": "מעדכן",
