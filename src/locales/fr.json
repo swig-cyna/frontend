@@ -10,18 +10,14 @@
   "Burger": {
     "signin": "Se connecter",
     "home": "Accueil",
-    "categories": "Catégories",
+    "products": "Produits",
     "backoffice": "Portail administrateur",
     "about": "À propos",
     "contact": "Contact",
     "cgu": "CGU",
     "signout": "Se déconnecter"
   },
-  "Footer": {
-    "about": "À propos",
-    "contact": "Contact",
-    "cgu": "CGU"
-  },
+  "Footer": { "about": "À propos", "contact": "Contact", "cgu": "CGU" },
   "NotFoundPage": {
     "title": "Page non trouvée",
     "backHome": "Retour à l'accueil"
@@ -40,9 +36,7 @@
     "phrase": "Pure player en cybersécurité pour PME et MSP",
     "learnMore": "En savoir plus"
   },
-  "ProductCard": {
-    "showMore": "Voir plus"
-  },
+  "ProductCard": { "showMore": "Voir plus" },
   "EmailVerification": {
     "title": "Compte créé avec succès !",
     "description": "Vérifiez votre email pour activer votre compte.",
@@ -251,10 +245,7 @@
     "total": "Total",
     "continueToPayment": "Continuer vers le paiement"
   },
-  "RecapRowProduct": {
-    "quantity": "Qté:",
-    "perUnit": "par unité"
-  },
+  "RecapRowProduct": { "quantity": "Qté:", "perUnit": "par unité" },
   "SavedPaymentMethods": {
     "addNewCard": "Ajouter une carte",
     "expireLabel": "Expire le {month}/{year}"
@@ -284,9 +275,7 @@
     "resetFilters": "Reinitialiser les filtres",
     "noProductsFound": "Aucun produit trouvé, essayez de modifier vos filtres"
   },
-  "Category": {
-    "products": "Produits"
-  },
+  "Category": { "products": "Produits" },
   "PaymentManagement": {
     "title": "Vos méthodes de paiement",
     "loading": "Chargement en cours...",

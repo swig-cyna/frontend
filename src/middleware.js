@@ -18,9 +18,7 @@ export default async function authMiddleware(request) {
     `${process.env.NEXT_PUBLIC_BACKEND_API}/api/auth/get-session`,
     {
       baseURL: request.nextUrl.origin,
-      headers: {
-        cookie: request.headers.get("cookie") || "",
-      },
+      headers: { cookie: request.headers.get("cookie") || "" },
     },
   )
 
@@ -28,7 +26,8 @@ export default async function authMiddleware(request) {
     !session &&
     (pathname.startsWith("/user") ||
       pathname.startsWith("/admin") ||
-      pathname.startsWith("/cart"))
+      pathname.startsWith("/payment") ||
+      pathname.startsWith("/subscriptions/payment"))
   ) {
     return NextResponse.redirect(
       new URL("/signin?reason=not-authenticated", request.url),

@@ -1,15 +1,15 @@
 "use client"
 
 import logo from "@/assets/logoText.png"
+import { signOut, useSession } from "@/features/auth/utils/authClient"
 import { Menu, User2 } from "lucide-react"
 import { useTranslations } from "next-intl"
 import Image from "next/image"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { Button } from "./ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "./ui/sheet"
-import { signOut, useSession } from "@/features/auth/utils/authClient"
-import { useRouter } from "next/navigation"
 
 const LinkBurger = ({ href, label, variant = "ghost", setOpen, ...props }) => (
   <Link href={href} onClick={() => setOpen(false)} {...props}>
@@ -65,8 +65,8 @@ const Burger = () => {
             <div className="grid space-y-2 py-4">
               <LinkBurger href="/" label={t("home")} setOpen={setOpen} />
               <LinkBurger
-                href="/categories"
-                label={t("categories")}
+                href="/products"
+                label={t("products")}
                 setOpen={setOpen}
               />
             </div>

@@ -36,17 +36,19 @@ const Header = () => {
             <Image src={logo} className="mt-1 h-8 w-auto" alt="logo" />
           </Link>
           <div className="flex items-center gap-4">
-            <Button
-              variant="secondary"
-              className="hidden w-40 justify-between rounded-full sm:flex"
-            >
-              <p>{t("search")}</p>
-              <Search />
-            </Button>
+            <Link href="/products">
+              <Button
+                variant="secondary"
+                className="hidden w-40 justify-between rounded-full sm:flex"
+              >
+                <p>{t("search")}</p>
+                <Search />
+              </Button>
+            </Link>
 
-            <button className="sm:hidden">
+            <Link className="sm:hidden" href="/products">
               <Search />
-            </button>
+            </Link>
 
             <Link href="/cart">
               <ShoppingCart />

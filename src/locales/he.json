@@ -10,22 +10,15 @@
   "Burger": {
     "signin": "להתחבר",
     "home": "בית",
-    "categories": "קטגוריות",
+    "products": "מוצרים",
     "backoffice": "פורטל מנהלים",
     "about": "אודות",
     "contact": "צור קשר",
     "cgu": "תנאי שימוש",
     "signout": "להתנתק"
   },
-  "Footer": {
-    "about": "אודות",
-    "contact": "צור קשר",
-    "cgu": "תנאי שימוש"
-  },
-  "NotFoundPage": {
-    "title": "הדף לא נמצא",
-    "backHome": "חזרה לדף הבית"
-  },
+  "Footer": { "about": "אודות", "contact": "צור קשר", "cgu": "תנאי שימוש" },
+  "NotFoundPage": { "title": "הדף לא נמצא", "backHome": "חזרה לדף הבית" },
   "HomePage": {
     "categories": "קטגוריות",
     "newProducts": "מוצרים חדשים",
@@ -40,9 +33,7 @@
     "phrase": "חברת סייבר טהורה לעסקים קטנים ובינוניים ולספקי MSP",
     "learnMore": "למידע נוסף"
   },
-  "ProductCard": {
-    "showMore": "הצג עוד"
-  },
+  "ProductCard": { "showMore": "הצג עוד" },
   "EmailVerification": {
     "title": "החשבון נוצר בהצלחה!",
     "description": "בדוק את הדואר האלקטרוני שלך כדי להפעיל את החשבון.",
@@ -74,9 +65,7 @@
     "resetCompleteTitle": "הסיסמה אופסה",
     "resetCompleteDescription": "הסיסמה שלך אופסה בהצלחה. כעת תוכל להתחבר עם הסיסמה החדשה שלך."
   },
-  "ResendEmailButton": {
-    "resendInSeconds": "שלח שוב בעוד {seconds} שניות"
-  },
+  "ResendEmailButton": { "resendInSeconds": "שלח שוב בעוד {seconds} שניות" },
   "SigninCard": {
     "emailPlaceholder": "דוא\"ל",
     "emailLabel": "דוא\"ל",
@@ -250,10 +239,7 @@
     "total": "סה\"כ",
     "continueToPayment": "המשך לתשלום"
   },
-  "RecapRowProduct": {
-    "quantity": "כמות:",
-    "perUnit": "ליחידה"
-  },
+  "RecapRowProduct": { "quantity": "כמות:", "perUnit": "ליחידה" },
   "SavedPaymentMethods": {
     "addNewCard": "הוסף כרטיס חדש",
     "expireLabel": "תפוגה {month}/{year}"
@@ -283,9 +269,7 @@
     "resetFilters": "איפוס מסננים",
     "noProductsFound": "לא נמצאו מוצרים. נסה לשנות את המסננים."
   },
-  "Category": {
-    "products": "מוצרים"
-  },
+  "Category": { "products": "מוצרים" },
   "PaymentManagement": {
     "title": "אמצעי התשלום שלך",
     "loading": "טוען...",
@@ -394,9 +378,7 @@
     "error_loading": "שגיאה בטעינת הכתובות.",
     "addNewCard": "הוסף כתובת חדשה"
   },
-  "ShippingStep": {
-    "use_same_address": "להשתמש באותו כתובת לחיוב"
-  },
+  "ShippingStep": { "use_same_address": "להשתמש באותו כתובת לחיוב" },
   "Subscriptions": {
     "Plans": {
       "title": "מנויים",

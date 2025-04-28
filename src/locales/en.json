@@ -10,22 +10,15 @@
   "Burger": {
     "signin": "Sign in",
     "home": "Home",
-    "categories": "Categories",
+    "products": "Products",
     "backoffice": "Admin portal",
     "about": "About",
     "contact": "Contact",
     "cgu": "Terms of Use",
     "signout": "Sign out"
   },
-  "Footer": {
-    "about": "About",
-    "contact": "Contact",
-    "cgu": "CGU"
-  },
-  "NotFoundPage": {
-    "title": "Page not found",
-    "backHome": "Back to home"
-  },
+  "Footer": { "about": "About", "contact": "Contact", "cgu": "CGU" },
+  "NotFoundPage": { "title": "Page not found", "backHome": "Back to home" },
   "HomePage": {
     "categories": "Categories",
     "newProducts": "New products",
@@ -40,9 +33,7 @@
     "phrase": "Pure cybersecurity player for SMEs and MSPs",
     "learnMore": "Learn more"
   },
-  "ProductCard": {
-    "showMore": "Show more"
-  },
+  "ProductCard": { "showMore": "Show more" },
   "EmailVerification": {
     "title": "Account created successfully!",
     "description": "Check your email to activate your account.",
@@ -74,9 +65,7 @@
     "resetCompleteTitle": "Password reset",
     "resetCompleteDescription": "Your password has been successfully reset. You can now log in with your new password."
   },
-  "ResendEmailButton": {
-    "resendInSeconds": "Resend in {seconds} seconds"
-  },
+  "ResendEmailButton": { "resendInSeconds": "Resend in {seconds} seconds" },
   "SigninCard": {
     "emailPlaceholder": "Email",
     "emailLabel": "Email",
@@ -251,10 +240,7 @@
     "total": "Total",
     "continueToPayment": "Continue to payment"
   },
-  "RecapRowProduct": {
-    "quantity": "Qty:",
-    "perUnit": "per unit"
-  },
+  "RecapRowProduct": { "quantity": "Qty:", "perUnit": "per unit" },
   "SavedPaymentMethods": {
     "addNewCard": "Add a new card",
     "expireLabel": "Expires {month}/{year}"
@@ -284,9 +270,7 @@
     "resetFilters": "Reset Filters",
     "noProductsFound": "No products found. Try to change the filters."
   },
-  "Category": {
-    "products": "Products"
-  },
+  "Category": { "products": "Products" },
   "PaymentManagement": {
     "title": "Your payment methods",
     "loading": "Loading...",
@@ -395,9 +379,7 @@
     "error_loading": "Error loading addresses.",
     "addNewCard": "Add a new address"
   },
-  "ShippingStep": {
-    "use_same_address": "Use the same address for billing"
-  },
+  "ShippingStep": { "use_same_address": "Use the same address for billing" },
   "Subscriptions": {
     "Plans": {
       "title": "Subscriptions",
