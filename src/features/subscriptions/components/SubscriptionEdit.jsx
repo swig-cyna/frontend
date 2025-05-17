@@ -33,7 +33,6 @@ export const SubscriptionEdit = ({ plant, onSave, isLoading }) => {
       price: plant?.price || 0,
     },
   })
-  console.log(plant)
 
   const onSubmit = (data) => {
     onSave(data)

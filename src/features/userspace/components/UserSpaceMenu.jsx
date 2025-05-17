@@ -2,6 +2,7 @@
 
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { signOut } from "@/features/auth/utils/authClient"
+import clsx from "clsx"
 import {
   CreditCard,
   HelpCircle,
@@ -93,14 +94,31 @@ const UserSpaceMenu = ({ user }) => {
           <div
             key={item.title}
             onClick={() => handleItemClick(item)}
-            className={`flex cursor-pointer items-center rounded-md p-2 hover:bg-gray-800 ${
-              pathname === item.url ? "bg-primary text-white" : ""
-            }`}
+            className={clsx(
+              "flex cursor-pointer items-center rounded-md p-2",
+              pathname === item.url
+                ? "bg-primary text-white hover:bg-primary/90"
+                : "hover:bg-accent",
+            )}
           >
             <item.icon className="mr-2" />
             <span>{item.title}</span>
           </div>
         ))}
+        {user?.role === "admin" &&
+          userMenuItems.map((item) => (
+            <div
+              key={item.title}
+              onClick={() => handleItemClick(item)}
+              className={clsx(
+                "flex cursor-pointer items-center rounded-md p-2 hover:bg-accent",
+                pathname === item.url && "bg-primary text-white",
+              )}
+            >
+              <item.icon className="mr-2" />
+              <span>{item.title}</span>
+            </div>
+          ))}
       </CardContent>
     </Card>
   )
