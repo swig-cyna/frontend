@@ -22,14 +22,19 @@ import {
   Trash2,
 } from "lucide-react"
 import { useTranslations } from "next-intl"
+import { useTheme } from "next-themes"
 import { useState } from "react"
 import { useAddresses, useDeleteAddress } from "../../hooks/useAddress"
-import { stripeOptions } from "../../utils/stripeAddressOptions"
+import {
+  stripeOptions,
+  stripeOptionsWhite,
+} from "../../utils/stripeAddressOptions"
 import AddressStripeForm from "./AddressStripeForm"
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_KEY_STRIPE)
 
 const AddressManagement = () => {
+  const { theme } = useTheme()
   const { data: session } = useSession()
   const { mutateAsync: deleteAddress } = useDeleteAddress()
   const { data: addresses, isLoading, error } = useAddresses(session?.user.id)
@@ -146,7 +151,10 @@ const AddressManagement = () => {
                 {t("add_address")}
               </DialogTitle>
             </DialogHeader>
-            <Elements stripe={stripePromise} options={stripeOptions}>
+            <Elements
+              stripe={stripePromise}
+              options={theme === "dark" ? stripeOptions : stripeOptionsWhite}
+            >
               <AddressStripeForm mode="add" onSuccess={handleAddSuccess} />
             </Elements>
           </DialogContent>
@@ -160,7 +168,10 @@ const AddressManagement = () => {
                 {t("edit_address")}
               </DialogTitle>
             </DialogHeader>
-            <Elements stripe={stripePromise} options={stripeOptions}>
+            <Elements
+              stripe={stripePromise}
+              options={theme === "dark" ? stripeOptions : stripeOptionsWhite}
+            >
               <AddressStripeForm
                 mode="edit"
                 address={addressToUpdate}

@@ -31,10 +31,14 @@ import {
   useUpdateShippingAddress,
 } from "@/features/stripe/hooks/useOrder"
 import AddressStripeForm from "@/features/userspace/components/address/AddressStripeForm"
-import { stripeOptions } from "@/features/userspace/utils/stripeAddressOptions"
+import {
+  stripeOptions,
+  stripeOptionsWhite,
+} from "@/features/userspace/utils/stripeAddressOptions"
 import { Elements } from "@stripe/react-stripe-js"
 import { loadStripe } from "@stripe/stripe-js"
 import { MoreHorizontal, Pencil } from "lucide-react"
+import { useTheme } from "next-themes"
 import { useState } from "react"
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_KEY_STRIPE)
@@ -56,6 +60,7 @@ const paymentStatusColors = {
 }
 
 export function OrderTable() {
+  const { theme } = useTheme()
   const { data: orders = [], isLoading, error } = useAllOrders()
   const updateShippingAddress = useUpdateShippingAddress()
   const updateBillingAddress = useUpdateBillingAddress()
@@ -192,7 +197,10 @@ export function OrderTable() {
                 : "Modifier l'adresse de facturation"}
             </DialogTitle>
           </DialogHeader>
-          <Elements stripe={stripePromise} options={stripeOptions}>
+          <Elements
+            stripe={stripePromise}
+            options={theme === "dark" ? stripeOptions : stripeOptionsWhite}
+          >
             <AddressStripeForm
               mode="order"
               address={currentAddress}
