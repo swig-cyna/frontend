@@ -17,7 +17,7 @@ const CategoriesItem = ({ category }) => {
           backgroundColor: category.color,
         }}
       >
-        <div className="z-10 m-[1px] rounded-lg bg-gradient-to-tl from-card/50 via-card to-card px-6 py-2">
+        <div className="z-10 m-[1px] rounded-lg bg-gradient-to-tl from-card/50 via-card to-card/80 px-6 py-2">
           <p className="font-semibold drop-shadow-md">
             {category.name || "Category Name"}
           </p>
