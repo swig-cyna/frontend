@@ -8,6 +8,7 @@ import CategoriesItem from "@/features/categories/components/CategoriesItem"
 import { useCategories } from "@/features/categories/hooks/useCategory"
 import CardProduct from "@/features/products/components/CardProduct"
 import { useNewProducts } from "@/features/products/hook/useNewProducts"
+import SubscriptionsOffers from "@/features/subscriptions/components/SubscriptionsOffers"
 import { Package } from "lucide-react"
 import { useTranslations } from "next-intl"
 import Link from "next/link"
@@ -40,7 +41,6 @@ const Home = () => {
               categories.data.map((category, index) => (
                 <CategoriesItem key={index} category={category} />
               ))}
-            <div className="scale-120 sticky -right-3 z-10 w-7 flex-1 bg-background blur-sm"></div>
           </div>
         </div>
       </div>
@@ -74,6 +74,15 @@ const Home = () => {
               <Skeleton className="h-[350px] w-auto" key={index} />
             ))}
         </div>
+      </div>
+
+      <div className="w-full">
+        <div className="mb-8 flex flex-col items-center">
+          <h2 className="text-4xl font-bold">{t("subscriptions")}</h2>
+          <div className="mt-2 h-1 w-16 rounded-full bg-primary text-2xl"></div>
+        </div>
+
+        <SubscriptionsOffers />
       </div>
     </main>
   )

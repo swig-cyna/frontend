@@ -98,7 +98,7 @@ export function CarouselPreview({ slides, isPreview }) {
                   <ImagePlus className="h-10 w-10 text-muted-foreground" />
                 </div>
               )}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent dark:from-black/60" />
               <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-20 p-6 px-12 text-white">
                 <h3 className="text-2xl font-bold">{slide.title}</h3>
                 <p className="mt-2 max-w-md">{slide.description}</p>

@@ -33,7 +33,6 @@ export const SubscriptionEdit = ({ plant, onSave, isLoading }) => {
       price: plant?.price || 0,
     },
   })
-  console.log(plant)
 
   const onSubmit = (data) => {
     onSave(data)
@@ -132,11 +131,7 @@ export const SubscriptionEdit = ({ plant, onSave, isLoading }) => {
               <FormItem>
                 <FormLabel>Description</FormLabel>
                 <FormControl>
-                  <MDEditor
-                    className="tesssss"
-                    onChange={field.onChange}
-                    value={field.value}
-                  />
+                  <MDEditor onChange={field.onChange} value={field.value} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

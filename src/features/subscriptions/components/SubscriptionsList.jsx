@@ -54,8 +54,6 @@ export function SubscriptionList() {
 
   const { data: products, isLoading, isFetching } = usePlants()
 
-  console.log(products)
-
   const handleCreateSubscription = () => {
     router.push("/admin/subscriptions/new")
   }

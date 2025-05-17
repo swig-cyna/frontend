@@ -3,6 +3,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Skeleton } from "@/components/ui/skeleton"
+import { getStatusVariant } from "@/features/support/utils/functions"
 import { Ticket } from "lucide-react"
 import { useRecentTickets } from "../hooks/useDashboard"
 
@@ -50,31 +51,14 @@ export function RecentTickets() {
             <p className="text-sm text-muted-foreground">{ticket.userName}</p>
           </div>
           <div className="ml-auto">
-            <Badge
-              className="capitalize"
-              variant={getStatusVariant(ticket.status)}
-            >
-              {ticket.status}
+            <Badge className={getStatusVariant(ticket.status)}>
+              {ticket.status === "open" && "Open"}
+              {ticket.status === "in_progress" && "In progress"}
+              {ticket.status === "closed" && "Closed"}
             </Badge>
           </div>
         </div>
       ))}
     </div>
   )
-}
-
-function getStatusVariant(status) {
-  switch (status) {
-    case "open":
-      return "default"
-
-    case "in_progress":
-      return "secondary"
-
-    case "closed":
-      return "outline"
-
-    default:
-      return "secondary"
-  }
 }

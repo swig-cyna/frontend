@@ -1,8 +1,12 @@
 import { Checkbox } from "@/components/ui/checkbox"
 import AddressStripeForm from "@/features/userspace/components/address/AddressStripeForm"
-import { stripeOptions } from "@/features/userspace/utils/stripeAddressOptions"
+import {
+  stripeOptions,
+  stripeOptionsWhite,
+} from "@/features/userspace/utils/stripeAddressOptions"
 import { Elements } from "@stripe/react-stripe-js"
 import { useTranslations } from "next-intl"
+import { useTheme } from "next-themes"
 import SavedAddresses from "./SavedAddress"
 
 const ShippingStep = ({
@@ -15,6 +19,7 @@ const ShippingStep = ({
   setShippingAddress,
   stripePromise,
 }) => {
+  const { theme } = useTheme()
   const t = useTranslations("ShippingStep")
 
   return (
@@ -33,7 +38,10 @@ const ShippingStep = ({
         </label>
       </div>
       {addingShipping ? (
-        <Elements stripe={stripePromise} options={stripeOptions}>
+        <Elements
+          stripe={stripePromise}
+          options={theme === "dark" ? stripeOptions : stripeOptionsWhite}
+        >
           <AddressStripeForm
             mode="add"
             onSuccess={(address) => {

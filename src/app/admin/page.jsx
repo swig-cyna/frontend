@@ -156,7 +156,7 @@ export default function DashboardPage() {
           </CardContent>
           <CardFooter>
             <Button asChild variant="outline" className="ml-auto">
-              <Link href="#">Show all orders</Link>
+              <Link href="/admin/orders">Show all orders</Link>
             </Button>
           </CardFooter>
         </Card>
