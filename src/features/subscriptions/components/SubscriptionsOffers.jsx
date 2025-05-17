@@ -129,8 +129,8 @@ const SubscriptionsOffers = () => {
                 className={clsx(
                   "bg-gradient-to-r px-6 pb-8 pt-6",
                   isYearlyPlan
-                    ? "from-blue-100 to-indigo-100 dark:from-blue-900 dark:to-indigo-900"
-                    : "from-blue-50 to-indigo-50 dark:from-blue-900 dark:to-indigo-900",
+                    ? "from-purple-100 to-indigo-100 dark:from-purple-900 dark:to-indigo-900"
+                    : "from-purple-50 to-indigo-50 dark:from-purple-900 dark:to-indigo-900",
                 )}
               >
                 <div>

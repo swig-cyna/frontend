@@ -24,7 +24,7 @@ const Footer = () => {
             />
           </a>
           <div className="flex items-center gap-3">
-            <ul className="flex flex-wrap items-center text-sm font-medium text-gray-400">
+            <ul className="flex flex-wrap items-center text-sm font-medium text-foreground">
               <li>
                 <Link href="/about" className="me-4 hover:underline md:me-6">
                   {t("about")}
