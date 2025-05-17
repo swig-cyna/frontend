@@ -1,5 +1,6 @@
 "use client"
 
+import logoDark from "@/assets/logoText-dark.png"
 import logo from "@/assets/logoText.png"
 import {
   DropdownMenu,
@@ -10,6 +11,7 @@ import {
 import { signOut, useSession } from "@/features/auth/utils/authClient"
 import { Search, ShoppingCart, User2 } from "lucide-react"
 import { useTranslations } from "next-intl"
+import { useTheme } from "next-themes"
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -21,6 +23,7 @@ import { Button } from "./ui/button"
 const Header = () => {
   const t = useTranslations("Header")
   const { data: session } = useSession()
+  const { theme } = useTheme()
   const router = useRouter()
 
   const isAdmin =
@@ -33,7 +36,11 @@ const Header = () => {
       <div className="flex w-full justify-center border-b bg-card shadow-xl xl:mt-3 xl:border-0 xl:bg-transparent xl:shadow-none">
         <div className="flex h-16 w-full max-w-[1200px] items-center justify-between rounded-full px-4 xl:mx-8 xl:border xl:bg-card xl:shadow-md">
           <Link href="/">
-            <Image src={logo} className="mt-1 h-8 w-auto" alt="logo" />
+            <Image
+              src={theme === "dark" ? logo : logoDark}
+              className="mt-1 h-8 w-auto"
+              alt="logo"
+            />
           </Link>
           <div className="flex items-center gap-4">
             <Link href="/products">
