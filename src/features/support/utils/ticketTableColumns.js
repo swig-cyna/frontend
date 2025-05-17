@@ -73,9 +73,9 @@ export const adminTicketColumns = (format) => [
     label: "Status",
     render: (ticket) => (
       <Badge className={getStatusVariant(ticket.status)}>
-        {ticket.status === "open" && "Ouvert"}
-        {ticket.status === "in_progress" && "En cours"}
-        {ticket.status === "closed" && "Fermé"}
+        {ticket.status === "open" && "Open"}
+        {ticket.status === "in_progress" && "In progress"}
+        {ticket.status === "closed" && "Closed"}
       </Badge>
     ),
   },
