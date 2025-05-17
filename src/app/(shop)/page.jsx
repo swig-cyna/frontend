@@ -41,7 +41,6 @@ const Home = () => {
               categories.data.map((category, index) => (
                 <CategoriesItem key={index} category={category} />
               ))}
-            <div className="scale-120 sticky -right-3 z-10 w-7 flex-1 bg-background blur-sm"></div>
           </div>
         </div>
       </div>
