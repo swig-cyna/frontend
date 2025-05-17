@@ -175,11 +175,7 @@ export const ProductEdit = ({ product, categories, onSave, isLoading }) => {
               <FormItem>
                 <FormLabel>Description</FormLabel>
                 <FormControl>
-                  <MDEditor
-                    className="tesssss"
-                    onChange={field.onChange}
-                    value={field.value}
-                  />
+                  <MDEditor onChange={field.onChange} value={field.value} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

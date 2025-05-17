@@ -75,6 +75,7 @@ const ProductPage = () => {
           <CardContent>
             <MDEditor.Markdown
               style={{ backgroundColor: "transparent" }}
+              className="!text-sidebar-accent-foreground"
               source={product.description}
             />
           </CardContent>

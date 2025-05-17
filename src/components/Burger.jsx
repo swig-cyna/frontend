@@ -1,9 +1,11 @@
 "use client"
 
+import logoDark from "@/assets/logoText-dark.png"
 import logo from "@/assets/logoText.png"
 import { signOut, useSession } from "@/features/auth/utils/authClient"
 import { Menu, User2 } from "lucide-react"
 import { useTranslations } from "next-intl"
+import { useTheme } from "next-themes"
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -19,6 +21,7 @@ const LinkBurger = ({ href, label, variant = "ghost", setOpen, ...props }) => (
   </Link>
 )
 const Burger = () => {
+  const { theme } = useTheme()
   const [open, setOpen] = useState(false)
   const t = useTranslations("Burger")
   const { data: session } = useSession()
@@ -36,7 +39,11 @@ const Burger = () => {
       </SheetTrigger>
       <SheetContent className="overflow-y-auto">
         <SheetHeader className="items-center">
-          <Image src={logo} className="mt-1 h-12 w-auto" alt="logo" />
+          <Image
+            src={theme === "dark" ? logo : logoDark}
+            className="mt-1 h-12 w-auto"
+            alt="logo"
+          />
         </SheetHeader>
         <nav>
           <div className="divide-y">

@@ -11,6 +11,7 @@ import {
   Users,
 } from "lucide-react"
 
+import logoDark from "@/assets/logoText-dark.png"
 import logo from "@/assets/logoText.png"
 import {
   DropdownMenu,
@@ -29,6 +30,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import { signOut, useSession } from "@/features/auth/utils/authClient"
+import { useTheme } from "next-themes"
 import Image from "next/image"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -45,6 +47,7 @@ const items = [
 ]
 
 const AdminSidebar = () => {
+  const { theme } = useTheme()
   const router = useRouter()
   const { data: session } = useSession()
 
@@ -52,7 +55,11 @@ const AdminSidebar = () => {
     <Sidebar>
       <SidebarContent>
         <div className="mx-3 mt-3 flex items-center justify-between">
-          <Image src={logo} className="mt-1 h-8 w-auto" alt="logo" />
+          <Image
+            src={theme === "dark" ? logo : logoDark}
+            className="mt-1 h-8 w-auto"
+            alt="logo"
+          />
         </div>
         <SidebarGroup>
           <SidebarGroupContent>
