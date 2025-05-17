@@ -9,6 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { signOut, useSession } from "@/features/auth/utils/authClient"
+import useCartStore from "@/features/cart/stores/cartStore"
 import { Search, ShoppingCart, User2 } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useTheme } from "next-themes"
@@ -25,6 +26,8 @@ const Header = () => {
   const { data: session } = useSession()
   const { theme } = useTheme()
   const router = useRouter()
+  const { cartItems } = useCartStore()
+  const totalItems = cartItems.reduce((acc, item) => acc + item.quantity, 0)
 
   const isAdmin =
     session?.user?.role === "admin" ||
@@ -58,7 +61,14 @@ const Header = () => {
             </Link>
 
             <Link href="/cart">
-              <ShoppingCart />
+              <div className="relative">
+                <ShoppingCart />
+                {Boolean(totalItems) && (
+                  <span className="outline-3 absolute -bottom-1 -right-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-600 px-1 pt-[1px] text-xs font-bold text-white outline outline-card">
+                    {totalItems}
+                  </span>
+                )}
+              </div>
             </Link>
             <LocaleSwitcher />
             {session ? (
