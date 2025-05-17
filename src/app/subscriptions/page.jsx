@@ -21,6 +21,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { useSession } from "@/features/auth/utils/authClient"
 import { usePlants } from "@/features/subscriptions/hooks/usePlants"
 import { useSubscription } from "@/features/subscriptions/hooks/useSubscription"
+import clsx from "clsx"
 import { AlertCircle, Check, LogIn } from "lucide-react"
 import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
@@ -113,72 +114,73 @@ const SubscriptionsPage = () => {
           .filter((item) => item.trim() !== "")
 
         return (
-          <Card
-            key={plan.id}
-            className={`relative flex flex-1 flex-col shadow-lg transition-all duration-300 hover:shadow-xl ${
-              isYearlyPlan
-                ? "border-2 border-blue-500"
-                : "border border-gray-200"
-            }`}
-          >
+          <div className="relative flex-1" key={plan.id}>
             {isYearlyPlan && (
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 transform rounded-full bg-blue-600 px-4 py-1 text-sm font-medium text-white">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 transform rounded-full bg-primary px-4 py-1 text-sm font-medium text-white">
                 {t("Subscriptions.Plans.bestOffer")}
               </div>
             )}
-            <CardHeader
-              className={`bg-gradient-to-r ${
-                isYearlyPlan
-                  ? "from-blue-100 to-indigo-100"
-                  : "from-blue-50 to-indigo-50"
-              } px-6 pb-8 pt-6`}
+            <Card
+              className={`flex flex-1 flex-col overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl ${
+                isYearlyPlan && "border-2 border-primary"
+              }`}
             >
-              <div className="flex items-start justify-between">
+              <CardHeader
+                className={clsx(
+                  "bg-gradient-to-r px-6 pb-8 pt-6",
+                  isYearlyPlan
+                    ? "from-blue-100 to-indigo-100 dark:from-blue-900 dark:to-indigo-900"
+                    : "from-blue-50 to-indigo-50 dark:from-blue-900 dark:to-indigo-900",
+                )}
+              >
                 <div>
-                  <CardTitle className="text-2xl font-bold text-gray-800">
-                    {plan.name}
-                  </CardTitle>
-                  <CardDescription className="mt-2 text-gray-600">
-                    {isYearlyPlan
-                      ? t("Subscriptions.Plans.yearlyCommitment")
-                      : t("Subscriptions.Plans.maxFlexibility")}
-                  </CardDescription>
+                  <div>
+                    <CardTitle className="text-2xl font-bold">
+                      {plan.name}
+                    </CardTitle>
+                    <CardDescription className="text-foreground">
+                      {isYearlyPlan
+                        ? t("Subscriptions.Plans.yearlyCommitment")
+                        : t("Subscriptions.Plans.maxFlexibility")}
+                    </CardDescription>
+                  </div>
+                  <div className="mt-1 flex items-end gap-3">
+                    <p className="text-3xl font-bold">{priceDisplay}</p>
+                    <p className="text-md mb-1 text-foreground">
+                      {plan.interval === "month"
+                        ? t("Subscriptions.Plans.perMonth")
+                        : t("Subscriptions.Plans.perYear")}
+                    </p>
+                  </div>
                 </div>
-                <div className="text-right">
-                  <span className="text-3xl font-bold text-gray-800">
-                    {priceDisplay}
-                  </span>
-                  <p className="text-sm text-gray-600">
-                    {plan.interval === "month"
-                      ? t("Subscriptions.Plans.perMonth")
-                      : t("Subscriptions.Plans.perYear")}
-                  </p>
-                </div>
-              </div>
-            </CardHeader>
-            <CardContent className="flex-grow pt-6">
-              <ul className="space-y-3">
-                {descriptionItems.map((item, index) => (
-                  <li key={index} className="flex items-start">
+              </CardHeader>
+              <CardContent className="flex-grow pt-6">
+                <ul className="space-y-3">
+                  {descriptionItems.map((item, index) => (
+                    <li key={index} className="flex items-start">
+                      <Check className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0 text-green-500" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                  <li className="flex items-start">
                     <Check className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0 text-green-500" />
-                    <span>{item}</span>
+                    <span>
+                      {plan.discount}
+                      {t("Subscriptions.Plans.discountLabel")}
+                    </span>
                   </li>
-                ))}
-                <li className="flex items-start">
-                  <Check className="mr-2 mt-0.5 h-5 w-5 flex-shrink-0 text-green-500" />
-                  <span>
-                    {plan.discount}
-                    {t("Subscriptions.Plans.discountLabel")}
-                  </span>
-                </li>
-              </ul>
-            </CardContent>
-            <CardFooter className="pb-6 pt-4">
-              <Button className="w-full" onClick={() => handleChoosePlan(plan)}>
-                {t("Subscriptions.Plans.choosePlan")}
-              </Button>
-            </CardFooter>
-          </Card>
+                </ul>
+              </CardContent>
+              <CardFooter className="pb-6 pt-4">
+                <Button
+                  className="w-full"
+                  onClick={() => handleChoosePlan(plan)}
+                >
+                  {t("Subscriptions.Plans.choosePlan")}
+                </Button>
+              </CardFooter>
+            </Card>
+          </div>
         )
       })}
 
