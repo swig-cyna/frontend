@@ -18,7 +18,7 @@ const Footer = () => {
         <div className="sm:flex sm:items-center sm:justify-between">
           <a className="mb-4 flex items-center space-x-3 sm:mb-0 rtl:space-x-reverse">
             <Image
-              src={theme === "dark" ? logo : logoDark}
+              src={theme === "light" ? logoDark : logo}
               className="mt-1 h-8 w-auto"
               alt="logo"
             />

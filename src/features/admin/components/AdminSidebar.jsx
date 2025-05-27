@@ -56,7 +56,7 @@ const AdminSidebar = () => {
       <SidebarContent>
         <div className="mx-3 mt-3 flex items-center justify-between">
           <Image
-            src={theme === "dark" ? logo : logoDark}
+            src={theme === "light" ? logoDark : logo}
             className="mt-1 h-8 w-auto"
             alt="logo"
           />

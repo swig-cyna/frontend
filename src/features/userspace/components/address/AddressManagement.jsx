@@ -153,7 +153,7 @@ const AddressManagement = () => {
             </DialogHeader>
             <Elements
               stripe={stripePromise}
-              options={theme === "dark" ? stripeOptions : stripeOptionsWhite}
+              options={theme === "light" ? stripeOptionsWhite : stripeOptions}
             >
               <AddressStripeForm mode="add" onSuccess={handleAddSuccess} />
             </Elements>
@@ -170,7 +170,7 @@ const AddressManagement = () => {
             </DialogHeader>
             <Elements
               stripe={stripePromise}
-              options={theme === "dark" ? stripeOptions : stripeOptionsWhite}
+              options={theme === "light" ? stripeOptionsWhite : stripeOptions}
             >
               <AddressStripeForm
                 mode="edit"

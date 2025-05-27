@@ -199,7 +199,7 @@ export function OrderTable() {
           </DialogHeader>
           <Elements
             stripe={stripePromise}
-            options={theme === "dark" ? stripeOptions : stripeOptionsWhite}
+            options={theme === "light" ? stripeOptionsWhite : stripeOptions}
           >
             <AddressStripeForm
               mode="order"

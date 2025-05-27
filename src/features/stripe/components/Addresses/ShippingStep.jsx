@@ -40,7 +40,7 @@ const ShippingStep = ({
       {addingShipping ? (
         <Elements
           stripe={stripePromise}
-          options={theme === "dark" ? stripeOptions : stripeOptionsWhite}
+          options={theme === "light" ? stripeOptionsWhite : stripeOptions}
         >
           <AddressStripeForm
             mode="add"

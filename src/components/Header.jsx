@@ -40,7 +40,7 @@ const Header = () => {
         <div className="flex h-16 w-full max-w-[1200px] items-center justify-between rounded-full px-4 xl:mx-8 xl:border xl:bg-card xl:shadow-md">
           <Link href="/">
             <Image
-              src={theme === "dark" ? logo : logoDark}
+              src={theme === "light" ? logoDark : logo}
               className="mt-1 h-8 w-auto"
               alt="logo"
             />

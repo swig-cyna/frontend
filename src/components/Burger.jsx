@@ -40,7 +40,7 @@ const Burger = () => {
       <SheetContent className="overflow-y-auto">
         <SheetHeader className="items-center">
           <Image
-            src={theme === "dark" ? logo : logoDark}
+            src={theme === "light" ? logoDark : logo}
             className="mt-1 h-12 w-auto"
             alt="logo"
           />
