@@ -10,9 +10,8 @@ vi.mock("next/image", () => ({
 vi.mock("next-intl", () => ({
   useTranslations: () => (key) => key,
   useFormatter: () => ({
-    number: (value, options) => {
-      return new Intl.NumberFormat('fr-FR', options).format(value)
-    }
+    number: (value, options) =>
+      new Intl.NumberFormat("fr-FR", options).format(value),
   }),
   __esModule: true,
 }))
