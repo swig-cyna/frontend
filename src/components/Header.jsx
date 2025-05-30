@@ -60,7 +60,7 @@ const Header = () => {
               <Search />
             </Link>
 
-            <Link href="/cart">
+            <Link role="cart" href="/cart">
               <div className="relative">
                 <ShoppingCart />
                 {Boolean(totalItems) && (
@@ -102,7 +102,7 @@ const Header = () => {
                       })
                     }}
                   >
-                    {t("signout")}
+                    <button>{t("signout")}</button>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
